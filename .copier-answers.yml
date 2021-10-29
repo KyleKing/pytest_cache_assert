@@ -1,0 +1,18 @@
+# yamllint disable-file
+# Answer file maintained by Copier for: https://github.com/KyleKing/calcipy_template
+# Check into version control. Edit by re-running copier and changing responses to the questions
+_commit: 0.2.1
+_src_path: gh:KyleKing/calcipy_template
+author_email: dev.act.kyle@gmail.com
+author_name: Kyle King
+author_username: kyleking
+codecov_token: d414dacb-5b8d-4c0b-94e1-42fe8393187d
+copyright_date: '2021'
+doc_dir: docs
+install_extras: null
+package_name_py: pytest_cache_assert
+project_description: Cache assertion data to simplify regression testing of complex
+  serializable data
+project_name: pytest_cache_assert
+repository_namespace: kyleking
+repository_provider: https://github.com

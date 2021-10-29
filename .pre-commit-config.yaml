@@ -12,7 +12,6 @@ repos:
     rev: v4.0.1
     hooks:
       - id: check-added-large-files
-      - id: check-case-conflict
       - id: check-json
       - id: check-merge-conflict
       - id: check-symlinks
@@ -37,7 +36,7 @@ repos:
       # - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.17.8
+    rev: v2.20.0
     hooks:
       - id: commitizen
         # yamllint disable-line rule:line-length
@@ -47,13 +46,13 @@ repos:
           ]
         stages: [commit-msg]
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.19.1
+    rev: v2.29.0
     hooks:
       - id: pyupgrade
         stages: [push]
         args: ["--keep-runtime-typing"]
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.1.0
+    rev: v2.2.0
     hooks:
       - id: add-trailing-comma
         stages: [push]

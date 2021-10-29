@@ -5,7 +5,7 @@
 ```sh
 git clone https://github.com/kyleking/pytest_cache_assert.git
 cd pytest_cache_assert
-poetry install 
+poetry install
 
 # See the available tasks
 poetry run doit list

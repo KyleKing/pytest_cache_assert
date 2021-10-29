@@ -12,6 +12,10 @@ length_sort = false
 line_length = 120
 multi_line_output = 5
 
+[tool.calcipy.test]
+pythons = ["3.7", "3.9"]
+args_diff = "--fail-under=85"
+
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.0.1"
@@ -60,3 +64,4 @@ calcipy = { version = ">=2021.0.5.0", extras = [
     "lint",
     "test",
 ], python = "^3.8" }
+pydantic = ">=1.8.2"

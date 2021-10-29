@@ -102,14 +102,7 @@ def test_variable_cache():
     check_assert(result, ...)
 ```
 
-The cached data can also be a super- or subset. You may only care that at minimum, certain fields exist and can allow some variability by setting `match_precision`
-
-```py
-# TODO: Maybe don't have match_precision as an option because recording means there won't ever be a sub/superset
-# PLANNED: Also consider dropping the transformer for the validator. The package can only work with JSON-safe data when caching anyway
-```
-
-Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library.
+Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library. This is possible with the `validator` callable. The default is a no-op and you replace it with a custom function that raises on an error.
 
 ```py
 # TODO: Add example for custom cerberus checks with `validator()`

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
 from _check_assert.caching import cache_data, init_cache, load_cached_data
-from _check_assert.constants import TEST_DATA_TYPE, MatchPrecision
+from _check_assert.constants import TEST_DATA_TYPE
 from beartype import beartype
 
 # NOTE: additional descriptions for planned features
@@ -16,10 +16,6 @@ from beartype import beartype
 #             - The utility functions provided by the package are for use cases with variable values
 #                 - NoOp-ignore field
 #                 - Check if null if value is null or check type-of (in-exact)
-# - transformer: custom serializer of Dict[str, Union[str, dict]]. Could use cattrs, marshmallow, Pydantic, or some
-#  custom function as long as the result is a dict
-#     - Can be used for additional checks with Cerberus or other library (custom_validator)
-# -->
 
 
 @beartype
@@ -32,13 +28,10 @@ def check_assert(
     path_cache_file: Path,
     # FIXME: path_cache_dir should be set globally or use a default. Not in-test-specified
     path_cache_dir: Path,
-    # TODO: Implement match_precision
-    match_precision: MatchPrecision = MatchPrecision.EXACT,
-    # TODO: Implement key rules. See notes above
+    # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
     key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
-    # TODO: Implement transformer (deserialization) and validator for user customization
+    # TODO: Implement validator for user customization
     validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
-    transformer: Optional[Callable[[TEST_DATA_TYPE], Any]] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
 
@@ -48,6 +41,8 @@ def check_assert(
         test_data: dictionary to test and/or cache
         path_cache_file: location of the cache file to write. Default is None and will be resolved through introspection
         path_cache_dir: location of the cache directory.
+        key_rules: dictionary of KeyRules too apply for selectively ignoring values
+        validator: Custom validation function to be run against the test data before any modification
 
     """
     validator = validator or (lambda res: res)
@@ -70,5 +65,4 @@ def check_assert(
     # TODO: modify the dictionary based on the match precision enum
     # test_data = apply_match_precision(test_data, match_precision)
 
-    transformer = transformer or (lambda res: res)
-    assert transformer(test_data) == cached_data  # noqa: B101,S101
+    assert test_data == cached_data  # noqa: B101,S101

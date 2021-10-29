@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from pytest_cache_assert._check_assert.checks import check_assert
+from pytest_cache_assert import check_assert
 
 
 def test_check_assert_failure(fix_test_cache):

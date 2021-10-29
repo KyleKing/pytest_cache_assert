@@ -8,7 +8,7 @@ Cache assertion data to simplify regression testing of complex serializable data
 
 ## Quick Start
 
-The primary use case of this package is regression testing of large dictionaries. You may have some parameterized test cases where you need to assert that a resulting dictionary is the same, but you don’t want to manually generate the expected fields and values and couple the test case to the source code. Instead you can cache or “record” the expected deserialized data structure, check the expected dictionary into version control, then regenerate on changes
+The primary use case of this package is regression testing of large dictionaries. You may have some parameterized test cases where you need to assert that a resulting dictionary is the same, but you don’t want to manually generate the expected fields and values and couple the test case to the source code. Instead you can cache or “record” the expected serialized data structure, check the expected dictionary into version control, then regenerate on changes
 
 This package can minimize test case logic, while improving test thoroughness
 
@@ -84,56 +84,42 @@ def test_create_data(name):
 
 ### More Examples
 
-<!-- TODO: Create these more complex examples and cleanup general ideas -->
+In your cached dictionary, you may have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:
 
-<!--
-- match-accuracy: exact, subset, superset (enum)
-- key_rules: Dict[str, Optional[Callable[[Any, Any], None]]
-    - (String): rule_callable (ignore, check-likeness, custom)
-        - Specify the key name or pattern of key names using dots for nesting and asterisks for wildcards (jmespath)
-        - The rule callable can be any custom implementation or one of the recommended
-            - The default assertion is an exact match, so any keys not specified here will be checked for exactness
-            - The provided checks are for variable use cases
-            - NoOp-ignore field
-            - Check if null if value is null or check type-of (in-exact)
-- transformer: custom serializer of Dict[str, Union[str, dict]]. Could use cattrs, marshmallow, Pydantic, or some custom function as long as the result is a dict
-    - Can be used for additional checks with Cerberus or other library (custom_validator)
--->
+```py
+from uuid import uuid4
+from datetime import datetime
 
-You might have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:
+from pytest_cache_assert import check_assert
 
-(Example with UUID and datetime)
+# TODO: Implement this example! Add as red test, then implement!
 
-- transformer = transformer or lambda res: res
-- data = json.loads(…)[KEY_Data]
-    - (Writes cache if first run)
-- result = transformer()
-- For each key_rule:
-    - Call
-    - Pop keys from both dictionaries if present
-- For subset type, filter the dictionaries
-- Normal pytest assert
+def test_variable_cache():
+    """Demonstration of specifying custom assertion rules."""
+    # TODO: support list indexing on top of jmespath...
+    result = {"date": datetime.now(), {"nested": {"uuid": uuid4()}}}
 
-The cached data can also be a super- or subset. You may only care that at minimum, certain fields exist and can allow some variability by setting …
+    check_assert(result, ...)
+```
 
-(Example)
+The cached data can also be a super- or subset. You may only care that at minimum, certain fields exist and can allow some variability by setting `match_precision`
 
-Or you may want to write your own custom checks against the deserialized data, such as with Cerberus or another library.
+```py
+# TODO: Maybe don't have match_precision as an option because recording means there won't ever be a sub/superset
+# PLANNED: Also consider dropping the transformer for the validator. The package can only work with JSON-safe data when caching anyway
+```
 
-(Example)
+Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library.
+
+```py
+# TODO: Add example for custom cerberus checks with `validator()`
+```
 
 ### Even More Example
 
 For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert/scripts) or [Tests](https://github.com/kyleking/pytest_cache_assert/tests)
 
-## Configuration Options
-
-### Local
-
-- `cache_name`: default is test name with -000 (or index of parameter)
-    - Can be set to static string or custom formatter
-
-### Global
+## Global Configuration Options
 
 - `custom directory` (set in pytest fixture like pytest-record)
     - Default is test directory/cache-assert/

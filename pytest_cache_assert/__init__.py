@@ -4,7 +4,7 @@ import warnings
 
 from beartype.roar import BeartypeDecorHintPepDeprecatedWarning
 
-from ._check_assert.checks import check_assert  # noqa: F401
+from .checks import check_assert  # noqa: F401
 
 __version__ = '0.0.1'
 __pkg_name__ = 'pytest_cache_assert'

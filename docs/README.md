@@ -43,7 +43,7 @@ def create_data(name: str) -> Dict[str, Any]:
     This demonstration uses pydantic, but any dictionary can be tested!
 
     """
-    return User(id=sys.maxsize, name=name).json()
+    return User(id=sys.maxsize, name=name).dict()
 ```
 
 ```py
@@ -57,11 +57,13 @@ from pytest_cache_assert import check_assert
 @pytest.mark.parametrize('name', ['Test Name 1', 'Test Name 2'])
 def test_create_data(name):
     """Basic test of create_data()."""
+    result = create_data(name=name)
+
     # One could manually create the expected dictionary
-    cache = {'id': 9223372036854775807, 'signup_ts': None, 'friends': [], 'name': 'Test Name 1'}
-    assert create_data(name=name) == cache
+    cache = {'id': 9223372036854775807, 'signup_ts': None, 'friends': [], 'name': name}
+    assert result == cache
     # Or use the pytest_cache_assert function to compare against the last recorded dictionary
-    assert check_assert(create_data(name=name))
+    check_assert(result)  # FIXME: Update with changes to function signature
 ```
 
 `pytest_cache_assert` will automatically create: `tests/cache-assert/source_file/test_file/test_create_data-000.json` (and `test_create_data-001.json`) for each of the parameters when first run by caching the result of `create_data(...)`. Below is the example for `test_create_data-000.json`. This file should be checked into version control and can be manually edited if needed or regenerated if the dictionary changes by deleting the file and re-running the tests

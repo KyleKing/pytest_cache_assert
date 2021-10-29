@@ -1,0 +1,51 @@
+"""Utilities for managing the cache."""
+
+import json
+from pathlib import Path
+
+from beartype import beartype
+
+from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
+
+
+@beartype
+def init_cache(path_cache_dir: Path) -> None:
+    """Ensure that the cache directory exists and add the README.
+
+    Args:
+        path_cache_dir: location of the cache directory
+
+    """
+    path_cache_dir.mkdir(exist_ok=True, parents=True)
+    (path_cache_dir / 'README.md').write_text(CACHE_README_TEXT)
+
+
+@beartype
+def cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE) -> None:
+    """Cache the specified data.
+
+    Args:
+        path_cache_file: location of the cache file to write
+        metadata: metadata dictionary to store in the cache file
+        test_data: arbitrary test data to store
+
+    """
+    cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
+    path_cache_file.parent.mkdir(exist_ok=True, parents=True)
+    _json = json.dumps(cache_dict, sort_keys=True, indent=4, separators=(',', ': '))
+    path_cache_file.write_text(_json)
+
+
+@beartype
+def load_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
+    """Cache the specified data.
+
+    Args:
+        path_cache_file: location of the cache file to write
+
+    Returns:
+        TEST_DATA_TYPE: loaded data from cache file
+
+    """
+    cache_dict = json.load(path_cache_file.open('r'))
+    return cache_dict[KEY_NAME_DATA]

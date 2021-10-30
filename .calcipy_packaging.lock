@@ -104,12 +104,12 @@
         "version": "0.3.3"
     },
     "calcipy": {
-        "datetime": "2021-10-30T16:47:22.290792Z",
+        "datetime": "2021-10-30T19:40:06.511771Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-10-30T16:47:22.290792Z",
-        "latest_version": "2021.0.6.0rc0",
+        "latest_datetime": "2021-10-30T19:40:06.511771Z",
+        "latest_version": "2021.0.6.0rc1",
         "name": "calcipy",
-        "version": "2021.0.6.0rc0"
+        "version": "2021.0.6.0rc1"
     },
     "cerberus": {
         "datetime": "2021-05-05T20:38:00.884544Z",
@@ -1494,14 +1494,6 @@
         "latest_version": "0.8.10",
         "name": "transitions",
         "version": "0.8.10"
-    },
-    "typed-ast": {
-        "datetime": "2021-04-11T23:57:40.684034Z",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-04-11T23:57:40.684034Z",
-        "latest_version": "1.4.3",
-        "name": "typed-ast",
-        "version": "1.4.3"
     },
     "typing-extensions": {
         "datetime": "2021-08-30T18:46:23.064211Z",

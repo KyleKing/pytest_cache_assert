@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
+from _pytest.assertion import pytest_assertrepr_compare
 from beartype import beartype
 
 from ._check_assert.caching import cache_data, init_cache, load_cached_data
@@ -23,6 +24,7 @@ from ._check_assert.constants import DEF_CACHE_DIR_NAME, TEST_DATA_TYPE
 def check_assert(
     test_data: TEST_DATA_TYPE,
     test_dir: Path,
+    config: Any,
     *,
     # FIXME: path_cache_file should be discovered through introspection if None
     # TODO: Add `cache_name` / `path_cache_file`: default is test name with `-00#` (or index of parameter). Argument
@@ -37,14 +39,15 @@ def check_assert(
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
 
-    Will raise AssertionError if any assertion fails.
-
     Args:
         test_data: dictionary to test and/or cache
         test_dir: top-level pytest test directory
         path_cache_file: location of the cache file to write. Default is None and will be resolved through introspection
         key_rules: dictionary of KeyRules too apply for selectively ignoring values
         validator: Custom validation function to be run against the test data before any modification
+
+    Raises:
+        AssertionError if any assertion fails.
 
     """
     # Parse configuration. Set via a custom 'cache_assert_config' module fixture
@@ -72,4 +75,13 @@ def check_assert(
     # TODO: modify the dictionary based on the match precision enum
     # test_data = apply_match_precision(test_data, match_precision)
 
-    assert test_data == cached_data  # noqa: B101,S101
+    # TODO: Consider other functions that might raise an assertion directly with formatting:
+    # https://github.com/pytest-dev/pytest/search?l=Python&q=pytest_assertrepr_compare&type=
+    # https://github.com/pytest-dev/pytest/search?q=pytest_runtest_protocol
+    # https://github.com/pytest-dev/pytest/blob/6247a956010855f227181ba6167c89bb500e9480/src/_pytest/assertion/__init__.py#L115-L168
+    # https://github.com/pytest-dev/pytest/blob/dd6d4b2fe0041db3e7a6378a5da67950393053af/src/_pytest/unittest.py#L363-L390
+    # https://github.com/pytest-dev/pytest/blob/f28421cc7068b13ba63c1f60cc21f898cccea36c/src/_pytest/runner.py#L110-L115
+
+    error_message = pytest_assertrepr_compare(config, op='==', left=test_data, right=cached_data)
+    if error_message:
+        raise AssertionError(error_message)

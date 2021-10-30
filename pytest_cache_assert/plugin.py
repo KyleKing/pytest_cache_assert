@@ -6,6 +6,7 @@ from typing import Any, Callable
 import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
+from _pytest.config import Config
 
 from .checks import check_assert
 
@@ -15,11 +16,12 @@ from .checks import check_assert
 
 @pytest.fixture()
 @beartype
-def with_check_assert(request: FixtureRequest) -> Callable[[Any], None]:
+def with_check_assert(request: FixtureRequest, pytestconfig: Config) -> Callable[[Any], None]:
     """Yield check_assert with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
+        pytestconfig: TODO: Pytest config instance!
 
     Returns:
         Callable[[Any], None]: `check_assert()` with test_dir already specified
@@ -35,4 +37,4 @@ def with_check_assert(request: FixtureRequest) -> Callable[[Any], None]:
     else:
         raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
 
-    return partial(check_assert, test_dir=test_dir)
+    return partial(check_assert, test_dir=test_dir, config=pytestconfig)

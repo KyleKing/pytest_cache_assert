@@ -37,12 +37,4 @@ def test_create_data(name, with_check_assert):
     cache = {'id': 9223372036854775807, 'signup_ts': None, 'friends': [], 'name': name}
     assert result == cache
     # Or use the pytest_cache_assert function to compare against the last recorded dictionary
-    # # FIXME: Being implemented
-    # parameter_index = int(name[-1]) - 1
-    # path_test_file = Path(__file__).resolve()
-    # path_cache_dir = path_test_file.parent / DEF_CACHE_DIR_NAME
-    # with_check_assert(
-    #     result,
-    #     path_cache_dir / f'{path_test_file.stem}/test_create_data-{parameter_index:3}.json',
-    #     path_cache_dir,
-    # )
+    with_check_assert(result)

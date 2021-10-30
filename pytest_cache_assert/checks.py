@@ -1,4 +1,8 @@
-"""Assertion checks for unit tests."""
+"""Assertion checks for unit tests.
+
+FYI: Should not require any pytest functionality
+
+"""
 
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
@@ -23,17 +27,14 @@ from ._check_assert.constants import DEF_CACHE_DIR_NAME, TEST_DATA_TYPE
 def check_assert(
     test_data: TEST_DATA_TYPE,
     test_dir: Path,
+    cache_name: str,
     *,
-    # FIXME: path_cache_file should be discovered through introspection if None
-    # TODO: Add `cache_name` / `path_cache_file`: default is test name with `-00#` (or index of parameter). Argument
-    #   should accept a static string or custom formatter
-    path_cache_file: Optional[Path] = None,
     # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
     key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
     # TODO: Implement validator for user customization
     validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
-    # Pytest Fixture
     cache_assert_config: Optional[Dict[str, str]] = None,
+    metadata: Optional[dict] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
 
@@ -42,24 +43,27 @@ def check_assert(
     Args:
         test_data: dictionary to test and/or cache
         test_dir: top-level pytest test directory
-        path_cache_file: location of the cache file to write. Default is None and will be resolved through introspection
+        cache_name: relative string path from the test_dir to the JSON cache file
         key_rules: dictionary of KeyRules too apply for selectively ignoring values
         validator: Custom validation function to be run against the test data before any modification
+        metadata: metadata dictionary to store in the cache file
 
     """
     # Parse configuration. Set via a custom 'cache_assert_config' module fixture
     cache_assert_config = cache_assert_config or {}
     # > path_cache_dir: location of the cache directory.
     path_cache_dir = test_dir / cache_assert_config.get('rel_path_cache_dir', DEF_CACHE_DIR_NAME)
+    path_cache_file = path_cache_dir / cache_name
 
     validator = validator or (lambda res: res)
     validator(test_data)
 
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)
+    # PLANNED: Consider always writing metadata. Only edge case is if multiple files use the same test
+    #   Would need logic to merge the metadata to show all test names, etc.
     if not path_cache_file.is_file():
-        # TODO: Generate metadata based on pytest parameters/introspection
-        cache_data(path_cache_file, {}, test_data)
+        cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
     for rule in key_rules or {}:
@@ -72,4 +76,4 @@ def check_assert(
     # TODO: modify the dictionary based on the match precision enum
     # test_data = apply_match_precision(test_data, match_precision)
 
-    assert test_data == cached_data  # noqa: B101,S101
+    assert test_data == cached_data  # nosec # noqa: S101

@@ -10,6 +10,10 @@ from calcipy.dev.conftest import pytest_runtest_makereport  # noqa: F401
 
 from .configuration import TEST_TMP_CACHE, clear_test_cache
 
+# FIXME: Plugin should be loaded via the entry_points...
+pytest_plugins = 'pytest_cache_assert.plugin'
+"""Load the pytest plugin."""
+
 
 @pytest.fixture()
 def fix_test_cache() -> Path:

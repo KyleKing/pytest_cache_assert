@@ -4,8 +4,6 @@ import warnings
 
 from beartype.roar import BeartypeDecorHintPepDeprecatedWarning
 
-from .checks import check_assert  # noqa: F401
-
 __version__ = '0.0.1'
 __pkg_name__ = 'pytest_cache_assert'
 
@@ -14,7 +12,3 @@ __pkg_name__ = 'pytest_cache_assert'
 warnings.simplefilter(action='ignore', category=BeartypeDecorHintPepDeprecatedWarning)
 
 # ====== Above is the recommended code from calcipy_template and may be updated on new releases ======
-
-__all__ = [
-    'check_assert',
-]

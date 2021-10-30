@@ -14,6 +14,9 @@ _NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
 TEST_DATA_TYPE = Any  # PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]
 """Test Data Type."""
 
+DEF_CACHE_DIR_NAME = 'assert-cache'
+"""Default `pytest_assert_cache` directory name."""
+
 KEY_NAME_META = '_info'
 """Key for metadata."""
 

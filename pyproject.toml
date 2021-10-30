@@ -41,14 +41,22 @@ keywords = []
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Pytest",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Topic :: Software Development :: Testing",
 ] # https://pypi.org/classifiers/
+
+[tool.poetry.plugins."pytest11"]
+# Register as a Pytest Plugin
+# Docs: https://docs.pytest.org/en/latest/how-to/writing_plugins.html#making-your-plugin-installable-by-others
+pytest_cache_assert = "pytest_cache_assert.plugin"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/pytest_cache_assert/issues"

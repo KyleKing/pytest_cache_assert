@@ -12,6 +12,8 @@ The primary use case of this package is regression testing of large dictionaries
 
 This package can minimize test case logic, while improving test thoroughness
 
+This project was heavily inspired by the excellent [pytest-recording](https://github.com/kiwicom/pytest-recording)
+
 ### Basic Example
 
 Situation: You've created a new project with poetry called `package_a` with one file `source_file.py` and test `tests/test_file.py`

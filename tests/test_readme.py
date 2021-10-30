@@ -2,14 +2,11 @@
 
 import sys
 from datetime import datetime
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import pytest
 from beartype import beartype
 from pydantic import BaseModel
-
-from pytest_cache_assert._check_assert.constants import DEF_CACHE_DIR_NAME
 
 
 class User(BaseModel):  # noqa: H601

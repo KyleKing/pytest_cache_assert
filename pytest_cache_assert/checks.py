@@ -47,7 +47,7 @@ def assert_against_cache(
         metadata: metadata dictionary to store in the cache file
 
     """
-    validator = validator or (lambda res: res)
+    validator = validator or (lambda _res: None)
     validator(test_data)
 
     path_cache_file = path_cache_dir / cache_name

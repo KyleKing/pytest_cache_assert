@@ -3,44 +3,26 @@
 import inspect
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable, Dict
+from typing import Any, Callable
 
 import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
 
 from . import checks
-from ._check_assert.caching import resolve_cache_name
 from ._check_assert.constants import DEF_CACHE_DIR_NAME
 
 # PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
 # https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70
 
 
-@pytest.fixture(scope='session')
-def check_assert_parameter_counter() -> Dict[str, int]:
-    """Track the times each specific test function has been run.
-
-    Returns:
-        Dict[str, int]: dictionary to count repetitions of a key
-
-    """
-    # PLANNED: Should be a class, but a dictionary is fine for now
-    counter: Dict[str, int] = {}
-    return counter
-
-
 @pytest.fixture()
 @beartype
-def assert_against_cache(
-    request: FixtureRequest,
-    check_assert_parameter_counter: Dict[str, int],
-) -> Callable[[Any], None]:
+def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
     """Yield checks.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
-        check_assert_parameter_counter: pytest fixture used to track the current parameter index
 
     Returns:
         Callable[[Any], None]: `checks.assert_against_cache()` with test_dir already specified
@@ -57,14 +39,8 @@ def assert_against_cache(
         raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
 
     test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
-
     test_file = Path(request.node.fspath)
-    # FIXME: The index is not always the same as the parameter list index!
-    #   Create a lookup cache file in the assert directory that maps index to the id name!
-    parameter_index = check_assert_parameter_counter.get(test_name, 0)
-    check_assert_parameter_counter[test_name] = parameter_index + 1
-    cache_name = resolve_cache_name(test_dir, test_file, parameter_index)
-
+    cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()
     path_cache_dir = test_dir / DEF_CACHE_DIR_NAME
 
     # PLANNED: serialize the func_args metadata recursively

@@ -49,20 +49,3 @@ def load_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
     """
     cache_dict = json.load(path_cache_file.open('r'))
     return cache_dict[KEY_NAME_DATA]
-
-
-@beartype
-def resolve_cache_name(test_dir: Path, test_file: Path, parameter_index: int) -> str:
-    """Resolve the cache file path based on test information.
-
-    Args:
-        test_dir: location of the test directory
-        test_file: location of the test file
-        parameter_index: index of the parameter in the test function
-
-    Returns:
-        str: cache_name
-
-    """
-    partial_path = '/'.join([*test_file.parent.relative_to(test_dir).parts] + [test_file.stem])
-    return f'{partial_path}-{parameter_index:02d}.json'

@@ -32,8 +32,8 @@ def cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE)
     """
     cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
     path_cache_file.parent.mkdir(exist_ok=True, parents=True)
-    _json = json.dumps(cache_dict, sort_keys=True, indent=4, separators=(',', ': '))
-    path_cache_file.write_text(_json)
+    _json = json.dumps(cache_dict, sort_keys=True, indent=2, separators=(',', ': '))
+    path_cache_file.write_text(_json.strip() + '\n')
 
 
 @beartype

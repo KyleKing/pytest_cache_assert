@@ -59,6 +59,8 @@ def assert_against_cache(
     test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
 
     test_file = Path(request.node.fspath)
+    # FIXME: The index is not always the same as the parameter list index!
+    #   Create a lookup cache file in the assert directory that maps index to the id name!
     parameter_index = check_assert_parameter_counter.get(test_name, 0)
     check_assert_parameter_counter[test_name] = parameter_index + 1
     cache_name = resolve_cache_name(test_dir, test_file, parameter_index)

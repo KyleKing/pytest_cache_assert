@@ -29,12 +29,13 @@ def create_data(name: str) -> Dict[str, Any]:
 
 
 @pytest.mark.parametrize('name', ['Test Name 1', 'Test Name 2'])
-def test_create_data(name, with_check_assert):
+def test_create_data(name, assert_against_cache):
     """Basic test of create_data()."""
     result = create_data(name=name)
 
     # One could manually create the expected dictionary
     cache = {'id': 9223372036854775807, 'signup_ts': None, 'friends': [], 'name': name}
     assert result == cache
-    # Or use the pytest_cache_assert function to compare against the last recorded dictionary
-    with_check_assert(result)
+    # ----------------------------------------------------------------------------------
+    # Or utilize the pytest_cache_assert fixture to compare against the last cached version
+    assert_against_cache(result)

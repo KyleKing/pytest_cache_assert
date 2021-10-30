@@ -9,9 +9,9 @@ import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
 
+from . import checks
 from ._check_assert.caching import resolve_cache_name
 from ._check_assert.constants import DEF_CACHE_DIR_NAME
-from .checks import check_assert
 
 # PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
 # https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70
@@ -32,18 +32,18 @@ def check_assert_parameter_counter() -> Dict[str, int]:
 
 @pytest.fixture()
 @beartype
-def with_check_assert(
+def assert_against_cache(
     request: FixtureRequest,
     check_assert_parameter_counter: Dict[str, int],
 ) -> Callable[[Any], None]:
-    """Yield check_assert with pytest-specific arguments already specified.
+    """Yield checks.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
         check_assert_parameter_counter: pytest fixture used to track the current parameter index
 
     Returns:
-        Callable[[Any], None]: `check_assert()` with test_dir already specified
+        Callable[[Any], None]: `checks.assert_against_cache()` with test_dir already specified
 
     Raises:
         RuntimeError: if the test directory cannot be determined
@@ -71,4 +71,4 @@ def with_check_assert(
     metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
     # FYI: The keyword arguments can be overridden by the test function
-    return partial(check_assert, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
+    return partial(checks.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

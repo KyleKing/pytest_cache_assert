@@ -3,14 +3,14 @@
 import pytest
 
 
-def test_check_assert_failure(fix_test_cache, with_check_assert):
+def test_check_assert_failure(fix_test_cache, assert_against_cache):
     """Test that a difference in test_data and cached data generates an error."""
     kwargs = {
         'path_cache_dir': fix_test_cache / 'custom/nested/dir',
         'cache_name': 'test_check_assert_failure-00.json',
     }
 
-    with_check_assert({'result': False}, **kwargs)  # act
+    assert_against_cache({'result': False}, **kwargs)  # act
 
     with pytest.raises(AssertionError):
-        with_check_assert({'result': True}, **kwargs)
+        assert_against_cache({'result': True}, **kwargs)

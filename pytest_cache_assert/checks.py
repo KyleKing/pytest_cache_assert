@@ -24,7 +24,7 @@ from ._check_assert.constants import TEST_DATA_TYPE
 
 
 @beartype
-def check_assert(
+def assert_against_cache(
     test_data: TEST_DATA_TYPE,
     path_cache_dir: Path,
     cache_name: str,

@@ -1,5 +1,6 @@
 """Pytest Plugin."""
 
+import inspect
 from functools import partial
 from pathlib import Path
 from typing import Any, Callable, Dict
@@ -9,6 +10,7 @@ from _pytest.fixtures import FixtureRequest
 from beartype import beartype
 
 from ._check_assert.caching import resolve_cache_name
+from ._check_assert.constants import DEF_CACHE_DIR_NAME
 from .checks import check_assert
 
 # PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
@@ -17,7 +19,12 @@ from .checks import check_assert
 
 @pytest.fixture(scope='session')
 def check_assert_parameter_counter() -> Dict[str, int]:
-    """Track the times each specific test function has been run."""
+    """Track the times each specific test function has been run.
+
+    Returns:
+        Dict[str, int]: dictionary to count repetitions of a key
+
+    """
     # PLANNED: Should be a class, but a dictionary is fine for now
     counter: Dict[str, int] = {}
     return counter
@@ -56,9 +63,12 @@ def with_check_assert(
     check_assert_parameter_counter[test_name] = parameter_index + 1
     cache_name = resolve_cache_name(test_dir, test_file, parameter_index)
 
-    # PLANNED: serialize the metadata recursively
-    func_args = {key: str(value) for key, value in request.node.funcargs.items()}
+    path_cache_dir = test_dir / DEF_CACHE_DIR_NAME
+
+    # PLANNED: serialize the func_args metadata recursively
+    test_params = [*inspect.signature(request.node.function).parameters.keys()]
+    func_args = {key: str(value) for key, value in request.node.funcargs.items() if key in test_params}
     metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
     # FYI: The keyword arguments can be overridden by the test function
-    return partial(check_assert, test_dir=test_dir, cache_name=cache_name, metadata=metadata)
+    return partial(check_assert, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

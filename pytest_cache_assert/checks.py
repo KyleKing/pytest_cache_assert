@@ -10,7 +10,7 @@ from typing import Any, Callable, Dict, Optional
 from beartype import beartype
 
 from ._check_assert.caching import cache_data, init_cache, load_cached_data
-from ._check_assert.constants import DEF_CACHE_DIR_NAME, TEST_DATA_TYPE
+from ._check_assert.constants import TEST_DATA_TYPE
 
 # NOTE: additional descriptions for planned features
 # - `key_rules`: Dict[str, Optional[Callable[[Any, Any], None]]
@@ -26,14 +26,12 @@ from ._check_assert.constants import DEF_CACHE_DIR_NAME, TEST_DATA_TYPE
 @beartype
 def check_assert(
     test_data: TEST_DATA_TYPE,
-    test_dir: Path,
+    path_cache_dir: Path,
     cache_name: str,
-    *,
     # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
     key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
     # TODO: Implement validator for user customization
     validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
-    cache_assert_config: Optional[Dict[str, str]] = None,
     metadata: Optional[dict] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
@@ -42,22 +40,17 @@ def check_assert(
 
     Args:
         test_data: dictionary to test and/or cache
-        test_dir: top-level pytest test directory
+        path_cache_dir: location of the cache directory
         cache_name: relative string path from the test_dir to the JSON cache file
         key_rules: dictionary of KeyRules too apply for selectively ignoring values
         validator: Custom validation function to be run against the test data before any modification
         metadata: metadata dictionary to store in the cache file
 
     """
-    # Parse configuration. Set via a custom 'cache_assert_config' module fixture
-    cache_assert_config = cache_assert_config or {}
-    # > path_cache_dir: location of the cache directory.
-    path_cache_dir = test_dir / cache_assert_config.get('rel_path_cache_dir', DEF_CACHE_DIR_NAME)
-    path_cache_file = path_cache_dir / cache_name
-
     validator = validator or (lambda res: res)
     validator(test_data)
 
+    path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)
     # PLANNED: Consider always writing metadata. Only edge case is if multiple files use the same test

@@ -6,7 +6,7 @@ import pytest
 def test_check_assert_failure(fix_test_cache, with_check_assert):
     """Test that a difference in test_data and cached data generates an error."""
     kwargs = {
-        'test_dir': fix_test_cache,
+        'path_cache_dir': fix_test_cache / 'custom/nested/dir',
         'cache_name': 'test_check_assert_failure-00.json',
     }
 

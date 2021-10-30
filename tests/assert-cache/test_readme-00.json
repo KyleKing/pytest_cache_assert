@@ -1,0 +1,15 @@
+{
+    "_info": {
+        "func_args": {
+            "name": "Test Name 1"
+        },
+        "test_file": "/Users/kyleking/Developer/packages/pytest_cache_assert/tests/test_readme.py",
+        "test_name": "test_create_data"
+    },
+    "_json": {
+        "friends": [],
+        "id": 9223372036854775807,
+        "name": "Test Name 1",
+        "signup_ts": null
+    }
+}

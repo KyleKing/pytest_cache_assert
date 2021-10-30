@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- re-run "poetry install" after entrypoint changes
+
 ### Feat
 
 - initial attempt at pytest plugin

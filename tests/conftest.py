@@ -1,6 +1,7 @@
 """PyTest configuration."""
 
 from pathlib import Path
+from typing import Callable
 
 import pytest
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
@@ -21,3 +22,17 @@ def fix_test_cache() -> Path:
     """
     clear_test_cache()
     return TEST_TMP_CACHE
+
+
+@pytest.fixture()
+def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Path:
+    """Fixture to temporary assert directory and keyword arguments.
+
+    Returns:
+        Path: Path to the test cache directory
+
+    """
+    return {
+        'path_cache_dir': fix_test_cache,
+        'cache_name': 'test_assert_against_cache.json',
+    }

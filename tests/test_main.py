@@ -30,28 +30,40 @@ def test_assert_against_cache_failure(fix_tmp_assert):
 
 @pytest.mark.parametrize(
     ('cached_data', 'test_data', 'key_rules'), [
-        ({'title': 'hello'}, {'title': 'Hello World!'}, [
-            KeyRule(key_list=['title'], func=check_suppress),
-        ]),
-        ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
-            KeyRule(key_list=['nested', 'title'], func=check_suppress),
-        ]),
-        ({'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
-            KeyRule(key_list=['added', '*', '*'], func=check_suppress),
-            KeyRule(key_list=['title'], func=check_suppress),
-        ]),
-        ({'numbers': 20}, {'numbers': 45}, [
-            KeyRule(key_list=['numbers'], func=check_type),
-        ]),
-        ({'numbers': '20.0'}, {'numbers': '45.0'}, [
-            KeyRule(key_list=['numbers'], func=check_type),  # PLANNED: Demonstrate that int != float?
-        ]),
+        (
+            {'title': 'hello'}, {'title': 'Hello World!'}, [
+                KeyRule(key_list=['title'], func=check_suppress),
+            ],
+        ),
+        (
+            {'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
+                KeyRule(key_list=['nested', 'title'], func=check_suppress),
+            ],
+        ),
+        (
+            {'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
+                KeyRule(key_list=['added', '*', '*'], func=check_suppress),
+                KeyRule(key_list=['title'], func=check_suppress),
+            ],
+        ),
+        (
+            {'numbers': 20}, {'numbers': 45}, [
+                KeyRule(key_list=['numbers'], func=check_type),
+            ],
+        ),
+        (
+            {'numbers': '20.0'}, {'numbers': '45.0'}, [
+                KeyRule(key_list=['numbers'], func=check_type),  # PLANNED: Demonstrate that int != float?
+            ],
+        ),
         # ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, [
         #     KeyRule(key_list=['dates'], func=check_type),  # FIXME: Need logic for lists!
         # ]),
-        ({'dates': str(datetime.now())}, {'dates': str(datetime.utcnow())}, [
-            KeyRule(key_list=['dates'], func=check_type),
-        ]),
+        (
+            {'dates': str(datetime.now())}, {'dates': str(datetime.utcnow())}, [
+                KeyRule(key_list=['dates'], func=check_type),
+            ],
+        ),
         # ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
         # ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
         # ({'dates': str(datetime.utcnow())}, {'dates': None}, []),

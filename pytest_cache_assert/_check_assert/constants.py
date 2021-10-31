@@ -1,7 +1,14 @@
 """Constants."""
 
 from datetime import datetime
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, Iterable, List, Type, Union
+
+
+class TrueNull:  # noqa: H601
+    """Indicate that the old or new value does not exist."""
+
+    ...
+
 
 _SAFE_T = Union[str, int, float, bool, None]
 """Safe types for json serialization."""
@@ -15,14 +22,10 @@ _NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
 TEST_DATA_TYPE = Any  # PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]
 """Test Data Type."""
 
+_DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime]
+"""Single types for DIFF_TYPES."""
 
-class _TrueNull:  # noqa: H601
-    """Indicate that the old or new value does not exist."""
-
-    ...
-
-
-_DIFF_TYPES = Union[None, str, int, float, datetime, _TrueNull]
+DIFF_TYPES = Union[_DIFF_SINGLE_TYPES, Type[TrueNull], Iterable[_DIFF_SINGLE_TYPES]]
 """Possible Old or New difference type."""
 
 DEF_CACHE_DIR_NAME = 'assert-cache'

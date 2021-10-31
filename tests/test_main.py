@@ -12,12 +12,15 @@ from cerberus.schema import SchemaError
 from pytest_cache_assert._check_assert.constants import TEST_DATA_TYPE
 from pytest_cache_assert.main import assert_against_cache
 
+# TODO: Make a smarter error message parser for better verification or result
+DEF_ERROR_MESSAGE = r'For test data: .*\nFound differences with: .*'
+
 
 def test_assert_against_cache_failure(fix_tmp_assert):
     """Test that a difference in test_data and cached data generates an error."""
     assert_against_cache({'result': False}, **fix_tmp_assert)
 
-    with pytest.raises(AssertionError, match=r'For test data: .*\nFound differences with: .*'):
+    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache({'result': True}, **fix_tmp_assert)  # act
 
 
@@ -35,7 +38,6 @@ def test_assert_against_cache_failure(fix_tmp_assert):
         ({'numbers': 20}, {'numbers': 45}, []),
         ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, []),
         ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
-        ({'iterable': {'acorn', 'tree'}}, {'iterable': ['acorn', 'tree']}, []),
         ({'dates': str(pendulum.now())}, {'dates': str(pendulum.now())}, []),
         ({'dates': str(datetime.utcnow())}, {'dates': str(datetime.utcnow())}, []),
         ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
@@ -45,10 +47,12 @@ def test_assert_against_cache_failure(fix_tmp_assert):
 )
 def test_assert_against_cache_differ(cached_data, test_data, key_rules, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
-    fix_tmp_assert = {**fix_tmp_assert, 'key_rules': key_rules}
-    assert_against_cache(cached_data, **fix_tmp_assert)  # Cache
+    assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
+    # Verify that the key_rules allow the test to pass
+    assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
 
-    with pytest.raises(AssertionError, match=r'For test data: .*\nFound differences with: .*'):
+    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
+        # Verify that without key rules, an AssertionError is raised
         assert_against_cache(test_data, **fix_tmp_assert)  # act
 
 
@@ -56,7 +60,7 @@ def test_assert_against_cache_number_key_edge_case(fix_tmp_assert):
     """Dictionaries with keys that are numbers fail comparison because they are stringified on load."""
     cached_data = {10: 50}  # Will have key name 10 (number) removed, and '10' (string) added
 
-    with pytest.raises(AssertionError, match=r'For test data: .*\nFound differences with: .*'):
+    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(cached_data, **fix_tmp_assert)  # act
 
 

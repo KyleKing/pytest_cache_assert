@@ -60,14 +60,15 @@ def assert_against_cache(
         cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
-    for rule in key_rules or {}:
+    dict_diff = [*dictdiffer.diff(cached_data, test_data)]
+    # for rule in key_rules or {}:
+    for _diff in dict_diff:
         # TODO: Move to key_rules to separate function
         #   - Check callable (NoOp ignore; check-likeness; or custom)
         #   - Pop keys from both dictionaries if present
         # test_data = apply_rule(test_data, rule)
-        print(rule)
+        print(_diff)
 
-    dict_diff = [*dictdiffer.diff(test_data, cached_data)]
     if dict_diff:
         # TODO: pretty print the dictionaries and "textwrap" to terminal width? (Move to dedicated function)
         raise AssertionError(f"""For test data: {test_data}

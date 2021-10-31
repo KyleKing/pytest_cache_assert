@@ -65,6 +65,7 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 python = "^3.7"
 beartype = ">=0.9.0"
 dictdiffer = ">=0.9"
+pendulum = "^2.1.2"
 pytest = ">=5"
 
 [tool.poetry.dev-dependencies]

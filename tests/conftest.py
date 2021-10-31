@@ -28,6 +28,9 @@ def fix_test_cache() -> Path:
 def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Path:
     """Fixture to temporary assert directory and keyword arguments.
 
+    Args:
+        fix_test_cache: pytest fixture for temporary directory
+
     Returns:
         Path: Path to the test cache directory
 

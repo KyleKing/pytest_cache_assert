@@ -20,6 +20,7 @@ FYI: Should not require any pytest functionality
     from ._check_assert import differ, error_message
     from ._check_assert.caching import cache_data, init_cache, load_cached_data
     from ._check_assert.constants import TEST_DATA_TYPE
+    from ._check_assert.error_message import RichAssertionError
     from ._check_assert.key_rules import KeyRule
 
 
@@ -43,7 +44,7 @@ FYI: Should not require any pytest functionality
             metadata: metadata dictionary to store in the cache file
 
         Raises:
-            AssertionError if any assertion fails
+            RichAssertionError: if any assertion fails
 
         """
         validator = validator or (lambda _res: None)
@@ -60,11 +61,13 @@ FYI: Should not require any pytest functionality
 
         dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
         if dict_diff:
-            raise AssertionError(
-                error_message.create(
-                    test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
-                ),
-            )
+            kwargs = {
+                'test_data': test_data,
+                'cached_data': cached_data,
+                'path_cache_file': path_cache_file,
+                'dict_diff': dict_diff,
+            }
+            raise RichAssertionError(error_message.create(**kwargs), error_info=kwargs)
 
     ```
 
@@ -84,18 +87,26 @@ def assert_against_cache(
 ) -> None
 ```
 
+
+
 Core logic for pytest_cache_assert to handle caching and assertion-checking.
 
-Args:
-    test_data: dictionary to test and/or cache
-    path_cache_dir: location of the cache directory
-    cache_name: relative string path from the test_dir to the JSON cache file
-    key_rules: dictionary of KeyRules too apply for selectively ignoring values
-    validator: Custom validation function to be run against the test data before any modification
-    metadata: metadata dictionary to store in the cache file
+**Parameters:**
 
-Raises:
-    AssertionError if any assertion fails
+| Name | Description |
+|---|---|
+| test_data | dictionary to test and/or cache |
+| path_cache_dir | location of the cache directory |
+| cache_name | relative string path from the test_dir to the JSON cache file |
+| key_rules | dictionary of KeyRules too apply for selectively ignoring values |
+| validator | Custom validation function to be run against the test data before any modification |
+| metadata | metadata dictionary to store in the cache file |
+
+**Raises:**
+
+| Type | Description |
+|---|---|
+| RichAssertionError | if any assertion fails |
 
 ??? example "View Source"
     ```python3
@@ -119,7 +130,7 @@ Raises:
             metadata: metadata dictionary to store in the cache file
 
         Raises:
-            AssertionError if any assertion fails
+            RichAssertionError: if any assertion fails
 
         """
         validator = validator or (lambda _res: None)
@@ -136,10 +147,12 @@ Raises:
 
         dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
         if dict_diff:
-            raise AssertionError(
-                error_message.create(
-                    test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
-                ),
-            )
+            kwargs = {
+                'test_data': test_data,
+                'cached_data': cached_data,
+                'path_cache_file': path_cache_file,
+                'dict_diff': dict_diff,
+            }
+            raise RichAssertionError(error_message.create(**kwargs), error_info=kwargs)
 
     ```

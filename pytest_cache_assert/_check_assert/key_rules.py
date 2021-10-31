@@ -57,7 +57,7 @@ def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     """
     if (
         check_exact(old=old, new=new)  # Catches if both null, etc.
-        or (not isinstance(old, str) and type(old) == type(new))
+        or (not isinstance(old, str) and isinstance(old, type(new)))
     ):
         return True
 

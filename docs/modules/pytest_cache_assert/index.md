@@ -10,6 +10,8 @@ pytest_cache_assert.
 
     from beartype.roar import BeartypeDecorHintPepDeprecatedWarning
 
+    from ._check_assert.key_rules import KeyRule, check_exact, check_suppress, check_type  # noqa: F401
+
     __version__ = '0.0.1'
     __pkg_name__ = 'pytest_cache_assert'
 

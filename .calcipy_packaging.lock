@@ -112,12 +112,12 @@
         "version": "0.3.3"
     },
     "calcipy": {
-        "datetime": "2021-10-30T23:45:01.487465Z",
+        "datetime": "2021-10-31T15:54:50.471038Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-10-30T23:45:01.487465Z",
-        "latest_version": "2021.0.6.0rc2",
+        "latest_datetime": "2021-10-31T15:54:50.471038Z",
+        "latest_version": "2021.0.6.0",
         "name": "calcipy",
-        "version": "2021.0.6.0rc2"
+        "version": "2021.0.6.0"
     },
     "cerberus": {
         "datetime": "2021-05-05T20:38:00.884544Z",
@@ -216,12 +216,12 @@
         "version": "2.20.0"
     },
     "coverage": {
-        "datetime": "2021-10-30T11:25:47.258356Z",
+        "datetime": "2021-10-31T14:11:37.702720Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-10-30T11:25:47.258356Z",
-        "latest_version": "6.1",
+        "latest_datetime": "2021-10-31T14:11:37.702720Z",
+        "latest_version": "6.1.1",
         "name": "coverage",
-        "version": "6.1"
+        "version": "6.1.1"
     },
     "darglint": {
         "datetime": "2021-10-18T03:40:35.034675Z",
@@ -672,12 +672,12 @@
         "version": "2.6.1"
     },
     "identify": {
-        "datetime": "2021-10-30T16:23:01.983383Z",
+        "datetime": "2021-10-31T15:33:26.501301Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-10-30T16:23:01.983383Z",
-        "latest_version": "2.3.2",
+        "latest_datetime": "2021-10-31T15:33:26.501301Z",
+        "latest_version": "2.3.3",
         "name": "identify",
-        "version": "2.3.2"
+        "version": "2.3.3"
     },
     "idna": {
         "datetime": "2021-10-12T23:33:38.020888Z",

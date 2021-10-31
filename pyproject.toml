@@ -70,7 +70,7 @@ pendulum = "^2.1.2"
 pytest = ">=5"
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=2021.0.6.0rc0", extras = [
+calcipy = { version = ">=2021.0.6.0", extras = [
     "dev",
     "lint",
     "test",

@@ -60,9 +60,11 @@ FYI: Should not require any pytest functionality
 
         dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
         if dict_diff:
-            raise AssertionError(error_message.create(
-                test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
-            ))
+            raise AssertionError(
+                error_message.create(
+                    test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
+                ),
+            )
 
     ```
 
@@ -134,8 +136,10 @@ Raises:
 
         dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
         if dict_diff:
-            raise AssertionError(error_message.create(
-                test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
-            ))
+            raise AssertionError(
+                error_message.create(
+                    test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
+                ),
+            )
 
     ```

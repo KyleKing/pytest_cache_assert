@@ -2,6 +2,7 @@
 
 import re
 from datetime import datetime
+from uuid import uuid4
 
 import pytest
 from beartype import beartype
@@ -49,6 +50,11 @@ def test_assert_against_cache_failure(fix_tmp_assert):
         (
             {'numbers': 20}, {'numbers': 45}, [
                 KeyRule(key_list=['numbers'], func=check_type),
+            ],
+        ),
+        (
+            {'uuid': str(uuid4())}, {'uuid': str(uuid4())}, [
+                KeyRule(key_list=['uuid'], func=check_type),
             ],
         ),
         (

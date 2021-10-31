@@ -1,6 +1,7 @@
 """Key Rules."""
 
 from typing import Callable, List
+from uuid import UUID
 
 import attr
 import pendulum
@@ -61,7 +62,7 @@ def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     ):
         return True
 
-    for converter in [int, float, pendulum.parse]:
+    for converter in [UUID, pendulum.parse, int, float]:
         try:
             converter(old)
             converter(new)

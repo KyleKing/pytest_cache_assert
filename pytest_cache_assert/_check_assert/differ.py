@@ -28,7 +28,15 @@ class DiffResult:  # noqa: H601
     new: DIFF_TYPES = attr.ib(validator=type_validator())
 
     def match_key_pattern(self, pattern: List[str]) -> bool:
-        """Match the provided pattern against the key list. Accepts asterisk wildcards."""
+        """Match the provided pattern against the key list. Accepts asterisk wildcards.
+
+        Args:
+            pattern: The key pattern to match against
+
+        Returns:
+            bool: True if the key `pattern` applies to the `key_list`
+
+        """
         if len(pattern) != len(self.key_list):
             return False
 
@@ -38,6 +46,12 @@ class DiffResult:  # noqa: H601
 @beartype
 def _parse_keys(raw_keys: List[Union[str, int]]) -> Tuple[List[str], Optional[int]]:
     """Parse the key list from dictdiffer for DiffResult.
+
+    Args:
+        raw_keys: list of keys that may contain dot-syntax
+
+    Returns:
+        Tuple: the complete list of keys and the optional list index if relevant
 
     """
     key_list = []
@@ -61,6 +75,9 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 
     Returns:
         List[DiffResult]: list of DiffResult objects
+
+    Raises:
+        ValueError: on any unexpected states
 
     """
     # TODO: Refactor into smaller functions!
@@ -122,17 +139,7 @@ def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule])
         List[DiffResult]: list of DiffResult objects
 
     """
-    results = []
-    untested_rules = key_rules
-    for diff_result in _raw_diff(old_dict=old_dict, new_dict=new_dict):
-        # PLANNED: pop rules that have been used
-        for rule in untested_rules:
-            if diff_result.match_key_pattern(rule.key_list):
-                pass
-            # TODO: Move to key_rules to separate function
-            #   - Check callable (NoOp ignore; check-likeness; or custom)
-            #   - Pop keys from both dictionaries if present
-            # test_data = apply_rule(test_data, rule)
-
-        results.append(diff_result)
-    return results
+    return [
+        any(rule.func(old=_d.old, new=_d.new) for rule in key_rules if _d.match_key_pattern(rule.key_list))
+        for _d in _raw_diff(old_dict=old_dict, new_dict=new_dict)
+    ]

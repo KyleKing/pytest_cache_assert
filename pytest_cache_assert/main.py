@@ -12,6 +12,7 @@ from beartype import beartype
 from ._check_assert import differ, error_message
 from ._check_assert.caching import cache_data, init_cache, load_cached_data
 from ._check_assert.constants import TEST_DATA_TYPE
+from ._check_assert.error_message import RichAssertionError
 from ._check_assert.key_rules import KeyRule
 
 
@@ -35,7 +36,7 @@ def assert_against_cache(
         metadata: metadata dictionary to store in the cache file
 
     Raises:
-        AssertionError if any assertion fails
+        RichAssertionError: if any assertion fails
 
     """
     validator = validator or (lambda _res: None)
@@ -52,8 +53,10 @@ def assert_against_cache(
 
     dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
     if dict_diff:
-        raise AssertionError(
-            error_message.create(
-                test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
-            ),
-        )
+        kwargs = {
+            'test_data': test_data,
+            'cached_data': cached_data,
+            'path_cache_file': path_cache_file,
+            'dict_diff': dict_diff,
+        }
+        raise RichAssertionError(error_message.create(**kwargs), **kwargs)

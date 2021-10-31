@@ -9,6 +9,7 @@ from beartype import beartype
 from cerberus import Validator
 from cerberus.schema import SchemaError
 
+from pytest_cache_assert import KeyRule, check_exact, check_suppress, check_type
 from pytest_cache_assert._check_assert.constants import TEST_DATA_TYPE
 from pytest_cache_assert.main import assert_against_cache
 
@@ -30,7 +31,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):
 
 @pytest.mark.parametrize(
     ('cached_data', 'test_data', 'key_rules'), [
-        # TODO: Key Rule
+        # FIXME: Implement tests of the KeyRule logic!
         ({'title': 'hello'}, {'title': 'Hello World!'}, []),
         ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, []),
         ({'missing': {'title': 'hello'}}, {'title': 'hello'}, []),
@@ -51,8 +52,8 @@ def test_assert_against_cache_differ(cached_data, test_data, key_rules, fix_tmp_
     # Verify that the key_rules allow the test to pass
     assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
 
+    # Verify that without key rules, an AssertionError is raised
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
-        # Verify that without key rules, an AssertionError is raised
         assert_against_cache(test_data, **fix_tmp_assert)  # act
 
 

@@ -12,7 +12,7 @@ from .constants import DIFF_TYPES
 
 
 @beartype
-def check_suppress(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_suppress(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     """Return True to suppress differences.
 
     Args:
@@ -27,7 +27,7 @@ def check_suppress(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
 
 @beartype
-def check_exact(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_exact(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     """Check for value equality.
 
     Args:
@@ -42,7 +42,7 @@ def check_exact(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
 
 @beartype
-def check_type(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     """Check if both values are the exact same or same non-string type.
 
     Will attempt to parse strings to int, float, or datetime.
@@ -61,13 +61,13 @@ def check_type(*, old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     ):
         return True
 
-    try:
-        for converter in [int, float, pendulum.parse]:
+    for converter in [int, float, pendulum.parse]:
+        try:
             converter(old)
             converter(new)
             return True
-    except (ValueError, ParserError):
-        pass
+        except (ValueError, ParserError):
+            pass
 
     return False
 

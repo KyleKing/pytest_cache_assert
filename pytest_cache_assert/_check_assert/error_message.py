@@ -10,9 +10,9 @@ from .differ import DiffResult
 class RichAssertionError(AssertionError):
     """Custom AssertionError with additional `error_info`."""
 
-    def __init__(self, *args, error_info: Any = None, **kwargs) -> None:
+    def __init__(self, *args, error_info: Any = None) -> None:
         """Store the error_info for later access."""  # noqa: DAR101
-        super(*args, **kwargs)
+        super().__init__(*args)
         self.error_info = error_info
 
 

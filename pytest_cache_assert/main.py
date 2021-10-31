@@ -59,4 +59,4 @@ def assert_against_cache(
             'path_cache_file': path_cache_file,
             'dict_diff': dict_diff,
         }
-        raise RichAssertionError(error_message.create(**kwargs), **kwargs)
+        raise RichAssertionError(error_message.create(**kwargs), error_info=kwargs)

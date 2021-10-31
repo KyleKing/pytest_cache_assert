@@ -130,6 +130,8 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule]) -> List[DiffResult]:
     """Determine the differences between two dictionaries.
 
+    FYI: Only checks first match and could suppress result of overlapping matches, but this is considered a user error
+
     Args:
         old_dict: old dictionary (typically cached one)
         new_dict: new dictionary (typically test data)
@@ -139,7 +141,12 @@ def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule])
         List[DiffResult]: list of DiffResult objects
 
     """
-    return [
-        any(rule.func(old=_d.old, new=_d.new) for rule in key_rules if _d.match_key_pattern(rule.key_list))
-        for _d in _raw_diff(old_dict=old_dict, new_dict=new_dict)
-    ]
+    @beartype
+    def matched_rule(diff_result: DiffResult) -> bool:
+        """Return `False` if the diff_result passes the custom rules and should be suppressed."""
+        for rule in key_rules:
+            if diff_result.match_key_pattern(rule.key_list):
+                return rule.func(old=diff_result.old, new=diff_result.new)
+        return False
+
+    return [_d for _d in _raw_diff(old_dict=old_dict, new_dict=new_dict) if not matched_rule(_d)]

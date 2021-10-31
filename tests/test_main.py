@@ -3,13 +3,12 @@
 import re
 from datetime import datetime
 
-import pendulum
 import pytest
 from beartype import beartype
 from cerberus import Validator
 from cerberus.schema import SchemaError
 
-from pytest_cache_assert import KeyRule, check_exact, check_suppress, check_type
+from pytest_cache_assert import KeyRule, check_suppress, check_type
 from pytest_cache_assert._check_assert.constants import TEST_DATA_TYPE
 from pytest_cache_assert.main import assert_against_cache
 
@@ -31,19 +30,32 @@ def test_assert_against_cache_failure(fix_tmp_assert):
 
 @pytest.mark.parametrize(
     ('cached_data', 'test_data', 'key_rules'), [
-        # FIXME: Implement tests of the KeyRule logic!
-        ({'title': 'hello'}, {'title': 'Hello World!'}, []),
-        ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, []),
-        ({'missing': {'title': 'hello'}}, {'title': 'hello'}, []),
-        ({'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, []),
-        ({'numbers': 20}, {'numbers': 45}, []),
-        ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, []),
-        ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
-        ({'dates': str(pendulum.now())}, {'dates': str(pendulum.now())}, []),
-        ({'dates': str(datetime.utcnow())}, {'dates': str(datetime.utcnow())}, []),
-        ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
-        ({'dates': str(datetime.utcnow())}, {'dates': None}, []),
-        ({'10': 50}, {'10': 51}, []),
+        ({'title': 'hello'}, {'title': 'Hello World!'}, [
+            KeyRule(key_list=['title'], func=check_suppress),
+        ]),
+        ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
+            KeyRule(key_list=['nested', 'title'], func=check_suppress),
+        ]),
+        ({'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
+            KeyRule(key_list=['added', '*', '*'], func=check_suppress),
+            KeyRule(key_list=['title'], func=check_suppress),
+        ]),
+        ({'numbers': 20}, {'numbers': 45}, [
+            KeyRule(key_list=['numbers'], func=check_type),
+        ]),
+        ({'numbers': '20.0'}, {'numbers': '45.0'}, [
+            KeyRule(key_list=['numbers'], func=check_type),  # PLANNED: Demonstrate that int != float?
+        ]),
+        # ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, [
+        #     KeyRule(key_list=['dates'], func=check_type),  # FIXME: Need logic for lists!
+        # ]),
+        ({'dates': str(datetime.now())}, {'dates': str(datetime.utcnow())}, [
+            KeyRule(key_list=['dates'], func=check_type),
+        ]),
+        # ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
+        # ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
+        # ({'dates': str(datetime.utcnow())}, {'dates': None}, []),
+        # ({'10': 50}, {'10': 51}, []),
     ],
 )
 def test_assert_against_cache_differ(cached_data, test_data, key_rules, fix_tmp_assert):

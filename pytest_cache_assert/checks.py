@@ -7,6 +7,7 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
+import dictdiffer
 from beartype import beartype
 
 from ._check_assert.caching import cache_data, init_cache, load_cached_data
@@ -28,15 +29,12 @@ def assert_against_cache(
     test_data: TEST_DATA_TYPE,
     path_cache_dir: Path,
     cache_name: str,
-    # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
+    # FIXME: Implement key rules. See notes above. Consider a dataclass KeyRules
     key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
-    # TODO: Implement validator for user customization
     validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
     metadata: Optional[dict] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
-
-    Will raise AssertionError if any assertion fails.
 
     Args:
         test_data: dictionary to test and/or cache
@@ -46,6 +44,9 @@ def assert_against_cache(
         validator: Custom validation function to be run against the test data before any modification
         metadata: metadata dictionary to store in the cache file
 
+    Raises:
+        AssertionError if any assertion fails
+
     """
     validator = validator or (lambda _res: None)
     validator(test_data)
@@ -53,8 +54,8 @@ def assert_against_cache(
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)
-    # PLANNED: Consider always writing metadata. Only edge case is if multiple files use the same test
-    #   Would need logic to merge the metadata to show all test names, etc.
+    # TODO: Always write metadata. Edge case is if multiple tests use the same cache file
+    #   Will merge the metadata to show values as sets
     if not path_cache_file.is_file():
         cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
@@ -66,7 +67,10 @@ def assert_against_cache(
         # test_data = apply_rule(test_data, rule)
         print(rule)
 
-    # TODO: modify the dictionary based on the match precision enum
-    # test_data = apply_match_precision(test_data, match_precision)
-
-    assert test_data == cached_data  # nosec # noqa: S101
+    dict_diff = [*dictdiffer.diff(test_data, cached_data)]
+    if dict_diff:
+        # TODO: pretty print the dictionaries and "textwrap" to terminal width? (Move to dedicated function)
+        raise AssertionError(f"""For test data: {test_data}
+Found differences with: {path_cache_file}
+Differences: {dict_diff}
+""")

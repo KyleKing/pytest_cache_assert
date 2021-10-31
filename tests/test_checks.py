@@ -1,7 +1,7 @@
 """Test plugin.py."""
 
 import re
-from _pytest.assertion import pytest_assertrepr_compare
+
 import pytest
 from beartype import beartype
 from cerberus import Validator
@@ -15,7 +15,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):
     """Test that a difference in test_data and cached data generates an error."""
     assert_against_cache({'result': False}, **fix_tmp_assert)
 
-    with pytest.raises(AssertionError, match=''):
+    with pytest.raises(AssertionError, match=r'For test data: .*\nFound differences with: .*'):
         assert_against_cache({'result': True}, **fix_tmp_assert)  # act
 
 

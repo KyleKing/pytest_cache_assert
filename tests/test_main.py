@@ -25,23 +25,24 @@ def test_assert_against_cache_failure(fix_tmp_assert):
 # Key Rules
 
 
-@pytest.mark.skip('Run the test_differ tests first!')
-@pytest.mark.parametrize(('cached_data', 'test_data', 'key_rules'), [
-    # TODO: Key Rule
-    ({'title': 'hello'}, {'title': 'Hello World!'}, []),
-    ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, []),
-    ({'missing': {'title': 'hello'}}, {'title': 'hello'}, []),
-    ({'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, []),
-    ({'numbers': 20}, {'numbers': 45}, []),
-    ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, []),
-    ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
-    ({'iterable': {'acorn', 'tree'}}, {'iterable': ['acorn', 'tree']}, []),
-    ({'dates': str(pendulum.now())}, {'dates': str(pendulum.now())}, []),
-    ({'dates': str(datetime.utcnow())}, {'dates': str(datetime.utcnow())}, []),
-    ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
-    ({'dates': str(datetime.utcnow())}, {'dates': None}, []),
-    ({'10': 50}, {'10': 51}, []),
-])
+@pytest.mark.parametrize(
+    ('cached_data', 'test_data', 'key_rules'), [
+        # TODO: Key Rule
+        ({'title': 'hello'}, {'title': 'Hello World!'}, []),
+        ({'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, []),
+        ({'missing': {'title': 'hello'}}, {'title': 'hello'}, []),
+        ({'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, []),
+        ({'numbers': 20}, {'numbers': 45}, []),
+        ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, []),
+        ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, []),
+        ({'iterable': {'acorn', 'tree'}}, {'iterable': ['acorn', 'tree']}, []),
+        ({'dates': str(pendulum.now())}, {'dates': str(pendulum.now())}, []),
+        ({'dates': str(datetime.utcnow())}, {'dates': str(datetime.utcnow())}, []),
+        ({'dates': None}, {'dates': str(datetime.utcnow())}, []),
+        ({'dates': str(datetime.utcnow())}, {'dates': None}, []),
+        ({'10': 50}, {'10': 51}, []),
+    ],
+)
 def test_assert_against_cache_differ(cached_data, test_data, key_rules, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     fix_tmp_assert = {**fix_tmp_assert, 'key_rules': key_rules}

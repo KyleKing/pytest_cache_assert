@@ -23,5 +23,5 @@ pytest_cache_assert.
 
 ## Sub-modules
 
-* [pytest_cache_assert.checks](checks/)
+* [pytest_cache_assert.main](main/)
 * [pytest_cache_assert.plugin](plugin/)

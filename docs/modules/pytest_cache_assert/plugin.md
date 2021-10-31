@@ -15,7 +15,7 @@ Pytest Plugin.
     from _pytest.fixtures import FixtureRequest
     from beartype import beartype
 
-    from . import checks
+    from . import main
     from ._check_assert.constants import DEF_CACHE_DIR_NAME
 
     # PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
@@ -25,13 +25,13 @@ Pytest Plugin.
     @pytest.fixture()
     @beartype
     def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
-        """Yield checks.assert_against_cache with pytest-specific arguments already specified.
+        """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
         Args:
             request: pytest fixture used to identify the test directory
 
         Returns:
-            Callable[[Any], None]: `checks.assert_against_cache()` with test_dir already specified
+            Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
 
         Raises:
             RuntimeError: if the test directory cannot be determined
@@ -46,7 +46,7 @@ Pytest Plugin.
 
         test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
         test_file = Path(request.node.fspath)
-        cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()
+        cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()  # noqa: ECE001
         path_cache_dir = test_dir / DEF_CACHE_DIR_NAME
 
         # PLANNED: serialize the func_args metadata recursively
@@ -55,7 +55,7 @@ Pytest Plugin.
         metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
         # FYI: The keyword arguments can be overridden by the test function
-        return partial(checks.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
+        return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
 
     ```
 
@@ -78,7 +78,7 @@ def assert_against_cache(
 
 
 
-Yield checks.assert_against_cache with pytest-specific arguments already specified.
+Yield main.assert_against_cache with pytest-specific arguments already specified.
 
 **Parameters:**
 
@@ -90,7 +90,7 @@ Yield checks.assert_against_cache with pytest-specific arguments already specifi
 
 | Type | Description |
 |---|---|
-| Callable[[Any], None] | `checks.assert_against_cache()` with test_dir already specified |
+| Callable[[Any], None] | `main.assert_against_cache()` with test_dir already specified |
 
 **Raises:**
 
@@ -103,13 +103,13 @@ Yield checks.assert_against_cache with pytest-specific arguments already specifi
     @pytest.fixture()
     @beartype
     def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
-        """Yield checks.assert_against_cache with pytest-specific arguments already specified.
+        """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
         Args:
             request: pytest fixture used to identify the test directory
 
         Returns:
-            Callable[[Any], None]: `checks.assert_against_cache()` with test_dir already specified
+            Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
 
         Raises:
             RuntimeError: if the test directory cannot be determined
@@ -124,7 +124,7 @@ Yield checks.assert_against_cache with pytest-specific arguments already specifi
 
         test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
         test_file = Path(request.node.fspath)
-        cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()
+        cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()  # noqa: ECE001
         path_cache_dir = test_dir / DEF_CACHE_DIR_NAME
 
         # PLANNED: serialize the func_args metadata recursively
@@ -133,6 +133,6 @@ Yield checks.assert_against_cache with pytest-specific arguments already specifi
         metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
         # FYI: The keyword arguments can be overridden by the test function
-        return partial(checks.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
+        return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
 
     ```

@@ -7,8 +7,10 @@ from .constants import TEST_DATA_TYPE
 from .differ import DiffResult
 
 
-def create(test_data: TEST_DATA_TYPE, cached_data: TEST_DATA_TYPE, path_cache_file: Path,
-           dict_diff: List[DiffResult]) -> str:
+def create(
+    test_data: TEST_DATA_TYPE, cached_data: TEST_DATA_TYPE, path_cache_file: Path,
+    dict_diff: List[DiffResult],
+) -> str:
     """Create the error message.
 
 

@@ -1,4 +1,4 @@
-#  pytest_cache_assert.checks
+#  pytest_cache_assert.main
 
 Assertion checks for unit tests.
 
@@ -13,23 +13,14 @@ FYI: Should not require any pytest functionality
     """
 
     from pathlib import Path
-    from typing import Any, Callable, Dict, Optional
+    from typing import Callable, List, Optional
 
-    from _pytest.assertion.util import assertrepr_compare
     from beartype import beartype
 
+    from ._check_assert import differ, error_message
     from ._check_assert.caching import cache_data, init_cache, load_cached_data
     from ._check_assert.constants import TEST_DATA_TYPE
-
-    # NOTE: additional descriptions for planned features
-    # - `key_rules`: Dict[str, Optional[Callable[[Any, Any], None]]
-    #     - (String): rule_callable (ignore, check-likeness, custom)
-    #         - Specify the key name or pattern of key names using dots for nesting and asterisks for wildcards (jmespath)
-    #         - The rule callable can be any custom implementation or one of the recommended
-    #             - The default assertion is an exact match, so any keys not specified here will be checked for exactness
-    #             - The utility functions provided by the package are for use cases with variable values
-    #                 - NoOp-ignore field
-    #                 - Check if null if value is null or check type-of (in-exact)
+    from ._check_assert.key_rules import KeyRule
 
 
     @beartype
@@ -37,8 +28,7 @@ FYI: Should not require any pytest functionality
         test_data: TEST_DATA_TYPE,
         path_cache_dir: Path,
         cache_name: str,
-        # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
-        key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
+        key_rules: Optional[List[KeyRule]] = None,
         validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
         metadata: Optional[dict] = None,
     ) -> None:
@@ -62,22 +52,17 @@ FYI: Should not require any pytest functionality
         path_cache_file = path_cache_dir / cache_name
         if not path_cache_dir.is_dir():
             init_cache(path_cache_dir)
-        # PLANNED: Consider always writing metadata. Only edge case is if multiple files use the same test
-        #   Would need logic to merge the metadata to show all test names, etc.
+        # TODO: Always write metadata. Edge case is if multiple tests use the same cache file
+        #   Will merge the metadata to show values as sets
         if not path_cache_file.is_file():
             cache_data(path_cache_file, metadata or {}, test_data)
         cached_data = load_cached_data(path_cache_file)
 
-        for rule in key_rules or {}:
-            # TODO: Move to key_rules to separate function
-            #   - Check callable (NoOp ignore; check-likeness; or custom)
-            #   - Pop keys from both dictionaries if present
-            # test_data = apply_rule(test_data, rule)
-            print(rule)
-
-        error_message = assertrepr_compare(config={'verbose': 3}, op='==', left=test_data, right=cached_data)
-        if error_message:
-            raise AssertionError(error_message)
+        dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
+        if dict_diff:
+            raise AssertionError(error_message.create(
+                test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
+            ))
 
     ```
 
@@ -91,7 +76,7 @@ def assert_against_cache(
     test_data: Any,
     path_cache_dir: pathlib.Path,
     cache_name: str,
-    key_rules: Union[Dict[str, Callable[[Any, Any], NoneType]], NoneType] = None,
+    key_rules: Union[List[pytest_cache_assert._check_assert.key_rules.KeyRule], NoneType] = None,
     validator: Union[Callable[[Any], NoneType], NoneType] = None,
     metadata: Union[dict, NoneType] = None
 ) -> None
@@ -117,8 +102,7 @@ Raises:
         test_data: TEST_DATA_TYPE,
         path_cache_dir: Path,
         cache_name: str,
-        # TODO: Implement key rules. See notes above. Consider a dataclass KeyRules
-        key_rules: Optional[Dict[str, Callable[[Any, Any], None]]] = None,
+        key_rules: Optional[List[KeyRule]] = None,
         validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
         metadata: Optional[dict] = None,
     ) -> None:
@@ -142,21 +126,16 @@ Raises:
         path_cache_file = path_cache_dir / cache_name
         if not path_cache_dir.is_dir():
             init_cache(path_cache_dir)
-        # PLANNED: Consider always writing metadata. Only edge case is if multiple files use the same test
-        #   Would need logic to merge the metadata to show all test names, etc.
+        # TODO: Always write metadata. Edge case is if multiple tests use the same cache file
+        #   Will merge the metadata to show values as sets
         if not path_cache_file.is_file():
             cache_data(path_cache_file, metadata or {}, test_data)
         cached_data = load_cached_data(path_cache_file)
 
-        for rule in key_rules or {}:
-            # TODO: Move to key_rules to separate function
-            #   - Check callable (NoOp ignore; check-likeness; or custom)
-            #   - Pop keys from both dictionaries if present
-            # test_data = apply_rule(test_data, rule)
-            print(rule)
-
-        error_message = assertrepr_compare(config={'verbose': 3}, op='==', left=test_data, right=cached_data)
-        if error_message:
-            raise AssertionError(error_message)
+        dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
+        if dict_diff:
+            raise AssertionError(error_message.create(
+                test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
+            ))
 
     ```

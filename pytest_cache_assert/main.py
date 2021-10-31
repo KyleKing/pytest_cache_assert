@@ -7,9 +7,9 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
-import dictdiffer
 from beartype import beartype
 
+from ._check_assert import differ, error_message
 from ._check_assert.caching import cache_data, init_cache, load_cached_data
 from ._check_assert.constants import TEST_DATA_TYPE
 
@@ -60,18 +60,9 @@ def assert_against_cache(
         cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
-    dict_diff = [*dictdiffer.diff(cached_data, test_data)]
-    # for rule in key_rules or {}:
-    for _diff in dict_diff:
-        # TODO: Move to key_rules to separate function
-        #   - Check callable (NoOp ignore; check-likeness; or custom)
-        #   - Pop keys from both dictionaries if present
-        # test_data = apply_rule(test_data, rule)
-        print(_diff)
-
+    dict_diff = differ.diff_with_rules(old=cached_data, new=test_data, key_rules=key_rules)
     if dict_diff:
         # TODO: pretty print the dictionaries and "textwrap" to terminal width? (Move to dedicated function)
-        raise AssertionError(f"""For test data: {test_data}
-Found differences with: {path_cache_file}
-Differences: {dict_diff}
-""")
+        raise AssertionError(error_message.create(
+            test_data=test_data, cached_data=cached_data, path_cache_file=path_cache_file, dict_diff=dict_diff,
+        ))

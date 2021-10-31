@@ -39,6 +39,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):
     ({'numbers': 20}, {'numbers': 45}, {}),
     ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, {}),
     ({'list': ['acorn', 'tree']}, {'list': ['acorn', 'treenut']}, {}),
+    ({'iterable': {'acorn', 'tree'}}, {'iterable': ['acorn', 'tree']}, {}),
     ({'dates': str(pendulum.now())}, {'dates': str(pendulum.now())}, {}),
     ({'dates': str(datetime.utcnow())}, {'dates': str(datetime.utcnow())}, {}),
     ({'dates': None}, {'dates': str(datetime.utcnow())}, {}),

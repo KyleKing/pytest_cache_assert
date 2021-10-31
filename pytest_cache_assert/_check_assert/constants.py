@@ -1,5 +1,6 @@
 """Constants."""
 
+from datetime import datetime
 from typing import Any, Dict, List, Union
 
 _SAFE_T = Union[str, int, float, bool, None]
@@ -13,6 +14,16 @@ _NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
 
 TEST_DATA_TYPE = Any  # PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]
 """Test Data Type."""
+
+
+class _TrueNull:  # noqa: H601
+    """Indicate that the old or new value does not exist."""
+
+    ...
+
+
+_DIFF_TYPES = Union[None, str, int, float, datetime, _TrueNull]
+"""Possible Old or New difference type."""
 
 DEF_CACHE_DIR_NAME = 'assert-cache'
 """Default `pytest_assert_cache` directory name."""

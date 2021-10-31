@@ -55,6 +55,14 @@
         "name": "attrs",
         "version": "21.2.0"
     },
+    "attrs-strict": {
+        "datetime": "2021-09-01T07:28:38.414211Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2021-09-01T07:28:38.414211Z",
+        "latest_version": "0.2.2",
+        "name": "attrs-strict",
+        "version": "0.2.2"
+    },
     "autoflake": {
         "datetime": "2020-08-23T01:20:55.487533Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",

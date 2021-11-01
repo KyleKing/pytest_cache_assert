@@ -1,6 +1,6 @@
 """Dictionary Differ."""
 
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Union
 
 import attr
 import dictdiffer
@@ -16,6 +16,23 @@ from .key_rules import KeyRule
 https://github.com/inveniosoftware/dictdiffer/blob/b32e4b0d44b81a6de4cffd7920122c5c96436a79/dictdiffer/__init__.py#L20
 
 """
+
+
+@beartype
+def _validate_diff_type(_instance: Any, _attribute: attr.Attribute, diff_type: Any) -> None:
+    """Validate diff_type.
+
+    Args:
+        _instance: instance of a class with `attrs` attributes
+        _attribute: Attribute to validate
+        diff_type: The value to validate. Expected string diff type label
+
+    Raises:
+        ValueError: if diff_type is not an expected type from dictdiffer
+
+    """
+    if diff_type not in (_ADD, _REMOVE, _CHANGE):
+        raise ValueError(f'Invalid diff_type: {diff_type}')
 
 
 @attr.s(auto_attribs=True, frozen=True, kw_only=True)
@@ -45,26 +62,110 @@ class DiffResult:  # noqa: H601
         return all(pat in wildcards or key == pat for key, pat in zip(self.key_list, pattern))
 
 
-@beartype
-def _parse_keys(raw_keys: List[Union[str, int]]) -> Tuple[List[str], Optional[int]]:
-    """Parse the key list from dictdiffer for DiffResult.
+@attr.s(auto_attribs=True, kw_only=True)
+class DictDiff:  # noqa: H601
+    """Mutable data structure to manipulate results of the raw dictdiffer.diff output."""
 
-    Args:
-        raw_keys: list of keys that may contain dot-syntax
+    # Initial raw output of dictdiffer
+    diff_type: str = attr.ib(validator=_validate_diff_type)
+    raw_keys: Union[str, List[Union[str, int]]] = attr.ib(validator=type_validator())
+    raw_data: Any
 
-    Returns:
-        Tuple: the complete list of keys and the optional list index if relevant
+    # Interim Values
+    keys: List[str] = attr.ib(factory=list, init=False, validator=type_validator())
+    index: Optional[int] = attr.ib(default=None, init=False, validator=type_validator())
+    data: Any = attr.ib(default=None, init=False, validator=type_validator())
 
-    """
-    key_list = []
-    index = None
-    for key in raw_keys:
-        if isinstance(key, int) and key == raw_keys[-1]:
-            index = key
-            break
-        key_list.extend(key.split('.') if '.' in key else [key])
+    # Final Values
+    old: DIFF_TYPES = attr.ib(default=TrueNull, init=False)
+    new: DIFF_TYPES = attr.ib(default=TrueNull, init=False)
 
-    return (key_list, index)
+    @beartype
+    def _parse_raw_data_and_raw_keys(self) -> None:
+        """Handle case where the keys are actually in the data.
+
+        Raises:
+            ValueError: on any unexpected states
+
+        """
+        self.data = self.raw_data
+        if self.raw_keys == '':
+            if len(self.raw_data) != 1:
+                raise ValueError(f'Unexpected self.raw_data from: {self}')
+            inner_list = self.raw_data[-1]
+            self.raw_keys = inner_list[:-1]
+            self.data = inner_list[-1]
+        self.keys = [self.raw_keys] if isinstance(self.raw_keys, str) else [*self.raw_keys]
+
+    @beartype
+    def _parse_data(self) -> None:
+        """Unwrap additional states of `self.data`.
+
+        Raises:
+            ValueError: on any unexpected states
+
+        """
+        # Handle case where there was a change in a list and the index is the first value in the data list
+        if (
+            isinstance(self.data, list) and len(self.data) == 1
+            and isinstance(self.data[0], tuple) and len(self.data[0]) == 2
+        ):
+            self.keys.append(self.data[0][0])
+            self.data = self.data[0][1]
+        # Handle case where the data is a new dictionary that has keys that should be in keys
+        while isinstance(self.data, dict):
+            items = [*self.data.items()]
+            if len(items) != 1:
+                raise ValueError(f'Unexpected self.data from: {self}')
+            key, value = items[0]
+            self.keys.append(key)
+            self.data = value
+
+    @beartype
+    def _parse_keys(self) -> None:
+        """Parse the key list from `dictdiffer.diff`."""
+        flattened_keys = []
+        for key in self.keys:
+            if isinstance(key, int) and key == self.keys[-1]:
+                self.index = key
+                break
+            flattened_keys.extend(key.split('.') if '.' in key else [key])
+
+        self.keys = flattened_keys
+
+    @beartype
+    def _assign_old_and_new(self) -> None:
+        """Assign new and old data based on the type of diff.
+
+        Raises:
+            ValueError: on any unexpected states
+
+        """
+        if self.diff_type == _ADD:
+            self.new = self.data
+        elif self.diff_type == _REMOVE:
+            self.old = self.data
+        elif self.diff_type == _CHANGE:
+            if len(self.data) != 2:
+                raise ValueError(f'Unexpected self.data from: {self}')
+            self.old = self.data[0]
+            self.new = self.data[1]
+        else:  # Shouldn't be reachable because of validator
+            raise ValueError(f'Unknown self.diff_type from: {self}')
+
+    @beartype
+    def get_diff_result(self) -> DiffResult:
+        """Generate the diff_result from parsed data.
+
+        Returns:
+            DiffResult: The diff_result
+
+        """
+        self._parse_raw_data_and_raw_keys()
+        self._parse_data()
+        self._parse_keys()
+        self._assign_old_and_new()
+        return DiffResult(key_list=self.keys, list_index=self.index, old=self.old, new=self.new)
 
 
 @beartype
@@ -78,52 +179,11 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
     Returns:
         List[DiffResult]: list of DiffResult objects
 
-    Raises:
-        ValueError: on any unexpected states
-
     """
-    # TODO: Refactor into smaller functions!
     results = []
-    for (diff_type, keys, data) in dictdiffer.diff(old_dict, new_dict):
-        # Handle case where the keys are actually in the data
-        if keys == '':
-            if len(data) != 1:
-                raise ValueError(f'Unexpected data: {(diff_type, keys, data)} for {(old_dict, new_dict)}')
-            inner_list = data[-1]
-            keys = inner_list[:-1]
-            data = inner_list[-1]
-        keys = [keys] if isinstance(keys, str) else [*keys]
-        # Handle case where there was a change in a list and the index is the first value in the data list
-        if isinstance(data, list) and len(data) == 1 and isinstance(data[0], tuple) and len(data[0]) == 2:
-            keys.append(data[0][0])
-            data = data[0][1]
-        # Handle case where the data is a new dictionary that has keys that should be in keys
-        while isinstance(data, dict):
-            items = [*data.items()]
-            if len(items) != 1:
-                raise ValueError(f'Unexpected data: {(diff_type, keys, data)} for {(old_dict, new_dict)}')
-            key, value = items[0]
-            keys.append(key)
-            data = value
-        # Calculate the list_index and key list
-        key_list, list_index = _parse_keys(keys)
-
-        # Assign new and old data based on the type of diff
-        old, new = TrueNull, TrueNull
-        if diff_type == _ADD:
-            new = data
-        elif diff_type == _REMOVE:
-            old = data
-        elif diff_type == _CHANGE:
-            if len(data) != 2:
-                raise ValueError(f'Unexpected data: {(diff_type, keys, data)} for {(old_dict, new_dict)}')
-            old = data[0]
-            new = data[1]
-        else:
-            raise ValueError(f'Unknown diff type: {diff_type}')
-
-        diff_result = DiffResult(key_list=key_list, list_index=list_index, old=old, new=new)
-        results.append(diff_result)
+    for (_type, _keys, _data) in dictdiffer.diff(old_dict, new_dict):
+        dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
+        results.append(dict_diff.get_diff_result())
 
     return results
 

@@ -78,9 +78,9 @@ def test_raw_diff(old_dict, new_dict, expected):
         (
             {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
                 KeyRule(pattern=['a', Wildcards.RECURSIVE]),
-                KeyRule(pattern=['a', Wildcards.SINGLE, Wildcards.SINGLE]),
                 KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
-            ],  # Check Sorting. Only the last key rule will suppress the error
+                KeyRule(pattern=['a', Wildcards.SINGLE, Wildcards.SINGLE]),
+            ],  # Check Sorting. Only the middle key_rule will suppress the error
         ),
     ],
 )

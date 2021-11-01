@@ -1,6 +1,6 @@
 """Key Rules."""
 
-from typing import Callable, List
+from typing import Callable, List, Union
 from uuid import UUID
 
 import attr
@@ -9,7 +9,7 @@ from attrs_strict import type_validator
 from beartype import beartype
 from pendulum.parsing.exceptions import ParserError
 
-from .constants import DIFF_TYPES
+from .constants import DIFF_TYPES, Wildcards
 
 
 @beartype
@@ -77,5 +77,5 @@ def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 class KeyRule:  # noqa: H601
     """Key Rule."""
 
-    key_list: List[str] = attr.ib(validator=type_validator())
+    pattern: List[Union[str, Wildcards]] = attr.ib(validator=type_validator())
     func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = attr.ib(default=check_exact, validator=type_validator())

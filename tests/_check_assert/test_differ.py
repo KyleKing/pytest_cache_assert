@@ -2,8 +2,9 @@
 
 import pytest
 
+from pytest_cache_assert import KeyRule, Wildcards, check_suppress
 from pytest_cache_assert._check_assert.constants import TrueNull
-from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff
+from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff_with_rules
 
 
 @pytest.mark.parametrize(
@@ -70,3 +71,23 @@ def test_raw_diff(old_dict, new_dict, expected):
     result = _raw_diff(old_dict=old_dict, new_dict=new_dict)
 
     assert sorted(result) == sorted(expected)
+
+
+@pytest.mark.parametrize(
+    ('old_dict', 'new_dict', 'key_rules'), [
+        (
+            {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
+                KeyRule(pattern=['a', Wildcards.RECURSIVE]),
+                KeyRule(pattern=['a', Wildcards.SINGLE, Wildcards.SINGLE]),
+                KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
+            ],  # Check Sorting. Only the last key rule will suppress the error
+        ),
+    ],
+)
+def test_diff_with_rules(old_dict, new_dict, key_rules):
+    """Test that the key rules work in various scenarios."""
+    result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=key_rules)
+
+    assert result == []
+    errors = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=[])
+    assert len(errors) == 1

@@ -95,13 +95,18 @@ The cached JSON files must be checked into version control and if needed, can be
 
 In your cached dictionary, you may have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:
 
+<!-- TODO: Support Nested KeyRules -->
+<!-- TODO: Use a class instead of an asterisk -->
+<!-- TODO: Support filtering all keys below ... (i.e. two asterisk) -->
+<!-- TODO: Sort by key names in reverse (most specific first) -->
+
 ```py
 """tests/test_main.py."""
 
 from uuid import uuid4
 from datetime import datetime, timedelta
 
-from pytest_cache_assert import KeyRule, check_suppress, check_type
+from pytest_cache_assert import KeyRule, check_suppress, check_type, Wildcards
 
 
 def test_assert_against_cache_key_rules(assert_against_cache):
@@ -112,13 +117,13 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     test_data = {'date': str(now + timedelta(hours=3)), {'nested': {'uuid': str(uuid4())}}}
     #
     key_rules = [
-      # Suppress keys 'ignored.a' and 'ignored.b' but note that 'ignored.c.something' would not be ignored
-      #   An asterisks can be used to suppress only one key
-      KeyRule(key_list=['ignored', '*'], func=check_suppress),
+      # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard
+      # If there were a 'ignored.c.something', the Wildcard.RECURSIVE could be used
+      KeyRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
       # Ensure that values are of the same type. This is useful if you expect datetime objects and want to raise
       #   if one value is Null (or you have a number stored as a string or UUID, etc.)
-      KeyRule(key_list=['date'], func=check_type),
-      KeyRule(key_list=['nested', 'uuid'], func=check_type),
+      KeyRule(pattern=['date'], func=check_type),
+      KeyRule(pattern=['nested', 'uuid'], func=check_type),
       # The KeyRule function can be replaced with any function that accepts keyword arguments 'old' and 'new'
     ]
     #

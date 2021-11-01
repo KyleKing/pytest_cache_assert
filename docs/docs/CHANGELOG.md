@@ -1,5 +1,15 @@
 ## Unreleased
 
+### Feat
+
+- support UUID in check_type
+
+### Fix
+
+- add missing check_imports file
+
+## 2021.0.1.0 (2021-10-31)
+
 ### Fix
 
 - add tests and verify correctness of KeyRule

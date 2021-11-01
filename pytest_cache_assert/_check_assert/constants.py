@@ -1,7 +1,24 @@
 """Constants."""
 
 from datetime import datetime
+from enum import Enum
 from typing import Any, Dict, Iterable, List, Type, Union
+
+
+class Wildcards(Enum):  # noqa: H601
+    """Pattern Matching Wildcards."""
+
+    SINGLE = 1
+    RECURSIVE = 2
+
+    def __str__(self) -> str:
+        """Return string representation for sorting.
+
+        Returns:
+            str: index as a string with dashes for sorting last
+
+        """
+        return f'--{self.name}--'
 
 
 class TrueNull:  # noqa: H601

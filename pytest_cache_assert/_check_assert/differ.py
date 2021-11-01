@@ -7,7 +7,7 @@ import dictdiffer
 from attrs_strict import type_validator
 from beartype import beartype
 
-from .constants import DIFF_TYPES, TrueNull
+from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
@@ -27,20 +27,22 @@ class DiffResult:  # noqa: H601
     old: DIFF_TYPES = attr.ib(validator=type_validator())
     new: DIFF_TYPES = attr.ib(validator=type_validator())
 
-    def match_key_pattern(self, pattern: List[str]) -> bool:
+    @beartype
+    def match_key_pattern(self, pattern: List[Union[str, Wildcards]]) -> bool:
         """Match the provided pattern against the key list. Accepts asterisk wildcards.
 
         Args:
-            pattern: The key pattern to match against
+            pattern: The key pattern to match against. Supports `Wildcards`
 
         Returns:
             bool: True if the key `pattern` applies to the `key_list`
 
         """
-        if len(pattern) != len(self.key_list):
+        if pattern[-1] != Wildcards.RECURSIVE and len(pattern) != len(self.key_list):
             return False
 
-        return all(pat == '*' or key == pat for key, pat in zip(self.key_list, pattern))
+        wildcards = [Wildcards.SINGLE, Wildcards.RECURSIVE]
+        return all(pat in wildcards or key == pat for key, pat in zip(self.key_list, pattern))
 
 
 @beartype
@@ -130,7 +132,7 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule]) -> List[DiffResult]:
     """Determine the differences between two dictionaries.
 
-    FYI: Only checks first match and could suppress result of overlapping matches, but this is considered a user error
+    FYI: Sorts by specificity so that more specific key_rules apply over less specific ones
 
     Args:
         old_dict: old dictionary (typically cached one)
@@ -143,9 +145,9 @@ def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule])
     """
     @beartype
     def matched_rule(diff_result: DiffResult) -> bool:
-        """Return `False` if the diff_result passes the custom rules and should be suppressed."""
-        for rule in key_rules:
-            if diff_result.match_key_pattern(rule.key_list):
+        """Return `False` if the difference should be suppressed."""
+        for rule in sorted(key_rules, key=lambda _rule: str(_rule.pattern)):  # noqa: DAR101, DAR201
+            if diff_result.match_key_pattern(rule.pattern):
                 return rule.func(old=diff_result.old, new=diff_result.new)
         return False
 

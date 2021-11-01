@@ -137,8 +137,7 @@ class DictDiff:  # noqa: H601
             if isinstance(key, int) and key == self.keys[-1]:
                 self.index = key
                 break
-            # TODO: When is dot_syntax returned? What if dictionary key has '.'?
-            flattened_keys.extend(key.split('.') if '.' in str(key) else [key])
+            flattened_keys.append(key)
 
         self.keys = flattened_keys
 
@@ -190,7 +189,8 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 
     """
     results = []
-    for (_type, _keys, _data) in dictdiffer.diff(old_dict, new_dict):
+    raw_diff = dictdiffer.diff(first=old_dict, second=new_dict, expand=True, dot_notation=False)
+    for (_type, _keys, _data) in raw_diff:
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
         diff_result = dict_diff.get_diff_result()
         results.append(diff_result)

@@ -38,6 +38,12 @@ from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff
             ],
         ),
         (
+            {'fruits': []}, {'fruits': ['apple', 'mango']}, [
+                DiffResult(key_list=['fruits'], list_index=0, old=TrueNull, new='apple'),
+                DiffResult(key_list=['fruits'], list_index=1, old=TrueNull, new='mango'),
+            ],
+        ),
+        (
             {'missing': {'title': 'hello'}}, {'title': 'hello'}, [
                 DiffResult(key_list=['title'], list_index=None, old=TrueNull, new='hello'),
                 DiffResult(key_list=['missing', 'title'], list_index=None, old='hello', new=TrueNull),
@@ -74,6 +80,12 @@ from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff
                 DiffResult(key_list=['a', 0, 'b', 0, 'c'], list_index=None, old=1, new=2),
             ],
         ),
+        (
+            {'a': [{'list': 1}, {'list': 2}]}, {'a': [{'list': 3}, {'list': 4}]}, [
+                DiffResult(key_list=['a', 0, 'list'], list_index=None, old=1, new=3),
+                DiffResult(key_list=['a', 1, 'list'], list_index=None, old=2, new=4),
+            ],
+        ),
     ],
 )
 def test_raw_diff(old_dict, new_dict, expected):
@@ -98,6 +110,11 @@ def test_raw_diff(old_dict, new_dict, expected):
                     pattern=['a', Wildcards.LIST, 'b', Wildcards.LIST, 'c'],
                     func=check_suppress,
                 ),
+            ],
+        ),
+        (
+            {'a.b.c': 1}, {'a.b.c': 2}, [
+                KeyRule(pattern=['a.b.c'], func=check_suppress),
             ],
         ),
     ],

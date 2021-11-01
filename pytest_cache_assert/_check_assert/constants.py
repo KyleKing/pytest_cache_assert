@@ -9,7 +9,13 @@ class Wildcards(Enum):  # noqa: H601
     """Pattern Matching Wildcards."""
 
     SINGLE = 1
+    """Replace a single dictionary key."""
+
     RECURSIVE = 2
+    """Apply to all keys at or below this wildcard."""
+
+    LIST = 4
+    """Pseudokey for a list containing dictionaries."""
 
     def __str__(self) -> str:
         """Return string representation for sorting.

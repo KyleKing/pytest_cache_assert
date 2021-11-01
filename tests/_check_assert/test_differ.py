@@ -64,6 +64,16 @@ from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff
                 DiffResult(key_list=['nullable'], list_index=None, old=None, new='Not Null'),
             ],
         ),
+        (
+            {'a': [{'list': 1}, {'list': None}]}, {'a': [{'list': 1}, {'list': 2}]}, [
+                DiffResult(key_list=['a', 1, 'list'], list_index=None, old=None, new=2),
+            ],
+        ),
+        (
+            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+                DiffResult(key_list=['a', 0, 'b', 0, 'c'], list_index=None, old=1, new=2),
+            ],
+        ),
     ],
 )
 def test_raw_diff(old_dict, new_dict, expected):
@@ -81,6 +91,14 @@ def test_raw_diff(old_dict, new_dict, expected):
                 KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
                 KeyRule(pattern=['a', Wildcards.SINGLE, Wildcards.SINGLE]),
             ],  # Check Sorting. Only the middle key_rule will suppress the error
+        ),
+        (
+            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+                KeyRule(
+                    pattern=['a', Wildcards.LIST, 'b', Wildcards.LIST, 'c'],
+                    func=check_suppress,
+                ),
+            ],
         ),
     ],
 )

@@ -95,11 +95,6 @@ The cached JSON files must be checked into version control and if needed, can be
 
 In your cached dictionary, you may have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:
 
-<!-- TODO: Support Nested KeyRules -->
-<!-- TODO: Use a class instead of an asterisk -->
-<!-- TODO: Support filtering all keys below ... (i.e. two asterisk) -->
-<!-- TODO: Sort by key names in reverse (most specific first) -->
-
 ```py
 """tests/test_main.py."""
 

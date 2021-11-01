@@ -39,7 +39,7 @@ def _validate_diff_type(_instance: Any, _attribute: attr.Attribute, diff_type: A
 class DiffResult:  # noqa: H601
     """Usable Dictionary DIff Result."""
 
-    key_list: List[str] = attr.ib(validator=type_validator())
+    key_list: List[Union[str, int]] = attr.ib(validator=type_validator())
     list_index: Optional[int] = attr.ib(validator=type_validator())
     old: DIFF_TYPES = attr.ib(validator=type_validator())
     new: DIFF_TYPES = attr.ib(validator=type_validator())
@@ -58,8 +58,16 @@ class DiffResult:  # noqa: H601
         if pattern[-1] != Wildcards.RECURSIVE and len(pattern) != len(self.key_list):
             return False
 
-        wildcards = [Wildcards.SINGLE, Wildcards.RECURSIVE]
-        return all(pat in wildcards or key == pat for key, pat in zip(self.key_list, pattern))
+        @beartype
+        def pat_match(pat: Union[str, Wildcards], key: Union[str, int]) -> bool:
+            """Attempt to match the pattern against each key."""
+            return (  # noqa: DAR101,DAR201
+                (key == pat)
+                or (pat in {Wildcards.SINGLE, Wildcards.RECURSIVE})
+                or (pat == Wildcards.LIST and isinstance(key, int))
+            )
+
+        return all(pat_match(pat, key) for key, pat in zip(self.key_list, pattern))
 
 
 @attr.s(auto_attribs=True, kw_only=True)
@@ -129,7 +137,8 @@ class DictDiff:  # noqa: H601
             if isinstance(key, int) and key == self.keys[-1]:
                 self.index = key
                 break
-            flattened_keys.extend(key.split('.') if '.' in key else [key])
+            # TODO: When is dot_syntax returned? What if dictionary key has '.'?
+            flattened_keys.extend(key.split('.') if '.' in str(key) else [key])
 
         self.keys = flattened_keys
 
@@ -183,7 +192,8 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
     results = []
     for (_type, _keys, _data) in dictdiffer.diff(old_dict, new_dict):
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
-        results.append(dict_diff.get_diff_result())
+        diff_result = dict_diff.get_diff_result()
+        results.append(diff_result)
 
     return results
 

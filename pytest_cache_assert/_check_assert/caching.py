@@ -2,7 +2,9 @@
 
 import json
 from pathlib import Path
+from typing import List
 
+import dictdiffer
 from beartype import beartype
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
@@ -21,7 +23,30 @@ def init_cache(path_cache_dir: Path) -> None:
 
 
 @beartype
-def cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE) -> None:
+def _merge_metadata(new_metadata: dict, cached_meta_list: List[dict]) -> List[dict]:
+    """Merge metadata for caching. Filter duplicates.
+
+    Args:
+        new_metadata: metadata dictionary to store in the cache file
+        cached_meta_list: list of old metadata dictionaries to merging
+
+    Returns:
+        List[dict]: merged metadata
+
+    """
+    all_meta = [new_metadata, *cached_meta_list]
+    cached_list = [
+        meta
+        for index, meta in enumerate(all_meta)
+        if all([*dictdiffer.diff(meta, _m)] for _m in all_meta[index + 1:])
+    ]
+    if all([*dictdiffer.diff(all_meta[-1], _m)] for _m in cached_list):
+        cached_list.append(all_meta[-1])
+    return sorted(cached_list, key=lambda _m: json.dumps(_m, sort_keys=True))
+
+
+@beartype
+def write_cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE) -> None:
     """Cache the specified data.
 
     Args:
@@ -30,6 +55,14 @@ def cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE)
         test_data: arbitrary test data to store
 
     """
+    if path_cache_file.is_file():
+        old_cache_dict = json.load(path_cache_file.open('r'))
+        old_meta = old_cache_dict[KEY_NAME_META]
+        metadata = _merge_metadata(metadata, old_meta)
+        test_data = old_cache_dict[KEY_NAME_DATA]
+    else:
+        metadata = [metadata]
+
     cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
     path_cache_file.parent.mkdir(exist_ok=True, parents=True)
     _json = json.dumps(cache_dict, sort_keys=True, indent=2, separators=(',', ': '))

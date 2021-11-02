@@ -28,9 +28,31 @@ def _serialize(key: str, value: Any) -> Union[dict, str]:
     return {key: _serialize(key, value) if isinstance(value, dict) else str(value)}
 
 
+@beartype
+def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
+    """Calculate metadata.
+
+    Args:
+        request: pytest fixture used to identify the test directory
+        rel_test_file: relative path to the test file
+
+    Returns:
+        dict: new_metadata
+
+    """
+    test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
+    test_params = [*inspect.signature(request.node.function).parameters.keys()]
+    raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
+    func_args = {}
+    for key, value in raw_args.items():
+        func_args.update(_serialize(key, value))
+    return {'test_file': rel_test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
+
+
 @pytest.fixture()
 @beartype
-def assert_against_cache(request: FixtureRequest, cache_assert_config: Optional[Dict[str, Any]]) -> Callable[[Any], None]:
+def assert_against_cache(request: FixtureRequest,
+                         cache_assert_config: Optional[Dict[str, Any]]) -> Callable[[Any], None]:
     """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
@@ -53,19 +75,14 @@ def assert_against_cache(request: FixtureRequest, cache_assert_config: Optional[
     else:
         raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
 
-    test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
-    test_file = Path(request.node.fspath)
-    cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()  # noqa: ECE001
-    # Read user setting
+    # Read user settings
     rel_dir = cache_assert_config.get(DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME)
     path_cache_dir = test_dir / rel_dir
 
-    test_params = [*inspect.signature(request.node.function).parameters.keys()]
-    raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
-    func_args = {}
-    for key, value in raw_args.items():
-        func_args.update(_serialize(key, value))
-    metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
+    # Calculate keyword arguments
+    rel_test_file = Path(request.node.fspath).relative_to(test_dir)
+    cache_name = (rel_test_file.parent / f'{request.node.name}.json').as_posix()  # noqa: ECE001
+    metadata = _calculate_metadata(request, rel_test_file)
 
     # FYI: The partial function keyword arguments can be overridden when called
     return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

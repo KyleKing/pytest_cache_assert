@@ -10,7 +10,7 @@ from typing import Callable, List, Optional
 from beartype import beartype
 
 from ._check_assert import differ, error_message
-from ._check_assert.caching import cache_data, init_cache, load_cached_data
+from ._check_assert.caching import init_cache, load_cached_data, write_cache_data
 from ._check_assert.constants import TEST_DATA_TYPE
 from ._check_assert.error_message import RichAssertionError
 from ._check_assert.key_rules import KeyRule
@@ -45,10 +45,7 @@ def assert_against_cache(
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)
-    # TODO: Always write metadata. Edge case is if multiple tests use the same cache file
-    #   Will merge the metadata to show values as sets
-    if not path_cache_file.is_file():
-        cache_data(path_cache_file, metadata or {}, test_data)
+    write_cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
     dict_diff = differ.diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])

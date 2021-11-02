@@ -73,13 +73,15 @@ def test_create_data(name, assert_against_cache):
 
 ```json
 {
-  "_info": {
-    "func_args": {
-      "name": "Test Name 1"
-    },
-    "test_file": ".../tests/test_file.py",
-    "test_name": "test_create_data"
-  },
+  "_info": [
+    {
+      "func_args": {
+        "name": "Test Name 1"
+      },
+      "test_file": "test_readme.py",
+      "test_name": "test_create_data"
+    }
+  ],
   "_json": {
     "friends": [],
     "id": 9223372036854775807,
@@ -165,16 +167,18 @@ For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert
 
 ## Global Configuration Options
 
-- `cache_dir_rel_path`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
+- `DEF_CACHE_DIR_KEY`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
 
 ```py
 import pytest
+
+from pytest_cache_assert import DEF_CACHE_DIR_KEY
 
 
 @pytest.fixture(scope='module')
 def cache_assert_config():
     return {
-        'cache_dir_rel_path': 'custom/cache/dir',
+        DEF_CACHE_DIR_KEY: 'custom/cache/dir',
     }
 ```
 
@@ -182,8 +186,10 @@ def cache_assert_config():
 
 These are ideas for future options that are not currently implemented, but could be if there is enough interest:
 
-- PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
 - PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development
+    - The other edge case where a `mode` might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed
+- PLANNED: [Provide CLI arguments like `pytest-recording`](https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70) (`request.config.getoption("--record-mode") or "none"`) for one-time changes to configuration
+- PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
 
 ## Roadmap
 

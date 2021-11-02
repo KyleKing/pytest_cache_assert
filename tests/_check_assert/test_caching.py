@@ -44,10 +44,8 @@ def test_merge_metadata(new_metadata, metadata_list):
 
     result = _merge_metadata(new_metadata, metadata_list)
 
-    # TODO: Support using lists by wrapping and unwrapping in assert_against_cache
-    # HACK: Wrap here...
     # FYI: Can't use plugin here because of recursion by calling `_merge_metadata` twice
-    main.assert_against_cache({'result': result}, path_cache_dir=path_cache_dir, cache_name=cache_name)
+    main.assert_against_cache(result, path_cache_dir=path_cache_dir, cache_name=cache_name)
 
 
 @pytest.mark.parametrize('index', range(3))

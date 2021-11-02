@@ -86,7 +86,7 @@ def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
     return _try_type_coercion(old=old, new=new)
 
 
-@attr.s(auto_attribs=True, frozen=True, kw_only=True)
+@attr.s(auto_attribs=True, kw_only=True)
 class KeyRule:  # noqa: H601
     """Key Rule."""
 

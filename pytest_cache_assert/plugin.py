@@ -3,7 +3,7 @@
 import inspect
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, Optional, Union
 
 import pytest
 from _pytest.fixtures import FixtureRequest
@@ -12,8 +12,20 @@ from beartype import beartype
 from . import main
 from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
 
-# PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
-# https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70
+
+@beartype
+def _serialize(key: str, value: Any) -> Union[dict, str]:
+    """Recursive serialization function.
+
+    Args:
+        key: string key name
+        value: value to serialize
+
+    Returns:
+        Union[dict, str]: JSON-safe data
+
+    """
+    return {key: _serialize(key, value) if isinstance(value, dict) else str(value)}
 
 
 @pytest.fixture()
@@ -48,10 +60,12 @@ def assert_against_cache(request: FixtureRequest, cache_assert_config: Optional[
     rel_dir = cache_assert_config.get(DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME)
     path_cache_dir = test_dir / rel_dir
 
-    # PLANNED: serialize the func_args metadata recursively
     test_params = [*inspect.signature(request.node.function).parameters.keys()]
-    func_args = {key: str(value) for key, value in request.node.funcargs.items() if key in test_params}
+    raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
+    func_args = {}
+    for key, value in raw_args.items():
+        func_args.update(_serialize(key, value))
     metadata = {'test_file': test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
-    # FYI: The keyword arguments can be overridden by the test function
+    # FYI: The partial function keyword arguments can be overridden when called
     return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

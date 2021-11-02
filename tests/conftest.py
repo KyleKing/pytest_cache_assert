@@ -46,6 +46,6 @@ def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Path:
 @pytest.fixture(scope='module')
 def cache_assert_config() -> Dict[str, Any]:
     """Specify a custom cache directory."""
-    return {
+    return {  # noqa: DAR201
         DEF_CACHE_DIR_KEY: f'{DEF_CACHE_DIR_NAME}-custom',
     }

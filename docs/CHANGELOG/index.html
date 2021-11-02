@@ -369,8 +369,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    Fix
+  <a href="#refactor" class="md-nav__link">
+    Refactor
   </a>
   
 </li>
@@ -383,7 +383,41 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#refactor" class="md-nav__link">
+  <a href="#fix" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2021010-2021-10-31" class="md-nav__link">
+    2021.0.1.0 (2021-10-31)
+  </a>
+  
+    <nav class="md-nav" aria-label="2021.0.1.0 (2021-10-31)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_1" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feat_1" class="md-nav__link">
+    Feat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refactor_1" class="md-nav__link">
     Refactor
   </a>
   
@@ -650,8 +684,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    Fix
+  <a href="#refactor" class="md-nav__link">
+    Refactor
   </a>
   
 </li>
@@ -664,7 +698,41 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#refactor" class="md-nav__link">
+  <a href="#fix" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2021010-2021-10-31" class="md-nav__link">
+    2021.0.1.0 (2021-10-31)
+  </a>
+  
+    <nav class="md-nav" aria-label="2021.0.1.0 (2021-10-31)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_1" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feat_1" class="md-nav__link">
+    Feat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refactor_1" class="md-nav__link">
     Refactor
   </a>
   
@@ -695,7 +763,30 @@
                   <h1>CHANGELOG</h1>
                 
                 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">⚓︎</a></h2>
+<h3 id="refactor">Refactor<a class="headerlink" href="#refactor" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>code cleanup &amp; documentation updates</li>
+<li>simplify merge_metadata logic</li>
+<li>serialize the func_args metadata recursively</li>
+<li>improve code quality of _raw_diff</li>
+</ul>
+<h3 id="feat">Feat<a class="headerlink" href="#feat" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>support comparison of lists</li>
+<li>always write metadata as a list</li>
+<li>customizable cache directory</li>
+<li>support lists of dictionaries</li>
+<li>replace asterisk string with Wildcard enum</li>
+<li>support UUID in check_type</li>
+</ul>
 <h3 id="fix">Fix<a class="headerlink" href="#fix" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>support dictionary keys with dots</li>
+<li>add CNAME for custom subdomain</li>
+<li>add missing check_imports file</li>
+</ul>
+<h2 id="2021010-2021-10-31">2021.0.1.0 (2021-10-31)<a class="headerlink" href="#2021010-2021-10-31" title="Permanent link">⚓︎</a></h2>
+<h3 id="fix_1">Fix<a class="headerlink" href="#fix_1" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>add tests and verify correctness of KeyRule</li>
 <li>use full name instead of custom indexing for cache</li>
@@ -703,7 +794,7 @@
 <li>reduce stored metadata and check args</li>
 <li>re-run &ldquo;poetry install&rdquo; after entrypoint changes</li>
 </ul>
-<h3 id="feat">Feat<a class="headerlink" href="#feat" title="Permanent link">⚓︎</a></h3>
+<h3 id="feat_1">Feat<a class="headerlink" href="#feat_1" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>implement key rules</li>
 <li>implement dictdiffer wrapper</li>
@@ -715,7 +806,7 @@
 <li>start with Readme (RDD)</li>
 <li>initialized project with copier</li>
 </ul>
-<h3 id="refactor">Refactor<a class="headerlink" href="#refactor" title="Permanent link">⚓︎</a></h3>
+<h3 id="refactor_1">Refactor<a class="headerlink" href="#refactor_1" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>rename checks to main</li>
 <li>rename check_assert to assert_against_cache &amp; update README</li>

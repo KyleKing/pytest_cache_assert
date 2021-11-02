@@ -615,49 +615,25 @@
 <li>
 <p>docs/README.md</p>
 <ul>
-<li>line 101    TODO: Implement this example! Add as red test, then implement!</li>
-<li>line 105    TODO: support list indexing on top of jmespath&hellip;</li>
-<li>line 114    TODO: Add example for custom cerberus checks with <code>validator()</code></li>
-<li>line 131    TODO: Not currently used&hellip;</li>
-<li>line 136    TODO: Consider record mode</li>
-<li>line 137    TODO: Consider filters</li>
+<li>line 189 PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development</li>
+<li>line 191 PLANNED: <a href="https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70">Provide CLI arguments like <code>pytest-recording</code></a> (<code>request.config.getoption("--record-mode") or "none"</code>) for one-time changes to configuration</li>
+<li>line 192 PLANNED: Consider filters to prevent secrets from being cached: <code>filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]</code></li>
 </ul>
 </li>
 <li>
 <p>pytest_cache_assert/_check_assert/constants.py</p>
 <ul>
-<li>line  22 PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]</li>
-</ul>
-</li>
-<li>
-<p>pytest_cache_assert/_check_assert/differ.py</p>
-<ul>
-<li>line  83    TODO: Refactor into smaller functions!</li>
-</ul>
-</li>
-<li>
-<p>pytest_cache_assert/main.py</p>
-<ul>
-<li>line  48    TODO: Always write metadata. Edge case is if multiple tests use the same cache file</li>
-</ul>
-</li>
-<li>
-<p>pytest_cache_assert/plugin.py</p>
-<ul>
-<li>line  15 PLANNED: Provide CLI args return request.config.getoption(&ldquo;&ndash;record-mode&rdquo;) or &ldquo;none&rdquo;</li>
-<li>line  46 PLANNED: serialize the func_args metadata recursively</li>
+<li>line  45 PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]</li>
 </ul>
 </li>
 <li>
 <p>tests/test_main.py</p>
 <ul>
-<li>line  15    TODO: Make a smarter error message parser for better verification or result</li>
-<li>line  56 PLANNED: Demonstrate that int != float?</li>
-<li>line  60   FIXME: Need logic for lists!</li>
+<li>line  16    TODO: Make a smarter error message parser for better verification or result</li>
 </ul>
 </li>
 </ul>
-<p>Found code tags for FIXME (1), TODO (9), PLANNED (6)</p>
+<p>Found code tags for TODO (1), PLANNED (6)</p>
 <!-- calcipy:skip_tags -->
                 
               

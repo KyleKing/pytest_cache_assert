@@ -682,20 +682,81 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
 
 <span class="kn">from</span> <span class="nn">._check_assert</span> <span class="kn">import</span> <span class="n">differ</span><span class="p">,</span> <span class="n">error_message</span>
-<span class="kn">from</span> <span class="nn">._check_assert.caching</span> <span class="kn">import</span> <span class="n">cache_data</span><span class="p">,</span> <span class="n">init_cache</span><span class="p">,</span> <span class="n">load_cached_data</span>
+<span class="kn">from</span> <span class="nn">._check_assert.caching</span> <span class="kn">import</span> <span class="n">init_cache</span><span class="p">,</span> <span class="n">load_cached_data</span><span class="p">,</span> <span class="n">write_cache_data</span>
 <span class="kn">from</span> <span class="nn">._check_assert.constants</span> <span class="kn">import</span> <span class="n">TEST_DATA_TYPE</span>
 <span class="kn">from</span> <span class="nn">._check_assert.error_message</span> <span class="kn">import</span> <span class="n">RichAssertionError</span>
 <span class="kn">from</span> <span class="nn">._check_assert.key_rules</span> <span class="kn">import</span> <span class="n">KeyRule</span>
 
+<span class="n">_WRAP_KEY</span> <span class="o">=</span> <span class="s1">&#39;--wrapped--&#39;</span>
+<span class="sd">&quot;&quot;&quot;Special key to convert lists to dictionaries for dictdiffer.&quot;&quot;&quot;</span>
+
 
 <span class="nd">@beartype</span>
+<span class="k">def</span> <span class="nf">_wrap_data</span><span class="p">(</span><span class="n">_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TEST_DATA_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _data: list or dictionary data to potentially wrap</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TEST_DATA_TYPE: wrapped data that is safe for comparison</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">_WRAP_KEY</span><span class="p">:</span> <span class="n">_data</span><span class="p">}</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">_data</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd"># FYI: Not needed because the data is already unwrapped in locals of assert_against_cache</span>
+<span class="sd">@beartype</span>
+<span class="sd">def _unwrap_data(_data: TEST_DATA_TYPE) -&gt; Any:</span>
+<span class="sd">    &quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _data: safe data to potentially unwrap</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: unwrapped list or dictionary data</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    return _data.get(_WRAP_KEY, _data)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">_safe_types</span><span class="p">(</span>
+    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">key_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TEST_DATA_TYPE</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert data and key_rules to safe data types for diffing.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        test_data: data to compare</span>
+<span class="sd">        cached_data: data to compare</span>
+<span class="sd">        key_rules: list of key rules to apply</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapped_key_rules</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key_rule</span> <span class="ow">in</span> <span class="n">key_rules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cached_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span><span class="n">_WRAP_KEY</span><span class="p">]</span> <span class="o">+</span> <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span>
+        <span class="n">wrapped_key_rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key_rule</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;old_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">test_data</span><span class="p">),</span>
+        <span class="s1">&#39;new_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">cached_data</span><span class="p">),</span>
+        <span class="s1">&#39;key_rules&#39;</span><span class="p">:</span> <span class="n">wrapped_key_rules</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="o">@</span> <span class="n">beartype</span>
 <span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">TEST_DATA_TYPE</span><span class="p">,</span>
+    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
     <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -705,7 +766,7 @@
     <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        test_data: dictionary to test and/or cache</span>
+<span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
 <span class="sd">        path_cache_dir: location of the cache directory</span>
 <span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
 <span class="sd">        key_rules: dictionary of KeyRules too apply for selectively ignoring values</span>
@@ -722,13 +783,10 @@
     <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
         <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
-    <span class="c1"># TODO: Always write metadata. Edge case is if multiple tests use the same cache file</span>
-    <span class="c1">#   Will merge the metadata to show values as sets</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-        <span class="n">cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
+    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
     <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
 
-    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="n">old_dict</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">new_dict</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">_safe_types</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">,</span> <span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[]))</span>
     <span class="k">if</span> <span class="n">dict_diff</span><span class="p">:</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>
@@ -762,7 +820,7 @@
 <tbody>
 <tr>
 <td>test_data</td>
-<td>dictionary to test and/or cache</td>
+<td>dictionary or list to test (could be from cache)</td>
 </tr>
 <tr>
 <td>path_cache_dir</td>
@@ -801,9 +859,9 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="highlight"><pre><span></span><code><span class="nd">@beartype</span>
+<details class="example"><summary>View Source</summary><div class="highlight"><pre><span></span><code><span class="o">@</span> <span class="n">beartype</span>
 <span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">TEST_DATA_TYPE</span><span class="p">,</span>
+    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
     <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -813,7 +871,7 @@
     <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        test_data: dictionary to test and/or cache</span>
+<span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
 <span class="sd">        path_cache_dir: location of the cache directory</span>
 <span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
 <span class="sd">        key_rules: dictionary of KeyRules too apply for selectively ignoring values</span>
@@ -830,13 +888,10 @@
     <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
         <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
-    <span class="c1"># TODO: Always write metadata. Edge case is if multiple tests use the same cache file</span>
-    <span class="c1">#   Will merge the metadata to show values as sets</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-        <span class="n">cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
+    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
     <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
 
-    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="n">old_dict</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">new_dict</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">_safe_types</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">,</span> <span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[]))</span>
     <span class="k">if</span> <span class="n">dict_diff</span><span class="p">:</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>

@@ -2,10 +2,23 @@
 
 ### Feat
 
+- support comparison of lists
+- always write metadata as a list
+- customizable cache directory
+- support lists of dictionaries
+- replace asterisk string with Wildcard enum
 - support UUID in check_type
+
+### Refactor
+
+- simplify merge_metadata logic
+- serialize the func_args metadata recursively
+- improve code quality of _raw_diff
 
 ### Fix
 
+- support dictionary keys with dots
+- add CNAME for custom subdomain
 - add missing check_imports file
 
 ## 2021.0.1.0 (2021-10-31)

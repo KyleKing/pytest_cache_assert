@@ -4,7 +4,6 @@ import json
 from pathlib import Path
 from typing import List
 
-import dictdiffer
 from beartype import beartype
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE

@@ -33,10 +33,12 @@ def test_caching(test_data, fix_test_cache):
     assert result == test_data
 
 
-@pytest.mark.parametrize(('new_metadata', 'metadata_list'), [
-    ({'new': 1}, [{'new': 1}, {'new': 2}]),  # Check Duplicate Removal
-    ({'new': 2}, [{'new': 3}, {'zz': 0}, {'new': 2}, {'new': 1}]),  # Check Sorting
-])
+@pytest.mark.parametrize(
+    ('new_metadata', 'metadata_list'), [
+        ({'new': 1}, [{'new': 1}, {'new': 2}]),  # Check Duplicate Removal
+        ({'new': 2}, [{'new': 3}, {'zz': 0}, {'new': 2}, {'new': 1}]),  # Check Sorting
+    ],
+)
 def test_merge_metadata(new_metadata, metadata_list):
     """Test _merge_metadata."""
     path_cache_dir = Path(__file__).parent / DEF_CACHE_DIR_NAME

@@ -5,7 +5,7 @@ FYI: Should not require any pytest functionality
 """
 
 from pathlib import Path
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Union
 
 from beartype import beartype
 
@@ -33,6 +33,8 @@ def _wrap_data(_data: Any) -> TEST_DATA_TYPE:
     return {_WRAP_KEY: _data} if isinstance(_data, list) else _data
 
 
+'''
+# FYI: Not needed because the data is already unwrapped in locals of assert_against_cache
 @beartype
 def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
     """Wrap data for comparison as dictionaries.
@@ -45,6 +47,34 @@ def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
 
     """
     return _data.get(_WRAP_KEY, _data)
+'''
+
+
+def _safe_types(
+    test_data: Any, cached_data: Any, key_rules: List[KeyRule],
+) -> Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]:
+    """Convert data and key_rules to safe data types for diffing.
+
+    Args:
+        test_data: data to compare
+        cached_data: data to compare
+        key_rules: list of key rules to apply
+
+    Returns:
+        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules
+
+    """
+    wrapped_key_rules = []
+    for key_rule in key_rules:
+        if isinstance(cached_data, list):
+            key_rule.pattern = [_WRAP_KEY] + key_rule.pattern
+        wrapped_key_rules.append(key_rule)
+
+    return {
+        'old_dict': _wrap_data(test_data),
+        'new_dict': _wrap_data(cached_data),
+        'key_rules': wrapped_key_rules,
+    }
 
 
 @ beartype
@@ -78,24 +108,12 @@ def assert_against_cache(
         init_cache(path_cache_dir)
     write_cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
-    wrapped_test_data = _wrap_data(test_data)
-    wrapped_cached_data = _wrap_data(cached_data)
 
-    wrapped_key_rules = []
-    for key_rule in key_rules or []:
-        if isinstance(cached_data, list):
-            key_rule.pattern = [_WRAP_KEY] + key_rule.pattern
-        wrapped_key_rules.append(key_rule)
-
-    dict_diff = differ.diff_with_rules(
-        old_dict=wrapped_cached_data,
-        new_dict=wrapped_test_data,
-        key_rules=wrapped_key_rules,
-    )
+    dict_diff = differ.diff_with_rules(**_safe_types(test_data, cached_data, key_rules or []))
     if dict_diff:
         kwargs = {
-            'test_data': _unwrap_data(wrapped_test_data),
-            'cached_data': _unwrap_data(wrapped_cached_data),
+            'test_data': test_data,
+            'cached_data': cached_data,
             'path_cache_file': path_cache_file,
             'dict_diff': dict_diff,
         }

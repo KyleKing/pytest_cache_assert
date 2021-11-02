@@ -51,8 +51,10 @@ def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
 
 @pytest.fixture()
 @beartype
-def assert_against_cache(request: FixtureRequest,
-                         cache_assert_config: Optional[Dict[str, Any]]) -> Callable[[Any], None]:
+def assert_against_cache(
+    request: FixtureRequest,
+    cache_assert_config: Optional[Dict[str, Any]],
+) -> Callable[[Any], None]:
     """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:

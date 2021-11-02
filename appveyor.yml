@@ -1,5 +1,5 @@
 ---
-version: 0.1.0.{build}
+version: 1.0.0rc0.{build}
 
 image:
   - Ubuntu

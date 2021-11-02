@@ -1,5 +1,12 @@
 ## Unreleased
 
+### Refactor
+
+- code cleanup & documentation updates
+- simplify merge_metadata logic
+- serialize the func_args metadata recursively
+- improve code quality of _raw_diff
+
 ### Feat
 
 - support comparison of lists
@@ -8,12 +15,6 @@
 - support lists of dictionaries
 - replace asterisk string with Wildcard enum
 - support UUID in check_type
-
-### Refactor
-
-- simplify merge_metadata logic
-- serialize the func_args metadata recursively
-- improve code quality of _raw_diff
 
 ### Fix
 

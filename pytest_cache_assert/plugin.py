@@ -53,13 +53,13 @@ def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
 @beartype
 def assert_against_cache(
     request: FixtureRequest,
-    cache_assert_config: Optional[Dict[str, Any]],
+    cache_assert_config: Optional[Dict[str, Any]] = None,
 ) -> Callable[[Any], None]:
     """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
-        cache_assert_config: pytest fixture for custom user configuration
+        cache_assert_config: optional pytest fixture for custom user configuration
 
     Returns:
         Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified

@@ -163,27 +163,27 @@ def test_assert_against_cache_validator(assert_against_cache):
 
 For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert/scripts) or [Tests](https://github.com/kyleking/pytest_cache_assert/tests)
 
-<!--
 ## Global Configuration Options
 
-- `custom directory` (set in pytest fixture like pytest-record)
-    - Default is test directory/cache-assert/
-- `record_rule`: regenerate on failure (re-raises assert, but updates cache). Default is to record once
+- `cache_dir_rel_path`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
 
 ```py
 import pytest
 
 
-# TODO: Not currently used...
 @pytest.fixture(scope='module')
 def cache_assert_config():
     return {
-        'rel_path_cache_dir': '..........',
-        'record_mode': 'rewrite',  # TODO: Consider record mode
-        'filter_headers': ['authorization'],  # TODO: Consider filters to prevent secrets from being stored
+        'cache_dir_rel_path': 'custom/cache/dir',
     }
 ```
- -->
+
+### Planned Global Configuration Options
+
+These are ideas for future options that are not currently implemented, but could be if there is enough interest:
+
+- PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
+- PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development
 
 ## Roadmap
 

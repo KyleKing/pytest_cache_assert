@@ -51,6 +51,9 @@ _DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime]
 DIFF_TYPES = Union[_DIFF_SINGLE_TYPES, Type[TrueNull], Iterable[_DIFF_SINGLE_TYPES]]
 """Possible Old or New difference type."""
 
+DEF_CACHE_DIR_KEY = 'cache_dir_rel_path'
+"""Default `pytest_assert_cache` directory key for `cache_assert_config` fixture."""
+
 DEF_CACHE_DIR_NAME = 'assert-cache'
 """Default `pytest_assert_cache` directory name."""
 

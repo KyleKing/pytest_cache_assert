@@ -3,14 +3,14 @@
 import inspect
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Dict, Optional
 
 import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
 
 from . import main
-from ._check_assert.constants import DEF_CACHE_DIR_NAME
+from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
 
 # PLANNED: Provide CLI args return request.config.getoption("--record-mode") or "none"
 # https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70
@@ -18,11 +18,12 @@ from ._check_assert.constants import DEF_CACHE_DIR_NAME
 
 @pytest.fixture()
 @beartype
-def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
+def assert_against_cache(request: FixtureRequest, cache_assert_config: Optional[Dict[str, Any]]) -> Callable[[Any], None]:
     """Yield main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
+        cache_assert_config: pytest fixture for custom user configuration
 
     Returns:
         Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
@@ -31,6 +32,8 @@ def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
         RuntimeError: if the test directory cannot be determined
 
     """
+    cache_assert_config = cache_assert_config or {}
+
     for sub_dir in ['tests', 'test']:
         test_dir = request.config.rootpath / sub_dir
         if test_dir.is_dir():
@@ -41,7 +44,9 @@ def assert_against_cache(request: FixtureRequest) -> Callable[[Any], None]:
     test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
     test_file = Path(request.node.fspath)
     cache_name = (test_file.parent.relative_to(test_dir) / f'{request.node.name}.json').as_posix()  # noqa: ECE001
-    path_cache_dir = test_dir / DEF_CACHE_DIR_NAME
+    # Read user setting
+    rel_dir = cache_assert_config.get(DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME)
+    path_cache_dir = test_dir / rel_dir
 
     # PLANNED: serialize the func_args metadata recursively
     test_params = [*inspect.signature(request.node.function).parameters.keys()]

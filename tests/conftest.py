@@ -1,13 +1,15 @@
 """PyTest configuration."""
 
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable, Dict
 
 import pytest
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
 from calcipy.dev.conftest import pytest_runtest_makereport  # noqa: F401
+
+from pytest_cache_assert import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
 
 from .configuration import TEST_TMP_CACHE, clear_test_cache
 
@@ -38,4 +40,12 @@ def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Path:
     return {
         'path_cache_dir': fix_test_cache,
         'cache_name': 'test_assert_against_cache.json',
+    }
+
+
+@pytest.fixture(scope='module')
+def cache_assert_config() -> Dict[str, Any]:
+    """Specify a custom cache directory."""
+    return {
+        DEF_CACHE_DIR_KEY: f'{DEF_CACHE_DIR_NAME}-custom',
     }

@@ -35,7 +35,7 @@ def test_caching(test_data, fix_test_cache):
 
 @pytest.mark.parametrize(('new_metadata', 'metadata_list'), [
     ({'new': 1}, [{'new': 1}, {'new': 2}]),  # Check Duplicate Removal
-    ({'new': 2}, [{'new': 3}, {'new': 2}, {'new': 1}]),  # Check Sorting
+    ({'new': 2}, [{'new': 3}, {'zz': 0}, {'new': 2}, {'new': 1}]),  # Check Sorting
 ])
 def test_merge_metadata(new_metadata, metadata_list):
     """Test _merge_metadata."""

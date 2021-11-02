@@ -20,6 +20,11 @@ from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff
             ],
         ),  # Minor string difference with nesting
         (
+            {'numbers': '20'}, {'numbers': 20}, [
+                DiffResult(key_list=['numbers'], list_index=None, old='20', new=20),
+            ],
+        ),  # String vs. int
+        (
             {'numbers': 20}, {'numbers': 45}, [
                 DiffResult(key_list=['numbers'], list_index=None, old=20, new=45),
             ],

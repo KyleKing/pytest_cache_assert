@@ -35,14 +35,8 @@ def _merge_metadata(new_metadata: dict, cached_meta_list: List[dict]) -> List[di
 
     """
     all_meta = [new_metadata, *cached_meta_list]
-    cached_list = [
-        meta
-        for index, meta in enumerate(all_meta)
-        if all([*dictdiffer.diff(meta, _m)] for _m in all_meta[index + 1:])
-    ]
-    if all([*dictdiffer.diff(all_meta[-1], _m)] for _m in cached_list):
-        cached_list.append(all_meta[-1])
-    return sorted(cached_list, key=lambda _m: json.dumps(_m, sort_keys=True))
+    unique_meta = {json.dumps(_m, sort_keys=True) for _m in all_meta}
+    return [*map(json.loads, sorted(unique_meta))]
 
 
 @beartype

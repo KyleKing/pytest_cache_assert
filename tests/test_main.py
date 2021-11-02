@@ -35,67 +35,92 @@ def test_assert_against_cache_failure(fix_tmp_assert):
             {'title': 'hello'}, {'title': 'Hello World!'}, [
                 KeyRule(pattern=['title'], func=check_suppress),
             ],
-        ),
+        ),  # Check suppressing a standard string
         (
             {'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
                 KeyRule(pattern=['nested', 'title'], func=check_suppress),
             ],
-        ),
+        ),  # Check suppressing nested changes
         (
             {'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
                 KeyRule(pattern=['added', Wildcards.SINGLE, Wildcards.SINGLE], func=check_suppress),
                 KeyRule(pattern=['title'], func=check_suppress),
             ],
-        ),
+        ),  # Check wildcards
         (
             {}, {'added': {'recursive': {'title': 'hello'}}}, [
                 KeyRule(pattern=['added', Wildcards.RECURSIVE], func=check_suppress),
+            ],
+        ),  # Check suppressing new value
+        (
+            {'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, [
+                KeyRule(pattern=['number_list'], func=check_suppress),
             ],
         ),
         (
             {'numbers': 20}, {'numbers': 45}, [
                 KeyRule(pattern=['numbers'], func=check_type),
             ],
-        ),
+        ),  # Check matching number types
+        (
+            {'numbers': 20}, {'numbers': 45.0}, [
+                KeyRule(pattern=['numbers'], func=check_type),
+            ],
+        ),  # Check different number types
+        (
+            {'numbers': '20'}, {'numbers': '45.0'}, [
+                KeyRule(pattern=['numbers'], func=check_type),
+            ],
+        ),  # Check str(numbers) (Note: type checking does not differentiate between int and float)
         (
             {'uuid': str(uuid4())}, {'uuid': str(uuid4())}, [
                 KeyRule(pattern=['uuid'], func=check_type),
             ],
-        ),
-        (
-            {'numbers': '20.0'}, {'numbers': '45.0'}, [
-                KeyRule(pattern=['numbers'], func=check_type),  # PLANNED: Demonstrate that int != float?
-            ],
-        ),
-        # ({'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, [
-        #     KeyRule(pattern=['dates'], func=check_type),  # FIXME: Need logic for lists!
-        # ]),
+        ),  # Check UUID types
         (
             {'dates': str(datetime.now())}, {'dates': str(datetime.utcnow())}, [
                 KeyRule(pattern=['dates'], func=check_type),
             ],
-        ),
+        ),  # Check date types
         (
             {'dates': str(datetime.now())}, {'dates': None}, [
                 KeyRule(pattern=['dates'], func=check_suppress),
             ],
-        ),
+        ),  # Suppress date/null
         (
             {'*': 50}, {'*': 51}, [
                 KeyRule(pattern=['*'], func=check_type),
             ],
-        ),
+        ),  # Verify that asterisk keys work
     ],
 )
-def test_assert_against_cache_differ(cached_data, test_data, key_rules, fix_tmp_assert):
+def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
     # Verify that the key_rules allow the test to pass
     assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
+    # Then, verify that without key rules, an AssertionError is raised
 
-    # Verify that without key rules, an AssertionError is raised
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(test_data, **fix_tmp_assert)  # act
+
+
+@pytest.mark.parametrize(
+    ('cached_data', 'test_data', 'key_rules'), [
+        (
+            {'a': 50}, {'a': 51}, [
+                KeyRule(pattern=['*'], func=check_type),
+            ],
+        ),  # Verify that asterisk keys work ('*' should not match 'a')
+    ],
+)
+def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, fix_tmp_assert):
+    """Test various edge cases for different dictionaries."""
+    assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
+
+    # Even with key_rules, the diff will fail
+    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
+        assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
 
 
 def test_assert_against_cache_number_key_edge_case(fix_tmp_assert):

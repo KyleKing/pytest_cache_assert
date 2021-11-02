@@ -44,7 +44,7 @@ def check_exact(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
 @beartype
 def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
-    """Attempt to parse strings to UUID, datetime, int, float, or complex.
+    """Attempt to coerce strings to UUID, datetime, or int/float.
 
     Args:
         old: the old value
@@ -54,12 +54,12 @@ def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
         bool: True if both values are the same kind
 
     """
-    for converter in [UUID, pendulum.parse, int, float, complex]:
+    for converter in [UUID, pendulum.parse, float]:
         try:
             converter(old)
             converter(new)
             return True
-        except (ValueError, ParserError):
+        except (ValueError, ParserError, AttributeError, TypeError):
             pass
 
     return False

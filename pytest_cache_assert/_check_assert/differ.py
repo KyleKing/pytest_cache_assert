@@ -58,6 +58,9 @@ class DiffResult:  # noqa: H601
         if pattern[-1] != Wildcards.RECURSIVE and len(pattern) != len(self.key_list):
             return False
 
+        if Wildcards.RECURSIVE in pattern[:-1]:
+            raise ValueError(f'Recursive wildcard can only be used at the end of the pattern: {pattern}')
+
         @beartype
         def pat_match(pat: Union[str, Wildcards], key: Union[str, int]) -> bool:
             """Attempt to match the pattern against each key."""

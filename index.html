@@ -881,29 +881,44 @@
 
 <span class="k">def</span> <span class="nf">test_assert_against_cache_key_rules</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Demonstrate use of `key_rules`.&quot;&quot;&quot;</span>
-    <span class="c1"># NOTE: all data passed to assert_against_cache must be JSON Serializable (i.e. from Marshmallow or Pydantic, etc.)</span>
     <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">cached_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span> <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}</span>
-    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span> <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}}}</span>
-    <span class="c1">#</span>
+    <span class="n">cached_data</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span>
+      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
+      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}},</span>
+    <span class="p">}</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
+      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recursively&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}}},</span>
+    <span class="p">}</span>
+
     <span class="n">key_rules</span> <span class="o">=</span> <span class="p">[</span>
-      <span class="c1"># Suppress keys &#39;ignored.a&#39; and &#39;ignored.b&#39; with the SINGLE wildcard</span>
-      <span class="c1"># If there were a &#39;ignored.c.something&#39;, the Wildcard.RECURSIVE could be used</span>
+      <span class="c1"># Suppress keys &#39;ignored.a&#39; and &#39;ignored.b&#39; with the SINGLE wildcard,</span>
+      <span class="c1">#   which aren&#39;t present in the test-data and would otherwise error</span>
       <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
-      <span class="c1"># Ensure that values are of the same type. This is useful if you expect datetime objects and want to raise</span>
-      <span class="c1">#   if one value is Null (or you have a number stored as a string or UUID, etc.)</span>
+      <span class="c1"># The pattern can also recursively apply to data below</span>
+      <span class="n">KeyRule</span><span class="p">(</span>
+        <span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="s1">&#39;recursively&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">RECURSIVELY</span><span class="p">],</span>
+        <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="c1"># Instead of suppressing, the type can be coerced from the string and verified</span>
+      <span class="c1">#   This is useful for datetime or UUID&#39;s where the string will be different,</span>
+      <span class="c1">#   but both values are the same type</span>
       <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
       <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
-      <span class="c1"># The KeyRule function can be replaced with any function that accepts keyword arguments &#39;old&#39; and &#39;new&#39;</span>
+      <span class="c1"># Custom functions can also be specified to check a datetime format, etc.</span>
+      <span class="c1">#   The function must accept the keyword arguments &#39;old&#39; and &#39;new&#39;</span>
     <span class="p">]</span>
-    <span class="c1">#</span>
-    <span class="c1"># Run twice to ensure that the initial cache file exists and that the key_rules suppress any errors</span>
-    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span><span class="p">)</span>
+
+    <span class="c1"># In this example, the cache file has been deleted, so first call will recreate it</span>
+    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
+    <span class="c1"># Then this line demonstrates that key_rules will suppress the errors</span>
     <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span><span class="p">)</span>
 
-    <span class="c1"># Verify that without key rules, an AssertionError is raised</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">DEF_ERROR_MESSAGE</span><span class="p">):</span>
-        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>  <span class="c1"># act</span>
+    <span class="c1"># While without key rules, an AssertionError is raised</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
+        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
 </code></pre></div>
 <p>Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library. This is possible with the <code>validator</code> callable. The default validator is a no-op and that may be replaced with any custom function that raises an Exception on error.</p>
 <div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>

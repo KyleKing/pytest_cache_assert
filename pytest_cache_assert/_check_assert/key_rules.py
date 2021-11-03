@@ -119,7 +119,7 @@ def _check_date_range(
     # Converts datetime to pendulum to ensure consistent timezones with serialized data
     if min_date and new_date < pendulum.parse(str(min_date)):
         return False
-    return (max_date and new_date <= pendulum.parse(str(max_date)))
+    return not (max_date and new_date > pendulum.parse(str(max_date)))
 
 
 @beartype

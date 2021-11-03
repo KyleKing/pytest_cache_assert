@@ -145,7 +145,7 @@ _NOW = datetime.utcnow()
             {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
                 KeyRule(
                     pattern=['datetime'],
-                    func=gen_check_date_range(_NOW + timedelta(hours=3), _NOW + timedelta(hours=3)),
+                    func=gen_check_date_range(_NOW - timedelta(hours=3), _NOW + timedelta(hours=3)),
                 ),
             ],
         ),  # Test generated datetime comparison logic for a date range

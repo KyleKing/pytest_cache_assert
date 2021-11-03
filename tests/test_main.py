@@ -11,18 +11,31 @@ from cerberus.schema import SchemaError
 
 from pytest_cache_assert import KeyRule, check_suppress, check_type
 from pytest_cache_assert._check_assert.constants import TEST_DATA_TYPE, Wildcards
+from pytest_cache_assert._check_assert.differ import DiffResult
+from pytest_cache_assert._check_assert.error_message import RichAssertionError
 from pytest_cache_assert.main import assert_against_cache
 
-# TODO: Make a smarter error message parser for better verification or result
+# FIXME: Create a new plugin fixture that can store and access strings as keys in a dictionary
 DEF_ERROR_MESSAGE = r'For test data: .*\nFound differences with: .*'
 
 
-def test_assert_against_cache_failure(fix_tmp_assert):
+def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
     """Test that a difference in test_data and cached data generates an error."""
-    assert_against_cache({'result': False}, **fix_tmp_assert)
+    test_data = {'result': False}
+    cached_data = {'result': True}
+    assert_against_cache(test_data, **fix_tmp_assert)
+    diff_results = [DiffResult(key_list=['result'], list_index=None, old=False, new=True)]
+    error_info = None
 
-    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
-        assert_against_cache({'result': True}, **fix_tmp_assert)  # act
+    try:
+        assert_against_cache(cached_data, **fix_tmp_assert)
+    except RichAssertionError as exc:
+        error_info = exc.error_info
+
+    assert error_info['test_data'] == test_data
+    assert error_info['cached_data'] == cached_data
+    assert error_info['path_cache_file'].name == fix_tmp_assert['cache_name']
+    assert error_info['diff_results'] == diff_results
 
 
 # -----------------------------------------------------------------------------

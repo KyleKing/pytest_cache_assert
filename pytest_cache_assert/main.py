@@ -109,12 +109,12 @@ def assert_against_cache(
     write_cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
-    dict_diff = differ.diff_with_rules(**_safe_types(test_data, cached_data, key_rules or []))
-    if dict_diff:
+    diff_results = differ.diff_with_rules(**_safe_types(test_data, cached_data, key_rules or []))
+    if diff_results:
         kwargs = {
             'test_data': test_data,
             'cached_data': cached_data,
             'path_cache_file': path_cache_file,
-            'dict_diff': dict_diff,
+            'diff_results': diff_results,
         }
         raise RichAssertionError(error_message.create(**kwargs), error_info=kwargs)

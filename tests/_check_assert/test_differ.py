@@ -1,10 +1,13 @@
 """Test the differ logic."""
 
+from datetime import datetime, timedelta
+
 import pytest
 
 from pytest_cache_assert import KeyRule, Wildcards, check_suppress
 from pytest_cache_assert._check_assert.constants import TrueNull
 from pytest_cache_assert._check_assert.differ import DiffResult, _raw_diff, diff_with_rules
+from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
 
 @pytest.mark.parametrize(
@@ -100,6 +103,9 @@ def test_raw_diff(old_dict, new_dict, expected):
     assert sorted(result) == sorted(expected)
 
 
+_NOW = datetime.utcnow()
+
+
 @pytest.mark.parametrize(
     ('old_dict', 'new_dict', 'key_rules'), [
         (
@@ -130,6 +136,34 @@ def test_raw_diff(old_dict, new_dict, expected):
                 KeyRule(pattern=['a.b.c'], func=check_suppress),
             ],
         ),  # Supports dotted-key names
+        (
+            {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
+                KeyRule(pattern=['datetime'], func=gen_check_date_range(max_date=_NOW + timedelta(hours=3))),
+            ],
+        ),  # Test generated datetime comparison logic for a max date
+        (
+            {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
+                KeyRule(
+                    pattern=['datetime'],
+                    func=gen_check_date_range(_NOW + timedelta(hours=3), _NOW + timedelta(hours=3)),
+                ),
+            ],
+        ),  # Test generated datetime comparison logic for a date range
+        (
+            {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
+                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+            ],
+        ),  # Test generated datetime comparison logic for LTE
+        (
+            {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
+                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+            ],
+        ),  # Test generated datetime comparison logic for GTE
+        (
+            {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
+                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3))),
+            ],
+        ),  # Test generated datetime comparison logic for Within
     ],
 )
 def test_diff_with_rules(old_dict, new_dict, key_rules):

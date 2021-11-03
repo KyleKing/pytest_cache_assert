@@ -5,7 +5,9 @@ import warnings
 from beartype.roar import BeartypeDecorHintPepDeprecatedWarning
 
 from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME, Wildcards  # noqa: F401
-from ._check_assert.key_rules import KeyRule, check_exact, check_suppress, check_type  # noqa: F401
+from ._check_assert.key_rules import (  # noqa: F401
+    Comparator, KeyRule, check_exact, check_suppress, check_type, gen_check_date_proximity, gen_check_date_range,
+)
 
 __version__ = '1.0.0'
 __pkg_name__ = 'pytest_cache_assert'

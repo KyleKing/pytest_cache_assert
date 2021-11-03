@@ -18,7 +18,7 @@ class RichAssertionError(AssertionError):
 
 def create(
     test_data: TEST_DATA_TYPE, cached_data: TEST_DATA_TYPE, path_cache_file: Path,
-    dict_diff: List[DiffResult],
+    diff_results: List[DiffResult],
 ) -> str:
     """Create the error message.
 
@@ -26,7 +26,7 @@ def create(
         test_data: the test data
         cached_data: the cached data
         path_cache_file: the path to the cache file
-        dict_diff: the diff results
+        diff_results: the diff results
 
     Returns:
         str: pleasant error message
@@ -34,5 +34,5 @@ def create(
     """
     return f"""For test data: {test_data}
 Found differences with: {path_cache_file}
-Differences: {dict_diff}
+Differences: {diff_results}
 """

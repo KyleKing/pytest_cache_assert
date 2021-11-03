@@ -1,6 +1,7 @@
 """Pytest Plugin."""
 
 import inspect
+import re
 from functools import partial
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional, Union
@@ -14,18 +15,24 @@ from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
 
 
 @beartype
-def _serialize(key: str, value: Any) -> Union[dict, str]:
+def _serialize(value: Any) -> Union[dict, str]:
     """Recursive serialization function.
 
     Args:
-        key: string key name
         value: value to serialize
 
     Returns:
         Union[dict, str]: JSON-safe data
 
     """
-    return {key: _serialize(key, value) if isinstance(value, dict) else str(value)}
+    if isinstance(value, dict) and value:
+        return {_k: _serialize(_v) for _k, _v in value.items()}
+
+    if inspect.isfunction(value) or isinstance(value, partial):
+        # Remove hex memory address from partial function signature
+        return re.sub(r' at 0x[^>]+>', '(..)>', str(value))
+
+    return str(value)
 
 
 @beartype
@@ -43,9 +50,7 @@ def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
     test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
     test_params = [*inspect.signature(request.node.function).parameters.keys()]
     raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
-    func_args = {}
-    for key, value in raw_args.items():
-        func_args.update(_serialize(key, value))
+    func_args = {key: _serialize(value) for key, value in raw_args.items()}
     return {'test_file': rel_test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
 
 

@@ -51,7 +51,7 @@ def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
 
 
 def _safe_types(
-    test_data: Any, cached_data: Any, key_rules: List[KeyRule],
+    *, test_data: Any, cached_data: Any, key_rules: List[KeyRule],
 ) -> Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]:
     """Convert data and key_rules to safe data types for diffing.
 
@@ -71,8 +71,8 @@ def _safe_types(
         wrapped_key_rules.append(key_rule)
 
     return {
-        'old_dict': _wrap_data(test_data),
-        'new_dict': _wrap_data(cached_data),
+        'old_dict': _wrap_data(cached_data),
+        'new_dict': _wrap_data(test_data),
         'key_rules': wrapped_key_rules,
     }
 
@@ -109,7 +109,8 @@ def assert_against_cache(
     write_cache_data(path_cache_file, metadata or {}, test_data)
     cached_data = load_cached_data(path_cache_file)
 
-    diff_results = differ.diff_with_rules(**_safe_types(test_data, cached_data, key_rules or []))
+    safe_tuple = _safe_types(cached_data=cached_data, test_data=test_data, key_rules=key_rules or [])
+    diff_results = differ.diff_with_rules(**safe_tuple)
     if diff_results:
         kwargs = {
             'test_data': test_data,

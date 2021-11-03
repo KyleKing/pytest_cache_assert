@@ -21,14 +21,14 @@ DEF_ERROR_MESSAGE = r'For test data: .*\nFound differences with: .*'
 
 def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
     """Test that a difference in test_data and cached data generates an error."""
-    test_data = {'result': False}
-    cached_data = {'result': True}
-    assert_against_cache(test_data, **fix_tmp_assert)
+    cached_data = {'result': False}
+    test_data = {'result': True}
+    assert_against_cache(cached_data, **fix_tmp_assert)
     diff_results = [DiffResult(key_list=['result'], list_index=None, old=False, new=True)]
     error_info = None
 
     try:
-        assert_against_cache(cached_data, **fix_tmp_assert)
+        assert_against_cache(test_data, **fix_tmp_assert)
     except RichAssertionError as exc:
         error_info = exc.error_info
 

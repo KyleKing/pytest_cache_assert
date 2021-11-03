@@ -4,7 +4,7 @@ import inspect
 import re
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Callable, Dict, Union
 
 import pytest
 from _pytest.fixtures import FixtureRequest
@@ -12,6 +12,12 @@ from beartype import beartype
 
 from . import main
 from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
+
+
+@pytest.fixture()
+def cache_assert_config() -> Dict[str, Any]:
+    """Specify a custom cache directory."""
+    return {}  # noqa: DAR201
 
 
 @beartype
@@ -58,7 +64,7 @@ def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
 @beartype
 def assert_against_cache(
     request: FixtureRequest,
-    cache_assert_config: Optional[Dict[str, Any]] = None,
+    cache_assert_config: Dict[str, Any],
 ) -> Callable[[Any], None]:
     """Yield main.assert_against_cache with pytest-specific arguments already specified.
 

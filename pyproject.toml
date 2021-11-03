@@ -18,7 +18,7 @@ args_diff = "--fail-under=85"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.0.0rc0"
+version = "1.0.0"
 tag_format = "2021.$version"
 version_files = [
     "pyproject.toml",
@@ -28,7 +28,7 @@ version_files = [
 
 [tool.poetry]
 name = "pytest_cache_assert"
-version = "1.0.0rc0"
+version = "1.0.0"
 description = "Cache assertion data to simplify regression testing of complex serializable data"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]

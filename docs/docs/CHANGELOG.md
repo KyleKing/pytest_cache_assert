@@ -1,5 +1,16 @@
 ## Unreleased
 
+### Fix
+
+- correctly implement an optional fixture
+- make config fixture optional
+
+### Feat
+
+- improve serialization
+
+## 2021.1.0.0rc0 (2021-11-02)
+
 ### Refactor
 
 - code cleanup & documentation updates

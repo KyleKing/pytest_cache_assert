@@ -18,10 +18,12 @@ This project was heavily inspired by the excellent [pytest-recording](https://gi
 
 ### Alternatives
 
-- [pytest-recording](https://github.com/kiwicom/pytest-recording): this is the package I use for recording and replaying **external** API communication so that API requests only need to be made once for unit testing
-- [pytest-snapshot](https://pypi.org/project/pytest-snapshot/): I only found this package after already releasing a 1.0.0 version of `pytest_assert_cache`, but the major difference is that this package is tailored to work out the box, while `pytest-snapshot` is much more configurable and allows user's choice of serialization method
-- [snapshottest](https://github.com/syrusakbary/snapshottest) -- TODO: document this alternative
-    - [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
+- [pytest-recording](https://github.com/kiwicom/pytest-recording): this is the package I use and highly recommend for recording and replaying **external** API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github's API called from a test suite)
+- [pytest-snapshot](https://pypi.org/project/pytest-snapshot/): I only found this package after already releasing a 1.0.0 version of `pytest_assert_cache`. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info
+- [snapshottest](https://github.com/syrusakbary/snapshottest): This was another find after releasing a 1.0.0 version and would probably be **a good alterantive for most users**
+    - `pytest-snapshot` is much more configurable, has many more users, and is a better name
+        - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
+        - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
 
 ### Basic Example
 

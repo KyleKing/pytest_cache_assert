@@ -1,13 +1,18 @@
 ## Unreleased
 
+### Refactor
+
+- use beartype's typing imports
+
+### Feat
+
+- new assert_against_dict for in-memory comparison
+- add support for comparing date-times
+
 ### Fix
 
 - argument order issues in main
 - datetime comparison logic
-
-### Feat
-
-- add support for comparing date-times
 
 ## 2021.1.0.0 (2021-11-02)
 

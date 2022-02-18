@@ -44,4 +44,18 @@ poetry run doit run cl_bump document deploy_docs publish
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                                                 |   Statements |   Missing |   Excluded | Coverage   |
+|:-----------------------------------------------------|-------------:|----------:|-----------:|:-----------|
+| `pytest_cache_assert/__init__.py`                    |            4 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/caching.py`       |           30 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/constants.py`     |           23 |         1 |          0 | 95.7%      |
+| `pytest_cache_assert/_check_assert/differ.py`        |          106 |        10 |          0 | 90.6%      |
+| `pytest_cache_assert/_check_assert/error_message.py` |           10 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/key_rules.py`     |           61 |         3 |          0 | 95.1%      |
+| `pytest_cache_assert/main.py`                        |           41 |         7 |          0 | 82.9%      |
+| `pytest_cache_assert/plugin.py`                      |           42 |         2 |          0 | 95.2%      |
+| **Totals**                                           |          317 |        23 |          0 | 92.7%      |
+
+Generated on: 2022-02-17T23:07:26.951916
 <!-- {cte} -->

@@ -5,9 +5,9 @@ FYI: Should not require any pytest functionality
 """
 
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Union
 
 from beartype import beartype
+from beartype.typing import Any, Callable, Dict, List, Optional, Union
 
 from ._check_assert import differ, error_message
 from ._check_assert.caching import init_cache, load_cached_data, write_cache_data
@@ -78,7 +78,7 @@ def _safe_types(
 
 
 @beartype
-def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List[KeyRule]] = None,) -> None:
+def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List[KeyRule]] = None) -> None:
     """Utilize custom DictDiffer logic to compare in-memory dictionaries.
 
     Args:

@@ -2,10 +2,10 @@
 
 import sys
 from datetime import datetime
-from typing import Any, Dict, List, Optional
 
 import pytest
 from beartype import beartype
+from beartype.typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 
 

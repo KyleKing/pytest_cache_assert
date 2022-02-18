@@ -3,13 +3,13 @@
 from datetime import datetime, timedelta
 from enum import Enum
 from functools import partial
-from typing import Callable, List, Optional, Union
 from uuid import UUID
 
 import attr
 import pendulum
 from attrs_strict import type_validator
 from beartype import beartype
+from beartype.typing import Callable, List, Optional, Union
 from pendulum.parsing.exceptions import ParserError
 
 from .constants import DIFF_TYPES, Wildcards

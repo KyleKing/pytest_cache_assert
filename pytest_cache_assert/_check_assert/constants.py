@@ -2,7 +2,8 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Iterable, List, Type, Union
+
+from beartype.typing import Any, Dict, Iterable, List, Type, Union
 
 
 class Wildcards(Enum):  # noqa: H601

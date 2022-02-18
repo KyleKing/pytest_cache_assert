@@ -65,7 +65,7 @@ install:
   - poetry config virtualenvs.in-project true
   - poetry config --list
   # Install project-specific dependencies and extras
-  - poetry install 
+  - poetry install
 
 test_script:
   - poetry run doit --continue

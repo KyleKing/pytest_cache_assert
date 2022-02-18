@@ -2,9 +2,9 @@
 
 import json
 from pathlib import Path
-from typing import List
 
 from beartype import beartype
+from beartype.typing import List
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
 

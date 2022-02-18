@@ -4,11 +4,11 @@ import inspect
 import re
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable, Dict, Union
 
 import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
+from beartype.typing import Any, Callable, Dict, Union
 
 from . import main
 from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME

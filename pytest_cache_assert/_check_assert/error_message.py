@@ -1,7 +1,8 @@
 """Generate nice error messages."""
 
 from pathlib import Path
-from typing import Any, List
+
+from beartype.typing import Any, List
 
 from .constants import TEST_DATA_TYPE
 from .differ import DiffResult

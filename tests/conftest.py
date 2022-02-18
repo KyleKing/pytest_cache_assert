@@ -1,9 +1,9 @@
 """PyTest configuration."""
 
 from pathlib import Path
-from typing import Any, Callable, Dict
 
 import pytest
+from beartype.typing import Any, Callable, Dict
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401

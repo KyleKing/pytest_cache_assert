@@ -1,11 +1,10 @@
 """Dictionary Differ."""
 
-from typing import Any, List, Optional, Union
-
 import attr
 import dictdiffer
 from attrs_strict import type_validator
 from beartype import beartype
+from beartype.typing import Any, List, Optional, Union
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule

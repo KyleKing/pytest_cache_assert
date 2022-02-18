@@ -1,5 +1,13 @@
 ## Unreleased
 
+### Fix
+
+- show the changelog on PyPi
+
+### Refactor
+
+- drop 2021 prefix on tags
+
 ## 1.1.0 (2022-02-18)
 
 ### Refactor

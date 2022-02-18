@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 1.1.0 (2022-02-18)
+
 ### Refactor
 
 - use beartype's typing imports
@@ -14,7 +16,7 @@
 - argument order issues in main
 - datetime comparison logic
 
-## 2021.1.0.0 (2021-11-02)
+## 1.0.0 (2021-11-02)
 
 ### Fix
 
@@ -25,7 +27,7 @@
 
 - improve serialization
 
-## 2021.1.0.0rc0 (2021-11-02)
+## 1.0.0rc0 (2021-11-02)
 
 ### Refactor
 
@@ -49,7 +51,7 @@
 - add CNAME for custom subdomain
 - add missing check_imports file
 
-## 2021.0.1.0 (2021-10-31)
+## 0.1.0 (2021-10-31)
 
 ### Fix
 

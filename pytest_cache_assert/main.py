@@ -78,6 +78,34 @@ def _safe_types(
 
 
 @beartype
+def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List[KeyRule]] = None,) -> None:
+    """Utilize custom DictDiffer logic to compare in-memory dictionaries.
+
+    Args:
+        old_dict: old dictionary (typically cached one)
+        new_dict: new dictionary (typically test data)
+        key_rules: dictionary of KeyRules to apply when selectively ignoring differences
+
+    Raises:
+        RichAssertionError: if any assertion fails
+
+    """
+    safe_tuple = _safe_types(cached_data=old_dict, test_data=new_dict, key_rules=key_rules or [])
+    diff_results = differ.diff_with_rules(**safe_tuple)
+    if diff_results:
+        kwargs = {
+            'new_dict': new_dict,
+            'old_dict': old_dict,
+            'diff_results': diff_results,
+        }
+        message = f"""For test data: {new_dict}
+Found differences with: {old_dict}
+Differences: {diff_results}
+"""
+        raise RichAssertionError(message, error_info=kwargs)
+
+
+@beartype
 def assert_against_cache(
     test_data: Any,
     path_cache_dir: Path,
@@ -92,7 +120,7 @@ def assert_against_cache(
         test_data: dictionary or list to test (could be from cache)
         path_cache_dir: location of the cache directory
         cache_name: relative string path from the test_dir to the JSON cache file
-        key_rules: dictionary of KeyRules too apply for selectively ignoring values
+        key_rules: dictionary of KeyRules to apply when selectively ignoring differences
         validator: Custom validation function to be run against the test data before any modification
         metadata: metadata dictionary to store in the cache file
 

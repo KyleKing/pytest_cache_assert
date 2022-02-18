@@ -9,12 +9,11 @@
         <meta name="description" content="pytest_cache_assert project documentation">
       
       
-      
         <meta name="author" content="Kyle King">
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
     
     
       
@@ -22,10 +21,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.a57b2b03.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.e8d9bf0c.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -35,14 +34,13 @@
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -59,9 +57,8 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
-      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -77,6 +74,7 @@
     <div data-md-component="announce">
       
     </div>
+    
     
       
 
@@ -122,8 +120,7 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -155,11 +152,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     kyleking/pytest_cache_assert
@@ -193,6 +189,22 @@
       pytest_cache_assert
     </a>
   </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="adr/" class="md-tabs__link">
+        Adr
+      </a>
+    </li>
+  
 
       
         
@@ -265,11 +277,10 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     kyleking/pytest_cache_assert
@@ -307,7 +318,6 @@
       
         
 
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -335,6 +345,13 @@
   
     <nav class="md-nav" aria-label="Quick Start">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    Alternatives
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#basic-example" class="md-nav__link">
@@ -367,7 +384,14 @@
     Global Configuration Options
   </a>
   
-    <nav class="md-nav" aria-label="Global Configuration Options">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -377,15 +401,15 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#other-planned-features" class="md-nav__link">
+    Other Planned Features
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
-    Roadmap
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -428,12 +452,74 @@
       
       
         <label class="md-nav__link" for="__nav_2">
+          Adr
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Adr" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Adr
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="adr/" class="md-nav__link">
+        ADR Documentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="adr/NNN-Template/" class="md-nav__link">
+        [short title of solved problem and solution]
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
           Docs
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Docs" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Docs
         </label>
@@ -554,18 +640,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_4">
           Modules
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Modules" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
+        <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Modules
         </label>
@@ -580,18 +666,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_3_1">
+        <label class="md-nav__link" for="__nav_4_1">
           Pytest cache assert
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Pytest cache assert" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_1">
+        <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           Pytest cache assert
         </label>
@@ -679,7 +765,6 @@
                   <div class="md-sidebar__inner">
                     
 
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -707,6 +792,13 @@
   
     <nav class="md-nav" aria-label="Quick Start">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    Alternatives
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#basic-example" class="md-nav__link">
@@ -739,7 +831,14 @@
     Global Configuration Options
   </a>
   
-    <nav class="md-nav" aria-label="Global Configuration Options">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -749,15 +848,15 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#other-planned-features" class="md-nav__link">
+    Other Planned Features
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
-    Roadmap
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -787,163 +886,178 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/README.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="pytest_cache_assert">pytest_cache_assert<a class="headerlink" href="#pytest_cache_assert" title="Permanent link">⚓︎</a></h1>
+<a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="pytest_cache_assert">pytest_cache_assert<a class="headerlink" href="#pytest_cache_assert" title="Permanent link">⚓︎</a></h1>
 <p>Cache assertion data to simplify regression testing of complex serializable data</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">⚓︎</a></h2>
 <p><code>poetry add pytest_assert_check --dev</code></p>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">⚓︎</a></h2>
-<p>The primary use case of this package is regression testing of large dictionaries. You may have some parameterized test cases where you need to assert that a resulting dictionary is the same, but you don’t want to manually generate the expected fields and values and couple the test case to the source code. Instead you can cache or “record” the expected serialized data structure, check the expected dictionary into version control, then regenerate on changes</p>
+<p>The primary use case of this package is regression testing of large, serializable dictionaries, such as from an API under development.</p>
+<p>You may have parameterized test cases where you need to assert that the created dictionary stays the same, but you don’t want to manually generate the expected fields and values to compare. Instead you can capture a snapshot of the serialized data and cache the result then use the cached data to check for consistency in repeated test runs. The cached files should be checked into version control, which can be very useful as documentation</p>
 <p>This package can minimize test case logic, while improving test thoroughness</p>
 <p>This project was heavily inspired by the excellent <a href="https://github.com/kiwicom/pytest-recording">pytest-recording</a></p>
+<h3 id="alternatives">Alternatives<a class="headerlink" href="#alternatives" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li><a href="https://github.com/kiwicom/pytest-recording">pytest-recording</a>: this is the package I use and highly recommend for recording and replaying <strong>external</strong> API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github&rsquo;s API called from a test suite)</li>
+<li><a href="https://pypi.org/project/pytest-snapshot/">pytest-snapshot</a>: I only found this package after already releasing a 1.0.0 version of <code>pytest_assert_cache</code>. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info</li>
+<li><a href="https://github.com/syrusakbary/snapshottest">snapshottest</a>: This was another find after releasing a 1.0.0 version and would probably be <strong>a good alterantive for most users</strong><ul>
+<li><code>pytest-snapshot</code> is much more configurable, has many more users, and is a better name<ul>
+<li>I really like the ability to quickly regenerate the cached files with <a href="https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py">&ndash;snapshot-update</a></li>
+<li><a href="https://github.com/syrusakbary/snapshottest/issues/21">There is some interesting discussion on how best to handle fields that change between tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="basic-example">Basic Example<a class="headerlink" href="#basic-example" title="Permanent link">⚓︎</a></h3>
 <p>You&rsquo;ve created a new project called <code>package_a</code> with one file <code>package_a/source_file.py</code> and test <code>tests/test_file.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;package_a/source_file.py&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
-
-<span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-
-
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
-    <span class="sd">&quot;&quot;&quot;Example from pydantic documentation.&quot;&quot;&quot;</span>
-
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1"># noqa: A003,VNE003</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;John Doe&#39;</span>
-    <span class="n">signup_ts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">friends</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-
-
-<span class="nd">@beartype</span>
-<span class="k">def</span> <span class="nf">create_data</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Arbitrary function that returns a dictionary.</span>
-
-<span class="sd">    This demonstration uses pydantic, but any dictionary can be tested!</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">User</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;package_a/source_file.py&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="sd">&quot;&quot;&quot;Example from pydantic documentation.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span>    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1"># noqa: A003,VNE003</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;John Doe&#39;</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="n">signup_ts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">friends</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="21 "></span><span class="k">def</span> <span class="nf">create_data</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="sd">&quot;&quot;&quot;Arbitrary function that returns a dictionary.</span>
+<span class="linenos" data-linenos="23 "></span>
+<span class="linenos" data-linenos="24 "></span><span class="sd">    This demonstration uses pydantic, but any dictionary can be tested!</span>
+<span class="linenos" data-linenos="25 "></span>
+<span class="linenos" data-linenos="26 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="k">return</span> <span class="n">User</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;tests/test_file.py&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">pytest</span>
-
-<span class="kn">from</span> <span class="nn">package_a.source_file</span> <span class="kn">import</span> <span class="n">create_data</span>
-
-
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Test Name 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Test Name 2&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">test_create_data</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">assert_against_cache</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Basic test of create_data().&quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">create_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="c1"># One could manually create the expected dictionary</span>
-    <span class="n">cache</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">9223372036854775807</span><span class="p">,</span> <span class="s1">&#39;signup_ts&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;friends&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
-    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">cache</span>
-    <span class="c1"># ----------------------------------------------------------------------------------</span>
-    <span class="c1"># Or utilize the pytest_cache_assert fixture to compare against the last cached version</span>
-    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;tests/test_file.py&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">package_a.source_file</span> <span class="kn">import</span> <span class="n">create_data</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Test Name 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Test Name 2&#39;</span><span class="p">])</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">def</span> <span class="nf">test_create_data</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">assert_against_cache</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="sd">&quot;&quot;&quot;Basic test of create_data().&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">result</span> <span class="o">=</span> <span class="n">create_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>    <span class="c1"># One could manually create the expected dictionary</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">cache</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">9223372036854775807</span><span class="p">,</span> <span class="s1">&#39;signup_ts&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;friends&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">cache</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="c1"># ----------------------------------------------------------------------------------</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="c1"># Or utilize the pytest_cache_assert fixture to compare against the last cached version</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 <p><code>pytest_cache_assert</code> will automatically create: <code>tests/cache-assert/source_file/test_file/test_create_data-[Test Name 1].json</code> (and <code>test_create_data[Test Name 2].json</code>) for each of the parameters when first run by caching the <code>result</code>. Below is the example for <code>test_create_data-[Test Name 1].json</code></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;_info&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;func_args&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Name 1&quot;</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;test_file&quot;</span><span class="p">:</span> <span class="s2">&quot;test_readme.py&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;test_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test_create_data&quot;</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;_json&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;friends&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9223372036854775807</span><span class="p">,</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Name 1&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;signup_ts&quot;</span><span class="p">:</span> <span class="kc">null</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span><span class="w"></span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">      </span><span class="nt">&quot;func_args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Name 1&quot;</span><span class="w"></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">      </span><span class="nt">&quot;test_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test_readme.py&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">      </span><span class="nt">&quot;test_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test_create_data&quot;</span><span class="w"></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="linenos" data-linenos="11 "></span><span class="w">  </span><span class="nt">&quot;_json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos" data-linenos="12 "></span><span class="w">    </span><span class="nt">&quot;friends&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="linenos" data-linenos="13 "></span><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9223372036854775807</span><span class="p">,</span><span class="w"></span>
+<span class="linenos" data-linenos="14 "></span><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Name 1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos" data-linenos="15 "></span><span class="w">    </span><span class="nt">&quot;signup_ts&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="linenos" data-linenos="16 "></span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos" data-linenos="17 "></span><span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>The cached JSON files must be checked into version control and if needed, can be manually edited or deleted so that they will be regenerated when the test suite is next run</p>
 <h3 id="more-examples">More Examples<a class="headerlink" href="#more-examples" title="Permanent link">⚓︎</a></h3>
 <p>In your cached dictionary, you may have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:</p>
-<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-
-<span class="kn">from</span> <span class="nn">pytest_cache_assert</span> <span class="kn">import</span> <span class="n">KeyRule</span><span class="p">,</span> <span class="n">check_suppress</span><span class="p">,</span> <span class="n">check_type</span><span class="p">,</span> <span class="n">Wildcards</span>
-
-
-<span class="k">def</span> <span class="nf">test_assert_against_cache_key_rules</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Demonstrate use of `key_rules`.&quot;&quot;&quot;</span>
-    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">cached_data</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span>
-      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
-      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}},</span>
-    <span class="p">}</span>
-    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
-      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
-      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recursively&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}}},</span>
-    <span class="p">}</span>
-
-    <span class="n">key_rules</span> <span class="o">=</span> <span class="p">[</span>
-      <span class="c1"># Suppress keys &#39;ignored.a&#39; and &#39;ignored.b&#39; with the SINGLE wildcard,</span>
-      <span class="c1">#   which aren&#39;t present in the test-data and would otherwise error</span>
-      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
-      <span class="c1"># The pattern can also recursively apply to data below</span>
-      <span class="n">KeyRule</span><span class="p">(</span>
-        <span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="s1">&#39;recursively&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">RECURSIVELY</span><span class="p">],</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">,</span>
-      <span class="p">),</span>
-      <span class="c1"># Instead of suppressing, the type can be coerced from the string and verified</span>
-      <span class="c1">#   This is useful for datetime or UUID&#39;s where the string will be different,</span>
-      <span class="c1">#   but both values are the same type</span>
-      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
-      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
-      <span class="c1"># Custom functions can also be specified to check a datetime format, etc.</span>
-      <span class="c1">#   The function must accept the keyword arguments &#39;old&#39; and &#39;new&#39;</span>
-    <span class="p">]</span>
-
-    <span class="c1"># In this example, the cache file has been deleted, so first call will recreate it</span>
-    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
-    <span class="c1"># Then this line demonstrates that key_rules will suppress the errors</span>
-    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span><span class="p">)</span>
-
-    <span class="c1"># While without key rules, an AssertionError is raised</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
-        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">pytest_cache_assert</span> <span class="kn">import</span> <span class="n">KeyRule</span><span class="p">,</span> <span class="n">check_suppress</span><span class="p">,</span> <span class="n">check_type</span><span class="p">,</span> <span class="n">Wildcards</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">def</span> <span class="nf">test_assert_against_cache_key_rules</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="sd">&quot;&quot;&quot;Demonstrate use of `key_rules`.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">cached_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="13 "></span>      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span>
+<span class="linenos" data-linenos="14 "></span>      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
+<span class="linenos" data-linenos="15 "></span>      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}},</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="18 "></span>      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+<span class="linenos" data-linenos="19 "></span>      <span class="p">{</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())}},</span>
+<span class="linenos" data-linenos="20 "></span>      <span class="p">{</span><span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recursively&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}}},</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">key_rules</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos" data-linenos="24 "></span>      <span class="c1"># Suppress keys &#39;ignored.a&#39; and &#39;ignored.b&#39; with the SINGLE wildcard,</span>
+<span class="linenos" data-linenos="25 "></span>      <span class="c1">#   which aren&#39;t present in the test-data and would otherwise error</span>
+<span class="linenos" data-linenos="26 "></span>      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
+<span class="linenos" data-linenos="27 "></span>      <span class="c1"># The pattern can also recursively apply to data below</span>
+<span class="linenos" data-linenos="28 "></span>      <span class="n">KeyRule</span><span class="p">(</span>
+<span class="linenos" data-linenos="29 "></span>        <span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="s1">&#39;recursively&#39;</span><span class="p">,</span> <span class="n">Wildcards</span><span class="o">.</span><span class="n">RECURSIVELY</span><span class="p">],</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">,</span>
+<span class="linenos" data-linenos="31 "></span>      <span class="p">),</span>
+<span class="linenos" data-linenos="32 "></span>      <span class="c1"># Instead of suppressing, the type can be coerced from the string and verified</span>
+<span class="linenos" data-linenos="33 "></span>      <span class="c1">#   This is useful for datetime or UUID&#39;s where the string will be different,</span>
+<span class="linenos" data-linenos="34 "></span>      <span class="c1">#   but both values are the same type</span>
+<span class="linenos" data-linenos="35 "></span>      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
+<span class="linenos" data-linenos="36 "></span>      <span class="n">KeyRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
+<span class="linenos" data-linenos="37 "></span>      <span class="c1"># Custom functions can also be specified to check a datetime format, etc.</span>
+<span class="linenos" data-linenos="38 "></span>      <span class="c1">#   The function must accept the keyword arguments &#39;old&#39; and &#39;new&#39;</span>
+<span class="linenos" data-linenos="39 "></span>    <span class="p">]</span>
+<span class="linenos" data-linenos="40 "></span>
+<span class="linenos" data-linenos="41 "></span>    <span class="c1"># In this example, the cache file has been deleted, so first call will recreate it</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="c1"># Then this line demonstrates that key_rules will suppress the errors</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span><span class="p">)</span>
+<span class="linenos" data-linenos="45 "></span>
+<span class="linenos" data-linenos="46 "></span>    <span class="c1"># While without key rules, an AssertionError is raised</span>
+<span class="linenos" data-linenos="47 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
+<span class="linenos" data-linenos="48 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
 </code></pre></div>
 <p>Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library. This is possible with the <code>validator</code> callable. The default validator is a no-op and that may be replaced with any custom function that raises an Exception on error.</p>
-<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
-<span class="kn">from</span> <span class="nn">cerberus</span> <span class="kn">import</span> <span class="n">Validator</span>
-<span class="kn">from</span> <span class="nn">cerberus.schema</span> <span class="kn">import</span> <span class="n">SchemaError</span>
-
-
-<span class="nd">@beartype</span>
-<span class="k">def</span> <span class="nf">cerberus_validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">:</span> <span class="n">TEST_DATA_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Cerberus custom validator example.&quot;&quot;&quot;</span>
-    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}})</span>
-    <span class="k">assert</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">test_assert_against_cache_validator</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Test the validator.&quot;&quot;&quot;</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;{&#39;result&#39;: [{&#39;type&#39;: [&#39;Unsupported types: int&#39;]}]}&quot;</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">SchemaError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">expected</span><span class="p">):</span>
-        <span class="n">assert_against_cache</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">validator</span><span class="o">=</span><span class="n">cerberus_validator</span><span class="p">)</span>  <span class="c1"># act</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cerberus</span> <span class="kn">import</span> <span class="n">Validator</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">cerberus.schema</span> <span class="kn">import</span> <span class="n">SchemaError</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="12 "></span><span class="k">def</span> <span class="nf">cerberus_validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">:</span> <span class="n">TEST_DATA_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="sd">&quot;&quot;&quot;Cerberus custom validator example.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}})</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">assert</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span><span class="k">def</span> <span class="nf">test_assert_against_cache_validator</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="sd">&quot;&quot;&quot;Test the validator.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">expected</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;{&#39;result&#39;: [{&#39;type&#39;: [&#39;Unsupported types: int&#39;]}]}&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="21 "></span>
+<span class="linenos" data-linenos="22 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">SchemaError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">expected</span><span class="p">):</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="n">assert_against_cache</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">validator</span><span class="o">=</span><span class="n">cerberus_validator</span><span class="p">)</span>  <span class="c1"># act</span>
 </code></pre></div>
 <h3 id="even-more-example">Even More Example<a class="headerlink" href="#even-more-example" title="Permanent link">⚓︎</a></h3>
 <p>For more examples, see <a href="https://github.com/kyleking/pytest_cache_assert/scripts">Scripts</a> or <a href="https://github.com/kyleking/pytest_cache_assert/tests">Tests</a></p>
@@ -951,30 +1065,45 @@
 <ul>
 <li><code>DEF_CACHE_DIR_KEY</code>: set a custom relative path from the <code>tests/</code> directory. Default is <code>assert-cache/</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
-
-<span class="kn">from</span> <span class="nn">pytest_cache_assert</span> <span class="kn">import</span> <span class="n">DEF_CACHE_DIR_KEY</span>
-
-
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="n">DEF_CACHE_DIR_KEY</span><span class="p">:</span> <span class="s1">&#39;custom/cache/dir&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">pytest_cache_assert</span> <span class="kn">import</span> <span class="n">DEF_CACHE_DIR_KEY</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="n">DEF_CACHE_DIR_KEY</span><span class="p">:</span> <span class="s1">&#39;custom/cache/dir&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="p">}</span>
 </code></pre></div>
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">⚓︎</a></h2>
+<p>See the <code>Open Issues</code> and <code>Milestones</code> for current status and <a href="docs/CODE_TAG_SUMMARY/">./docs/CODE_TAG_SUMMARY.md</a> for annotations in the source code.</p>
+<p>For release history, see the <a href="docs/CHANGELOG/">./docs/CHANGELOG.md</a></p>
 <h3 id="planned-global-configuration-options">Planned Global Configuration Options<a class="headerlink" href="#planned-global-configuration-options" title="Permanent link">⚓︎</a></h3>
 <p>These are ideas for future options that are not currently implemented, but could be if there is enough interest:</p>
 <ul>
 <li>PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development<ul>
-<li>The other edge case where a <code>mode</code> might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed</li>
+<li>The other edge case where a <code>mode</code> might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a <code>rewrite_metadata</code> setting would be useful with options: <code>Always</code>, <code>Once</code> (Default), or <code>Never</code></li>
+<li>Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)<ul>
+<li>FIXME: Don&rsquo;t store variable datetime in the func_args!</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>PLANNED: <a href="https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70">Provide CLI arguments like <code>pytest-recording</code></a> (<code>request.config.getoption("--record-mode") or "none"</code>) for one-time changes to configuration</li>
 <li>PLANNED: Consider filters to prevent secrets from being cached: <code>filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]</code></li>
 </ul>
-<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">⚓︎</a></h2>
-<p>See the <code>Open Issues</code> and <code>Milestones</code> for current status and <a href="docs/CODE_TAG_SUMMARY/">./docs/CODE_TAG_SUMMARY.md</a> for annotations in the source code.</p>
-<p>For release history, see the <a href="docs/CHANGELOG/">./docs/CHANGELOG.md</a></p>
+<h3 id="other-planned-features">Other Planned Features<a class="headerlink" href="#other-planned-features" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>PLANNED: Consider inline corrections to cached data like this <a href="https://jestjs.io/docs/snapshot-testing#inline-snapshots">feature from Jest</a><ul>
+<li>Show the diff between the cached data and the test data? Would need to look for a package that can show the comparison between two dictionaries in terminal<ul>
+<li><a href="https://github.com/ymattw/ydiff">ydiff</a> might be a great choice, but I would need to support git (and ask if anyone needs SVN support) to write the change and compare. Probably better to more directly ask if the user wants the test case (shown by name and maybe a brief list of changes) to be replaced or not</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PLANNED: <a href="https://jestjs.io/docs/snapshot-testing#best-practices">Add tips from Jest on best practices</a> &ndash; treat snapshots as code, etc.</li>
+</ul>
 <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">⚓︎</a></h2>
 <p>See the Developer Guide, Contribution Guidelines, etc</p>
 <ul>
@@ -986,11 +1115,21 @@
 </ul>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">⚓︎</a></h2>
 <p><a href="https://github.com/kyleking/pytest_cache_assert/LICENSE">LICENSE</a></p>
-                
-              
-              
-                
 
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 4, 2021</span>
+      
+        <br>
+        Created:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 29, 2021</span>
+      
+    
+  </small>
+</div>
 
               
             </article>
@@ -999,20 +1138,19 @@
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
       
         
-        <a href="docs/CHANGELOG/" class="md-footer__link md-footer__link--next" aria-label="Next: CHANGELOG" rel="next">
+        <a href="adr/" class="md-footer__link md-footer__link--next" aria-label="Next: ADR Documentation" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              CHANGELOG
+              ADR Documentation
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1024,16 +1162,15 @@
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        
-          Made with
-          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-            Material for MkDocs
-          </a>
-        
-        
-      </div>
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -1043,10 +1180,14 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.b1047164.min.js"></script>
+      <script src="assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="_javascript/tables.js"></script>
       
     
   </body>

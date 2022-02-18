@@ -12,19 +12,19 @@
         <meta name="author" content="Kyle King">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
     
     
       
-        <title>CHANGELOG - pytest_cache_assert</title>
+        <title>ADR Documentation - pytest_cache_assert</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.e8d9bf0c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.e8d9bf0c.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -38,7 +38,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#unreleased" class="md-skip">
+        <a href="#adr-documentation" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="pytest_cache_assert" class="md-header__button md-logo" aria-label="pytest_cache_assert" data-md-component="logo">
+    <a href=".." title="pytest_cache_assert" class="md-header__button md-logo" aria-label="pytest_cache_assert" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CHANGELOG
+              ADR Documentation
             
           </span>
         </div>
@@ -183,26 +183,10 @@
 
 
   <li class="md-tabs__item">
-    <a href="../.." class="md-tabs__link">
+    <a href=".." class="md-tabs__link">
       pytest_cache_assert
     </a>
   </li>
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../adr/" class="md-tabs__link">
-        Adr
-      </a>
-    </li>
-  
 
       
         
@@ -217,6 +201,22 @@
   
     <li class="md-tabs__item">
       <a href="./" class="md-tabs__link md-tabs__link--active">
+        Adr
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../docs/CHANGELOG/" class="md-tabs__link">
         Docs
       </a>
     </li>
@@ -237,7 +237,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../modules/pytest_cache_assert/" class="md-tabs__link">
+      <a href="../modules/pytest_cache_assert/" class="md-tabs__link">
         Modules
       </a>
     </li>
@@ -267,7 +267,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="pytest_cache_assert" class="md-nav__button md-logo" aria-label="pytest_cache_assert" data-md-component="logo">
+    <a href=".." title="pytest_cache_assert" class="md-nav__button md-logo" aria-label="pytest_cache_assert" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -298,7 +298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         pytest_cache_assert
       </a>
     </li>
@@ -311,12 +311,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -337,11 +339,52 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../adr/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ADR Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         ADR Documentation
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adrs" class="md-nav__link">
+    ADRs
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -353,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adr/NNN-Template/" class="md-nav__link">
+      <a href="NNN-Template/" class="md-nav__link">
         [short title of solved problem and solution]
       </a>
     </li>
@@ -373,14 +416,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -401,170 +442,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          CHANGELOG
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../docs/CHANGELOG/" class="md-nav__link">
         CHANGELOG
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
-    Unreleased
-  </a>
-  
-    <nav class="md-nav" aria-label="Unreleased">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#refactor" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021100-2021-11-02" class="md-nav__link">
-    2021.1.0.0 (2021-11-02)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.1.0.0 (2021-11-02)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fix_1" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_1" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021100rc0-2021-11-02" class="md-nav__link">
-    2021.1.0.0rc0 (2021-11-02)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.1.0.0rc0 (2021-11-02)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#refactor_1" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_2" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_2" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021010-2021-10-31" class="md-nav__link">
-    2021.0.1.0 (2021-10-31)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.0.1.0 (2021-10-31)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fix_3" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_3" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#refactor_2" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -576,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CODE_OF_CONDUCT/" class="md-nav__link">
+      <a href="../docs/CODE_OF_CONDUCT/" class="md-nav__link">
         Contributor Covenant Code of Conduct
       </a>
     </li>
@@ -590,7 +472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CODE_TAG_SUMMARY/" class="md-nav__link">
+      <a href="../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
         Task Summary
       </a>
     </li>
@@ -604,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CONTRIBUTING/" class="md-nav__link">
+      <a href="../docs/CONTRIBUTING/" class="md-nav__link">
         Contributing
       </a>
     </li>
@@ -618,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DEVELOPER_GUIDE/" class="md-nav__link">
+      <a href="../docs/DEVELOPER_GUIDE/" class="md-nav__link">
         Developer Notes
       </a>
     </li>
@@ -632,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../SECURITY/" class="md-nav__link">
+      <a href="../docs/SECURITY/" class="md-nav__link">
         Security
       </a>
     </li>
@@ -646,7 +528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../STYLE_GUIDE/" class="md-nav__link">
+      <a href="../docs/STYLE_GUIDE/" class="md-nav__link">
         Personal Style Guides
       </a>
     </li>
@@ -720,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/pytest_cache_assert/" class="md-nav__link">
+      <a href="../modules/pytest_cache_assert/" class="md-nav__link">
         pytest_cache_assert
       </a>
     </li>
@@ -734,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/pytest_cache_assert/_code_diagrams/" class="md-nav__link">
+      <a href="../modules/pytest_cache_assert/_code_diagrams/" class="md-nav__link">
         Code Diagrams
       </a>
     </li>
@@ -748,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/pytest_cache_assert/main/" class="md-nav__link">
+      <a href="../modules/pytest_cache_assert/main/" class="md-nav__link">
         pytest_cache_assert.main
       </a>
     </li>
@@ -762,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/pytest_cache_assert/plugin/" class="md-nav__link">
+      <a href="../modules/pytest_cache_assert/plugin/" class="md-nav__link">
         pytest_cache_assert.plugin
       </a>
     </li>
@@ -800,6 +682,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -808,131 +692,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
-    Unreleased
+  <a href="#adrs" class="md-nav__link">
+    ADRs
   </a>
-  
-    <nav class="md-nav" aria-label="Unreleased">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#refactor" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021100-2021-11-02" class="md-nav__link">
-    2021.1.0.0 (2021-11-02)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.1.0.0 (2021-11-02)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fix_1" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_1" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021100rc0-2021-11-02" class="md-nav__link">
-    2021.1.0.0rc0 (2021-11-02)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.1.0.0rc0 (2021-11-02)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#refactor_1" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_2" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_2" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2021010-2021-10-31" class="md-nav__link">
-    2021.0.1.0 (2021-10-31)
-  </a>
-  
-    <nav class="md-nav" aria-label="2021.0.1.0 (2021-10-31)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fix_3" class="md-nav__link">
-    Fix
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feat_3" class="md-nav__link">
-    Feat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#refactor_2" class="md-nav__link">
-    Refactor
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -948,89 +710,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/docs/CHANGELOG.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/adr/README.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-  <h1>CHANGELOG</h1>
-
-<h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">⚓︎</a></h2>
-<h3 id="refactor">Refactor<a class="headerlink" href="#refactor" title="Permanent link">⚓︎</a></h3>
+<h1 id="adr-documentation">ADR Documentation<a class="headerlink" href="#adr-documentation" title="Permanent link">⚓︎</a></h1>
+<p><em>ADR</em>: Architectural Design Decision</p>
+<h2 id="adrs">ADRs<a class="headerlink" href="#adrs" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li>use beartype&rsquo;s typing imports</li>
-</ul>
-<h3 id="feat">Feat<a class="headerlink" href="#feat" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>new assert_against_dict for in-memory comparison</li>
-<li>add support for comparing date-times</li>
-</ul>
-<h3 id="fix">Fix<a class="headerlink" href="#fix" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>argument order issues in main</li>
-<li>datetime comparison logic</li>
-</ul>
-<h2 id="2021100-2021-11-02">2021.1.0.0 (2021-11-02)<a class="headerlink" href="#2021100-2021-11-02" title="Permanent link">⚓︎</a></h2>
-<h3 id="fix_1">Fix<a class="headerlink" href="#fix_1" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>correctly implement an optional fixture</li>
-<li>make config fixture optional</li>
-</ul>
-<h3 id="feat_1">Feat<a class="headerlink" href="#feat_1" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>improve serialization</li>
-</ul>
-<h2 id="2021100rc0-2021-11-02">2021.1.0.0rc0 (2021-11-02)<a class="headerlink" href="#2021100rc0-2021-11-02" title="Permanent link">⚓︎</a></h2>
-<h3 id="refactor_1">Refactor<a class="headerlink" href="#refactor_1" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>code cleanup &amp; documentation updates</li>
-<li>simplify merge_metadata logic</li>
-<li>serialize the func_args metadata recursively</li>
-<li>improve code quality of _raw_diff</li>
-</ul>
-<h3 id="feat_2">Feat<a class="headerlink" href="#feat_2" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>support comparison of lists</li>
-<li>always write metadata as a list</li>
-<li>customizable cache directory</li>
-<li>support lists of dictionaries</li>
-<li>replace asterisk string with Wildcard enum</li>
-<li>support UUID in check_type</li>
-</ul>
-<h3 id="fix_2">Fix<a class="headerlink" href="#fix_2" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>support dictionary keys with dots</li>
-<li>add CNAME for custom subdomain</li>
-<li>add missing check_imports file</li>
-</ul>
-<h2 id="2021010-2021-10-31">2021.0.1.0 (2021-10-31)<a class="headerlink" href="#2021010-2021-10-31" title="Permanent link">⚓︎</a></h2>
-<h3 id="fix_3">Fix<a class="headerlink" href="#fix_3" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>add tests and verify correctness of KeyRule</li>
-<li>use full name instead of custom indexing for cache</li>
-<li>use 2-spaces on JSON for pre-commit</li>
-<li>reduce stored metadata and check args</li>
-<li>re-run &ldquo;poetry install&rdquo; after entrypoint changes</li>
-</ul>
-<h3 id="feat_3">Feat<a class="headerlink" href="#feat_3" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>implement key rules</li>
-<li>implement dictdiffer wrapper</li>
-<li>initialize decoupled differ and error message (WIP)</li>
-<li>use dictdiffer for quick fix for assertion messages</li>
-<li>resolve cache file name based on pytest metadata</li>
-<li>initial attempt at pytest plugin</li>
-<li>initialize package code and tests</li>
-<li>start with Readme (RDD)</li>
-<li>initialized project with copier</li>
-</ul>
-<h3 id="refactor_2">Refactor<a class="headerlink" href="#refactor_2" title="Permanent link">⚓︎</a></h3>
-<ul>
-<li>rename checks to main</li>
-<li>rename check_assert to assert_against_cache &amp; update README</li>
-<li>drop transformer and match_precision</li>
-<li>update notes and implementation plans</li>
+<li>ADR 000: <a href="./000-Meta-ADR.md">Meta-ADR.md</a></li>
 </ul>
 
   <hr>
@@ -1042,7 +732,7 @@
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 29, 2021</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 18, 2022</span>
       
     
   </small>
@@ -1060,7 +750,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../adr/NNN-Template/" class="md-footer__link md-footer__link--prev" aria-label="Previous: [short title of solved problem and solution]" rel="prev">
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: pytest_cache_assert" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1069,20 +759,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              [short title of solved problem and solution]
+              pytest_cache_assert
             </div>
           </div>
         </a>
       
       
         
-        <a href="../CODE_OF_CONDUCT/" class="md-footer__link md-footer__link--next" aria-label="Next: Contributor Covenant Code of Conduct" rel="next">
+        <a href="NNN-Template/" class="md-footer__link md-footer__link--next" aria-label="Next: [short title of solved problem and solution]" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Contributor Covenant Code of Conduct
+              [short title of solved problem and solution]
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1112,14 +802,14 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      <script src="../assets/javascripts/bundle.8aa65030.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       
-        <script src="../../_javascript/tables.js"></script>
+        <script src="../_javascript/tables.js"></script>
       
     
   </body>

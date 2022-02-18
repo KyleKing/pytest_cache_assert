@@ -9,12 +9,11 @@
         <meta name="description" content="pytest_cache_assert project documentation">
       
       
-      
         <meta name="author" content="Kyle King">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
     
     
       
@@ -22,10 +21,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.a57b2b03.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e8d9bf0c.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -35,14 +34,13 @@
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -59,9 +57,8 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
   
     
-    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
-      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -77,6 +74,7 @@
     <div data-md-component="announce">
       
     </div>
+    
     
       
 
@@ -122,8 +120,7 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -155,11 +152,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     kyleking/pytest_cache_assert
@@ -191,6 +187,22 @@
       pytest_cache_assert
     </a>
   </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../adr/" class="md-tabs__link">
+        Adr
+      </a>
+    </li>
+  
 
       
         
@@ -265,11 +277,10 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/kyleking/pytest_cache_assert/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     kyleking/pytest_cache_assert
@@ -311,12 +322,74 @@
       
       
         <label class="md-nav__link" for="__nav_2">
+          Adr
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Adr" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Adr
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../adr/" class="md-nav__link">
+        ADR Documentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../adr/NNN-Template/" class="md-nav__link">
+        [short title of solved problem and solution]
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
           Docs
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Docs" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Docs
         </label>
@@ -439,18 +512,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_4">
           Modules
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Modules" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
+        <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Modules
         </label>
@@ -467,18 +540,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_3_1">
+        <label class="md-nav__link" for="__nav_4_1">
           Pytest cache assert
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Pytest cache assert" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_1">
+        <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           Pytest cache assert
         </label>
@@ -538,7 +611,6 @@
       
         
 
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -563,6 +635,13 @@
           <li class="md-nav__item">
   <a href="#assert_against_cache" class="md-nav__link">
     assert_against_cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assert_against_dict" class="md-nav__link">
+    assert_against_dict
   </a>
   
 </li>
@@ -621,7 +700,6 @@
                   <div class="md-sidebar__inner">
                     
 
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -650,6 +728,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#assert_against_dict" class="md-nav__link">
+    assert_against_dict
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -667,146 +752,178 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/modules/pytest_cache_assert/main.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="pytest_cache_assertmain">pytest_cache_assert.main<a class="headerlink" href="#pytest_cache_assertmain" title="Permanent link">⚓︎</a></h1>
+<a href="https://github.com/kyleking/pytest_cache_assert/edit/main/docs/modules/pytest_cache_assert/main.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="pytest_cache_assertmain">pytest_cache_assert.main<a class="headerlink" href="#pytest_cache_assertmain" title="Permanent link">⚓︎</a></h1>
 <p>Assertion checks for unit tests.</p>
 <p>FYI: Should not require any pytest functionality</p>
-<details class="example"><summary>View Source</summary><div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Assertion checks for unit tests.</span>
-
-<span class="sd">FYI: Should not require any pytest functionality</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
-
-<span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
-
-<span class="kn">from</span> <span class="nn">._check_assert</span> <span class="kn">import</span> <span class="n">differ</span><span class="p">,</span> <span class="n">error_message</span>
-<span class="kn">from</span> <span class="nn">._check_assert.caching</span> <span class="kn">import</span> <span class="n">init_cache</span><span class="p">,</span> <span class="n">load_cached_data</span><span class="p">,</span> <span class="n">write_cache_data</span>
-<span class="kn">from</span> <span class="nn">._check_assert.constants</span> <span class="kn">import</span> <span class="n">TEST_DATA_TYPE</span>
-<span class="kn">from</span> <span class="nn">._check_assert.error_message</span> <span class="kn">import</span> <span class="n">RichAssertionError</span>
-<span class="kn">from</span> <span class="nn">._check_assert.key_rules</span> <span class="kn">import</span> <span class="n">KeyRule</span>
-
-<span class="n">_WRAP_KEY</span> <span class="o">=</span> <span class="s1">&#39;--wrapped--&#39;</span>
-<span class="sd">&quot;&quot;&quot;Special key to convert lists to dictionaries for dictdiffer.&quot;&quot;&quot;</span>
-
-
-<span class="nd">@beartype</span>
-<span class="k">def</span> <span class="nf">_wrap_data</span><span class="p">(</span><span class="n">_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TEST_DATA_TYPE</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        _data: list or dictionary data to potentially wrap</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        TEST_DATA_TYPE: wrapped data that is safe for comparison</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="n">_WRAP_KEY</span><span class="p">:</span> <span class="n">_data</span><span class="p">}</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">_data</span>
-
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># FYI: Not needed because the data is already unwrapped in locals of assert_against_cache</span>
-<span class="sd">@beartype</span>
-<span class="sd">def _unwrap_data(_data: TEST_DATA_TYPE) -&gt; Any:</span>
-<span class="sd">    &quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        _data: safe data to potentially unwrap</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Any: unwrapped list or dictionary data</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-<span class="sd">    return _data.get(_WRAP_KEY, _data)</span>
-<span class="sd">&#39;&#39;&#39;</span>
-
-
-<span class="k">def</span> <span class="nf">_safe_types</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">key_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TEST_DATA_TYPE</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]]:</span>
-    <span class="sd">&quot;&quot;&quot;Convert data and key_rules to safe data types for diffing.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        test_data: data to compare</span>
-<span class="sd">        cached_data: data to compare</span>
-<span class="sd">        key_rules: list of key rules to apply</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wrapped_key_rules</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">key_rule</span> <span class="ow">in</span> <span class="n">key_rules</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cached_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span><span class="n">_WRAP_KEY</span><span class="p">]</span> <span class="o">+</span> <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span>
-        <span class="n">wrapped_key_rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key_rule</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;old_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">test_data</span><span class="p">),</span>
-        <span class="s1">&#39;new_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">cached_data</span><span class="p">),</span>
-        <span class="s1">&#39;key_rules&#39;</span><span class="p">:</span> <span class="n">wrapped_key_rules</span><span class="p">,</span>
-    <span class="p">}</span>
-
-
-<span class="o">@</span> <span class="n">beartype</span>
-<span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
-    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">TEST_DATA_TYPE</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
-<span class="sd">        path_cache_dir: location of the cache directory</span>
-<span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
-<span class="sd">        key_rules: dictionary of KeyRules too apply for selectively ignoring values</span>
-<span class="sd">        validator: Custom validation function to be run against the test data before any modification</span>
-<span class="sd">        metadata: metadata dictionary to store in the cache file</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        RichAssertionError: if any assertion fails</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">_res</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-
-    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-        <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
-    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
-    <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
-
-    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">_safe_types</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">,</span> <span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[]))</span>
-    <span class="k">if</span> <span class="n">dict_diff</span><span class="p">:</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>
-            <span class="s1">&#39;cached_data&#39;</span><span class="p">:</span> <span class="n">cached_data</span><span class="p">,</span>
-            <span class="s1">&#39;path_cache_file&#39;</span><span class="p">:</span> <span class="n">path_cache_file</span><span class="p">,</span>
-            <span class="s1">&#39;dict_diff&#39;</span><span class="p">:</span> <span class="n">dict_diff</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">error_message</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="  1 "></span><span class="sd">&quot;&quot;&quot;Assertion checks for unit tests.</span>
+<span class="linenos" data-linenos="  2 "></span>
+<span class="linenos" data-linenos="  3 "></span><span class="sd">FYI: Should not require any pytest functionality</span>
+<span class="linenos" data-linenos="  4 "></span>
+<span class="linenos" data-linenos="  5 "></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="  6 "></span>
+<span class="linenos" data-linenos="  7 "></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos" data-linenos="  8 "></span>
+<span class="linenos" data-linenos="  9 "></span><span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
+<span class="linenos" data-linenos=" 10 "></span><span class="kn">from</span> <span class="nn">beartype.typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos" data-linenos=" 11 "></span>
+<span class="linenos" data-linenos=" 12 "></span><span class="kn">from</span> <span class="nn">._check_assert</span> <span class="kn">import</span> <span class="n">differ</span><span class="p">,</span> <span class="n">error_message</span>
+<span class="linenos" data-linenos=" 13 "></span><span class="kn">from</span> <span class="nn">._check_assert.caching</span> <span class="kn">import</span> <span class="n">init_cache</span><span class="p">,</span> <span class="n">load_cached_data</span><span class="p">,</span> <span class="n">write_cache_data</span>
+<span class="linenos" data-linenos=" 14 "></span><span class="kn">from</span> <span class="nn">._check_assert.constants</span> <span class="kn">import</span> <span class="n">TEST_DATA_TYPE</span>
+<span class="linenos" data-linenos=" 15 "></span><span class="kn">from</span> <span class="nn">._check_assert.error_message</span> <span class="kn">import</span> <span class="n">RichAssertionError</span>
+<span class="linenos" data-linenos=" 16 "></span><span class="kn">from</span> <span class="nn">._check_assert.key_rules</span> <span class="kn">import</span> <span class="n">KeyRule</span>
+<span class="linenos" data-linenos=" 17 "></span>
+<span class="linenos" data-linenos=" 18 "></span><span class="n">_WRAP_KEY</span> <span class="o">=</span> <span class="s1">&#39;--wrapped--&#39;</span>
+<span class="linenos" data-linenos=" 19 "></span><span class="sd">&quot;&quot;&quot;Special key to convert lists to dictionaries for dictdiffer.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 20 "></span>
+<span class="linenos" data-linenos=" 21 "></span>
+<span class="linenos" data-linenos=" 22 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 23 "></span><span class="k">def</span> <span class="nf">_wrap_data</span><span class="p">(</span><span class="n">_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TEST_DATA_TYPE</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 24 "></span>    <span class="sd">&quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
+<span class="linenos" data-linenos=" 25 "></span>
+<span class="linenos" data-linenos=" 26 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 27 "></span><span class="sd">        _data: list or dictionary data to potentially wrap</span>
+<span class="linenos" data-linenos=" 28 "></span>
+<span class="linenos" data-linenos=" 29 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 30 "></span><span class="sd">        TEST_DATA_TYPE: wrapped data that is safe for comparison</span>
+<span class="linenos" data-linenos=" 31 "></span>
+<span class="linenos" data-linenos=" 32 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 33 "></span>    <span class="k">return</span> <span class="p">{</span><span class="n">_WRAP_KEY</span><span class="p">:</span> <span class="n">_data</span><span class="p">}</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">_data</span>
+<span class="linenos" data-linenos=" 34 "></span>
+<span class="linenos" data-linenos=" 35 "></span>
+<span class="linenos" data-linenos=" 36 "></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos" data-linenos=" 37 "></span><span class="sd"># FYI: Not needed because the data is already unwrapped in locals of assert_against_cache</span>
+<span class="linenos" data-linenos=" 38 "></span><span class="sd">@beartype</span>
+<span class="linenos" data-linenos=" 39 "></span><span class="sd">def _unwrap_data(_data: TEST_DATA_TYPE) -&gt; Any:</span>
+<span class="linenos" data-linenos=" 40 "></span><span class="sd">    &quot;&quot;&quot;Wrap data for comparison as dictionaries.</span>
+<span class="linenos" data-linenos=" 41 "></span>
+<span class="linenos" data-linenos=" 42 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 43 "></span><span class="sd">        _data: safe data to potentially unwrap</span>
+<span class="linenos" data-linenos=" 44 "></span>
+<span class="linenos" data-linenos=" 45 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 46 "></span><span class="sd">        Any: unwrapped list or dictionary data</span>
+<span class="linenos" data-linenos=" 47 "></span>
+<span class="linenos" data-linenos=" 48 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 49 "></span><span class="sd">    return _data.get(_WRAP_KEY, _data)</span>
+<span class="linenos" data-linenos=" 50 "></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos" data-linenos=" 51 "></span>
+<span class="linenos" data-linenos=" 52 "></span>
+<span class="linenos" data-linenos=" 53 "></span><span class="k">def</span> <span class="nf">_safe_types</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 54 "></span>    <span class="o">*</span><span class="p">,</span> <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">key_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">],</span>
+<span class="linenos" data-linenos=" 55 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TEST_DATA_TYPE</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]]:</span>
+<span class="linenos" data-linenos=" 56 "></span>    <span class="sd">&quot;&quot;&quot;Convert data and key_rules to safe data types for diffing.</span>
+<span class="linenos" data-linenos=" 57 "></span>
+<span class="linenos" data-linenos=" 58 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 59 "></span><span class="sd">        test_data: data to compare</span>
+<span class="linenos" data-linenos=" 60 "></span><span class="sd">        cached_data: data to compare</span>
+<span class="linenos" data-linenos=" 61 "></span><span class="sd">        key_rules: list of key rules to apply</span>
+<span class="linenos" data-linenos=" 62 "></span>
+<span class="linenos" data-linenos=" 63 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 64 "></span><span class="sd">        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules</span>
+<span class="linenos" data-linenos=" 65 "></span>
+<span class="linenos" data-linenos=" 66 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 67 "></span>    <span class="n">wrapped_key_rules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos=" 68 "></span>    <span class="k">for</span> <span class="n">key_rule</span> <span class="ow">in</span> <span class="n">key_rules</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 69 "></span>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cached_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 70 "></span>            <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="p">[</span><span class="n">_WRAP_KEY</span><span class="p">]</span> <span class="o">+</span> <span class="n">key_rule</span><span class="o">.</span><span class="n">pattern</span>
+<span class="linenos" data-linenos=" 71 "></span>        <span class="n">wrapped_key_rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key_rule</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 72 "></span>
+<span class="linenos" data-linenos=" 73 "></span>    <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos=" 74 "></span>        <span class="s1">&#39;old_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">cached_data</span><span class="p">),</span>
+<span class="linenos" data-linenos=" 75 "></span>        <span class="s1">&#39;new_dict&#39;</span><span class="p">:</span> <span class="n">_wrap_data</span><span class="p">(</span><span class="n">test_data</span><span class="p">),</span>
+<span class="linenos" data-linenos=" 76 "></span>        <span class="s1">&#39;key_rules&#39;</span><span class="p">:</span> <span class="n">wrapped_key_rules</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 77 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos=" 78 "></span>
+<span class="linenos" data-linenos=" 79 "></span>
+<span class="linenos" data-linenos=" 80 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 81 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 82 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
+<span class="linenos" data-linenos=" 83 "></span>
+<span class="linenos" data-linenos=" 84 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 85 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
+<span class="linenos" data-linenos=" 86 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
+<span class="linenos" data-linenos=" 87 "></span><span class="sd">        key_rules: dictionary of KeyRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos=" 88 "></span>
+<span class="linenos" data-linenos=" 89 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos=" 90 "></span><span class="sd">        RichAssertionError: if any assertion fails</span>
+<span class="linenos" data-linenos=" 91 "></span>
+<span class="linenos" data-linenos=" 92 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 93 "></span>    <span class="n">safe_tuple</span> <span class="o">=</span> <span class="n">_safe_types</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos=" 94 "></span>    <span class="n">diff_results</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">safe_tuple</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 95 "></span>    <span class="k">if</span> <span class="n">diff_results</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 96 "></span>        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos=" 97 "></span>            <span class="s1">&#39;new_dict&#39;</span><span class="p">:</span> <span class="n">new_dict</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 98 "></span>            <span class="s1">&#39;old_dict&#39;</span><span class="p">:</span> <span class="n">old_dict</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 99 "></span>            <span class="s1">&#39;diff_results&#39;</span><span class="p">:</span> <span class="n">diff_results</span><span class="p">,</span>
+<span class="linenos" data-linenos="100 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="101 "></span>        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;For test data: </span><span class="si">{</span><span class="n">new_dict</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="102 "></span><span class="s2">Found differences with: </span><span class="si">{</span><span class="n">old_dict</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="103 "></span><span class="s2">Differences: </span><span class="si">{</span><span class="n">diff_results</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="104 "></span><span class="s2">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="105 "></span>        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos" data-linenos="106 "></span>
+<span class="linenos" data-linenos="107 "></span>
+<span class="linenos" data-linenos="108 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="109 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="110 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos="111 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos="112 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="113 "></span>    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="114 "></span>    <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">TEST_DATA_TYPE</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="115 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="116 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="117 "></span>    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
+<span class="linenos" data-linenos="118 "></span>
+<span class="linenos" data-linenos="119 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="120 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
+<span class="linenos" data-linenos="121 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
+<span class="linenos" data-linenos="122 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
+<span class="linenos" data-linenos="123 "></span><span class="sd">        key_rules: dictionary of KeyRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="124 "></span><span class="sd">        validator: Custom validation function to be run against the test data before any modification</span>
+<span class="linenos" data-linenos="125 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
+<span class="linenos" data-linenos="126 "></span>
+<span class="linenos" data-linenos="127 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="128 "></span><span class="sd">        RichAssertionError: if any assertion fails</span>
+<span class="linenos" data-linenos="129 "></span>
+<span class="linenos" data-linenos="130 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="131 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">_res</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos" data-linenos="132 "></span>    <span class="n">validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="133 "></span>
+<span class="linenos" data-linenos="134 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
+<span class="linenos" data-linenos="135 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+<span class="linenos" data-linenos="136 "></span>        <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
+<span class="linenos" data-linenos="137 "></span>    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="138 "></span>    <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="139 "></span>
+<span class="linenos" data-linenos="140 "></span>    <span class="n">safe_tuple</span> <span class="o">=</span> <span class="n">_safe_types</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="141 "></span>    <span class="n">diff_results</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">safe_tuple</span><span class="p">)</span>
+<span class="linenos" data-linenos="142 "></span>    <span class="k">if</span> <span class="n">diff_results</span><span class="p">:</span>
+<span class="linenos" data-linenos="143 "></span>        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="144 "></span>            <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>
+<span class="linenos" data-linenos="145 "></span>            <span class="s1">&#39;cached_data&#39;</span><span class="p">:</span> <span class="n">cached_data</span><span class="p">,</span>
+<span class="linenos" data-linenos="146 "></span>            <span class="s1">&#39;path_cache_file&#39;</span><span class="p">:</span> <span class="n">path_cache_file</span><span class="p">,</span>
+<span class="linenos" data-linenos="147 "></span>            <span class="s1">&#39;diff_results&#39;</span><span class="p">:</span> <span class="n">diff_results</span><span class="p">,</span>
+<span class="linenos" data-linenos="148 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="149 "></span>        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">error_message</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="assert_against_cache">assert_against_cache<a class="headerlink" href="#assert_against_cache" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
-    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">pytest_cache_assert</span><span class="o">.</span><span class="n">_check_assert</span><span class="o">.</span><span class="n">key_rules</span><span class="o">.</span><span class="n">KeyRule</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">validator</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">pytest_cache_assert</span><span class="o">.</span><span class="n">_check_assert</span><span class="o">.</span><span class="n">key_rules</span><span class="o">.</span><span class="n">KeyRule</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">validator</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="8 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Core logic for pytest_cache_assert to handle caching and assertion-checking.</p>
 <p><strong>Parameters:</strong></p>
@@ -832,7 +949,7 @@
 </tr>
 <tr>
 <td>key_rules</td>
-<td>dictionary of KeyRules too apply for selectively ignoring values</td>
+<td>dictionary of KeyRules to apply when selectively ignoring differences</td>
 </tr>
 <tr>
 <td>validator</td>
@@ -859,54 +976,143 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="highlight"><pre><span></span><code><span class="o">@</span> <span class="n">beartype</span>
-<span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
-    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">TEST_DATA_TYPE</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
-<span class="sd">        path_cache_dir: location of the cache directory</span>
-<span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
-<span class="sd">        key_rules: dictionary of KeyRules too apply for selectively ignoring values</span>
-<span class="sd">        validator: Custom validation function to be run against the test data before any modification</span>
-<span class="sd">        metadata: metadata dictionary to store in the cache file</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        RichAssertionError: if any assertion fails</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">_res</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-
-    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-        <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
-    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
-    <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
-
-    <span class="n">dict_diff</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">_safe_types</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">,</span> <span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[]))</span>
-    <span class="k">if</span> <span class="n">dict_diff</span><span class="p">:</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>
-            <span class="s1">&#39;cached_data&#39;</span><span class="p">:</span> <span class="n">cached_data</span><span class="p">,</span>
-            <span class="s1">&#39;path_cache_file&#39;</span><span class="p">:</span> <span class="n">path_cache_file</span><span class="p">,</span>
-            <span class="s1">&#39;dict_diff&#39;</span><span class="p">:</span> <span class="n">dict_diff</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">error_message</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">TEST_DATA_TYPE</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="13 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
+<span class="linenos" data-linenos="14 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
+<span class="linenos" data-linenos="15 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
+<span class="linenos" data-linenos="16 "></span><span class="sd">        key_rules: dictionary of KeyRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="17 "></span><span class="sd">        validator: Custom validation function to be run against the test data before any modification</span>
+<span class="linenos" data-linenos="18 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="21 "></span><span class="sd">        RichAssertionError: if any assertion fails</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">_res</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path_cache_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+<span class="linenos" data-linenos="29 "></span>        <span class="n">init_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">)</span>
+<span class="linenos" data-linenos="30 "></span>    <span class="n">write_cache_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="31 "></span>    <span class="n">cached_data</span> <span class="o">=</span> <span class="n">load_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span>    <span class="n">safe_tuple</span> <span class="o">=</span> <span class="n">_safe_types</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="34 "></span>    <span class="n">diff_results</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">safe_tuple</span><span class="p">)</span>
+<span class="linenos" data-linenos="35 "></span>    <span class="k">if</span> <span class="n">diff_results</span><span class="p">:</span>
+<span class="linenos" data-linenos="36 "></span>        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="37 "></span>            <span class="s1">&#39;test_data&#39;</span><span class="p">:</span> <span class="n">test_data</span><span class="p">,</span>
+<span class="linenos" data-linenos="38 "></span>            <span class="s1">&#39;cached_data&#39;</span><span class="p">:</span> <span class="n">cached_data</span><span class="p">,</span>
+<span class="linenos" data-linenos="39 "></span>            <span class="s1">&#39;path_cache_file&#39;</span><span class="p">:</span> <span class="n">path_cache_file</span><span class="p">,</span>
+<span class="linenos" data-linenos="40 "></span>            <span class="s1">&#39;diff_results&#39;</span><span class="p">:</span> <span class="n">diff_results</span><span class="p">,</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="42 "></span>        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">error_message</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 </details>
-                
-              
-              
-                
+<h3 id="assert_against_dict">assert_against_dict<a class="headerlink" href="#assert_against_dict" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="n">old_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">new_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">key_rules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">pytest_cache_assert</span><span class="o">.</span><span class="n">_check_assert</span><span class="o">.</span><span class="n">key_rules</span><span class="o">.</span><span class="n">KeyRule</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="5 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Utilize custom DictDiffer logic to compare in-memory dictionaries.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>old_dict</td>
+<td>old dictionary (typically cached one)</td>
+</tr>
+<tr>
+<td>new_dict</td>
+<td>new dictionary (typically test data)</td>
+</tr>
+<tr>
+<td>key_rules</td>
+<td>dictionary of KeyRules to apply when selectively ignoring differences</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RichAssertionError</td>
+<td>if any assertion fails</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">key_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">KeyRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="sd">        key_rules: dictionary of KeyRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="11 "></span><span class="sd">        RichAssertionError: if any assertion fails</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">safe_tuple</span> <span class="o">=</span> <span class="n">_safe_types</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">key_rules</span><span class="o">=</span><span class="n">key_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">diff_results</span> <span class="o">=</span> <span class="n">differ</span><span class="o">.</span><span class="n">diff_with_rules</span><span class="p">(</span><span class="o">**</span><span class="n">safe_tuple</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="k">if</span> <span class="n">diff_results</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="18 "></span>            <span class="s1">&#39;new_dict&#39;</span><span class="p">:</span> <span class="n">new_dict</span><span class="p">,</span>
+<span class="linenos" data-linenos="19 "></span>            <span class="s1">&#39;old_dict&#39;</span><span class="p">:</span> <span class="n">old_dict</span><span class="p">,</span>
+<span class="linenos" data-linenos="20 "></span>            <span class="s1">&#39;diff_results&#39;</span><span class="p">:</span> <span class="n">diff_results</span><span class="p">,</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;For test data: </span><span class="si">{</span><span class="n">new_dict</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="23 "></span><span class="s2">Found differences with: </span><span class="si">{</span><span class="n">old_dict</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="24 "></span><span class="s2">Differences: </span><span class="si">{</span><span class="n">diff_results</span><span class="si">}</span><span class="s2"></span>
+<span class="linenos" data-linenos="25 "></span><span class="s2">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
 
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 31, 2021</span>
+      
+        <br>
+        Created:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 31, 2021</span>
+      
+    
+  </small>
+</div>
 
               
             </article>
@@ -915,8 +1121,7 @@
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
@@ -955,16 +1160,15 @@
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        
-          Made with
-          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-            Material for MkDocs
-          </a>
-        
-        
-      </div>
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -974,10 +1178,14 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.b1047164.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../../_javascript/tables.js"></script>
       
     
   </body>

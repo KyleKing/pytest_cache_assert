@@ -77,7 +77,7 @@ def _safe_types(
     }
 
 
-@ beartype
+@beartype
 def assert_against_cache(
     test_data: Any,
     path_cache_dir: Path,

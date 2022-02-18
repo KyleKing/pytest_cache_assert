@@ -2,6 +2,17 @@
 
 ### Fix
 
+- argument order issues in main
+- datetime comparison logic
+
+### Feat
+
+- add support for comparing date-times
+
+## 2021.1.0.0 (2021-11-02)
+
+### Fix
+
 - correctly implement an optional fixture
 - make config fixture optional
 

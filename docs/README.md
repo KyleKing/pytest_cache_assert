@@ -24,6 +24,7 @@ This project was heavily inspired by the excellent [pytest-recording](https://gi
     - `pytest-snapshot` is much more configurable, has many more users, and is a better name
         - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
         - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
+- [dirty-equals](https://github.com/samuelcolvin/dirty-equals): broadly check values (i.e. `assert result == {'counter': IsPositiveInt, ...}`, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review
 
 ### Basic Example
 

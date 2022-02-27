@@ -51,14 +51,15 @@ poetry run doit run lock document deploy_docs publish
 |:-----------------------------------------------------|-------------:|----------:|-----------:|:-----------|
 | `pytest_cache_assert/__init__.py`                    |            4 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/caching.py`       |           30 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/caching.py`       |           31 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/constants.py`     |           23 |         1 |          0 | 95.7%      |
-| `pytest_cache_assert/_check_assert/differ.py`        |          106 |        10 |          0 | 90.6%      |
+| `pytest_cache_assert/_check_assert/differ.py`        |          114 |        10 |          0 | 91.2%      |
 | `pytest_cache_assert/_check_assert/error_message.py` |           10 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/key_rules.py`     |           61 |         3 |          0 | 95.1%      |
+| `pytest_cache_assert/_check_assert/serializer.py`    |           25 |         6 |          0 | 76.0%      |
 | `pytest_cache_assert/main.py`                        |           41 |         7 |          0 | 82.9%      |
-| `pytest_cache_assert/plugin.py`                      |           42 |         2 |          0 | 95.2%      |
-| **Totals**                                           |          317 |        23 |          0 | 92.7%      |
+| `pytest_cache_assert/plugin.py`                      |           35 |         2 |          0 | 94.3%      |
+| **Totals**                                           |          344 |        29 |          0 | 91.6%      |
 
-Generated on: 2022-02-26T23:06:03.775001
+Generated on: 2022-02-27T13:30:59.560829
 <!-- {cte} -->

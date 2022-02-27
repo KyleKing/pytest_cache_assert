@@ -17,7 +17,6 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
         assert_against_cache({'result': True}, **kwargs)
 
 
-# FIXME: Convert to hypothesis
 @pytest.mark.parametrize(
     'test_data',
     [

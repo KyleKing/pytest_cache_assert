@@ -103,7 +103,7 @@ def test_raw_diff(old_dict, new_dict, expected, help_text):
     try:
         assert result == expected
     except Exception as exc:
-        raise AssertionError(f'Failed {help_text}')
+        raise AssertionError(f'Failed {help_text}') from exc
 
 
 _NOW = datetime.utcnow()
@@ -173,10 +173,9 @@ def test_diff_with_rules(old_dict, new_dict, key_rules, help_text):
     """Test that the key rules work in various scenarios."""
     result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=key_rules)
 
-
     try:
         assert result == []
         errors = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=[])
         assert len(errors) == 1
     except Exception as exc:
-        raise AssertionError(f'Failed {help_text}')
+        raise AssertionError(f'Failed {help_text}') from exc

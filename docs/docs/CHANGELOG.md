@@ -1,5 +1,10 @@
 ## Unreleased
 
+### Fix
+
+- implement serializer before diffing
+- failing tests and run doit
+
 ### Feat
 
 - WIP serializer to support functions

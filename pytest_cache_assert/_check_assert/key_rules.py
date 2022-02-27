@@ -5,8 +5,8 @@ from enum import Enum
 from functools import partial
 from uuid import UUID
 
-from attrs import mutable, field
 import pendulum
+from attrs import field, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Union

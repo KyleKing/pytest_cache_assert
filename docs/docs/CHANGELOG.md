@@ -2,7 +2,12 @@
 
 ### Feat
 
+- WIP serializer to support functions
 - copier update. Add Github Actions
+
+### Refactor
+
+- use next generation attrs syntax
 
 ## 1.1.1 (2022-02-18)
 

@@ -1,7 +1,7 @@
 """Dictionary Differ."""
 
 import dictdiffer
-from attrs import frozen, mutable, field
+from attrs import field, frozen, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, List, Optional, Union
@@ -18,7 +18,7 @@ https://github.com/inveniosoftware/dictdiffer/blob/b32e4b0d44b81a6de4cffd7920122
 
 
 @beartype
-def _validate_diff_type(_instance: Any, _attribute: attr.Attribute, diff_type: Any) -> None:
+def _validate_diff_type(_instance: Any, _attribute: attrs.Attribute, diff_type: Any) -> None:
     """Validate diff_type.
 
     Args:

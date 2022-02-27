@@ -21,9 +21,9 @@ This project was heavily inspired by the excellent [pytest-recording](https://gi
 - [pytest-recording](https://github.com/kiwicom/pytest-recording): this is the package I use and highly recommend for recording and replaying **external** API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github's API called from a test suite)
 - [pytest-snapshot](https://pypi.org/project/pytest-snapshot/): I only found this package after already releasing a 1.0.0 version of `pytest_assert_cache`. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info
 - [snapshottest](https://github.com/syrusakbary/snapshottest): This was another find after releasing a 1.0.0 version and would probably be **a good alterantive for most users**
-    - `pytest-snapshot` is much more configurable, has many more users, and is a better name
-        - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
-        - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
+  - `pytest-snapshot` is much more configurable, has many more users, and is a better name
+    - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
+    - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
 - [dirty-equals](https://github.com/samuelcolvin/dirty-equals): broadly check values (i.e. `assert result == {'counter': IsPositiveInt, ...}`, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review
 
 ### Basic Example
@@ -220,17 +220,17 @@ For release history, see the [./docs/CHANGELOG.md](./docs/CHANGELOG.md)
 These are ideas for future options that are not currently implemented, but could be if there is enough interest:
 
 - PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development
-    - The other edge case where a `mode` might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a `rewrite_metadata` setting would be useful with options: `Always`, `Once` (Default), or `Never`
-    - Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)
-        - FIXME: Don't store variable datetime in the func_args!
+  - The other edge case where a `mode` might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a `rewrite_metadata` setting would be useful with options: `Always`, `Once` (Default), or `Never`
+  - Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)
+    - FIXME: Don't store variable datetime in the func_args!
 - PLANNED: [Provide CLI arguments like `pytest-recording`](https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70) (`request.config.getoption("--record-mode") or "none"`) for one-time changes to configuration
 - PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
 
 ### Other Planned Features
 
 - PLANNED: Consider inline corrections to cached data like this [feature from Jest](https://jestjs.io/docs/snapshot-testing#inline-snapshots)
-    - Show the diff between the cached data and the test data? Would need to look for a package that can show the comparison between two dictionaries in terminal
-        - [ydiff](https://github.com/ymattw/ydiff) might be a great choice, but I would need to support git (and ask if anyone needs SVN support) to write the change and compare. Probably better to more directly ask if the user wants the test case (shown by name and maybe a brief list of changes) to be replaced or not
+  - Show the diff between the cached data and the test data? Would need to look for a package that can show the comparison between two dictionaries in terminal
+    - [ydiff](https://github.com/ymattw/ydiff) might be a great choice, but I would need to support git (and ask if anyone needs SVN support) to write the change and compare. Probably better to more directly ask if the user wants the test case (shown by name and maybe a brief list of changes) to be replaced or not
 - PLANNED: [Add tips from Jest on best practices](https://jestjs.io/docs/snapshot-testing#best-practices) -- treat snapshots as code, etc.
 
 ## Contributing

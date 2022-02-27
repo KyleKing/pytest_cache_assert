@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Feat
+
+- introduce internally configurable punq
+
 ## 1.2.1 (2022-02-27)
 
 ### Fix

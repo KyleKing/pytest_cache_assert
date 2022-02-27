@@ -174,7 +174,7 @@ from cerberus.schema import SchemaError
 
 
 @beartype
-def cerberus_validator(test_data: TEST_DATA_TYPE) -> None:
+def cerberus_validator(test_data) -> None:
     """Cerberus custom validator example."""
     validator = Validator({'result': {'type': 'int'}})
     assert validator.validate(test_data)
@@ -194,19 +194,19 @@ For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert
 
 ## Global Configuration Options
 
-- `DEF_CACHE_DIR_KEY`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
+- See `AssertConfig` in `plugin.py` for configuration options and more information
+  - `cache_dir_rel_path`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
+  - `extra_ser_rules`: additional serialization rules that can be used generically on arbitrary data
 
 ```py
 import pytest
 
-from pytest_cache_assert import DEF_CACHE_DIR_KEY
+from pytest_cache_assert.plugin import AssertConfig
 
 
 @pytest.fixture(scope='module')
 def cache_assert_config():
-    return {
-        DEF_CACHE_DIR_KEY: 'custom/cache/dir',
-    }
+    return AssertConfig(cache_dir_rel_path='custom/cache/dir')
 ```
 
 ## Roadmap

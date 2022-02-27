@@ -16,7 +16,7 @@ class Wildcards(Enum):  # noqa: H601
     """Apply to all keys at or below this wildcard."""
 
     LIST = 4
-    """Pseudokey for a list containing dictionaries."""
+    """Pseudo-key for a list containing dictionaries."""
 
     def __str__(self) -> str:
         """Return string representation for sorting.
@@ -29,7 +29,11 @@ class Wildcards(Enum):  # noqa: H601
 
 
 class TrueNull:  # noqa: H601
-    """Indicate that the old or new value does not exist."""
+    """Indicate that the old or new value does not exist.
+
+    Note: `attrs.NOTHING` is a singleton and can't be used for type annotations
+
+    """
 
     ...
 
@@ -51,9 +55,6 @@ _DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime]
 
 DIFF_TYPES = Union[_DIFF_SINGLE_TYPES, Type[TrueNull], Iterable[_DIFF_SINGLE_TYPES]]
 """Possible Old or New difference type."""
-
-DEF_CACHE_DIR_KEY = 'cache_dir_rel_path'
-"""Default `pytest_assert_cache` directory key for `cache_assert_config` fixture."""
 
 DEF_CACHE_DIR_NAME = 'assert-cache'
 """Default `pytest_assert_cache` directory name."""

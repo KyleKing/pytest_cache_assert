@@ -37,10 +37,10 @@ def coerce_if_known_type(value: Any) -> Any:
     except punq.MissingDependencyError:
         ...
     rules.extend([
-        [Callable, replace_memory_address],
-        [(Path, PurePath), Path.as_posix],
-        [Pattern, str],
-        [complex, lambda _o: [_o.real, _o.imag]],
+        (Callable, replace_memory_address),
+        ((Path, PurePath), Path.as_posix),
+        (Pattern, str),
+        (complex, lambda _o: [_o.real, _o.imag]),
     ])
     for _types, func in rules:
         if isinstance(value, _types):

@@ -6,19 +6,36 @@ from pathlib import Path
 
 import pytest
 from _pytest.fixtures import FixtureRequest
+from attrs import field, frozen
+from attrs_strict import type_validator
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict
+from beartype.typing import Any, Callable, List, Optional, Tuple
 
 from . import main
-from ._check_assert.constants import DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME
+from ._check_assert.config import CacheAssertContainerKeys, cache_assert_container
+from ._check_assert.constants import DEF_CACHE_DIR_NAME
 from ._check_assert.serializer import recursive_serialize
 
 
+@frozen(kw_only=True)
+class AssertConfig:
+    """User configuration data structure."""
+
+    cache_dir_rel_path: str = field(default=DEF_CACHE_DIR_NAME, validator=type_validator())
+    """String relative directory to `tests/`. Default resolves to `tests/assert-cache/`."""
+
+    extra_ser_rules: List[Tuple[Any, Callable[[Any], Any]]] = field(factory=list, validator=type_validator())
+    """Additional serialization rules. Example: `[(Enum, lambda _e: _e.name), (doit.tools.Interactive, str)]`."""
+
+    def __attrs_post_init__(self) -> None:
+        """Register relevant configuration options."""
+        cache_assert_container.register(CacheAssertContainerKeys.SER_RULES, instance=self.extra_ser_rules)
+
+
 @pytest.fixture()
-def cache_assert_config() -> Dict[str, Any]:
-    """Specify a custom cache directory."""
-    # FIXME: Use an attrs data model for cache_assert_config! Add feature for RULES override
-    return {}  # noqa: DAR201
+def cache_assert_config() -> AssertConfig:
+    """Configure pytest_cache_assert using `AssertConfig`."""
+    return AssertConfig()
 
 
 @beartype
@@ -44,13 +61,13 @@ def _calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> dict:
 @beartype
 def assert_against_cache(
     request: FixtureRequest,
-    cache_assert_config: Dict[str, Any],
+    cache_assert_config: Optional[AssertConfig],
 ) -> Callable[[Any], None]:
     """Return main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
-        cache_assert_config: optional pytest fixture for custom user configuration
+        cache_assert_config: pytest fixture that returns AssertConfig for user configuration
 
     Returns:
         Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
@@ -59,7 +76,7 @@ def assert_against_cache(
         RuntimeError: if the test directory cannot be determined
 
     """
-    cache_assert_config = cache_assert_config or {}
+    cache_assert_config = cache_assert_config or AssertConfig()
 
     test_dir = None
     for sub_dir in ['tests', 'test']:
@@ -70,8 +87,7 @@ def assert_against_cache(
         raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
 
     # Read user settings
-    rel_dir = cache_assert_config.get(DEF_CACHE_DIR_KEY, DEF_CACHE_DIR_NAME)
-    path_cache_dir = test_dir / rel_dir
+    path_cache_dir = test_dir / cache_assert_config.cache_dir_rel_path
 
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)

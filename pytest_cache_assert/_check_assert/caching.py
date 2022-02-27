@@ -4,9 +4,10 @@ import json
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import List
+from beartype.typing import Any, Dict, List
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
+from .serializer import CacheAssertSerializer
 
 
 @beartype
@@ -22,7 +23,7 @@ def init_cache(path_cache_dir: Path) -> None:
 
 
 @beartype
-def _merge_metadata(new_metadata: dict, cached_meta_list: List[dict]) -> List[dict]:
+def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Merge metadata for caching. Filter duplicates.
 
     Args:
@@ -34,12 +35,12 @@ def _merge_metadata(new_metadata: dict, cached_meta_list: List[dict]) -> List[di
 
     """
     all_meta = [new_metadata, *cached_meta_list]
-    unique_meta = {json.dumps(_m, sort_keys=True) for _m in all_meta}
+    unique_meta = {json.dumps(_m, sort_keys=True, cls=CacheAssertSerializer) for _m in all_meta}
     return [*map(json.loads, sorted(unique_meta))]
 
 
 @beartype
-def write_cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA_TYPE) -> None:
+def write_cache_data(path_cache_file: Path, metadata: Dict[str, Any], test_data: TEST_DATA_TYPE) -> None:
     """Cache the specified data.
 
     Args:
@@ -58,7 +59,7 @@ def write_cache_data(path_cache_file: Path, metadata: dict, test_data: TEST_DATA
 
     cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
     path_cache_file.parent.mkdir(exist_ok=True, parents=True)
-    _json = json.dumps(cache_dict, sort_keys=True, indent=2, separators=(',', ': '))
+    _json = json.dumps(cache_dict, sort_keys=True, indent=2, separators=(',', ': '), cls=CacheAssertSerializer)
     path_cache_file.write_text(_json.strip() + '\n')
 
 

@@ -1,13 +1,7 @@
 """Test plugin.py."""
 
-import json
-from functools import partial
-from uuid import UUID
-
-import pendulum
 import pytest
-
-from pytest_cache_assert.plugin import _serialize
+from beartype import beartype
 
 
 def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
@@ -25,24 +19,12 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
 
 # FIXME: Convert to hypothesis
 @pytest.mark.parametrize(
-    ('value', 'expected'), [
-        ('20211101', '20211101'),
-        (pendulum.parse('20211101'), '2021-11-01T00:00:00+00:00'),
-        ({'date': pendulum.parse('20211101')}, {'date': '2021-11-01T00:00:00+00:00'}),
-        (
-            {'nested': {'uuid1': UUID(int=1), 'uuid2': UUID(int=2)}},
-            {'nested': {'uuid1': str(UUID(int=1)), 'uuid2': str(UUID(int=2))}},
-        ),
-        (UUID, "<class 'uuid.UUID'>"),
-        (pendulum.parse, '<function parse(..)>'),
-        (
-            {'partial': partial(json.dumps, sort_keys=True)},
-            {'partial': 'functools.partial(<function dumps(..)>, sort_keys=True)'},
-        ),
+    'test_data',
+    [
+        {'decorator': beartype},
+        {'func': test_assert_against_cache_failure},
     ],
 )
-def test_serialize(value, expected):
-    """Test serialization."""
-    result = _serialize(value)
-
-    assert result == expected
+def test_assert_against_cache(test_data, assert_against_cache):
+    """Test edge cases for assert_against_cache."""
+    assert_against_cache(test_data)

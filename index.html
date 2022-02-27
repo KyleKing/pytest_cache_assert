@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.2">
     
     
       
@@ -33,7 +33,7 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -905,12 +905,10 @@
 <ul>
 <li><a href="https://github.com/kiwicom/pytest-recording">pytest-recording</a>: this is the package I use and highly recommend for recording and replaying <strong>external</strong> API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github&rsquo;s API called from a test suite)</li>
 <li><a href="https://pypi.org/project/pytest-snapshot/">pytest-snapshot</a>: I only found this package after already releasing a 1.0.0 version of <code>pytest_assert_cache</code>. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info</li>
-<li><a href="https://github.com/syrusakbary/snapshottest">snapshottest</a>: This was another find after releasing a 1.0.0 version and would probably be <strong>a good alterantive for most users</strong><ul>
+<li><a href="https://github.com/syrusakbary/snapshottest">snapshottest</a>: This was another find after releasing a 1.0.0 version and would probably be <strong>a good alterantive for most users</strong></li>
 <li><code>pytest-snapshot</code> is much more configurable, has many more users, and is a better name<ul>
 <li>I really like the ability to quickly regenerate the cached files with <a href="https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py">&ndash;snapshot-update</a></li>
 <li><a href="https://github.com/syrusakbary/snapshottest/issues/21">There is some interesting discussion on how best to handle fields that change between tests</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="https://github.com/samuelcolvin/dirty-equals">dirty-equals</a>: broadly check values (i.e. <code>assert result == {'counter': IsPositiveInt, ...}</code>, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review</li>
@@ -1083,12 +1081,10 @@
 <h3 id="planned-global-configuration-options">Planned Global Configuration Options<a class="headerlink" href="#planned-global-configuration-options" title="Permanent link">⚓︎</a></h3>
 <p>These are ideas for future options that are not currently implemented, but could be if there is enough interest:</p>
 <ul>
-<li>PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development<ul>
+<li>PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development</li>
 <li>The other edge case where a <code>mode</code> might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a <code>rewrite_metadata</code> setting would be useful with options: <code>Always</code>, <code>Once</code> (Default), or <code>Never</code></li>
 <li>Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)<ul>
 <li>FIXME: Don&rsquo;t store variable datetime in the func_args!</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>PLANNED: <a href="https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70">Provide CLI arguments like <code>pytest-recording</code></a> (<code>request.config.getoption("--record-mode") or "none"</code>) for one-time changes to configuration</li>
@@ -1096,11 +1092,9 @@
 </ul>
 <h3 id="other-planned-features">Other Planned Features<a class="headerlink" href="#other-planned-features" title="Permanent link">⚓︎</a></h3>
 <ul>
-<li>PLANNED: Consider inline corrections to cached data like this <a href="https://jestjs.io/docs/snapshot-testing#inline-snapshots">feature from Jest</a><ul>
+<li>PLANNED: Consider inline corrections to cached data like this <a href="https://jestjs.io/docs/snapshot-testing#inline-snapshots">feature from Jest</a></li>
 <li>Show the diff between the cached data and the test data? Would need to look for a package that can show the comparison between two dictionaries in terminal<ul>
 <li><a href="https://github.com/ymattw/ydiff">ydiff</a> might be a great choice, but I would need to support git (and ask if anyone needs SVN support) to write the change and compare. Probably better to more directly ask if the user wants the test case (shown by name and maybe a brief list of changes) to be replaced or not</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>PLANNED: <a href="https://jestjs.io/docs/snapshot-testing#best-practices">Add tips from Jest on best practices</a> &ndash; treat snapshots as code, etc.</li>
@@ -1122,7 +1116,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 26, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 27, 2022</span>
       
         <br>
         Created:
@@ -1184,7 +1178,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.8aa65030.min.js"></script>
+      <script src="assets/javascripts/bundle.9f3ca3d1.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       

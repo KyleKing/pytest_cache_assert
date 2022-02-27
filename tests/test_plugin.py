@@ -1,6 +1,7 @@
 """Test plugin.py."""
 
 from pathlib import Path, PureWindowsPath
+
 import pytest
 from beartype import beartype
 

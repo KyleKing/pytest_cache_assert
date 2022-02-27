@@ -2,9 +2,9 @@
 
 import inspect
 import re
-from pathlib import Path, PurePath
 from functools import partial
 from json import JSONEncoder
+from pathlib import Path, PurePath
 
 from beartype import beartype
 from beartype.typing import Any, Dict, Union

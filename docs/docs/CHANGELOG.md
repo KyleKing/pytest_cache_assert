@@ -2,6 +2,12 @@
 
 ### Fix
 
+- support Paths
+
+## 1.2.0 (2022-02-27)
+
+### Fix
+
 - implement serializer before diffing
 - failing tests and run doit
 

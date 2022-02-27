@@ -1721,7 +1721,7 @@ six = ">=1.15.0,<2.0.0"
 name = "punq"
 version = "0.6.2"
 description = "An IOC Container for Python 3.6+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.2,<4.0.0"
 
@@ -2526,7 +2526,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "1d63df89fce57cce6618c0426a74f35b904836a9b7316f180d31614b0f71be47"
+content-hash = "436a04050f1f3540ecb8f7bd2aef10049f01c1082bb8a31080d3acc46b950de1"
 
 [metadata.files]
 absolufy-imports = [

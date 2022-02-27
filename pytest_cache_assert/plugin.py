@@ -17,6 +17,7 @@ from ._check_assert.serializer import recursive_serialize
 @pytest.fixture()
 def cache_assert_config() -> Dict[str, Any]:
     """Specify a custom cache directory."""
+    # FIXME: Use an attrs data model for cache_assert_config! Add feature for RULES override
     return {}  # noqa: DAR201
 
 
@@ -45,7 +46,7 @@ def assert_against_cache(
     request: FixtureRequest,
     cache_assert_config: Dict[str, Any],
 ) -> Callable[[Any], None]:
-    """Yield main.assert_against_cache with pytest-specific arguments already specified.
+    """Return main.assert_against_cache with pytest-specific arguments already specified.
 
     Args:
         request: pytest fixture used to identify the test directory
@@ -60,6 +61,7 @@ def assert_against_cache(
     """
     cache_assert_config = cache_assert_config or {}
 
+    test_dir = None
     for sub_dir in ['tests', 'test']:
         test_dir = request.config.rootpath / sub_dir
         if test_dir.is_dir():

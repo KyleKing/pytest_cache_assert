@@ -1,16 +1,23 @@
 """Provide additional encoding functionality to check_assert."""
 
-import inspect
 import re
-from functools import partial
 from json import JSONEncoder
 from pathlib import Path, PurePath
 
+import punq
 from beartype import beartype
-from beartype.typing import Any, Dict, Union
+from beartype.typing import Any, Callable, Dict, Pattern, Union
+
+from .config import CacheAssertContainerKeys, cache_assert_container
 
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 """Regex for matching the hex memory address in a function signature."""
+
+
+@beartype
+def replace_memory_address(obj: Callable) -> str:
+    # Remove hex memory address from partial function signature
+    return _RE_MEMORY_ADDRESS.sub('(..)>', str(obj))  # noqa: PD005
 
 
 @beartype
@@ -24,12 +31,20 @@ def coerce_if_known_type(value: Any) -> Any:
         Any: possibly unmodified data
 
     """
-    if inspect.isfunction(value) or isinstance(value, partial):
-        # Remove hex memory address from partial function signature
-        return _RE_MEMORY_ADDRESS.sub('(..)>', str(value))  # noqa: PD005
-
-    if isinstance(value, (Path, PurePath)):
-        return value.as_posix()
+    rules = []
+    try:
+        rules = cache_assert_container.resolve(CacheAssertContainerKeys.SER_RULES)
+    except punq.MissingDependencyError:
+        ...
+    rules.extend([
+        [Callable, replace_memory_address],
+        [(Path, PurePath), Path.as_posix],
+        [Pattern, str],
+        [complex, lambda _o: [_o.real, _o.imag]],
+    ])
+    for _types, func in rules:
+        if isinstance(value, _types):
+            return func(value)
 
     return value
 
@@ -60,12 +75,5 @@ class CacheAssertSerializer(JSONEncoder):
 
     def default(self, obj: Any) -> Any:
         """Extend default encoder."""
-        encodable_types = {
-            complex: lambda _o: [_o.real, _o.imag],
-        }
-        for _type, converter in encodable_types.items():
-            if isinstance(obj, _type):
-                return converter(obj)
         obj = coerce_if_known_type(obj)
-
         return obj if isinstance(obj, str) else JSONEncoder.default(self, obj)

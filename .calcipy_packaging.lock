@@ -119,13 +119,21 @@
         "name": "better-exceptions",
         "version": "0.3.3"
     },
-    "calcipy": {
-        "datetime": "2022-02-27T15:37:36.353342Z",
+    "black": {
+        "datetime": "2022-01-29T20:39:31.168389Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-02-27T15:37:36.353342Z",
-        "latest_version": "0.14.0",
+        "latest_datetime": "2022-01-29T20:39:31.168389Z",
+        "latest_version": "22.1.0",
+        "name": "black",
+        "version": "22.1.0"
+    },
+    "calcipy": {
+        "datetime": "2022-02-27T18:50:08.771080Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2022-02-27T18:50:08.771080Z",
+        "latest_version": "0.14.1",
         "name": "calcipy",
-        "version": "0.14.0"
+        "version": "0.14.1"
     },
     "cement": {
         "datetime": "2021-12-18T18:27:13.099741Z",
@@ -230,6 +238,14 @@
         "latest_version": "2.21.2",
         "name": "commitizen",
         "version": "2.21.2"
+    },
+    "commonmark": {
+        "datetime": "2019-10-04T15:37:37.674968Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2019-10-04T15:37:37.674968Z",
+        "latest_version": "0.9.1",
+        "name": "commonmark",
+        "version": "0.9.1"
     },
     "coverage": {
         "datetime": "2022-02-20T22:58:20.435301Z",
@@ -1350,6 +1366,14 @@
         "latest_version": "0.18.0",
         "name": "returns",
         "version": "0.18.0"
+    },
+    "rich": {
+        "datetime": "2022-02-08T20:12:21.830518Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2022-02-08T20:12:21.830518Z",
+        "latest_version": "11.2.0",
+        "name": "rich",
+        "version": "11.2.0"
     },
     "six": {
         "datetime": "2021-05-05T14:18:17.237677Z",

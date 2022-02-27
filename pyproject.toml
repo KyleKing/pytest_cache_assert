@@ -1,5 +1,5 @@
 [build-system]
-requires = ["poetry-core>=1.2.1"]
+requires = ["poetry-core>=1.0.7"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
@@ -61,6 +61,7 @@ attrs-strict = ">=0.2"
 beartype = ">=0.10.0"
 dictdiffer = ">=0.9"   # Alternative: https://pypi.org/project/deepdiff/
 pendulum = ">=2.1.2"
+punq = ">=0.6.2"
 pytest = ">=5.0.0"
 
 [tool.poetry.dev-dependencies]

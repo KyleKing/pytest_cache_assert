@@ -1,13 +1,14 @@
 """Dictionary Differ."""
 
 import dictdiffer
-from attrs import field, frozen, mutable
+from attrs import Attribute, field, frozen, mutable
 from attrs_strict import type_validator
 from beartype import beartype
-from beartype.typing import Any, List, Optional, Union
+from beartype.typing import Any, Dict, List, Optional, Union
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
+from .serializer import serialize_if_callable
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
 """Sourced from dictdiffer.
@@ -18,7 +19,7 @@ https://github.com/inveniosoftware/dictdiffer/blob/b32e4b0d44b81a6de4cffd7920122
 
 
 @beartype
-def _validate_diff_type(_instance: Any, _attribute: attrs.Attribute, diff_type: Any) -> None:
+def _validate_diff_type(_instance: Any, _attribute: Attribute, diff_type: Any) -> None:
     """Validate diff_type.
 
     Args:
@@ -32,6 +33,27 @@ def _validate_diff_type(_instance: Any, _attribute: attrs.Attribute, diff_type: 
     """
     if diff_type not in (_ADD, _REMOVE, _CHANGE):
         raise ValueError(f'Invalid diff_type: {diff_type}')
+
+
+@beartype
+def _data_converter(data: Any) -> DIFF_TYPES:
+    """Recursively Coerce new data to type that can be compared.
+
+    Based on `.serializer.recursive_serialize``
+
+    Args:
+        data: data to coerce
+
+    Returns:
+        DIFF_TYPES: DiffResult-safe data
+
+    """
+    data = serialize_if_callable(data)
+
+    if isinstance(data, dict) and data:
+        return {_k: _data_converter(_v) for _k, _v in data.items()}
+
+    return data
 
 
 @frozen(kw_only=True)
@@ -82,7 +104,7 @@ class DictDiff:  # noqa: H601
     raw_data: Any
 
     # Interim Values
-    keys: List[str] = field(factory=list, init=False, validator=type_validator())
+    keys: List[Any] = field(factory=list, init=False, validator=type_validator())
     index: Optional[int] = field(default=None, init=False, validator=type_validator())
     data: Any = field(default=None, init=False, validator=type_validator())
 
@@ -90,6 +112,7 @@ class DictDiff:  # noqa: H601
     old: DIFF_TYPES = field(default=TrueNull, init=False)
     new: DIFF_TYPES = field(default=TrueNull, init=False)
 
+    # FIXME: Add example of what this is changing. I can't remember why this was necessary
     @beartype
     def _parse_raw_data_and_raw_keys(self) -> None:
         """Handle case where the keys are actually in the data.
@@ -179,7 +202,7 @@ class DictDiff:  # noqa: H601
 
 
 @beartype
-def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
+def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any]) -> List[DiffResult]:
     """Determine the differences between two dictionaries.
 
     Args:
@@ -191,6 +214,7 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 
     """
     results = []
+    new_dict = _data_converter(new_dict)
     raw_diff = dictdiffer.diff(first=old_dict, second=new_dict, expand=True, dot_notation=False)
     for (_type, _keys, _data) in raw_diff:
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
@@ -201,7 +225,7 @@ def _raw_diff(*, old_dict: dict, new_dict: dict) -> List[DiffResult]:
 
 
 @beartype
-def diff_with_rules(*, old_dict: dict, new_dict: dict, key_rules: List[KeyRule]) -> List[DiffResult]:
+def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any], key_rules: List[KeyRule]) -> List[DiffResult]:
     """Determine the differences between two dictionaries.
 
     FYI: Sorts by specificity so that more specific key_rules apply over less specific ones

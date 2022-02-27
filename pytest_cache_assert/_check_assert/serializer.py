@@ -13,7 +13,7 @@ _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 
 
 @beartype
-def _serialize_callable(value: Any) -> Any:
+def serialize_if_callable(value: Any) -> Any:
     """Serialize value with the memory address removed (if a function).
 
     Args:
@@ -44,7 +44,7 @@ def recursive_serialize(value: Any) -> Union[Dict[str, Any], str]:
     if isinstance(value, dict) and value:
         return {_k: recursive_serialize(_v) for _k, _v in value.items()}
 
-    return str(_serialize_callable(value))
+    return str(serialize_if_callable(value))
 
 
 class CacheAssertSerializer(JSONEncoder):
@@ -62,6 +62,6 @@ class CacheAssertSerializer(JSONEncoder):
         for _type, converter in encodable_types.items():
             if isinstance(obj, _type):
                 return converter(obj)
-        obj = _serialize_callable(obj)
+        obj = serialize_if_callable(obj)
 
         return obj if isinstance(obj, str) else JSONEncoder.default(self, obj)

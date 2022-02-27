@@ -1,0 +1,16 @@
+{
+  "_info": [
+    {
+      "func_args": {
+        "test_data": {
+          "decorator": "<function beartype(..)>"
+        }
+      },
+      "test_file": "test_plugin.py",
+      "test_name": "test_assert_against_cache"
+    }
+  ],
+  "_json": {
+    "decorator": "<function beartype(..)>"
+  }
+}

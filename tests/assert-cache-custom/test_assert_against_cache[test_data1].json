@@ -1,0 +1,16 @@
+{
+  "_info": [
+    {
+      "func_args": {
+        "test_data": {
+          "func": "<function test_assert_against_cache_failure(..)>"
+        }
+      },
+      "test_file": "test_plugin.py",
+      "test_name": "test_assert_against_cache"
+    }
+  ],
+  "_json": {
+    "func": "<function test_assert_against_cache_failure(..)>"
+  }
+}

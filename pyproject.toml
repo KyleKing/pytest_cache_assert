@@ -56,18 +56,14 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 "Changelog" = "https://github.com/kyleking/pytest_cache_assert/blob/main/docs/docs/CHANGELOG.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.7.6"
 attrs-strict = ">=0.2"
 beartype = ">=0.10.0"
 dictdiffer = ">=0.9"   # Alternative: https://pypi.org/project/deepdiff/
 pendulum = ">=2.1.2"
-pytest = ">=5"
+pytest = ">=5.0.0"
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.13.0", extras = [
-    "dev",
-    "lint",
-    "test",
-], python = "^3.8" }
+calcipy = { version = ">=0.14.0", extras = ["dev", "lint", "test"] }
 cerberus = ">=1.3.4"
 pydantic = ">=1.8.2"

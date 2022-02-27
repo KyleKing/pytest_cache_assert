@@ -1,5 +1,6 @@
 """Test plugin.py."""
 
+from pathlib import Path, PureWindowsPath
 import pytest
 from beartype import beartype
 
@@ -22,6 +23,8 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
     [
         {'decorator': beartype},
         {'func': test_assert_against_cache_failure},
+        {'path': Path.home()},
+        {'PureWindowsPath': PureWindowsPath('C:/Program Files')},
     ],
 )
 def test_assert_against_cache(test_data, assert_against_cache):

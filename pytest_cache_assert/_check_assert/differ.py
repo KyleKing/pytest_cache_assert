@@ -8,7 +8,7 @@ from beartype.typing import Any, Dict, List, Optional, Union
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
-from .serializer import serialize_if_callable
+from .serializer import coerce_if_known_type
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
 """Sourced from dictdiffer.
@@ -48,7 +48,7 @@ def _data_converter(data: Any) -> DIFF_TYPES:
         DIFF_TYPES: DiffResult-safe data
 
     """
-    data = serialize_if_callable(data)
+    data = coerce_if_known_type(data)
 
     if isinstance(data, dict) and data:
         return {_k: _data_converter(_v) for _k, _v in data.items()}

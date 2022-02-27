@@ -1,7 +1,7 @@
 """Dictionary Differ."""
 
-import attr
 import dictdiffer
+from attrs import frozen, mutable, field
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, List, Optional, Union
@@ -34,14 +34,14 @@ def _validate_diff_type(_instance: Any, _attribute: attr.Attribute, diff_type: A
         raise ValueError(f'Invalid diff_type: {diff_type}')
 
 
-@attr.s(auto_attribs=True, frozen=True, kw_only=True)
+@frozen(kw_only=True)
 class DiffResult:  # noqa: H601
     """Usable Dictionary DIff Result."""
 
-    key_list: List[Union[str, int]] = attr.ib(validator=type_validator())
-    list_index: Optional[int] = attr.ib(validator=type_validator())
-    old: DIFF_TYPES = attr.ib(validator=type_validator())
-    new: DIFF_TYPES = attr.ib(validator=type_validator())
+    key_list: List[Union[str, int]] = field(validator=type_validator())
+    list_index: Optional[int] = field(validator=type_validator())
+    old: DIFF_TYPES = field(validator=type_validator())
+    new: DIFF_TYPES = field(validator=type_validator())
 
     @beartype
     def match_key_pattern(self, pattern: List[Union[str, Wildcards]]) -> bool:
@@ -72,23 +72,23 @@ class DiffResult:  # noqa: H601
         return all(pat_match(pat, key) for key, pat in zip(self.key_list, pattern))
 
 
-@attr.s(auto_attribs=True, kw_only=True)
+@mutable(kw_only=True)
 class DictDiff:  # noqa: H601
     """Mutable data structure to manipulate results of the raw dictdiffer.diff output."""
 
     # Initial raw output of dictdiffer
-    diff_type: str = attr.ib(validator=_validate_diff_type)
-    raw_keys: Union[str, List[Union[str, int]]] = attr.ib(validator=type_validator())
+    diff_type: str = field(validator=_validate_diff_type)
+    raw_keys: Union[str, List[Union[str, int]]] = field(validator=type_validator())
     raw_data: Any
 
     # Interim Values
-    keys: List[str] = attr.ib(factory=list, init=False, validator=type_validator())
-    index: Optional[int] = attr.ib(default=None, init=False, validator=type_validator())
-    data: Any = attr.ib(default=None, init=False, validator=type_validator())
+    keys: List[str] = field(factory=list, init=False, validator=type_validator())
+    index: Optional[int] = field(default=None, init=False, validator=type_validator())
+    data: Any = field(default=None, init=False, validator=type_validator())
 
     # Final Values
-    old: DIFF_TYPES = attr.ib(default=TrueNull, init=False)
-    new: DIFF_TYPES = attr.ib(default=TrueNull, init=False)
+    old: DIFF_TYPES = field(default=TrueNull, init=False)
+    new: DIFF_TYPES = field(default=TrueNull, init=False)
 
     @beartype
     def _parse_raw_data_and_raw_keys(self) -> None:

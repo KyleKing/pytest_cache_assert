@@ -5,7 +5,7 @@ from enum import Enum
 from functools import partial
 from uuid import UUID
 
-import attr
+from attrs import mutable, field
 import pendulum
 from attrs_strict import type_validator
 from beartype import beartype
@@ -182,9 +182,9 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-@attr.s(auto_attribs=True, kw_only=True)
+@mutable(kw_only=True)
 class KeyRule:  # noqa: H601
     """Key Rule."""
 
-    pattern: List[Union[str, Wildcards]] = attr.ib(validator=type_validator())
-    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = attr.ib(default=check_exact, validator=type_validator())
+    pattern: List[Union[str, Wildcards]] = field(validator=type_validator())
+    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = field(default=check_exact, validator=type_validator())

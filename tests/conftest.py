@@ -1,7 +1,7 @@
 """PyTest configuration."""
 
-from enum import Enum
 from decimal import Decimal
+from enum import Enum
 from pathlib import Path
 
 import pytest

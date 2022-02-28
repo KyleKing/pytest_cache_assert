@@ -1045,7 +1045,7 @@
 <span class="linenos" data-linenos=" 9 "></span>
 <span class="linenos" data-linenos="10 "></span>
 <span class="linenos" data-linenos="11 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="12 "></span><span class="k">def</span> <span class="nf">cerberus_validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">:</span> <span class="n">TEST_DATA_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span><span class="k">def</span> <span class="nf">cerberus_validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="13 "></span>    <span class="sd">&quot;&quot;&quot;Cerberus custom validator example.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="14 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}})</span>
 <span class="linenos" data-linenos="15 "></span>    <span class="k">assert</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
@@ -1062,18 +1062,18 @@
 <p>For more examples, see <a href="https://github.com/kyleking/pytest_cache_assert/scripts">Scripts</a> or <a href="https://github.com/kyleking/pytest_cache_assert/tests">Tests</a></p>
 <h2 id="global-configuration-options">Global Configuration Options<a class="headerlink" href="#global-configuration-options" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>DEF_CACHE_DIR_KEY</code>: set a custom relative path from the <code>tests/</code> directory. Default is <code>assert-cache/</code></li>
+<li>See <code>AssertConfig</code> in <code>plugin.py</code> for configuration options and more information</li>
+<li><code>cache_dir_rel_path</code>: set a custom relative path from the <code>tests/</code> directory. Default is <code>assert-cache/</code></li>
+<li><code>extra_ser_rules</code>: additional serialization rules that can be used generically on arbitrary data</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="linenos" data-linenos=" 2 "></span>
-<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">pytest_cache_assert</span> <span class="kn">import</span> <span class="n">DEF_CACHE_DIR_KEY</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span>
-<span class="linenos" data-linenos=" 6 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">():</span>
-<span class="linenos" data-linenos=" 8 "></span>    <span class="k">return</span> <span class="p">{</span>
-<span class="linenos" data-linenos=" 9 "></span>        <span class="n">DEF_CACHE_DIR_KEY</span><span class="p">:</span> <span class="s1">&#39;custom/cache/dir&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="10 "></span>    <span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="kn">from</span> <span class="nn">pytest_cache_assert.plugin</span> <span class="kn">import</span> <span class="n">AssertConfig</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span>
+<span class="linenos" data-linenos="6 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">():</span>
+<span class="linenos" data-linenos="8 "></span>    <span class="k">return</span> <span class="n">AssertConfig</span><span class="p">(</span><span class="n">cache_dir_rel_path</span><span class="o">=</span><span class="s1">&#39;custom/cache/dir&#39;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">⚓︎</a></h2>
 <p>See the <code>Open Issues</code> and <code>Milestones</code> for current status and <a href="docs/CODE_TAG_SUMMARY/">./docs/CODE_TAG_SUMMARY.md</a> for annotations in the source code.</p>

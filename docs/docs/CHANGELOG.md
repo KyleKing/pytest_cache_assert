@@ -2,6 +2,7 @@
 
 ### Feat
 
+- improve configurability with AssertConfig
 - introduce internally configurable punq
 
 ## 1.2.1 (2022-02-27)

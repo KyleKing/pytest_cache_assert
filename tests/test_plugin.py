@@ -32,6 +32,6 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
         {'list_of_things': (Path.home(), 1.23, CacheAssertContainerKeys.SER_RULES)},
     ],
 )
-def test_assert_against_cache(test_data, assert_against_cache):
+def test_assert_against_cache(test_data, assert_against_cache, benchmark):
     """Test edge cases for assert_against_cache."""
-    assert_against_cache(test_data)
+    benchmark(assert_against_cache, test_data)

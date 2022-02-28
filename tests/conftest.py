@@ -51,5 +51,5 @@ def cache_assert_config() -> Dict[str, Any]:
     """Specify a custom cache directory."""
     return AssertConfig(
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
-        extra_ser_rules=[(Enum, lambda _e: _e.value), ((complex, Decimal), int)],
+        extra_ser_rules=[(Enum, lambda _e: _e.name), ((complex, Decimal), int)],
     )

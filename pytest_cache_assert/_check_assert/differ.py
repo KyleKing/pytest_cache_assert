@@ -50,6 +50,8 @@ def _data_converter(data: Any) -> DIFF_TYPES:
     """
     data = coerce_if_known_type(data)
 
+    if isinstance(data, List):
+        return [*map(coerce_if_known_type, data)]  # For performance, only provides one level of recursion
     if isinstance(data, dict) and data:
         return {_k: _data_converter(_v) for _k, _v in data.items()}
 
@@ -194,6 +196,7 @@ class DictDiff:  # noqa: H601
             DiffResult: The diff_result
 
         """
+        # TODO: Implement with `returns` as a "Flow" to separate state and operations (SRP)
         self._parse_raw_data_and_raw_keys()
         self._parse_data()
         self._parse_keys()

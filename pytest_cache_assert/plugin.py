@@ -25,7 +25,11 @@ class AssertConfig:
     """String relative directory to `tests/`. Default resolves to `tests/assert-cache/`."""
 
     extra_ser_rules: List[Tuple[Any, Any]] = field(factory=list, validator=type_validator())
-    """Additional serialization rules. Example: `[(Enum, lambda _e: _e.name), (doit.tools.Interactive, str)]`."""
+    """Additional serialization rules. Example: `[(Enum, lambda _e: _e.name), (doit.tools.Interactive, str)]`.
+
+    Note that lists and dictionary types are already recursively processed
+
+    """
 
     def __attrs_post_init__(self) -> None:
         """Register relevant configuration options."""

@@ -1,6 +1,7 @@
 """Provide additional encoding functionality to check_assert."""
 
 import re
+from enum import Enum
 from json import JSONEncoder
 from pathlib import Path, PurePath
 
@@ -37,8 +38,9 @@ def coerce_if_known_type(value: Any) -> Any:
     except punq.MissingDependencyError:
         ...
     rules.extend([
-        (Callable, replace_memory_address),
         ((Path, PurePath), Path.as_posix),
+        (Callable, replace_memory_address),
+        (Enum, lambda _e: _e.value),
         (Pattern, str),
         (complex, lambda _o: [_o.real, _o.imag]),
     ])

@@ -24,7 +24,7 @@ class AssertConfig:
     cache_dir_rel_path: str = field(default=DEF_CACHE_DIR_NAME, validator=type_validator())
     """String relative directory to `tests/`. Default resolves to `tests/assert-cache/`."""
 
-    extra_ser_rules: List[Tuple[Any, Callable[[Any], Any]]] = field(factory=list, validator=type_validator())
+    extra_ser_rules: List[Tuple[Any, Any]] = field(factory=list, validator=type_validator())
     """Additional serialization rules. Example: `[(Enum, lambda _e: _e.name), (doit.tools.Interactive, str)]`."""
 
     def __attrs_post_init__(self) -> None:

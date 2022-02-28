@@ -1,5 +1,7 @@
 """PyTest configuration."""
 
+from enum import Enum
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -47,4 +49,7 @@ def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Dict[str, Union[st
 @pytest.fixture(scope='module')
 def cache_assert_config() -> Dict[str, Any]:
     """Specify a custom cache directory."""
-    return AssertConfig(cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom')
+    return AssertConfig(
+        cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
+        extra_ser_rules=[(Enum, lambda _e: _e.value), ((complex, Decimal), int)],
+    )

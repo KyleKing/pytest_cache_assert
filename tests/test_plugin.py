@@ -30,6 +30,9 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
         {'PureWindowsPath': PureWindowsPath('C:/Program Files')},
         {'enum': CacheAssertContainerKeys.SER_RULES},
         {'list_of_things': (Path.home(), 1.23, CacheAssertContainerKeys.SER_RULES)},
+        # Add test cases from Hypothesis
+        {'1': False, '餁': 28498688},
+        {'': False, '1': 0, '│\U00108f79': 0},
     ],
 )
 def test_assert_against_cache(test_data, assert_against_cache, benchmark):

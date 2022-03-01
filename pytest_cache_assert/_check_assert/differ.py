@@ -8,7 +8,7 @@ from beartype.typing import Any, Dict, List, Optional, Union
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
-from .serializer import coerce_if_known_type
+from .serializer import recursive_data_converter
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
 """Sourced from dictdiffer.
@@ -33,29 +33,6 @@ def _validate_diff_type(_instance: Any, _attribute: Attribute, diff_type: Any) -
     """
     if diff_type not in (_ADD, _REMOVE, _CHANGE):
         raise ValueError(f'Invalid diff_type: {diff_type}')
-
-
-@beartype
-def _data_converter(data: Any) -> DIFF_TYPES:
-    """Recursively Coerce new data to type that can be compared.
-
-    Based on `.serializer.recursive_serialize``
-
-    Args:
-        data: data to coerce
-
-    Returns:
-        DIFF_TYPES: DiffResult-safe data
-
-    """
-    data = coerce_if_known_type(data)
-
-    if isinstance(data, List):
-        return [*map(coerce_if_known_type, data)]  # For performance, only provides one level of recursion
-    if isinstance(data, dict) and data:
-        return {_k: _data_converter(_v) for _k, _v in data.items()}
-
-    return data
 
 
 @frozen(kw_only=True)
@@ -217,7 +194,7 @@ def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any]) -> List[DiffRes
 
     """
     results = []
-    new_dict = _data_converter(new_dict)
+    new_dict = recursive_data_converter(new_dict)
     raw_diff = dictdiffer.diff(first=old_dict, second=new_dict, expand=True, dot_notation=False)
     for (_type, _keys, _data) in raw_diff:
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)

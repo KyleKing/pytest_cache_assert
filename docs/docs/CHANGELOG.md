@@ -2,6 +2,7 @@
 
 ### Fix
 
+- debug recursive serialization for diffing
 - handle one-level of recursion in lists
 
 ## 1.3.1 (2022-02-27)

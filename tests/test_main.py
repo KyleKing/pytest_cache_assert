@@ -180,7 +180,7 @@ def test_assert_against_cache_validator(fix_tmp_assert):
     result=st.dictionaries(
         keys=st.text(),
         values=(st.booleans() | st.integers() | st.text()),
-        max_size=30,
+        max_size=5,
     ),
 )
 def test_assert_against_cache_with_hypothesis(result, fix_tmp_assert):

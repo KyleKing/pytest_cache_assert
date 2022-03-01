@@ -9,7 +9,7 @@ from uuid import UUID
 
 import punq
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict, List, Pattern, Union, Iterable
+from beartype.typing import Any, Callable, List, Pattern
 
 from .config import CacheAssertContainerKeys, cache_assert_container
 from .constants import DIFF_TYPES

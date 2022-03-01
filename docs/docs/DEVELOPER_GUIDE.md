@@ -48,7 +48,7 @@ poetry run doit run lock document deploy_docs publish
 
 <!-- {cts} COVERAGE -->
 | File                                                 |   Statements |   Missing |   Excluded | Coverage   |
-|:-----------------------------------------------------|-------------:|----------:|-----------:|:-----------|
+|------------------------------------------------------|--------------|-----------|------------|------------|
 | `pytest_cache_assert/__init__.py`                    |            4 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/caching.py`       |           31 |         0 |          0 | 100.0%     |
@@ -62,5 +62,5 @@ poetry run doit run lock document deploy_docs publish
 | `pytest_cache_assert/plugin.py`                      |           44 |         2 |          0 | 95.5%      |
 | **Totals**                                           |          369 |        25 |          0 | 93.2%      |
 
-Generated on: 2022-03-01T07:15:15.067028
+Generated on: 2022-03-01T09:17:15.666245
 <!-- {cte} -->

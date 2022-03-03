@@ -52,7 +52,7 @@ def coerce_if_known_type(value: Any) -> Any:
             return func(value)
 
     # Handle generic classes not recognized by inspect.isclass()
-    if str(value).startswith('<class'):
+    if str(type(value)).startswith('<class'):
         return str(value)
 
     return value

@@ -4,6 +4,7 @@ from pathlib import Path, PureWindowsPath
 
 import pytest
 from beartype import beartype
+from pydantic import BaseModel
 
 from pytest_cache_assert._check_assert.config import CacheAssertContainerKeys
 
@@ -30,6 +31,9 @@ def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
         {'PureWindowsPath': PureWindowsPath('C:/Program Files')},
         {'enum': CacheAssertContainerKeys.SER_RULES},
         {'list_of_things': (Path.home(), 1.23, CacheAssertContainerKeys.SER_RULES)},
+        {'empty_list': []},
+        {'empty_dict': {}},
+        {'BaseModel': BaseModel},
         # Add test cases from Hypothesis
         {'1': False, '餁': 28498688},
         {'': False, '1': 0, '│\U00108f79': 0},

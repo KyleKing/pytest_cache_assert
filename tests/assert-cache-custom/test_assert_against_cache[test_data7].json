@@ -3,9 +3,7 @@
     {
       "func_args": {
         "test_data": {
-          "": false,
-          "1": 0,
-          "\u2502\udbe3\udf79": 0
+          "empty_dict": {}
         }
       },
       "test_file": "test_plugin.py",
@@ -13,8 +11,6 @@
     }
   ],
   "_json": {
-    "": false,
-    "1": 0,
-    "\u2502\udbe3\udf79": 0
+    "empty_dict": {}
   }
 }

@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fix
+
+- handle edge cases with serializing classes
+
 ## 1.3.2 (2022-03-01)
 
 ### Fix

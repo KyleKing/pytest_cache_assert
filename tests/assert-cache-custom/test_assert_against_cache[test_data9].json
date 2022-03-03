@@ -3,7 +3,8 @@
     {
       "func_args": {
         "test_data": {
-          "empty_list": []
+          "1": false,
+          "\u9901": 28498688
         }
       },
       "test_file": "test_plugin.py",
@@ -11,6 +12,7 @@
     }
   ],
   "_json": {
-    "empty_list": []
+    "1": false,
+    "\u9901": 28498688
   }
 }

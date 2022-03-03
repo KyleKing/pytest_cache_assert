@@ -57,10 +57,10 @@ poetry run doit run lock document deploy_docs publish
 | `pytest_cache_assert/_check_assert/differ.py`        |          108 |        10 |          0 | 90.7%      |
 | `pytest_cache_assert/_check_assert/error_message.py` |           10 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/key_rules.py`     |           61 |         3 |          0 | 95.1%      |
-| `pytest_cache_assert/_check_assert/serializer.py`    |           42 |         2 |          0 | 95.2%      |
+| `pytest_cache_assert/_check_assert/serializer.py`    |           45 |         5 |          0 | 88.9%      |
 | `pytest_cache_assert/main.py`                        |           41 |         7 |          0 | 82.9%      |
 | `pytest_cache_assert/plugin.py`                      |           44 |         2 |          0 | 95.5%      |
-| **Totals**                                           |          369 |        25 |          0 | 93.2%      |
+| **Totals**                                           |          372 |        28 |          0 | 92.5%      |
 
-Generated on: 2022-03-01T09:17:15.666245
+Generated on: 2022-03-02T21:33:38.082029
 <!-- {cte} -->

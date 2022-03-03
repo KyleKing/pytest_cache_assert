@@ -9,7 +9,7 @@ from uuid import UUID
 
 import punq
 from beartype import beartype
-from beartype.typing import Any, Callable, List, Pattern
+from beartype.typing import Any, Callable, Dict, Iterable, List, Pattern
 
 from .config import CacheAssertContainerKeys, cache_assert_container
 from .constants import DIFF_TYPES
@@ -52,7 +52,7 @@ def coerce_if_known_type(value: Any) -> Any:
             return func(value)
 
     # Handle generic classes not recognized by inspect.isclass()
-    if str(type(value)).startswith('<class'):
+    if not isinstance(value, (Dict, Iterable)) and str(type(value)).startswith('<class'):
         return str(value)
 
     return value

@@ -175,7 +175,10 @@ def test_assert_against_cache_validator(fix_tmp_assert):
 # TODO: Support additional types: st.binary()
 #   https://hypothesis.readthedocs.io/en/latest/ghostwriter.html
 #   https://hypothesis.readthedocs.io/en/latest/data.html
-@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+@settings(
+    deadline=None,
+    suppress_health_check=[HealthCheck.function_scoped_fixture],
+)
 @given(
     result=st.dictionaries(
         keys=st.text(),

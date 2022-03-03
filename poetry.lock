@@ -144,7 +144,7 @@ pytz = ">=2015.7"
 
 [[package]]
 name = "bandit"
-version = "1.7.3"
+version = "1.7.2"
 description = "Security oriented static analyser for python code."
 category = "dev"
 optional = false
@@ -157,7 +157,7 @@ PyYAML = ">=5.3.1"
 stevedore = ">=1.20.0"
 
 [package.extras]
-test = ["coverage (>=4.5.4)", "fixtures (>=3.0.0)", "flake8 (>=4.0.0)", "stestr (>=2.5.0)", "testscenarios (>=0.5.0)", "testtools (>=2.3.0)", "toml", "beautifulsoup4 (>=4.8.0)", "pylint (==1.9.4)"]
+test = ["beautifulsoup4 (>=4.8.0)", "coverage (>=4.5.4)", "fixtures (>=3.0.0)", "flake8 (>=4.0.0)", "pylint (==1.9.4)", "stestr (>=2.5.0)", "testscenarios (>=0.5.0)", "testtools (>=2.3.0)", "toml"]
 toml = ["toml"]
 yaml = ["pyyaml"]
 
@@ -212,7 +212,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "calcipy"
-version = "0.14.3"
+version = "0.14.4"
 description = "Python package to simplify development. Includes functionality for task running, testing, linting, documenting, and more"
 category = "dev"
 optional = false
@@ -222,10 +222,11 @@ python-versions = ">=3.7.6,<4.0.0"
 absolufy-imports = {version = ">=0.3.1", optional = true, markers = "extra == \"lint\""}
 add-trailing-comma = {version = ">=2.1.0", optional = true, markers = "extra == \"lint\""}
 attrs = ">=21"
-attrs_strict = ">=0.2.2"
+attrs_strict = ">=1.0.0"
 autoflake = {version = ">=1.4", optional = true, markers = "extra == \"lint\""}
 autopep8 = {version = ">=1.5", optional = true, markers = "extra == \"lint\""}
-beartype = ">=0.10.0"
+bandit = {version = "<=1.7.2", optional = true, markers = "extra == \"lint\""}
+beartype = ">=0.10.2"
 better-exceptions = {version = ">=0.3", optional = true, markers = "extra == \"dev\""}
 cement = ">=3.0.6"
 cohesion = {version = ">=1", optional = true, markers = "extra == \"lint\""}
@@ -280,11 +281,11 @@ mkdocs-git-revision-date-localized-plugin = {version = ">=1.0", optional = true,
 mkdocs-material = {version = ">=7.1", optional = true, markers = "extra == \"dev\""}
 mypy = {version = ">=0.812", optional = true, markers = "extra == \"test\""}
 nox-poetry = {version = ">=0.8", optional = true, markers = "extra == \"test\""}
-pandas = ">=1.0"
+pandas = ">=0.25.1"
 pandas-vet = {version = ">=0.2", optional = true, markers = "extra == \"lint\""}
 pdbpp = {version = ">=0.10", optional = true, markers = "(sys_platform != \"win32\" or python_version < \"3.9\") and extra == \"dev\""}
 pdocs = {version = ">=1.1", optional = true, markers = "extra == \"dev\""}
-pendulum = ">=2"
+pendulum = ">=2.1.0"
 pep8-naming = {version = ">=0.11", optional = true, markers = "extra == \"lint\""}
 pip-check = {version = ">=2.7", optional = true, markers = "extra == \"lint\""}
 pre-commit = ">=2.15"
@@ -295,7 +296,7 @@ pylint = {version = ">=2.8", optional = true, markers = "extra == \"lint\""}
 pyrate_limiter = ">=2.4"
 pytest = {version = ">=6", optional = true, markers = "extra == \"test\""}
 pytest-benchmark = {version = ">=3.4.1", optional = true, markers = "extra == \"test\""}
-pytest-cache-assert = {version = ">=1.3.1", optional = true, markers = "extra == \"test\""}
+pytest-cache-assert = {version = ">=1.3.2", optional = true, markers = "extra == \"test\""}
 pytest-html = {version = ">=3.1", optional = true, markers = "extra == \"test\""}
 pytest-randomly = {version = ">=3.8", optional = true, markers = "extra == \"test\""}
 pytest-recording = {version = ">=0.11", optional = true, markers = "extra == \"test\""}
@@ -316,8 +317,8 @@ yamllint = {version = ">=1.26", optional = true, markers = "extra == \"lint\""}
 
 [package.extras]
 dev = ["better-exceptions (>=0.3)", "commitizen (>=2)", "mkdocs-git-revision-date-localized-plugin (>=1.0)", "mkdocs-material (>=7.1)", "livereload", "pdbpp (>=0.10)", "pdocs (>=1.1)", "pyupgrade (>=2.19.1)"]
-lint = ["absolufy-imports (>=0.3.1)", "add-trailing-comma (>=2.1.0)", "autoflake (>=1.4)", "autopep8 (>=1.5)", "cohesion (>=1)", "darglint (>=1.8)", "dlint (>=0.11)", "flake8 (>=3.8.4)", "flake8-2020 (>=1.6)", "flake8-aaa (>=0.12)", "flake8-annotations (>=2.6)", "flake8-assertive (>=1.3)", "flake8-bandit (>=2.1)", "flake8-blind-except (>=0.2)", "flake8-breakpoint (>=1.1)", "flake8-broken-line (>=0.3)", "flake8-bugbear (>=22.1.11)", "flake8-builtins (>=1.5)", "flake8-cognitive-complexity (>=0.1)", "flake8-comprehensions (>=3.5)", "flake8-debugger (>=4.0)", "flake8-docstrings (>=1.6)", "flake8-eradicate (>=1.0)", "flake8-expression-complexity (>=0.0.9)", "flake8-fixme (>=1.1)", "flake8-functions (>=0.0.6)", "flake8-isort (>=4.0)", "flake8-logging-format (>=0.6)", "flake8-markdown (>=0.2)", "flake8-pep3101 (>=1.3)", "flake8-plone-hasattr (>=0.2)", "flake8-print (>=4.0)", "flake8-printf-formatting (>=1.1)", "flake8-pytest-style (>=1.4)", "flake8-quotes (>=3.2)", "flake8-return (>=1.1)", "flake8-SQL (>=0.4)", "flake8-string-format (>=0.3)", "flake8-tuple (>=0.4)", "flake8-variables-names (>=0.0.4)", "hacking (>=4)", "isort (>=5)", "licensecheck[full] (>=2022,<2023)", "pandas-vet (>=0.2)", "pep8-naming (>=0.11)", "pip-check (>=2.7)", "proselint (>=0.10)", "pycln (>=1.2.0)", "pylint (>=2.8)", "vulture (>=2.3)", "xenon (>=0.8)", "yamllint (>=1.26)"]
-test = ["coverage (>=6)", "diff-cover (>=6.4)", "hypothesis[cli] (>=6.38.0)", "lxml (>=4.7.1)", "mypy (>=0.812)", "nox-poetry (>=0.8)", "pytest (>=6)", "pytest-benchmark (>=3.4.1)", "pytest-cache-assert (>=1.3.1)", "pytest-html (>=3.1)", "pytest-randomly (>=3.8)", "pytest-recording (>=0.11)", "pytest-subprocess (>=1.4.1)", "pytest-watcher (>=0.2)"]
+lint = ["absolufy-imports (>=0.3.1)", "add-trailing-comma (>=2.1.0)", "autoflake (>=1.4)", "autopep8 (>=1.5)", "cohesion (>=1)", "darglint (>=1.8)", "dlint (>=0.11)", "flake8 (>=3.8.4)", "flake8-2020 (>=1.6)", "flake8-aaa (>=0.12)", "flake8-annotations (>=2.6)", "flake8-assertive (>=1.3)", "bandit (<=1.7.2)", "flake8-bandit (>=2.1)", "flake8-blind-except (>=0.2)", "flake8-breakpoint (>=1.1)", "flake8-broken-line (>=0.3)", "flake8-bugbear (>=22.1.11)", "flake8-builtins (>=1.5)", "flake8-cognitive-complexity (>=0.1)", "flake8-comprehensions (>=3.5)", "flake8-debugger (>=4.0)", "flake8-docstrings (>=1.6)", "flake8-eradicate (>=1.0)", "flake8-expression-complexity (>=0.0.9)", "flake8-fixme (>=1.1)", "flake8-functions (>=0.0.6)", "flake8-isort (>=4.0)", "flake8-logging-format (>=0.6)", "flake8-markdown (>=0.2)", "flake8-pep3101 (>=1.3)", "flake8-plone-hasattr (>=0.2)", "flake8-print (>=4.0)", "flake8-printf-formatting (>=1.1)", "flake8-pytest-style (>=1.4)", "flake8-quotes (>=3.2)", "flake8-return (>=1.1)", "flake8-SQL (>=0.4)", "flake8-string-format (>=0.3)", "flake8-tuple (>=0.4)", "flake8-variables-names (>=0.0.4)", "hacking (>=4)", "isort (>=5)", "licensecheck[full] (>=2022,<2023)", "pandas-vet (>=0.2)", "pep8-naming (>=0.11)", "pip-check (>=2.7)", "proselint (>=0.10)", "pycln (>=1.2.0)", "pylint (>=2.8)", "vulture (>=2.3)", "xenon (>=0.8)", "yamllint (>=1.26)"]
+test = ["coverage (>=6)", "diff-cover (>=6.4)", "hypothesis[cli] (>=6.38.0)", "lxml (>=4.7.1)", "mypy (>=0.812)", "nox-poetry (>=0.8)", "pytest (>=6)", "pytest-benchmark (>=3.4.1)", "pytest-cache-assert (>=1.3.2)", "pytest-html (>=3.1)", "pytest-randomly (>=3.8)", "pytest-recording (>=0.11)", "pytest-subprocess (>=1.4.1)", "pytest-watcher (>=0.2)"]
 commitizen_legacy = ["cz_legacy (>=0.1.2)"]
 
 [[package]]
@@ -1406,7 +1407,7 @@ mkdocs = ">=1.0"
 
 [[package]]
 name = "mkdocs-material"
-version = "8.2.3"
+version = "8.2.4"
 description = "A Material Design theme for MkDocs"
 category = "dev"
 optional = false
@@ -1515,6 +1516,14 @@ python-versions = ">=3.7,<4.0"
 nox = ">=2020.8.22"
 packaging = ">=20.9"
 tomlkit = ">=0.7.0,<0.8.0"
+
+[[package]]
+name = "numpy"
+version = "1.21.5"
+description = "NumPy is the fundamental package for array computing with Python."
+category = "dev"
+optional = false
+python-versions = ">=3.7,<3.11"
 
 [[package]]
 name = "numpy"
@@ -2526,7 +2535,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "851721279329a273130a7aa3709f36935c57bedb0dd50b397f7956d16eaf25c9"
+content-hash = "52a18e2f3af50de133b2f71d0d28a797f4b62d4d98264da3cf910a508c9dac09"
 
 [metadata.files]
 absolufy-imports = [
@@ -2577,8 +2586,8 @@ babel = [
     {file = "Babel-2.9.1.tar.gz", hash = "sha256:bc0c176f9f6a994582230df350aa6e05ba2ebe4b3ac317eab29d9be5d2768da0"},
 ]
 bandit = [
-    {file = "bandit-1.7.3-py3-none-any.whl", hash = "sha256:3ce9b4e6a4f7f41aa966c9543e635dd35e52a793a47e746f0c55c7ecfc69d7e8"},
-    {file = "bandit-1.7.3.tar.gz", hash = "sha256:58772ca951bf1129dda8a280d351547de832720bf7b5c29fac3103927980b8a6"},
+    {file = "bandit-1.7.2-py3-none-any.whl", hash = "sha256:e20402cadfd126d85b68ed4c8862959663c8c372dbbb1fca8f8e2c9f55a067ec"},
+    {file = "bandit-1.7.2.tar.gz", hash = "sha256:6d11adea0214a43813887bfe71a377b5a9955e4c826c8ffd341b494e3ab25260"},
 ]
 beartype = [
     {file = "beartype-0.10.2-py3-none-any.whl", hash = "sha256:6e05f9825917219d9380f76a4ba31d8ff29de36556abed70ddc8da7ac59f6d13"},
@@ -2615,8 +2624,8 @@ black = [
     {file = "black-22.1.0.tar.gz", hash = "sha256:a7c0192d35635f6fc1174be575cb7915e92e5dd629ee79fdaf0dcfa41a80afb5"},
 ]
 calcipy = [
-    {file = "calcipy-0.14.3-py3-none-any.whl", hash = "sha256:3a9961880a582ec0702676bc11d16f1cfabf63c7ce0f29ff5f421352cbde7510"},
-    {file = "calcipy-0.14.3.tar.gz", hash = "sha256:e54511446e0777201a59c12c8a8ac06b161c56ae6f542f78918b255c8ecb9adf"},
+    {file = "calcipy-0.14.4-py3-none-any.whl", hash = "sha256:e14d8f23bacc7d09d831e5d853eb9f6ef76566461641098f72fcb61dae9a51a9"},
+    {file = "calcipy-0.14.4.tar.gz", hash = "sha256:3d5071c6b469eea6421238a9dceae35bdb17eabaf318c6057779999f614f807c"},
 ]
 cement = [
     {file = "cement-3.0.6-py3-none-any.whl", hash = "sha256:79c9655e68e4393bf8898d28fc806cc5187c1fc493a75f1af396bd30c6170cc4"},
@@ -3160,8 +3169,8 @@ mkdocs-git-revision-date-localized-plugin = [
     {file = "mkdocs_git_revision_date_localized_plugin-1.0.0-py3-none-any.whl", hash = "sha256:15086eb25129347e63da7c109c6f9834a2937a1e1c91fb850be13645e6a21dbe"},
 ]
 mkdocs-material = [
-    {file = "mkdocs-material-8.2.3.tar.gz", hash = "sha256:aea074a5b368c8a27c8ae4fe72bd943176512b225541106797e367c62ce3f5a0"},
-    {file = "mkdocs_material-8.2.3-py2.py3-none-any.whl", hash = "sha256:34a3155fe30f3fd697acef230e459e0428acb0481bcbb968e4a94a3ac174af18"},
+    {file = "mkdocs-material-8.2.4.tar.gz", hash = "sha256:3c350a03e2f7288874f0a9cf5aacfbbb8721cc7d4e389b53169180ee2187223e"},
+    {file = "mkdocs_material-8.2.4-py2.py3-none-any.whl", hash = "sha256:7aa9ed562f68c8592dad3f568378c98a2350398445dbf46de373585b3cd9080e"},
 ]
 mkdocs-material-extensions = [
     {file = "mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
@@ -3271,6 +3280,36 @@ nox-poetry = [
     {file = "nox_poetry-0.9.0-py3-none-any.whl", hash = "sha256:33423c855fb47e2901faf9e15937326bc20c6e356eef825903eed4f8bbda69d3"},
 ]
 numpy = [
+    {file = "numpy-1.21.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:301e408a052fdcda5cdcf03021ebafc3c6ea093021bf9d1aa47c54d48bdad166"},
+    {file = "numpy-1.21.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:a7e8f6216f180f3fd4efb73de5d1eaefb5f5a1ee5b645c67333033e39440e63a"},
+    {file = "numpy-1.21.5-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:fc7a7d7b0ed72589fd8b8486b9b42a564f10b8762be8bd4d9df94b807af4a089"},
+    {file = "numpy-1.21.5-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:58ca1d7c8aef6e996112d0ce873ac9dfa1eaf4a1196b4ff7ff73880a09923ba7"},
+    {file = "numpy-1.21.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dc4b2fb01f1b4ddbe2453468ea0719f4dbb1f5caa712c8b21bb3dd1480cd30d9"},
+    {file = "numpy-1.21.5-cp310-cp310-win_amd64.whl", hash = "sha256:cc1b30205d138d1005adb52087ff45708febbef0e420386f58664f984ef56954"},
+    {file = "numpy-1.21.5-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:08de8472d9f7571f9d51b27b75e827f5296295fa78817032e84464be8bb905bc"},
+    {file = "numpy-1.21.5-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:4fe6a006557b87b352c04596a6e3f12a57d6e5f401d804947bd3188e6b0e0e76"},
+    {file = "numpy-1.21.5-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:3d893b0871322eaa2f8c7072cdb552d8e2b27645b7875a70833c31e9274d4611"},
+    {file = "numpy-1.21.5-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:341dddcfe3b7b6427a28a27baa59af5ad51baa59bfec3264f1ab287aa3b30b13"},
+    {file = "numpy-1.21.5-cp37-cp37m-win32.whl", hash = "sha256:ca9c23848292c6fe0a19d212790e62f398fd9609aaa838859be8459bfbe558aa"},
+    {file = "numpy-1.21.5-cp37-cp37m-win_amd64.whl", hash = "sha256:025b497014bc33fc23897859350f284323f32a2fff7654697f5a5fc2a19e9939"},
+    {file = "numpy-1.21.5-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:3a5098df115340fb17fc93867317a947e1dcd978c3888c5ddb118366095851f8"},
+    {file = "numpy-1.21.5-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:311283acf880cfcc20369201bd75da907909afc4666966c7895cbed6f9d2c640"},
+    {file = "numpy-1.21.5-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:b545ebadaa2b878c8630e5bcdb97fc4096e779f335fc0f943547c1c91540c815"},
+    {file = "numpy-1.21.5-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:c5562bcc1a9b61960fc8950ade44d00e3de28f891af0acc96307c73613d18f6e"},
+    {file = "numpy-1.21.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:eed2afaa97ec33b4411995be12f8bdb95c87984eaa28d76cf628970c8a2d689a"},
+    {file = "numpy-1.21.5-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:61bada43d494515d5b122f4532af226fdb5ee08fe5b5918b111279843dc6836a"},
+    {file = "numpy-1.21.5-cp38-cp38-win32.whl", hash = "sha256:7b9d6b14fc9a4864b08d1ba57d732b248f0e482c7b2ff55c313137e3ed4d8449"},
+    {file = "numpy-1.21.5-cp38-cp38-win_amd64.whl", hash = "sha256:dbce7adeb66b895c6aaa1fad796aaefc299ced597f6fbd9ceddb0dd735245354"},
+    {file = "numpy-1.21.5-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:507c05c7a37b3683eb08a3ff993bd1ee1e6c752f77c2f275260533b265ecdb6c"},
+    {file = "numpy-1.21.5-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:00c9fa73a6989895b8815d98300a20ac993c49ac36c8277e8ffeaa3631c0dbbb"},
+    {file = "numpy-1.21.5-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:69a5a8d71c308d7ef33ef72371c2388a90e3495dbb7993430e674006f94797d5"},
+    {file = "numpy-1.21.5-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:2d8adfca843bc46ac199a4645233f13abf2011a0b2f4affc5c37cd552626f27b"},
+    {file = "numpy-1.21.5-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:c293d3c0321996cd8ffe84215ffe5d269fd9d1d12c6f4ffe2b597a7c30d3e593"},
+    {file = "numpy-1.21.5-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3c978544be9e04ed12016dd295a74283773149b48f507d69b36f91aa90a643e5"},
+    {file = "numpy-1.21.5-cp39-cp39-win32.whl", hash = "sha256:2a9add27d7fc0fdb572abc3b2486eb3b1395da71e0254c5552b2aad2a18b5441"},
+    {file = "numpy-1.21.5-cp39-cp39-win_amd64.whl", hash = "sha256:1964db2d4a00348b7a60ee9d013c8cb0c566644a589eaa80995126eac3b99ced"},
+    {file = "numpy-1.21.5-pp37-pypy37_pp73-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:a7c4b701ca418cd39e28ec3b496e6388fe06de83f5f0cb74794fa31cfa384c02"},
+    {file = "numpy-1.21.5.zip", hash = "sha256:6a5928bc6241264dce5ed509e66f33676fc97f464e7a919edc672fb5532221ee"},
     {file = "numpy-1.22.2-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:515a8b6edbb904594685da6e176ac9fbea8f73a5ebae947281de6613e27f1956"},
     {file = "numpy-1.22.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:76a4f9bce0278becc2da7da3b8ef854bed41a991f4226911a24a9711baad672c"},
     {file = "numpy-1.22.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:168259b1b184aa83a514f307352c25c56af111c269ffc109d9704e81f72e764b"},

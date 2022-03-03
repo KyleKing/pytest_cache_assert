@@ -31,6 +31,9 @@ class AssertConfig:
 
     """
 
+    always_write: bool = field(default=False, validator=type_validator())  # FIXME: TBD!
+    """TBD print out warning if set to True"""
+
     def __attrs_post_init__(self) -> None:
         """Register relevant configuration options."""
         cache_assert_container.register(CacheAssertContainerKeys.SER_RULES, instance=self.extra_ser_rules)

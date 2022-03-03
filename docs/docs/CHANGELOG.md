@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fix
+
+- class is only in the type string
+
 ## 1.3.3 (2022-03-03)
 
 ### Fix

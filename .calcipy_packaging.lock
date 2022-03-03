@@ -96,12 +96,12 @@
         "version": "2.9.1"
     },
     "bandit": {
-        "datetime": "2022-02-27T23:45:12.988435Z",
+        "datetime": "2022-01-26T01:00:17.920898Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
         "latest_datetime": "2022-02-27T23:45:12.988435Z",
         "latest_version": "1.7.3",
         "name": "bandit",
-        "version": "1.7.3"
+        "version": "1.7.2"
     },
     "beartype": {
         "datetime": "2022-02-22T23:42:32.606958Z",
@@ -128,12 +128,12 @@
         "version": "22.1.0"
     },
     "calcipy": {
-        "datetime": "2022-03-01T12:14:02.463533Z",
+        "datetime": "2022-03-02T02:12:05.099817Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-03-01T12:14:02.463533Z",
-        "latest_version": "0.14.3",
+        "latest_datetime": "2022-03-02T02:12:05.099817Z",
+        "latest_version": "0.14.4",
         "name": "calcipy",
-        "version": "0.14.3"
+        "version": "0.14.4"
     },
     "cement": {
         "datetime": "2021-12-18T18:27:13.099741Z",
@@ -696,12 +696,12 @@
         "version": "2.6.1"
     },
     "hypothesis": {
-        "datetime": "2022-03-01T06:00:04.930066Z",
+        "datetime": "2022-03-03T11:19:41.726547Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-03-01T06:00:04.930066Z",
-        "latest_version": "6.39.0",
+        "latest_datetime": "2022-03-03T11:19:41.726547Z",
+        "latest_version": "6.39.1",
         "name": "hypothesis",
-        "version": "6.39.0"
+        "version": "6.39.1"
     },
     "identify": {
         "datetime": "2022-02-22T19:36:33.536536Z",
@@ -880,12 +880,12 @@
         "version": "1.0.0"
     },
     "mkdocs-material": {
-        "datetime": "2022-02-27T14:20:13.564972Z",
+        "datetime": "2022-03-02T13:41:26.641622Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-02-27T14:20:13.564972Z",
-        "latest_version": "8.2.3",
+        "latest_datetime": "2022-03-02T13:41:26.641622Z",
+        "latest_version": "8.2.4",
         "name": "mkdocs-material",
-        "version": "8.2.3"
+        "version": "8.2.4"
     },
     "mkdocs-material-extensions": {
         "datetime": "2021-09-03T20:49:40.072718Z",

@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fix
+
+- another attempt at fixing edge case for unknown class
+
 ## 1.3.4 (2022-03-03)
 
 ### Fix

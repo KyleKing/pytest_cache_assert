@@ -876,75 +876,78 @@
 <span class="linenos" data-linenos=" 31 "></span>
 <span class="linenos" data-linenos=" 32 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos=" 33 "></span>
-<span class="linenos" data-linenos=" 34 "></span>    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 35 "></span>        <span class="sd">&quot;&quot;&quot;Register relevant configuration options.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 36 "></span>        <span class="n">cache_assert_container</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">SER_RULES</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_ser_rules</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 37 "></span>
-<span class="linenos" data-linenos=" 38 "></span>
-<span class="linenos" data-linenos=" 39 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 40 "></span><span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AssertConfig</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 41 "></span>    <span class="sd">&quot;&quot;&quot;Configure pytest_cache_assert using `AssertConfig`.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 42 "></span>    <span class="k">return</span> <span class="n">AssertConfig</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 43 "></span>
-<span class="linenos" data-linenos=" 44 "></span>
-<span class="linenos" data-linenos=" 45 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 46 "></span><span class="k">def</span> <span class="nf">_calculate_metadata</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 47 "></span>    <span class="sd">&quot;&quot;&quot;Calculate metadata.</span>
-<span class="linenos" data-linenos=" 48 "></span>
-<span class="linenos" data-linenos=" 49 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 50 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos=" 51 "></span><span class="sd">        rel_test_file: relative path to the test file</span>
-<span class="linenos" data-linenos=" 52 "></span>
-<span class="linenos" data-linenos=" 53 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos=" 54 "></span><span class="sd">        dict: new_metadata</span>
+<span class="linenos" data-linenos=" 34 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="n">type_validator</span><span class="p">())</span>  <span class="c1"># FIXME: TBD!</span>
+<span class="linenos" data-linenos=" 35 "></span>    <span class="sd">&quot;&quot;&quot;TBD print out warning if set to True&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 36 "></span>
+<span class="linenos" data-linenos=" 37 "></span>    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 38 "></span>        <span class="sd">&quot;&quot;&quot;Register relevant configuration options.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 39 "></span>        <span class="n">cache_assert_container</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">SER_RULES</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_ser_rules</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 40 "></span>
+<span class="linenos" data-linenos=" 41 "></span>
+<span class="linenos" data-linenos=" 42 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 43 "></span><span class="k">def</span> <span class="nf">cache_assert_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AssertConfig</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 44 "></span>    <span class="sd">&quot;&quot;&quot;Configure pytest_cache_assert using `AssertConfig`.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 45 "></span>    <span class="k">return</span> <span class="n">AssertConfig</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 46 "></span>
+<span class="linenos" data-linenos=" 47 "></span>
+<span class="linenos" data-linenos=" 48 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 49 "></span><span class="k">def</span> <span class="nf">_calculate_metadata</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 50 "></span>    <span class="sd">&quot;&quot;&quot;Calculate metadata.</span>
+<span class="linenos" data-linenos=" 51 "></span>
+<span class="linenos" data-linenos=" 52 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 53 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos=" 54 "></span><span class="sd">        rel_test_file: relative path to the test file</span>
 <span class="linenos" data-linenos=" 55 "></span>
-<span class="linenos" data-linenos=" 56 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 57 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>
-<span class="linenos" data-linenos=" 58 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="linenos" data-linenos=" 59 "></span>    <span class="n">raw_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
-<span class="linenos" data-linenos=" 60 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">recursive_serialize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">raw_args</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="linenos" data-linenos=" 61 "></span>    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;test_file&#39;</span><span class="p">:</span> <span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="s1">&#39;test_name&#39;</span><span class="p">:</span> <span class="n">test_name</span><span class="p">,</span> <span class="s1">&#39;func_args&#39;</span><span class="p">:</span> <span class="n">func_args</span><span class="p">}</span>
-<span class="linenos" data-linenos=" 62 "></span>
-<span class="linenos" data-linenos=" 63 "></span>
-<span class="linenos" data-linenos=" 64 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 65 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 66 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 67 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 68 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">],</span>
-<span class="linenos" data-linenos=" 69 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="linenos" data-linenos=" 70 "></span>    <span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
-<span class="linenos" data-linenos=" 71 "></span>
-<span class="linenos" data-linenos=" 72 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 73 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos=" 74 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
-<span class="linenos" data-linenos=" 75 "></span>
-<span class="linenos" data-linenos=" 76 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos=" 77 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
+<span class="linenos" data-linenos=" 56 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 57 "></span><span class="sd">        dict: new_metadata</span>
+<span class="linenos" data-linenos=" 58 "></span>
+<span class="linenos" data-linenos=" 59 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 60 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>
+<span class="linenos" data-linenos=" 61 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos=" 62 "></span>    <span class="n">raw_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
+<span class="linenos" data-linenos=" 63 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">recursive_serialize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">raw_args</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="linenos" data-linenos=" 64 "></span>    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;test_file&#39;</span><span class="p">:</span> <span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="s1">&#39;test_name&#39;</span><span class="p">:</span> <span class="n">test_name</span><span class="p">,</span> <span class="s1">&#39;func_args&#39;</span><span class="p">:</span> <span class="n">func_args</span><span class="p">}</span>
+<span class="linenos" data-linenos=" 65 "></span>
+<span class="linenos" data-linenos=" 66 "></span>
+<span class="linenos" data-linenos=" 67 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 68 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 69 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 70 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 71 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">],</span>
+<span class="linenos" data-linenos=" 72 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos" data-linenos=" 73 "></span>    <span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
+<span class="linenos" data-linenos=" 74 "></span>
+<span class="linenos" data-linenos=" 75 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 76 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos=" 77 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
 <span class="linenos" data-linenos=" 78 "></span>
-<span class="linenos" data-linenos=" 79 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos=" 80 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
+<span class="linenos" data-linenos=" 79 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 80 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
 <span class="linenos" data-linenos=" 81 "></span>
-<span class="linenos" data-linenos=" 82 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 83 "></span>    <span class="n">cache_assert_config</span> <span class="o">=</span> <span class="n">cache_assert_config</span> <span class="ow">or</span> <span class="n">AssertConfig</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 82 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos=" 83 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
 <span class="linenos" data-linenos=" 84 "></span>
-<span class="linenos" data-linenos=" 85 "></span>    <span class="n">test_dir</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos" data-linenos=" 86 "></span>    <span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;tests&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]:</span>
-<span class="linenos" data-linenos=" 87 "></span>        <span class="n">test_dir</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootpath</span> <span class="o">/</span> <span class="n">sub_dir</span>
-<span class="linenos" data-linenos=" 88 "></span>        <span class="k">if</span> <span class="n">test_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-<span class="linenos" data-linenos=" 89 "></span>            <span class="k">break</span>
-<span class="linenos" data-linenos=" 90 "></span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 91 "></span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not locate a &quot;tests/&quot; directory in </span><span class="si">{</span><span class="n">test_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 92 "></span>
-<span class="linenos" data-linenos=" 93 "></span>    <span class="c1"># Read user settings</span>
-<span class="linenos" data-linenos=" 94 "></span>    <span class="n">path_cache_dir</span> <span class="o">=</span> <span class="n">test_dir</span> <span class="o">/</span> <span class="n">cache_assert_config</span><span class="o">.</span><span class="n">cache_dir_rel_path</span>
+<span class="linenos" data-linenos=" 85 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 86 "></span>    <span class="n">cache_assert_config</span> <span class="o">=</span> <span class="n">cache_assert_config</span> <span class="ow">or</span> <span class="n">AssertConfig</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 87 "></span>
+<span class="linenos" data-linenos=" 88 "></span>    <span class="n">test_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos=" 89 "></span>    <span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;tests&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]:</span>
+<span class="linenos" data-linenos=" 90 "></span>        <span class="n">test_dir</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootpath</span> <span class="o">/</span> <span class="n">sub_dir</span>
+<span class="linenos" data-linenos=" 91 "></span>        <span class="k">if</span> <span class="n">test_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 92 "></span>            <span class="k">break</span>
+<span class="linenos" data-linenos=" 93 "></span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 94 "></span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not locate a &quot;tests/&quot; directory in </span><span class="si">{</span><span class="n">test_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos" data-linenos=" 95 "></span>
-<span class="linenos" data-linenos=" 96 "></span>    <span class="c1"># Calculate keyword arguments</span>
-<span class="linenos" data-linenos=" 97 "></span>    <span class="n">rel_test_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 98 "></span>    <span class="n">cache_name</span> <span class="o">=</span> <span class="p">(</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>  <span class="c1"># noqa: ECE001</span>
-<span class="linenos" data-linenos=" 99 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">_calculate_metadata</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="100 "></span>
-<span class="linenos" data-linenos="101 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
-<span class="linenos" data-linenos="102 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 96 "></span>    <span class="c1"># Read user settings</span>
+<span class="linenos" data-linenos=" 97 "></span>    <span class="n">path_cache_dir</span> <span class="o">=</span> <span class="n">test_dir</span> <span class="o">/</span> <span class="n">cache_assert_config</span><span class="o">.</span><span class="n">cache_dir_rel_path</span>
+<span class="linenos" data-linenos=" 98 "></span>
+<span class="linenos" data-linenos=" 99 "></span>    <span class="c1"># Calculate keyword arguments</span>
+<span class="linenos" data-linenos="100 "></span>    <span class="n">rel_test_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)</span>
+<span class="linenos" data-linenos="101 "></span>    <span class="n">cache_name</span> <span class="o">=</span> <span class="p">(</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>  <span class="c1"># noqa: ECE001</span>
+<span class="linenos" data-linenos="102 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">_calculate_metadata</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="103 "></span>
+<span class="linenos" data-linenos="104 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
+<span class="linenos" data-linenos="105 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
@@ -1069,8 +1072,9 @@
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">class</span> <span class="nc">AssertConfig</span><span class="p">(</span>
 <span class="linenos" data-linenos="2 "></span>    <span class="o">*</span><span class="p">,</span>
 <span class="linenos" data-linenos="3 "></span>    <span class="n">cache_dir_rel_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;assert-cache&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="4 "></span>    <span class="n">extra_ser_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">NOTHING</span>
-<span class="linenos" data-linenos="5 "></span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">extra_ser_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">NOTHING</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos" data-linenos="6 "></span><span class="p">)</span>
 </code></pre></div>
 <details class="example">
 <summary>View Source</summary>
@@ -1087,12 +1091,17 @@
 <span class="linenos" data-linenos="11 "></span>
 <span class="linenos" data-linenos="12 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="13 "></span>
-<span class="linenos" data-linenos="14 "></span>    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="15 "></span>        <span class="sd">&quot;&quot;&quot;Register relevant configuration options.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="16 "></span>        <span class="n">cache_assert_container</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">SER_RULES</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_ser_rules</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="n">type_validator</span><span class="p">())</span>  <span class="c1"># FIXME: TBD!</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="sd">&quot;&quot;&quot;TBD print out warning if set to True&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span>    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="sd">&quot;&quot;&quot;Register relevant configuration options.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="n">cache_assert_container</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">SER_RULES</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_ser_rules</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">always_write</span>
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">cache_dir_rel_path</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">extra_ser_rules</span>

@@ -1,14 +1,15 @@
 """Configuration settings."""
 
+from beartype.typing import Any
 from enum import Enum
-
+from beartype import beartype
 import punq
 
 
 class CacheAssertContainerKeys(Enum):  # noqa: H601
-    """Enum of keys included in `cache_assert_container`."""
+    """Enum of keys used in `cache_assert_container`."""
 
-    SER_RULES = 'rules'
+    CONFIG = 'config'
 
 
 cache_assert_container = punq.Container()
@@ -17,3 +18,15 @@ cache_assert_container = punq.Container()
 Currently only supports registering custom serialization rules
 
 """
+
+
+@beartype
+def register(key: CacheAssertContainerKeys, instance: Any) -> None:
+    """Registers an instance for access with `retrieve(key)`."""
+    cache_assert_container.register(key, instance=instance)
+
+
+@beartype
+def retrieve(key: CacheAssertContainerKeys) -> None:
+    """Retrieves the value registered for the specified key."""
+    return cache_assert_container.register(key)

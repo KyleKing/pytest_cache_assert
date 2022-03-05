@@ -47,9 +47,8 @@ def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Dict[str, Union[st
 
 
 @pytest.fixture(scope='module')
-def cache_assert_config() -> Dict[str, Any]:
-    """Specify a custom cache directory."""
+def cache_assert_config() -> AssertConfig:
+    """Override the default AssertConfig."""
     return AssertConfig(
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
-        extra_ser_rules=[(Enum, lambda _e: _e.name), ((complex, Decimal), int)],
     )

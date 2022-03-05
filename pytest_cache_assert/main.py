@@ -15,6 +15,7 @@ from ._check_assert.constants import TEST_DATA_TYPE
 from ._check_assert.error_message import RichAssertionError
 from ._check_assert.key_rules import KeyRule
 
+# FIXME: Need to remove this from the Output when debugging
 _WRAP_KEY = '--wrapped--'
 """Special key to convert lists to dictionaries for dictdiffer."""
 
@@ -112,7 +113,7 @@ def assert_against_cache(
     cache_name: str,
     key_rules: Optional[List[KeyRule]] = None,
     validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
-    metadata: Optional[dict] = None,
+    metadata: Optional[dict] = None,  # FIXME: Need use the TestMetaData...
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
 

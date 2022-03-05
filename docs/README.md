@@ -192,11 +192,20 @@ def test_assert_against_cache_validator(assert_against_cache):
 
 For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert/scripts) or [Tests](https://github.com/kyleking/pytest_cache_assert/tests)
 
-## Global Configuration Options
+## Customization (`beta`)
+
+> Note: this feature is to be considered `beta` and may change, but I will do my best to keep the same interfaces
+
+For 2.0.0, `pytest_cache_assert` was refactored to be more easily customizable with configuration options for not just the cache directory, but also for a way to override how files are named and to override how the cached test data is serialized and validated.
+
+With these configuration options, users or 3rd party packages can replace the default package behavior, such as changing the file format for data serialization (`yaml`, `jsonlines`, etc.) and/or specifying a different serialization logic. All configuration options are available by creating a `cache_assert_config` fixture with the provided implementations.
 
 - See `AssertConfig` in `plugin.py` for configuration options and more information
-  - `cache_dir_rel_path`: set a custom relative path from the `tests/` directory. Default is `assert-cache/`
-  - `extra_ser_rules`: additional serialization rules that can be used generically on arbitrary data
+  - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
+  - `always_write`: Always write to the cached file so that diffs can be examined in the user's VCS.
+  - `cache_rel_path_resolver`: Any class that implements the CacheRelPathResolver interface to determine the relative path.
+  - `serializer`: Replacement serializer to replace the default JSON one.
+  - `validator`: Custom validator for identifying and summarizing the differences with cached data to StdOut
 
 ```py
 import pytest
@@ -219,10 +228,6 @@ For release history, see the [./docs/CHANGELOG.md](./docs/CHANGELOG.md)
 
 These are ideas for future options that are not currently implemented, but could be if there is enough interest:
 
-- PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development
-  - The other edge case where a `mode` might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a `rewrite_metadata` setting would be useful with options: `Always`, `Once` (Default), or `Never`
-  - Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)
-    - FIXME: Don't store variable datetime in the func_args!
 - PLANNED: [Provide CLI arguments like `pytest-recording`](https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70) (`request.config.getoption("--record-mode") or "none"`) for one-time changes to configuration
 - PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
 

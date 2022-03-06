@@ -1,19 +1,15 @@
 """Test plugin.py."""
 
-import re
 from datetime import datetime
 from uuid import uuid4
 
 import pendulum
 import pytest
-from beartype import beartype
-from cerberus import Validator
-from cerberus.schema import SchemaError
 from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 
 from pytest_cache_assert import KeyRule, check_suppress, check_type
-from pytest_cache_assert._check_assert.constants import TEST_DATA_TYPE, Wildcards
+from pytest_cache_assert._check_assert.constants import Wildcards
 from pytest_cache_assert._check_assert.differ import DiffResult
 from pytest_cache_assert._check_assert.error_message import RichAssertionError
 from pytest_cache_assert.main import assert_against_cache
@@ -147,25 +143,6 @@ def test_assert_against_cache_number_key_edge_case(fix_tmp_assert):
 
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(cached_data, **fix_tmp_assert)  # act
-
-
-# -----------------------------------------------------------------------------
-# Validators
-
-
-@beartype
-def cerberus_validator(test_data: TEST_DATA_TYPE) -> None:
-    """Cerberus custom validator example."""
-    validator = Validator({'result': {'type': 'int'}})
-    assert validator.validate(test_data)
-
-
-def test_assert_against_cache_validator(fix_tmp_assert):
-    """Test the validator."""
-    expected = re.escape("{'result': [{'type': ['Unsupported types: int']}]}")
-
-    with pytest.raises(SchemaError, match=expected):
-        assert_against_cache({'result': False}, validator=cerberus_validator, **fix_tmp_assert)  # act
 
 
 # -----------------------------------------------------------------------------

@@ -160,34 +160,6 @@ def test_assert_against_cache_key_rules(assert_against_cache):
         assert_against_cache(test_data)
 ```
 
-Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library. This is possible with the `validator` callable. The default validator is a no-op and that may be replaced with any custom function that raises an Exception on error.
-
-```py
-"""tests/test_main.py."""
-
-import re
-
-import pytest
-from beartype import beartype
-from cerberus import Validator
-from cerberus.schema import SchemaError
-
-
-@beartype
-def cerberus_validator(test_data) -> None:
-    """Cerberus custom validator example."""
-    validator = Validator({'result': {'type': 'int'}})
-    assert validator.validate(test_data)
-
-
-def test_assert_against_cache_validator(assert_against_cache):
-    """Test the validator."""
-    expected = re.escape("{'result': [{'type': ['Unsupported types: int']}]}")
-
-    with pytest.raises(SchemaError, match=expected):
-        assert_against_cache({'result': False}, validator=cerberus_validator)  # act
-```
-
 ### Even More Example
 
 For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert/scripts) or [Tests](https://github.com/kyleking/pytest_cache_assert/tests)

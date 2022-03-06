@@ -109,10 +109,10 @@ Differences: {diff_results}
 @beartype
 def assert_against_cache(
     test_data: Any,
+    *,
     path_cache_dir: Path,
     cache_name: str,
     key_rules: Optional[List[KeyRule]] = None,
-    validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,  # FIXME: Remove this. If desired, run separately
     metadata: Optional[Dict] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
@@ -122,16 +122,12 @@ def assert_against_cache(
         path_cache_dir: location of the cache directory
         cache_name: relative string path from the test_dir to the JSON cache file
         key_rules: dictionary of KeyRules to apply when selectively ignoring differences
-        validator: Custom validation function to be run against the test data before any modification
         metadata: metadata dictionary to store in the cache file
 
     Raises:
         RichAssertionError: if any assertion fails
 
     """
-    validator = validator or (lambda _res: None)
-    validator(test_data)
-
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)

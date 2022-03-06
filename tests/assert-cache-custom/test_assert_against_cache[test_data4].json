@@ -3,7 +3,7 @@
     {
       "func_args": {
         "test_data": {
-          "enum": "SER_RULES"
+          "enum": "__config__"
         }
       },
       "test_file": "test_plugin.py",
@@ -11,6 +11,6 @@
     }
   ],
   "_json": {
-    "enum": "SER_RULES"
+    "enum": "__config__"
   }
 }

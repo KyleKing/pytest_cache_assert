@@ -1,11 +1,9 @@
 """PyTest configuration."""
 
-from decimal import Decimal
-from enum import Enum
 from pathlib import Path
 
 import pytest
-from beartype.typing import Any, Callable, Dict, Union
+from beartype.typing import Callable, Dict, Union
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401

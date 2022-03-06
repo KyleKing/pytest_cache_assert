@@ -60,9 +60,13 @@ python = "^3.7.6"
 attrs-strict = ">=0.2"
 beartype = ">=0.10.0"
 dictdiffer = ">=0.9"   # Alternative: https://pypi.org/project/deepdiff/
+implements = ">=0.3.0"
 pendulum = ">=2.1.2"
+preconvert = ">=0.0.6"
 punq = ">=0.6.2"
 pytest = ">=5.0.0"
+returns = ">=0.18.0"
+ujson = ">=5.1.0"
 
 [tool.poetry.dev-dependencies]
 calcipy = { version = ">=0.14.4", extras = ["dev", "lint", "test"] }

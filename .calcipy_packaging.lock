@@ -128,12 +128,12 @@
         "version": "22.1.0"
     },
     "calcipy": {
-        "datetime": "2022-03-02T02:12:05.099817Z",
+        "datetime": "2022-03-05T20:53:23.852842Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-03-02T02:12:05.099817Z",
-        "latest_version": "0.14.4",
+        "latest_datetime": "2022-03-05T20:53:23.852842Z",
+        "latest_version": "0.14.5",
         "name": "calcipy",
-        "version": "0.14.4"
+        "version": "0.14.5"
     },
     "cement": {
         "datetime": "2021-12-18T18:27:13.099741Z",
@@ -719,6 +719,14 @@
         "name": "idna",
         "version": "3.3"
     },
+    "implements": {
+        "datetime": "2021-02-17T14:40:03.034474Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2021-02-17T14:40:03.034474Z",
+        "latest_version": "0.3.0",
+        "name": "implements",
+        "version": "0.3.0"
+    },
     "importlib-metadata": {
         "datetime": "2022-02-27T19:41:49.012917Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
@@ -880,12 +888,12 @@
         "version": "1.0.0"
     },
     "mkdocs-material": {
-        "datetime": "2022-03-02T13:41:26.641622Z",
+        "datetime": "2022-03-06T13:25:22.388277Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-03-02T13:41:26.641622Z",
-        "latest_version": "8.2.4",
+        "latest_datetime": "2022-03-06T13:25:22.388277Z",
+        "latest_version": "8.2.5",
         "name": "mkdocs-material",
-        "version": "8.2.4"
+        "version": "8.2.5"
     },
     "mkdocs-material-extensions": {
         "datetime": "2021-09-03T20:49:40.072718Z",
@@ -1062,6 +1070,14 @@
         "latest_version": "2.17.0",
         "name": "pre-commit",
         "version": "2.17.0"
+    },
+    "preconvert": {
+        "datetime": "2019-08-19T01:18:21.861237Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2019-08-19T01:18:21.861237Z",
+        "latest_version": "0.0.6",
+        "name": "preconvert",
+        "version": "0.0.6"
     },
     "prompt-toolkit": {
         "datetime": "2022-02-11T08:51:01.140138Z",
@@ -1375,6 +1391,14 @@
         "name": "rich",
         "version": "11.2.0"
     },
+    "setuptools-scm": {
+        "datetime": "2022-01-19T10:42:56.561004Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2022-01-19T10:42:56.561004Z",
+        "latest_version": "6.4.2",
+        "name": "setuptools-scm",
+        "version": "6.4.2"
+    },
     "six": {
         "datetime": "2021-05-05T14:18:17.237677Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
@@ -1558,6 +1582,14 @@
         "latest_version": "0.7.1",
         "name": "typing-inspect",
         "version": "0.7.1"
+    },
+    "ujson": {
+        "datetime": "2021-12-20T13:04:11.597980Z",
+        "domain": "https://pypi.org/pypi/{name}/{version}/json",
+        "latest_datetime": "2021-12-20T13:04:11.597980Z",
+        "latest_version": "5.1.0",
+        "name": "ujson",
+        "version": "5.1.0"
     },
     "urllib3": {
         "datetime": "2022-01-07T15:56:31.276636Z",

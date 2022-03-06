@@ -6,7 +6,7 @@
           "list_of_things": [
             "/Users/kyleking",
             1.23,
-            "SER_RULES"
+            "__config__"
           ]
         }
       },
@@ -18,7 +18,7 @@
     "list_of_things": [
       "/Users/kyleking",
       1.23,
-      "SER_RULES"
+      "__config__"
     ]
   }
 }

@@ -7,11 +7,9 @@ from json import JSONEncoder
 from pathlib import Path, PurePath
 from uuid import UUID
 
-import punq
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, List, Pattern
 
-from .config import CacheAssertContainerKeys, cache_assert_container
 from .constants import DIFF_TYPES
 
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
@@ -35,24 +33,19 @@ def coerce_if_known_type(value: Any) -> Any:
         Any: possibly unmodified data
 
     """
-    rules = []
-    try:
-        rules = cache_assert_container.resolve(CacheAssertContainerKeys.SER_RULES)
-    except punq.MissingDependencyError:
-        ...
-    rules.extend([
+    rules = [
         ((Path, PurePath), Path.as_posix),
         (Callable, replace_memory_address),
         (Enum, lambda _e: _e.value),
         ((datetime, UUID, Pattern), str),
         (complex, lambda _o: [_o.real, _o.imag]),
-    ])
+    ]
     for _types, func in rules:
         if isinstance(value, _types):
             return func(value)
 
     # Handle generic classes not recognized by inspect.isclass()
-    if not isinstance(value, (Dict, Iterable)) and str(type(value)).startswith('<class'):
+    if value and not isinstance(value, (Dict, Iterable, int, float)) and str(type(value)).startswith('<class'):
         return str(value)
 
     return value

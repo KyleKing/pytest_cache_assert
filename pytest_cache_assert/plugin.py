@@ -2,25 +2,26 @@
 
 from __future__ import annotations
 
-import warnings
 import inspect
+import warnings
 from functools import partial
 from pathlib import Path
 
+import attrs
 import pytest
 from _pytest.fixtures import FixtureRequest
 from attrs import field, frozen
 from attrs_strict import type_validator
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict, Optional
+from beartype.typing import Any, Callable, Dict, Iterable, Optional, Union
 
 from . import main
-from .cache_rel_path_resolver import CacheRelPathResolverType, CacheRelPath
-from .serializer import SerializerType, JSONCacheSerializer
-from .validator import ValidatorType, DiffValidator
 from ._check_assert.config import CacheAssertContainerKeys, register
 from ._check_assert.constants import DEF_CACHE_DIR_NAME
 from ._check_assert.serializer import recursive_serialize
+from .cache_rel_path_resolver import CacheRelPath, CacheRelPathResolverType
+from .serializer import JSONCacheSerializer, SerializerType
+from .validator import DiffValidator, ValidatorType
 
 
 @frozen(kw_only=True)
@@ -68,37 +69,32 @@ def cache_assert_config() -> AssertConfig:
     return AssertConfig()
 
 
-@beartype
-def calculate_metadata(request: FixtureRequest, rel_test_file: Path) -> Dict:
-    """Calculate metadata.
-
-    Args:
-        request: pytest fixture used to identify the test directory
-        rel_test_file: relative path to the test file
-
-    Returns:
-        dict: new_metadata
-
-    """
-    test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
-    test_params = [*inspect.signature(request.node.function).parameters.keys()]
-    raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
-    func_args = recursive_serialize(raw_args)
-    return {'test_file': rel_test_file.as_posix(), 'test_name': test_name, 'func_args': func_args}
-
-
 @frozen(kw_only=True)
 class TestMetadata:
     """Test MetaData."""
 
     test_file: str = field(validator=type_validator())
     test_name: str = field(validator=type_validator())
-    func_args: Dict = field(validator=type_validator())
+    func_args: Union[Dict, Iterable]  # = field(validator=type_validator())
 
     @classmethod
     @beartype
-    def from_pytest(cls: TestMetadata, request: FixtureRequest, rel_test_file: Path) -> TestMetadata:
-        return cls(**calculate_metadata(request=request, rel_test_file=rel_test_file))
+    def from_pytest(cls, request: FixtureRequest, rel_test_file: Path) -> TestMetadata:
+        """Resolve TestMetadata.
+
+        Args:
+            request: pytest fixture used to identify the test directory
+            rel_test_file: relative path to the test file
+
+        Returns:
+            TestMetadata: new TestMetadata
+
+        """
+        test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
+        test_params = [*inspect.signature(request.node.function).parameters.keys()]
+        raw_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
+        func_args = recursive_serialize(raw_args)
+        return cls(test_file=rel_test_file.as_posix(), test_name=test_name, func_args=func_args)
 
 
 @pytest.fixture()
@@ -136,7 +132,7 @@ def assert_against_cache(
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)
     cache_name = (rel_test_file.parent / f'{request.node.name}.json').as_posix()  # noqa: ECE001
-    metadata = TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file)
+    metadata = attrs.asdict(TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file))
 
     # FYI: The partial function keyword arguments can be overridden when called
     return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

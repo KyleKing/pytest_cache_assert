@@ -1,15 +1,16 @@
 """Configuration settings."""
 
-from beartype.typing import Any
 from enum import Enum
-from beartype import beartype
+
 import punq
+from beartype import beartype
+from beartype.typing import Any
 
 
 class CacheAssertContainerKeys(Enum):  # noqa: H601
     """Enum of keys used in `cache_assert_container`."""
 
-    CONFIG = 'config'
+    CONFIG = '__config__'
 
 
 cache_assert_container = punq.Container()

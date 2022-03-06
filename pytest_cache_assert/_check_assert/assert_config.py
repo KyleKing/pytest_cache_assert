@@ -2,11 +2,12 @@
 
 import warnings
 
+import punq
 from attrs import field, frozen
 from attrs_strict import type_validator
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
-from .config import CacheAssertContainerKeys, register
+from .config import CacheAssertContainerKeys, register, retrieve
 from .constants import DEF_CACHE_DIR_NAME
 from .validator import DiffValidator, ValidatorType
 
@@ -38,3 +39,10 @@ class AssertConfig:
         if self.always_write:
             warnings.warn('User has configured always_write globally. Make sure to check-in files to a VCS')
         register(CacheAssertContainerKeys.CONFIG, self)
+
+
+# Ensure that a default AssertConfig is always registered
+try:
+    retrieve(CacheAssertContainerKeys.CONFIG)
+except punq.MissingDependencyError:
+    register(CacheAssertContainerKeys.CONFIG, AssertConfig())

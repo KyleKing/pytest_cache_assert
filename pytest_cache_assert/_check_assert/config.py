@@ -28,6 +28,6 @@ def register(key: CacheAssertContainerKeys, instance: Any) -> None:
 
 
 @beartype
-def retrieve(key: CacheAssertContainerKeys) -> None:
+def retrieve(key: CacheAssertContainerKeys) -> Any:
     """Retrieves the value registered for the specified key."""
-    return cache_assert_container.register(key)
+    return cache_assert_container.resolve(key)

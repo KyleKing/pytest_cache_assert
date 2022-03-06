@@ -9,7 +9,6 @@ from returns.pipeline import flow
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
-from .serializer import recursive_serialize
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
 """Sourced from dictdiffer.
@@ -207,7 +206,6 @@ def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any]) -> List[DiffRes
 
     """
     results = []
-    new_dict = recursive_serialize(new_dict)
     raw_diff = dictdiffer.diff(first=old_dict, second=new_dict, expand=True, dot_notation=False)
     for (_type, _keys, _data) in raw_diff:
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
@@ -218,7 +216,7 @@ def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any]) -> List[DiffRes
 
 
 @beartype
-def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any], key_rules: List[KeyRule]) -> List[DiffResult]:
+def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, key_rules: List[KeyRule]) -> List[DiffResult]:
     """Determine the differences between two dictionaries.
 
     FYI: Sorts by specificity so that more specific key_rules apply over less specific ones

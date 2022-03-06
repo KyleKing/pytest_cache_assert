@@ -10,11 +10,13 @@ from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional, Union
 
 from . import KeyRule
+from . import retrieve, CacheAssertContainerKeys, CacheStoreType
 from ._check_assert import differ, error_message
-from ._check_assert.caching import init_cache, load_cached_data, write_cache_data
 from ._check_assert.constants import TEST_DATA_TYPE
 from ._check_assert.error_message import RichAssertionError
 
+
+# FIXME: Move this logic to the ValidatorType implementation
 # FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users
 _WRAP_KEY = '--wrapped--'
 """Special key to convert lists to dictionaries for dictdiffer."""
@@ -71,9 +73,10 @@ def _safe_types(
             key_rule.pattern = [_WRAP_KEY] + key_rule.pattern
         wrapped_key_rules.append(key_rule)
 
+    cache_store: CacheStoreType = retrieve(CacheAssertContainerKeys.CONFIG).cache_store
     return {
         'old_dict': _wrap_data(cached_data),
-        'new_dict': _wrap_data(test_data),
+        'new_dict': _wrap_data(cache_store.serialize(test_data)),
         'key_rules': wrapped_key_rules,
     }
 
@@ -94,6 +97,7 @@ def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List
     safe_tuple = _safe_types(cached_data=old_dict, test_data=new_dict, key_rules=key_rules or [])
     diff_results = differ.diff_with_rules(**safe_tuple)
     if diff_results:
+        # PLANNED: Cap length of error message. There might be a library that can help with that
         kwargs = {
             'new_dict': new_dict,
             'old_dict': old_dict,
@@ -128,11 +132,12 @@ def assert_against_cache(
         RichAssertionError: if any assertion fails
 
     """
+    cache_store: CacheStoreType = retrieve(CacheAssertContainerKeys.CONFIG).cache_store
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
-        init_cache(path_cache_dir)
-    write_cache_data(path_cache_file, metadata=metadata, test_data=test_data)
-    cached_data = load_cached_data(path_cache_file)
+        cache_store.initialize(path_cache_dir)
+    cache_store.write(path_cache_file, metadata=metadata, test_data=test_data)
+    cached_data = cache_store.read_cached_data(path_cache_file)
 
     safe_tuple = _safe_types(cached_data=cached_data, test_data=test_data, key_rules=key_rules or [])
     diff_results = differ.diff_with_rules(**safe_tuple)

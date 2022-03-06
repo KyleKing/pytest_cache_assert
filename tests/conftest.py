@@ -3,7 +3,8 @@
 from pathlib import Path
 
 import pytest
-from beartype.typing import Callable, Dict, Union
+from beartype import beartype
+from beartype.typing import Dict, Union
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
@@ -16,7 +17,8 @@ from .configuration import TEST_TMP_CACHE, clear_test_cache
 
 
 @pytest.fixture()
-def fix_test_cache() -> Path:
+@beartype
+def fix_cache_path() -> Path:
     """Fixture to clear and return the test cache directory for use.
 
     Returns:
@@ -28,23 +30,25 @@ def fix_test_cache() -> Path:
 
 
 @pytest.fixture()
-def fix_tmp_assert(fix_test_cache: Callable[[None], Path]) -> Dict[str, Union[str, Path]]:
+@beartype
+def fix_tmp_assert(fix_cache_path: Path) -> Dict[str, Union[str, Path]]:
     """Fixture to temporary assert directory and keyword arguments.
 
     Args:
-        fix_test_cache: pytest fixture for temporary directory
+        fix_cache_path: pytest fixture for temporary directory
 
     Returns:
         Path: Path to the test cache directory
 
     """
     return {
-        'path_cache_dir': fix_test_cache,
+        'path_cache_dir': fix_cache_path,
         'cache_name': 'test_assert_against_cache.json',
     }
 
 
 @pytest.fixture(scope='module')
+@beartype
 def cache_assert_config() -> AssertConfig:
     """Override the default AssertConfig."""
     return AssertConfig(

@@ -9,13 +9,13 @@ from pathlib import Path
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, List, Optional, Union
 
+from . import KeyRule
 from ._check_assert import differ, error_message
 from ._check_assert.caching import init_cache, load_cached_data, write_cache_data
 from ._check_assert.constants import TEST_DATA_TYPE
 from ._check_assert.error_message import RichAssertionError
-from ._check_assert.key_rules import KeyRule
 
-# FIXME: Need to remove this from the Output when debugging
+# FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users
 _WRAP_KEY = '--wrapped--'
 """Special key to convert lists to dictionaries for dictdiffer."""
 
@@ -112,8 +112,8 @@ def assert_against_cache(
     path_cache_dir: Path,
     cache_name: str,
     key_rules: Optional[List[KeyRule]] = None,
-    validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,
-    metadata: Optional[dict] = None,  # FIXME: Need use the TestMetaData...
+    validator: Optional[Callable[[TEST_DATA_TYPE], None]] = None,  # FIXME: Remove this. If desired, run separately
+    metadata: Optional[Dict] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
 
@@ -135,7 +135,7 @@ def assert_against_cache(
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         init_cache(path_cache_dir)
-    write_cache_data(path_cache_file, metadata or {}, test_data)
+    write_cache_data(path_cache_file, metadata=metadata, test_data=test_data)
     cached_data = load_cached_data(path_cache_file)
 
     safe_tuple = _safe_types(cached_data=cached_data, test_data=test_data, key_rules=key_rules or [])

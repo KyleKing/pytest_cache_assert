@@ -1,4 +1,4 @@
-"""Provide additional encoding functionality to check_assert."""
+"""Implement a serializer for caching data to and from version controlled files."""
 
 import re
 from datetime import datetime
@@ -9,11 +9,31 @@ from uuid import UUID
 
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, List, Pattern
+from implements import Interface, implements
 
 from .constants import DIFF_TYPES
 
+try:
+    from typing import Protocol, runtime_checkable
+except ImportError:
+    from typing_extensions import Protocol, runtime_checkable
+
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 """Regex for matching the hex memory address in a function signature."""
+
+
+class Serializer(Interface):
+    ...
+
+
+@runtime_checkable
+class SerializerType(Protocol):
+    ...
+
+
+@implements(Serializer)
+class JSONCacheSerializer(SerializerType):
+    ...
 
 
 @beartype

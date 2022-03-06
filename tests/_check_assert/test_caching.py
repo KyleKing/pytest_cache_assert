@@ -9,11 +9,11 @@ from pytest_cache_assert._check_assert.caching import _merge_metadata, init_cach
 from pytest_cache_assert._check_assert.constants import CACHE_README_TEXT, DEF_CACHE_DIR_NAME
 
 
-def test_init_cache(fix_test_cache):
+def test_init_cache(fix_cache_path):
     """Test that the cache can be created."""
-    init_cache(fix_test_cache)  # act
+    init_cache(fix_cache_path)  # act
 
-    assert (fix_test_cache / 'README.md').read_text() == CACHE_README_TEXT
+    assert (fix_cache_path / 'README.md').read_text() == CACHE_README_TEXT
 
 
 @pytest.mark.parametrize(
@@ -22,11 +22,11 @@ def test_init_cache(fix_test_cache):
         {'number': 1.23, 'str': 'message', 'bool': True, 'null': None},
     ],
 )
-def test_caching(test_data, fix_test_cache):
+def test_caching(test_data, fix_cache_path):
     """Test that data can be cached and then restored."""
-    init_cache(fix_test_cache)
-    path_cache_file = fix_test_cache / 'a_dir/sample.json'
-    write_cache_data(path_cache_file, {}, test_data)
+    init_cache(fix_cache_path)
+    path_cache_file = fix_cache_path / 'a_dir/sample.json'
+    write_cache_data(path_cache_file, metadata={}, test_data=test_data)
 
     result = load_cached_data(path_cache_file)
 

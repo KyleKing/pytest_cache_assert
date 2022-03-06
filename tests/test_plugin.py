@@ -9,10 +9,10 @@ from pydantic import BaseModel
 from pytest_cache_assert._check_assert.config import CacheAssertContainerKeys
 
 
-def test_assert_against_cache_failure(fix_test_cache, assert_against_cache):
+def test_assert_against_cache_failure(fix_cache_path, assert_against_cache):
     """Test that a difference in test_data and cached data generates an error."""
     kwargs = {
-        'path_cache_dir': fix_test_cache / 'custom/nested/dir',
+        'path_cache_dir': fix_cache_path / 'custom/nested/dir',
         'cache_name': 'test_assert_against_cache_failure-00.json',
     }
 

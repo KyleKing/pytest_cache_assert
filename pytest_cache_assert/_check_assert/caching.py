@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List
+from beartype.typing import Any, Dict, List, Optional
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
-from .serializer import CacheAssertSerializer
+from .serializer import CacheAssertSerializer, recursive_serialize
 
 
 @beartype
@@ -40,15 +40,16 @@ def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[st
 
 
 @beartype
-def write_cache_data(path_cache_file: Path, metadata: Dict[str, Any], test_data: TEST_DATA_TYPE) -> None:
+def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_data: TEST_DATA_TYPE) -> None:
     """Cache the specified data.
 
     Args:
         path_cache_file: location of the cache file to write
-        metadata: metadata dictionary to store in the cache file
+        metadata: optional dictionary for storing in the cache file
         test_data: arbitrary test data to store
 
     """
+    metadata = recursive_serialize(metadata or {})
     if path_cache_file.is_file():
         old_cache_dict = json.load(path_cache_file.open('r'))
         old_meta = old_cache_dict[KEY_NAME_META]

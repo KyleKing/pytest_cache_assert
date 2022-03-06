@@ -23,6 +23,11 @@ _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 
 
 class Serializer(Interface):
+
+    # FIXME: Rename to cache-store
+    # FIXME: Merge with cache_rel_path_resolver
+    # TODO: Methods for init/read/write. Uses `caching.py` internally
+
     ...
 
 
@@ -72,11 +77,11 @@ def coerce_if_known_type(value: Any) -> Any:
 
 
 @beartype
-def recursive_data_converter(data: Any) -> DIFF_TYPES:
-    """Recursively Coerce new data to type that can be compared.
+def recursive_serialize(data: Any) -> DIFF_TYPES:
+    """Recursive serialization of arbitrary data.
 
     Args:
-        data: data to coerce
+        data: data to serialize
 
     Returns:
         DIFF_TYPES: DiffResult-safe data
@@ -87,23 +92,10 @@ def recursive_data_converter(data: Any) -> DIFF_TYPES:
     if isinstance(data, (tuple, List)):
         return [*map(coerce_if_known_type, data)]  # For performance, only provides one level of recursion
     if isinstance(data, dict) and data:
-        return {_k: recursive_data_converter(_v) for _k, _v in data.items()}
+        return {_k: recursive_serialize(_v) for _k, _v in data.items()}
 
     return data
 
-
-@beartype
-def recursive_serialize(value: Any) -> Any:
-    """Recursive serialization function.
-
-    Args:
-        value: value to serialize
-
-    Returns:
-        Union[Dict[str, Any], str]: JSON-safe data (numbers, etc.)
-
-    """
-    return recursive_data_converter(value)
 
 
 class CacheAssertSerializer(JSONEncoder):

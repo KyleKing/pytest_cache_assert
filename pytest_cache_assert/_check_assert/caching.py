@@ -40,6 +40,17 @@ def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[st
 
 
 @beartype
+def _read_full_cache(path_cache_file: Path) -> TEST_DATA_TYPE:
+    """Read from the cache file.
+
+    Args:
+        path_cache_file: location of the cache file to write
+
+    """
+    return json.loads(path_cache_file.read_text())
+
+
+@beartype
 def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_data: TEST_DATA_TYPE) -> None:
     """Cache the specified data.
 
@@ -51,7 +62,7 @@ def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_da
     """
     metadata = recursive_serialize(metadata or {})
     if path_cache_file.is_file():
-        old_cache_dict = json.load(path_cache_file.open('r'))
+        old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
         metadata = _merge_metadata(metadata, old_meta)
         test_data = old_cache_dict[KEY_NAME_DATA]
@@ -75,5 +86,4 @@ def load_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
         TEST_DATA_TYPE: loaded data from cache file
 
     """
-    cache_dict = json.load(path_cache_file.open('r'))
-    return cache_dict[KEY_NAME_DATA]
+    return _read_full_cache(path_cache_file)[KEY_NAME_DATA]

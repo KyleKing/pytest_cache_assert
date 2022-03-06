@@ -7,7 +7,7 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict, List, Optional, Union
+from beartype.typing import Any, Dict, List, Optional, Union
 
 from . import KeyRule
 from ._check_assert import differ, error_message

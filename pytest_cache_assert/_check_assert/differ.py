@@ -5,10 +5,11 @@ from attrs import Attribute, field, frozen, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional, Union
+from returns.pipeline import flow
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
-from .serializer import recursive_data_converter
+from .serializer import recursive_serialize
 
 (_ADD, _REMOVE, _CHANGE) = ('add', 'remove', 'change')
 """Sourced from dictdiffer.
@@ -91,94 +92,106 @@ class DictDiff:  # noqa: H601
     old: DIFF_TYPES = field(default=TrueNull, init=False)
     new: DIFF_TYPES = field(default=TrueNull, init=False)
 
-    # FIXME: Add example of what this is changing. I can't remember why this was necessary
-    @beartype
-    def _parse_raw_data_and_raw_keys(self) -> None:
-        """Handle case where the keys are actually in the data.
 
-        Raises:
-            ValueError: on any unexpected states
 
-        """
-        self.data = self.raw_data
-        if self.raw_keys == '':
-            if len(self.raw_data) != 1:
-                raise ValueError(f'Unexpected self.raw_data from: {self}')
-            inner_list = self.raw_data[-1]
-            self.raw_keys = inner_list[:-1]
-            self.data = inner_list[-1]
-        self.keys = [self.raw_keys] if isinstance(self.raw_keys, str) else [*self.raw_keys]
+# FIXME: Add example of what this is changing. I can't remember why this was necessary
+@beartype
+def _parse_raw_data_and_raw_keys(diff: DictDiff) -> DictDiff:
+    """Handle case where the keys are actually in the data.
 
-    @beartype
-    def _parse_data(self) -> None:
-        """Unwrap additional states of `self.data`.
+    Raises:
+        ValueError: on any unexpected states
 
-        Raises:
-            ValueError: on any unexpected states
+    """
+    diff.data = diff.raw_data
+    if diff.raw_keys == '':
+        if len(diff.raw_data) != 1:
+            raise ValueError(f'Unexpected diff.raw_data from: {diff}')
+        inner_list = diff.raw_data[-1]
+        diff.raw_keys = inner_list[:-1]
+        diff.data = inner_list[-1]
+    diff.keys = [diff.raw_keys] if isinstance(diff.raw_keys, str) else [*diff.raw_keys]
+    return diff
 
-        """
-        # Handle case where there was a change in a list and the index is the first value in the data list
-        if (
-            isinstance(self.data, list) and len(self.data) == 1
-            and isinstance(self.data[0], tuple) and len(self.data[0]) == 2
-        ):
-            self.keys.append(self.data[0][0])
-            self.data = self.data[0][1]
-        # Handle case where the data is a new dictionary that has keys that should be in keys
-        while isinstance(self.data, dict):
-            items = [*self.data.items()]
-            if len(items) != 1:
-                raise ValueError(f'Unexpected self.data from: {self}')
-            key, value = items[0]
-            self.keys.append(key)
-            self.data = value
 
-    @beartype
-    def _parse_keys(self) -> None:
-        """Parse the key list from `dictdiffer.diff`."""
-        flattened_keys = []
-        for key in self.keys:
-            if isinstance(key, int) and key == self.keys[-1]:
-                self.index = key
-                break
-            flattened_keys.append(key)
+@beartype
+def _parse_data(diff: DictDiff) -> DictDiff:
+    """Unwrap additional states of `self.data`.
 
-        self.keys = flattened_keys
+    Raises:
+        ValueError: on any unexpected states
 
-    @beartype
-    def _assign_old_and_new(self) -> None:
-        """Assign new and old data based on the type of diff.
+    """
+    # Handle case where there was a change in a list and the index is the first value in the data list
+    if (
+        isinstance(diff.data, list) and len(diff.data) == 1
+        and isinstance(diff.data[0], tuple) and len(diff.data[0]) == 2
+    ):
+        diff.keys.append(diff.data[0][0])
+        diff.data = diff.data[0][1]
+    # Handle case where the data is a new dictionary that has keys that should be in keys
+    while isinstance(diff.data, dict):
+        items = [*diff.data.items()]
+        if len(items) != 1:
+            raise ValueError(f'Unexpected diff.data from: {diff}')
+        key, value = items[0]
+        diff.keys.append(key)
+        diff.data = value
+    return diff
 
-        Raises:
-            ValueError: on any unexpected states
 
-        """
-        if self.diff_type == _ADD:
-            self.new = self.data
-        elif self.diff_type == _REMOVE:
-            self.old = self.data
-        elif self.diff_type == _CHANGE:
-            if len(self.data) != 2:
-                raise ValueError(f'Unexpected self.data from: {self}')
-            self.old = self.data[0]
-            self.new = self.data[1]
-        else:  # Shouldn't be reachable because of validator
-            raise ValueError(f'Unknown self.diff_type from: {self}')
+@beartype
+def _parse_keys(diff: DictDiff) -> DictDiff:
+    """Parse the key list from `dictdiffer.diff`."""
+    flattened_keys = []
+    for key in diff.keys:
+        if isinstance(key, int) and key == diff.keys[-1]:
+            diff.index = key
+            break
+        flattened_keys.append(key)
 
-    @beartype
-    def get_diff_result(self) -> DiffResult:
-        """Generate the diff_result from parsed data.
+    diff.keys = flattened_keys
+    return diff
 
-        Returns:
-            DiffResult: The diff_result
 
-        """
-        # TODO: Implement with `returns` as a "Flow" to separate state and operations (SRP)
-        self._parse_raw_data_and_raw_keys()
-        self._parse_data()
-        self._parse_keys()
-        self._assign_old_and_new()
-        return DiffResult(key_list=self.keys, list_index=self.index, old=self.old, new=self.new)
+@beartype
+def _assign_old_and_new(diff: DictDiff) -> DictDiff:
+    """Assign new and old data based on the type of diff.
+
+    Raises:
+        ValueError: on any unexpected states
+
+    """
+    if diff.diff_type == _ADD:
+        diff.new = diff.data
+    elif diff.diff_type == _REMOVE:
+        diff.old = diff.data
+    elif diff.diff_type == _CHANGE:
+        if len(diff.data) != 2:
+            raise ValueError(f'Unexpected diff.data from: {diff}')
+        diff.old = diff.data[0]
+        diff.new = diff.data[1]
+    else:  # Shouldn't be reachable because of validator
+        raise ValueError(f'Unknown diff.diff_type from: {diff}')
+    return diff
+
+
+@beartype
+def get_diff_result(diff: DictDiff) -> DiffResult:
+    """Generate the diff_result from parsed data.
+
+    Returns:
+        DiffResult: The diff_result
+
+    """
+    diff = flow(
+        diff,
+        _parse_raw_data_and_raw_keys,
+        _parse_data,
+        _parse_keys,
+        _assign_old_and_new,
+    )
+    return DiffResult(key_list=diff.keys, list_index=diff.index, old=diff.old, new=diff.new)
 
 
 @beartype
@@ -194,11 +207,11 @@ def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: Dict[str, Any]) -> List[DiffRes
 
     """
     results = []
-    new_dict = recursive_data_converter(new_dict)
+    new_dict = recursive_serialize(new_dict)
     raw_diff = dictdiffer.diff(first=old_dict, second=new_dict, expand=True, dot_notation=False)
     for (_type, _keys, _data) in raw_diff:
         dict_diff = DictDiff(diff_type=_type, raw_keys=_keys, raw_data=_data)
-        diff_result = dict_diff.get_diff_result()
+        diff_result = get_diff_result(dict_diff)
         results.append(diff_result)
 
     return results

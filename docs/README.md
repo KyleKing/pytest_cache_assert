@@ -166,18 +166,17 @@ For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert
 
 ## Customization (`beta`)
 
-> Note: this feature is to be considered `beta` and may change, but I will do my best to keep the same interfaces
+> Note: this feature is to be considered `beta` and may change, however, I will do my best to keep the same interfaces
 
 For 2.0.0, `pytest_cache_assert` was refactored to be more easily customizable with configuration options for not just the cache directory, but also for a way to override how files are named and to override how the cached test data is serialized and validated.
 
 With these configuration options, users or 3rd party packages can replace the default package behavior, such as changing the file format for data serialization (`yaml`, `jsonlines`, etc.) and/or specifying a different serialization logic. All configuration options are available by creating a `cache_assert_config` fixture with the provided implementations.
 
 - See `AssertConfig` in `plugin.py` for configuration options and more information
-  - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
   - `always_write`: Always write to the cached file so that diffs can be examined in the user's VCS.
-  - `cache_rel_path_resolver`: Any class that implements the CacheRelPathResolver interface to determine the relative path.
-  - `serializer`: Replacement serializer to replace the default JSON one.
-  - `validator`: Custom validator for identifying and summarizing the differences with cached data to StdOut
+  - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
+  - `cache_store`: Configurable class for managing the cache representation. Default is local JSON.
+  - `validator`: Custom validator for identifying and summarizing the deviations from the cache.
 
 ```py
 import pytest

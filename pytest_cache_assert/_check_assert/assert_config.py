@@ -5,10 +5,9 @@ import warnings
 from attrs import field, frozen
 from attrs_strict import type_validator
 
-from .cache_rel_path_resolver import CacheRelPath, CacheRelPathResolverType
+from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, register
 from .constants import DEF_CACHE_DIR_NAME
-from .serializer import JSONCacheSerializer, SerializerType
 from .validator import DiffValidator, ValidatorType
 
 
@@ -16,32 +15,23 @@ from .validator import DiffValidator, ValidatorType
 class AssertConfig:
     """User configuration data structure."""
 
-    cache_dir_rel_path: str = field(default=DEF_CACHE_DIR_NAME, validator=type_validator())
-    """String relative directory from `tests/`. Default resolves to `tests/assert-cache/`."""
-
     # FIXME: This needs to be implemented
     always_write: bool = field(default=False, validator=type_validator())
     """Always write to the cached file so that diffs can be examined in the user's VCS."""
 
-    # FIXME: This needs to be implemented
-    cache_rel_path_resolver: CacheRelPathResolverType = field(factory=CacheRelPath, validator=type_validator())
-    """Any class that implements the CacheRelPathResolver interface to determine the relative path.
+    cache_dir_rel_path: str = field(default=DEF_CACHE_DIR_NAME, validator=type_validator())
+    """String relative directory from `tests/`. Default resolves to `tests/assert-cache/`."""
 
-    This is useful if you want to override the nested directory structure and file names
+    cache_store: CacheStoreType = field(factory=LocalJSONCacheStore, validator=type_validator())
+    """Configurable class for managing the cache representation. Default is local JSON.
 
-    """
-
-    # FIXME: This needs to be implemented
-    serializer: SerializerType = field(factory=JSONCacheSerializer, validator=type_validator())
-    """Replacement serializer to replace the default JSON one.
-
-    Override the default `serializer` to have a custom cache format
+    Override the default `cache_store` to have a custom cache format and serialization
 
     """
 
     # FIXME: This needs to be implemented
     validator: ValidatorType = field(factory=DiffValidator, validator=type_validator())
-    """Custom validator for identifying and summarizing the differences with cached data to StdOut."""
+    """Custom validator for identifying and summarizing the deviations from the cache."""
 
     def __attrs_post_init__(self) -> None:
         """Register the configuration object."""

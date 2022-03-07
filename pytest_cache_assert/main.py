@@ -7,76 +7,9 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional, Union
+from beartype.typing import Any, Dict, List, Optional
 
-from . import CacheAssertContainerKeys, CacheStoreType, KeyRule, retrieve
-from ._check_assert import differ, error_message
-from ._check_assert.constants import TEST_DATA_TYPE
-from ._check_assert.error_message import RichAssertionError
-
-# FIXME: Move this logic to the ValidatorType implementation
-# FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users
-_WRAP_KEY = '--wrapped--'
-"""Special key to convert lists to dictionaries for dictdiffer."""
-
-
-@beartype
-def _wrap_data(_data: Any) -> TEST_DATA_TYPE:
-    """Wrap data for comparison as dictionaries.
-
-    Args:
-        _data: list or dictionary data to potentially wrap
-
-    Returns:
-        TEST_DATA_TYPE: wrapped data that is safe for comparison
-
-    """
-    return {_WRAP_KEY: _data} if isinstance(_data, list) else _data
-
-
-'''
-# FYI: Not needed because the data is already unwrapped in locals of assert_against_cache
-@beartype
-def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
-    """Wrap data for comparison as dictionaries.
-
-    Args:
-        _data: safe data to potentially unwrap
-
-    Returns:
-        Any: unwrapped list or dictionary data
-
-    """
-    return _data.get(_WRAP_KEY, _data)
-'''
-
-
-def _safe_types(
-    *, test_data: Any, cached_data: Any, key_rules: List[KeyRule],
-) -> Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]:
-    """Convert data and key_rules to safe data types for diffing.
-
-    Args:
-        test_data: data to compare
-        cached_data: data to compare
-        key_rules: list of key rules to apply
-
-    Returns:
-        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules
-
-    """
-    wrapped_key_rules = []
-    for key_rule in key_rules:
-        if isinstance(cached_data, list):
-            key_rule.pattern = [_WRAP_KEY] + key_rule.pattern
-        wrapped_key_rules.append(key_rule)
-
-    cache_store: CacheStoreType = retrieve(CacheAssertContainerKeys.CONFIG).cache_store
-    return {
-        'old_dict': _wrap_data(cached_data),
-        'new_dict': _wrap_data(cache_store.serialize(test_data)),
-        'key_rules': wrapped_key_rules,
-    }
+from . import AssertConfig, CacheAssertContainerKeys, CacheStoreType, KeyRule, ValidatorType, retrieve
 
 
 @beartype
@@ -88,24 +21,13 @@ def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List
         new_dict: new dictionary (typically test data)
         key_rules: dictionary of KeyRules to apply when selectively ignoring differences
 
-    Raises:
-        RichAssertionError: if any assertion fails
-
     """
-    safe_tuple = _safe_types(cached_data=old_dict, test_data=new_dict, key_rules=key_rules or [])
-    diff_results = differ.diff_with_rules(**safe_tuple)
-    if diff_results:
-        # PLANNED: Cap length of error message. There might be a library that can help with that
-        kwargs = {
-            'new_dict': new_dict,
-            'old_dict': old_dict,
-            'diff_results': diff_results,
-        }
-        message = f"""For test data: {new_dict}
-Found differences with: {old_dict}
-Differences: {diff_results}
-"""
-        raise RichAssertionError(message, error_info=kwargs)
+    config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
+    cache_store: CacheStoreType = config.cache_store
+    new_dict = cache_store.serialize(new_dict)
+
+    validator: ValidatorType = config.validator
+    validator.assertion(cached_data=old_dict, test_data=new_dict, key_rules=key_rules or [])
 
 
 @beartype
@@ -126,24 +48,18 @@ def assert_against_cache(
         key_rules: dictionary of KeyRules to apply when selectively ignoring differences
         metadata: metadata dictionary to store in the cache file
 
-    Raises:
-        RichAssertionError: if any assertion fails
-
     """
-    cache_store: CacheStoreType = retrieve(CacheAssertContainerKeys.CONFIG).cache_store
+    config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
+    cache_store: CacheStoreType = config.cache_store
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
         cache_store.initialize(path_cache_dir)
+    test_data = cache_store.serialize(test_data)
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data)
     cached_data = cache_store.read_cached_data(path_cache_file)
 
-    safe_tuple = _safe_types(cached_data=cached_data, test_data=test_data, key_rules=key_rules or [])
-    diff_results = differ.diff_with_rules(**safe_tuple)
-    if diff_results:
-        kwargs = {
-            'test_data': test_data,
-            'cached_data': cached_data,
-            'path_cache_file': path_cache_file,
-            'diff_results': diff_results,
-        }
-        raise RichAssertionError(error_message.create(**kwargs), error_info=kwargs)
+    validator: ValidatorType = config.validator
+    validator.assertion(
+        cached_data=cached_data, test_data=test_data, key_rules=key_rules or [],
+        path_cache_file=path_cache_file,
+    )

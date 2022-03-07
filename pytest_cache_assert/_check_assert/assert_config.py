@@ -9,7 +9,7 @@ from attrs_strict import type_validator
 from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, register, retrieve
 from .constants import DEF_CACHE_DIR_NAME
-from .validator import DiffValidator, ValidatorType
+from .validator import DictDiffValidator, ValidatorType
 
 
 @frozen(kw_only=True)
@@ -30,8 +30,7 @@ class AssertConfig:
 
     """
 
-    # FIXME: This needs to be implemented
-    validator: ValidatorType = field(factory=DiffValidator, validator=type_validator())
+    validator: ValidatorType = field(factory=DictDiffValidator, validator=type_validator())
     """Custom validator for identifying and summarizing the deviations from the cache."""
 
     def __attrs_post_init__(self) -> None:

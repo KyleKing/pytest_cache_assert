@@ -143,14 +143,6 @@
         "name": "cement",
         "version": "3.0.6"
     },
-    "cerberus": {
-        "datetime": "2021-05-05T20:38:00.884544Z",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-05-05T20:38:00.884544Z",
-        "latest_version": "1.3.4",
-        "name": "cerberus",
-        "version": "1.3.4"
-    },
     "certifi": {
         "datetime": "2021-10-08T19:32:10.712888Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
@@ -696,12 +688,12 @@
         "version": "2.6.1"
     },
     "hypothesis": {
-        "datetime": "2022-03-03T11:19:41.726547Z",
+        "datetime": "2022-03-07T07:01:07.393970Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-03-03T11:19:41.726547Z",
-        "latest_version": "6.39.1",
+        "latest_datetime": "2022-03-07T07:01:07.393970Z",
+        "latest_version": "6.39.2",
         "name": "hypothesis",
-        "version": "6.39.1"
+        "version": "6.39.2"
     },
     "identify": {
         "datetime": "2022-02-22T19:36:33.536536Z",

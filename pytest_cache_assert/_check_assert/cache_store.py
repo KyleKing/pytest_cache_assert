@@ -7,7 +7,6 @@ from beartype.typing import Any, Dict, Optional
 from implements import Interface, implements
 
 from .caching import init_cache, load_cached_data, write_cache_data
-from .constants import TEST_DATA_TYPE
 from .serializer import make_diffable
 
 try:
@@ -23,15 +22,15 @@ class CacheStore(Interface):
         ...
 
     @staticmethod
-    def serialize(data: Any) -> TEST_DATA_TYPE:
+    def serialize(data: Any) -> Any:
         ...
 
     @staticmethod
-    def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: TEST_DATA_TYPE) -> None:
+    def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any) -> None:
         ...
 
     @staticmethod
-    def read_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
+    def read_cached_data(path_cache_file: Path) -> Any:
         ...
 
 
@@ -53,15 +52,15 @@ class LocalJSONCacheStore(CacheStoreType):
 
     @staticmethod
     @beartype
-    def serialize(data: Any) -> TEST_DATA_TYPE:
+    def serialize(data: Any) -> Any:
         return make_diffable(data=data)
 
     @staticmethod
     @beartype
-    def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: TEST_DATA_TYPE) -> None:
+    def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any) -> None:
         write_cache_data(path_cache_file=path_cache_file, metadata=metadata, test_data=test_data)
 
     @staticmethod
     @beartype
-    def read_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
+    def read_cached_data(path_cache_file: Path) -> Any:
         return load_cached_data(path_cache_file)

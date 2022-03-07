@@ -5,7 +5,7 @@ from pathlib import Path
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 
-from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
+from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META
 from .serializer import dumps, loads, make_diffable, pretty_dumps
 
 
@@ -39,18 +39,21 @@ def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[st
 
 
 @beartype
-def _read_full_cache(path_cache_file: Path) -> TEST_DATA_TYPE:
+def _read_full_cache(path_cache_file: Path) -> Any:
     """Read from the cache file.
 
     Args:
         path_cache_file: location of the cache file to write
+
+    Returns:
+        Any: full cache dictionary including metadata
 
     """
     return loads(path_cache_file.read_text())
 
 
 @beartype
-def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_data: TEST_DATA_TYPE) -> None:
+def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any) -> None:
     """Cache the specified data.
 
     Args:
@@ -74,14 +77,14 @@ def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_da
 
 
 @beartype
-def load_cached_data(path_cache_file: Path) -> TEST_DATA_TYPE:
+def load_cached_data(path_cache_file: Path) -> Any:
     """Cache the specified data.
 
     Args:
         path_cache_file: location of the cache file to write
 
     Returns:
-        TEST_DATA_TYPE: loaded data from cache file
+        Any: loaded data from cache file
 
     """
     return _read_full_cache(path_cache_file)[KEY_NAME_DATA]

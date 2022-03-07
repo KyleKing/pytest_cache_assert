@@ -3,7 +3,7 @@
 from datetime import datetime
 from enum import Enum
 
-from beartype.typing import Any, Dict, Iterable, List, Type, Union
+from beartype.typing import Dict, Iterable, List, Type, Union
 
 
 class Wildcards(Enum):  # noqa: H601
@@ -46,9 +46,6 @@ _NESTED_DICT = Dict[_SAFE_T, Union[_SAFE_T, Dict[_SAFE_T, Union[_SAFE_T, dict]]]
 
 _NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
 """Nested list type."""
-
-TEST_DATA_TYPE = Any  # PLANNED: Consider something like: Union[_NESTED_DICT, _NESTED_LIST]
-"""Test Data Type."""
 
 _DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime]
 """Single types for DIFF_TYPES."""

@@ -3,10 +3,9 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional, Union
+from beartype.typing import Any, Dict, List, Optional
 from implements import Interface, implements
 
-from .constants import TEST_DATA_TYPE
 from .differ import diff_with_rules
 from .error_message import RichAssertionError
 from .key_rules import KeyRule
@@ -22,14 +21,14 @@ _WRAP_KEY = '--wrapped--'
 
 
 @beartype
-def _wrap_data(_data: Any) -> TEST_DATA_TYPE:
+def _wrap_data(_data: Any) -> Any:
     """Wrap data for comparison as dictionaries.
 
     Args:
         _data: list or dictionary data to potentially wrap
 
     Returns:
-        TEST_DATA_TYPE: wrapped data that is safe for comparison
+        Any: wrapped data that is safe for comparison
 
     """
     return {_WRAP_KEY: _data} if isinstance(_data, list) else _data
@@ -38,7 +37,7 @@ def _wrap_data(_data: Any) -> TEST_DATA_TYPE:
 '''
 # FYI: Not needed because the data is already unwrapped in locals of assert_against_cache
 @beartype
-def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
+def _unwrap_data(_data: Any) -> Any:
     """Wrap data for comparison as dictionaries.
 
     Args:
@@ -54,7 +53,7 @@ def _unwrap_data(_data: TEST_DATA_TYPE) -> Any:
 
 def _safe_types(
     *, test_data: Any, cached_data: Any, key_rules: List[KeyRule],
-) -> Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]:
+) -> Dict:
     """Convert data and key_rules to safe data types for diffing.
 
     Args:
@@ -63,7 +62,7 @@ def _safe_types(
         key_rules: list of key rules to apply
 
     Returns:
-        Dict[str, Union[TEST_DATA_TYPE, List[KeyRule]]]: safe keyword args for diff_with_rules
+        Dict: safe keyword args for diff_with_rules
 
     """
     wrapped_key_rules = []

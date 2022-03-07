@@ -2,10 +2,22 @@
 
 ### Feat
 
+- implement DictDifferValidator
+- implement LocalJSONCacheStore
 - initialize new customization features
+
+### Refactor
+
+- switch to preconvert internally
+- encapsulate JSON logic
+- combine into single CacheStore representation
+- separate functional logic from state for DictDiff
+- remove optional validator argument
+- decouple AssertConfig from plugin
 
 ### Fix
 
+- resolve local test failures after initial refactor
 - commitizen changed Cerberus dependency version
 
 ## 1.3.5 (2022-03-03)

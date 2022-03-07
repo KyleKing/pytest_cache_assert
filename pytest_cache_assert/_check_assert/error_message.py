@@ -4,7 +4,6 @@ from pathlib import Path
 
 from beartype.typing import Any, List
 
-from .constants import TEST_DATA_TYPE
 from .differ import DiffResult
 
 
@@ -18,7 +17,7 @@ class RichAssertionError(AssertionError):
 
     @classmethod
     def create_message(
-        cls, test_data: TEST_DATA_TYPE, cached_data: TEST_DATA_TYPE, path_cache_file: Path,
+        cls, test_data: Any, cached_data: Any, path_cache_file: Path,
         diff_results: List[DiffResult],
     ) -> str:
         """Create the error message.

@@ -16,7 +16,6 @@ from pytest_cache_assert.main import assert_against_cache
 
 from .configuration import clear_test_cache
 
-# FIXME: Create a new plugin fixture that can store and access strings as keys in a dictionary
 DEF_ERROR_MESSAGE = r'For test data: .*\nFound differences with: .*'
 
 
@@ -141,7 +140,7 @@ def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, h
 # Hypothesis Testing
 
 
-# TODO: Support additional types: st.binary()
+# TODO: Add tests for additional types: st.binary(), etc.
 #   https://hypothesis.readthedocs.io/en/latest/ghostwriter.html
 #   https://hypothesis.readthedocs.io/en/latest/data.html
 @settings(
@@ -151,7 +150,7 @@ def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, h
 @given(
     result=st.dictionaries(
         keys=st.text(),
-        values=(st.booleans() | st.integers() | st.text()),
+        values=(st.booleans() | st.integers() | st.text() | st.binary()),
         max_size=5,
     ),
 )

@@ -1,13 +1,12 @@
 """Utilities for managing the cache."""
 
-import json
 from pathlib import Path
 
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META, TEST_DATA_TYPE
-from .serializer import CacheAssertSerializer, recursive_serialize
+from .serializer import dumps, loads, make_diffable, pretty_dumps
 
 
 @beartype
@@ -35,8 +34,8 @@ def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[st
 
     """
     all_meta = [new_metadata, *cached_meta_list]
-    unique_meta = {json.dumps(_m, sort_keys=True, cls=CacheAssertSerializer) for _m in all_meta}
-    return [*map(json.loads, sorted(unique_meta))]
+    unique_meta = {dumps(_m, sort_keys=True) for _m in all_meta}
+    return [*map(loads, sorted(unique_meta))]
 
 
 @beartype
@@ -47,7 +46,7 @@ def _read_full_cache(path_cache_file: Path) -> TEST_DATA_TYPE:
         path_cache_file: location of the cache file to write
 
     """
-    return json.loads(path_cache_file.read_text())
+    return loads(path_cache_file.read_text())
 
 
 @beartype
@@ -60,7 +59,7 @@ def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_da
         test_data: arbitrary test data to store
 
     """
-    metadata = recursive_serialize(metadata or {})
+    metadata = make_diffable(metadata) if metadata else {}
     if path_cache_file.is_file():
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
@@ -71,8 +70,7 @@ def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_da
 
     cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
     path_cache_file.parent.mkdir(exist_ok=True, parents=True)
-    _json = json.dumps(cache_dict, sort_keys=True, indent=2, separators=(',', ': '), cls=CacheAssertSerializer)
-    path_cache_file.write_text(_json.strip() + '\n')
+    path_cache_file.write_text(pretty_dumps(cache_dict))
 
 
 @beartype

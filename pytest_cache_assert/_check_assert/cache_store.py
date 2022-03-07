@@ -6,9 +6,9 @@ from beartype import beartype
 from beartype.typing import Any, Dict, Optional
 from implements import Interface, implements
 
-from .caching import init_cache, write_cache_data, load_cached_data
+from .caching import init_cache, load_cached_data, write_cache_data
 from .constants import TEST_DATA_TYPE
-from .serializer import recursive_serialize
+from .serializer import make_diffable
 
 try:
     from typing import Protocol, runtime_checkable
@@ -54,7 +54,7 @@ class LocalJSONCacheStore(CacheStoreType):
     @staticmethod
     @beartype
     def serialize(data: Any) -> TEST_DATA_TYPE:
-        return recursive_serialize(data=data)
+        return make_diffable(data=data)
 
     @staticmethod
     @beartype

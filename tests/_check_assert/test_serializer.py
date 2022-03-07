@@ -7,7 +7,7 @@ from uuid import UUID
 import pendulum
 import pytest
 
-from pytest_cache_assert._check_assert.serializer import recursive_serialize
+from pytest_cache_assert._check_assert.serializer import make_diffable
 
 
 @pytest.mark.parametrize(
@@ -27,8 +27,8 @@ from pytest_cache_assert._check_assert.serializer import recursive_serialize
         ),
     ],
 )
-def test_recursive_serialize(value, expected):
-    """Test recursive serialization."""
-    result = recursive_serialize(value)
+def test_make_diffable(value, expected):
+    """Test recursive serialization in make_diffable."""
+    result = make_diffable(value)
 
     assert result == expected

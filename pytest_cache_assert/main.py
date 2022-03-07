@@ -9,12 +9,10 @@ from pathlib import Path
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional, Union
 
-from . import KeyRule
-from . import retrieve, CacheAssertContainerKeys, CacheStoreType
+from . import CacheAssertContainerKeys, CacheStoreType, KeyRule, retrieve
 from ._check_assert import differ, error_message
 from ._check_assert.constants import TEST_DATA_TYPE
 from ._check_assert.error_message import RichAssertionError
-
 
 # FIXME: Move this logic to the ValidatorType implementation
 # FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users

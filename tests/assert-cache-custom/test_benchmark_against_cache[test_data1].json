@@ -7,7 +7,7 @@
         }
       },
       "test_file": "test_plugin.py",
-      "test_name": "test_assert_against_cache"
+      "test_name": "test_benchmark_against_cache"
     }
   ],
   "_json": {

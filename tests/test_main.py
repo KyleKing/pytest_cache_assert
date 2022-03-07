@@ -120,29 +120,21 @@ def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, 
 
 
 @pytest.mark.parametrize(
-    ('cached_data', 'test_data', 'key_rules'), [
+    ('cached_data', 'test_data', 'key_rules', 'help_text'), [
         (
             {'a': 50}, {'a': 51}, [
                 KeyRule(pattern=['*'], func=check_type),
-            ],
-        ),  # Verify that asterisk keys work ('*' should not match 'a')
+            ], 'Verify that asterisk keys work ("*" should not match "a")',
+        ),
     ],
 )
-def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, fix_tmp_assert):
+def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, help_text, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
 
     # Even with key_rules, the diff will fail
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
-
-
-def test_assert_against_cache_number_key_edge_case(fix_tmp_assert):
-    """Dictionaries with keys that are numbers fail comparison because they are stringified on load."""
-    cached_data = {10: 50}  # Will have key name 10 (number) removed, and '10' (string) added
-
-    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
-        assert_against_cache(cached_data, **fix_tmp_assert)  # act
 
 
 # -----------------------------------------------------------------------------

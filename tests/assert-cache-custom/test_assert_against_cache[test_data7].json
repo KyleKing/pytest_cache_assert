@@ -3,7 +3,8 @@
     {
       "func_args": {
         "test_data": {
-          "empty_dict": {}
+          "10": 50,
+          "11": "51"
         }
       },
       "test_file": "test_plugin.py",
@@ -11,6 +12,7 @@
     }
   ],
   "_json": {
-    "empty_dict": {}
+    "10": 50,
+    "11": "51"
   }
 }

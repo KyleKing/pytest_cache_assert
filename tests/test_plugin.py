@@ -30,15 +30,24 @@ def test_assert_against_cache_failure(fix_cache_path, assert_against_cache):
         {'path': Path.home()},
         {'PureWindowsPath': PureWindowsPath('C:/Program Files')},
         {'enum': CacheAssertContainerKeys.CONFIG},
-        {'list_of_things': (Path.home(), 1.23, CacheAssertContainerKeys.CONFIG)},
         {'empty_list': []},
         {'empty_dict': {}},
-        {'BaseModel': BaseModel},
-        # Add test cases from Hypothesis
-        {'1': False, '餁': 28498688},
-        {'': False, '1': 0, '│\U00108f79': 0},
+        {10: 50, '11': '51'},
     ],
 )
-def test_assert_against_cache(test_data, assert_against_cache, benchmark):
+def test_assert_against_cache(test_data, assert_against_cache):
+    """Test edge cases for assert_against_cache."""
+    assert_against_cache(test_data)
+
+
+@pytest.mark.parametrize(
+    'test_data',
+    [
+        {'list_of_things': (Path.home(), 1.23, CacheAssertContainerKeys.CONFIG)},
+        {'BaseModel': BaseModel},
+        {'': False, '1': 0, '餁': 28498688, '│\U00108f79': 0},
+    ],
+)
+def test_benchmark_against_cache(test_data, assert_against_cache, benchmark):
     """Test edge cases for assert_against_cache."""
     benchmark(assert_against_cache, test_data)

@@ -92,7 +92,6 @@ class DictDiff:  # noqa: H601
     new: DIFF_TYPES = field(default=TrueNull, init=False)
 
 
-
 # FIXME: Add example of what this is changing. I can't remember why this was necessary
 @beartype
 def _parse_raw_data_and_raw_keys(diff: DictDiff) -> DictDiff:

@@ -3,11 +3,7 @@
     {
       "func_args": {
         "test_data": {
-          "list_of_things": [
-            "/Users/kyleking",
-            1.23,
-            "__config__"
-          ]
+          "empty_list": []
         }
       },
       "test_file": "test_plugin.py",
@@ -15,10 +11,6 @@
     }
   ],
   "_json": {
-    "list_of_things": [
-      "/Users/kyleking",
-      1.23,
-      "__config__"
-    ]
+    "empty_list": []
   }
 }

@@ -10,4 +10,4 @@ class Converter:
     """User-specific converters to extend the default `cache_store`."""
 
     types: Any
-    func: Callable[[Any], str] = field(validator=type_validator())
+    func: Callable[[Any], Any] = field(validator=type_validator())

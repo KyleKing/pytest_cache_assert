@@ -2,6 +2,8 @@
 
 from pathlib import Path, PureWindowsPath
 
+import numpy as np
+import pandas as pd
 import pytest
 from beartype import beartype
 from pydantic import BaseModel
@@ -33,6 +35,8 @@ def test_assert_against_cache_failure(fix_cache_path, assert_against_cache):
         {'empty_list': []},
         {'empty_dict': {}},
         {10: 50, '11': '51'},
+        {'array': np.array([[1.23, 2.34], [3, 4]])},
+        {'df': pd.DataFrame([['a', 'b'], ['c', 'd']],columns=['col 1', 'col 2'])}
     ],
 )
 def test_assert_against_cache(test_data, assert_against_cache):

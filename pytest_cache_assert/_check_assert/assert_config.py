@@ -37,7 +37,7 @@ class AssertConfig:
 
     Example: `[Converters(types=(boto3.resources.base.ServiceResource), func=str)]`
 
-    Other use cases include serializing pandas or numpy data
+    Useful for serializing data form pandas or other types that are unknown to the generic converters
 
     """
 

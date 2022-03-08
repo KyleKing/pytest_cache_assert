@@ -1,17 +1,19 @@
 """PyTest configuration."""
 
+import json
 from pathlib import Path
 
+import pandas as pd
 import pytest
 from beartype import beartype
-from beartype.typing import Dict, Union
+from beartype.typing import Dict, List, Union
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
 from calcipy.dev.conftest import pytest_runtest_makereport  # noqa: F401
 
+from pytest_cache_assert import AssertConfig, Converter
 from pytest_cache_assert._check_assert.constants import DEF_CACHE_DIR_NAME
-from pytest_cache_assert.plugin import AssertConfig
 
 from .configuration import TEST_TMP_CACHE, clear_test_cache
 
@@ -47,10 +49,16 @@ def fix_tmp_assert(fix_cache_path: Path) -> Dict[str, Union[str, Path]]:
     }
 
 
+@beartype
+def panda_to_json(df: pd.DataFrame) -> Dict:
+    return json.loads(df.to_json(orient='split'))
+
+
 @pytest.fixture(scope='module')
 @beartype
 def cache_assert_config() -> AssertConfig:
     """Override the default AssertConfig."""
     return AssertConfig(
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
+        # converters=[Converter(types=(pd.DataFrame), func=panda_to_json)],
     )

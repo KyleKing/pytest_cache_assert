@@ -69,5 +69,7 @@ returns = ">=0.18.0"
 ujson = ">=5.1.0"      # PLANNED: Implement ujson as a faster alternative to json
 
 [tool.poetry.dev-dependencies]
+bearboto3 = { version = ">=0.1.2", extras = ["s3"] }
 calcipy = { version = ">=0.14.5", extras = ["dev", "lint", "test"] }
+moto = ">=3.0.6"
 pydantic = ">=1.8.2"

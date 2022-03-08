@@ -24,6 +24,7 @@ def assert_against_dict(old_dict: dict, new_dict: dict, key_rules: Optional[List
     """
     config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
     cache_store: CacheStoreType = config.cache_store
+    cache_store.initialize(None, config.converters)
     new_dict = cache_store.serialize(new_dict)
 
     validator: ValidatorType = config.validator
@@ -52,8 +53,7 @@ def assert_against_cache(
     config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
     cache_store: CacheStoreType = config.cache_store
     path_cache_file = path_cache_dir / cache_name
-    if not path_cache_dir.is_dir():
-        cache_store.initialize(path_cache_dir, config.converters)
+    cache_store.initialize(path_cache_dir, config.converters)
     test_data = cache_store.serialize(test_data)
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data)
     cached_data = cache_store.read_cached_data(path_cache_file)

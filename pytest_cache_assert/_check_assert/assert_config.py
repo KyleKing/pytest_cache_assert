@@ -18,7 +18,6 @@ from .validator import DictDiffValidator, ValidatorType
 class AssertConfig:
     """User configuration data structure."""
 
-    # FIXME: This needs to be implemented
     always_write: bool = field(default=False, validator=type_validator())
     """Always write to the cached file so that diffs can be examined in the user's VCS."""
 

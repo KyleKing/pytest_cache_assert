@@ -19,7 +19,7 @@ except ImportError:
 class CacheStore(Interface):
 
     @staticmethod
-    def initialize(path_cache_dir: Path, converters: Optional[List[Converter]] = None) -> None:
+    def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
         ...
 
     @staticmethod
@@ -48,11 +48,11 @@ class LocalJSONCacheStore(CacheStoreType):
 
     @staticmethod
     @beartype
-    def initialize(path_cache_dir: Path, converters: Optional[List[Converter]] = None) -> None:
+    def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
         if converters:
             register_user_converters(converters)
-
-        init_cache(path_cache_dir)
+        if path_cache_dir:
+            init_cache(path_cache_dir)
 
     @staticmethod
     @beartype

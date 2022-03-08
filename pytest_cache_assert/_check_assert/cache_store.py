@@ -3,11 +3,12 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, Optional
+from beartype.typing import Any, Dict, List, Optional
 from implements import Interface, implements
 
 from .caching import init_cache, load_cached_data, write_cache_data
-from .serializer import make_diffable
+from .converter import Converter
+from .serializer import make_diffable, register_user_converters
 
 try:
     from typing import Protocol, runtime_checkable
@@ -18,7 +19,7 @@ except ImportError:
 class CacheStore(Interface):
 
     @staticmethod
-    def initialize(path_cache_dir: Path) -> None:
+    def initialize(path_cache_dir: Path, converters: Optional[List[Converter]] = None) -> None:
         ...
 
     @staticmethod
@@ -47,7 +48,10 @@ class LocalJSONCacheStore(CacheStoreType):
 
     @staticmethod
     @beartype
-    def initialize(path_cache_dir: Path) -> None:
+    def initialize(path_cache_dir: Path, converters: Optional[List[Converter]] = None) -> None:
+        if converters:
+            register_user_converters(converters)
+
         init_cache(path_cache_dir)
 
     @staticmethod

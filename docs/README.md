@@ -176,6 +176,7 @@ With these configuration options, users or 3rd party packages can replace the de
   - `always_write`: Always write to the cached file so that diffs can be examined in the user's VCS.
   - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
   - `cache_store`: Configurable class for managing the cache representation. Default is local JSON.
+  - `converters`: register functions that handle conversion of unhandled types, such as pandas or numpy
   - `validator`: Custom validator for identifying and summarizing the deviations from the cache.
 
 ```py

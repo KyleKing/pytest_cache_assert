@@ -53,7 +53,7 @@ def assert_against_cache(
     cache_store: CacheStoreType = config.cache_store
     path_cache_file = path_cache_dir / cache_name
     if not path_cache_dir.is_dir():
-        cache_store.initialize(path_cache_dir)
+        cache_store.initialize(path_cache_dir, config.converters)
     test_data = cache_store.serialize(test_data)
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data)
     cached_data = cache_store.read_cached_data(path_cache_file)

@@ -5,10 +5,12 @@ import warnings
 import punq
 from attrs import field, frozen
 from attrs_strict import type_validator
+from beartype.typing import List
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, register, retrieve
 from .constants import DEF_CACHE_DIR_NAME
+from .converter import Converter
 from .validator import DictDiffValidator, ValidatorType
 
 
@@ -27,6 +29,15 @@ class AssertConfig:
     """Configurable class for managing the cache representation. Default is local JSON.
 
     Override the default `cache_store` to have a custom cache format and serialization
+
+    """
+
+    converters: List[Converter] = field(factory=list, validator=type_validator())
+    """Extend cache_store with custom functions for serializing novel types.
+
+    Example: `[Converters(types=(boto3.resources.base.ServiceResource), func=str)]`
+
+    Other use cases include serializing pandas or numpy data
 
     """
 

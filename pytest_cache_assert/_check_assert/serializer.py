@@ -7,9 +7,11 @@ from pathlib import Path, PurePath
 from beartype import beartype
 from beartype.typing import Any, Callable, List, Pattern
 from preconvert import register
+from preconvert.exceptions import Unconvertable
 from preconvert.output import json as pjson
 
 from .constants import DIFF_TYPES
+from .converter import Converter
 
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 """Regex for matching the hex memory address in a function signature."""
@@ -37,6 +39,13 @@ def _serialize_complex(obj: complex) -> List[float]:
     return [obj.real, obj.imag]
 
 
+@beartype
+def register_user_converters(converters: List[Converter]) -> None:
+    """Register the user-specified converters with preconvert."""
+    for converter in converters:
+        register.converter(converter.types)(converter.func)
+
+
 def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
     """Serialize object to str.
 
@@ -48,8 +57,14 @@ def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
     Returns:
         str: serialized data
 
+    Raises:
+        ValueError: when serialization fails
+
     """
-    return pjson.dumps(obj, sort_keys=sort_keys, indent=indent or None)
+    try:
+        return pjson.dumps(obj, sort_keys=sort_keys, indent=indent or None)
+    except Unconvertable as exc:
+        raise ValueError('Conversion error. Try registering a new handler with AssertConfig') from exc
 
 
 def pretty_dumps(obj: Any) -> str:

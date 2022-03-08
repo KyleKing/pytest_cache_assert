@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.4">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
     
     
       
@@ -381,8 +381,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-configuration-options" class="md-nav__link">
-    Global Configuration Options
+  <a href="#customization-beta" class="md-nav__link">
+    Customization (beta)
   </a>
   
 </li>
@@ -828,8 +828,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-configuration-options" class="md-nav__link">
-    Global Configuration Options
+  <a href="#customization-beta" class="md-nav__link">
+    Customization (beta)
   </a>
   
 </li>
@@ -1034,38 +1034,21 @@
 <span class="linenos" data-linenos="47 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
 <span class="linenos" data-linenos="48 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
 </code></pre></div>
-<p>Or you may want to write your own custom checks against the serialized data, such as with Cerberus or another library. This is possible with the <code>validator</code> callable. The default validator is a no-op and that may be replaced with any custom function that raises an Exception on error.</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;tests/test_main.py.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 2 "></span>
-<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cerberus</span> <span class="kn">import</span> <span class="n">Validator</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">cerberus.schema</span> <span class="kn">import</span> <span class="n">SchemaError</span>
-<span class="linenos" data-linenos=" 9 "></span>
-<span class="linenos" data-linenos="10 "></span>
-<span class="linenos" data-linenos="11 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="12 "></span><span class="k">def</span> <span class="nf">cerberus_validator</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="13 "></span>    <span class="sd">&quot;&quot;&quot;Cerberus custom validator example.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}})</span>
-<span class="linenos" data-linenos="15 "></span>    <span class="k">assert</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="linenos" data-linenos="16 "></span>
-<span class="linenos" data-linenos="17 "></span>
-<span class="linenos" data-linenos="18 "></span><span class="k">def</span> <span class="nf">test_assert_against_cache_validator</span><span class="p">(</span><span class="n">assert_against_cache</span><span class="p">):</span>
-<span class="linenos" data-linenos="19 "></span>    <span class="sd">&quot;&quot;&quot;Test the validator.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="20 "></span>    <span class="n">expected</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;{&#39;result&#39;: [{&#39;type&#39;: [&#39;Unsupported types: int&#39;]}]}&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos="21 "></span>
-<span class="linenos" data-linenos="22 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">SchemaError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">expected</span><span class="p">):</span>
-<span class="linenos" data-linenos="23 "></span>        <span class="n">assert_against_cache</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">validator</span><span class="o">=</span><span class="n">cerberus_validator</span><span class="p">)</span>  <span class="c1"># act</span>
-</code></pre></div>
 <h3 id="even-more-example">Even More Example<a class="headerlink" href="#even-more-example" title="Permanent link">⚓︎</a></h3>
 <p>For more examples, see <a href="https://github.com/kyleking/pytest_cache_assert/scripts">Scripts</a> or <a href="https://github.com/kyleking/pytest_cache_assert/tests">Tests</a></p>
-<h2 id="global-configuration-options">Global Configuration Options<a class="headerlink" href="#global-configuration-options" title="Permanent link">⚓︎</a></h2>
+<h2 id="customization-beta">Customization (<code>beta</code>)<a class="headerlink" href="#customization-beta" title="Permanent link">⚓︎</a></h2>
+<blockquote>
+<p>Note: this feature is to be considered <code>beta</code> and may change, however, I will do my best to keep the same interfaces</p>
+</blockquote>
+<p>For 2.0.0, <code>pytest_cache_assert</code> was refactored to be more easily customizable with configuration options for not just the cache directory, but also for a way to override how files are named and to override how the cached test data is serialized and validated.</p>
+<p>With these configuration options, users or 3rd party packages can replace the default package behavior, such as changing the file format for data serialization (<code>yaml</code>, <code>jsonlines</code>, etc.) and/or specifying a different serialization logic. All configuration options are available by creating a <code>cache_assert_config</code> fixture with the provided implementations.</p>
 <ul>
 <li>See <code>AssertConfig</code> in <code>plugin.py</code> for configuration options and more information</li>
-<li><code>cache_dir_rel_path</code>: set a custom relative path from the <code>tests/</code> directory. Default is <code>assert-cache/</code></li>
-<li><code>extra_ser_rules</code>: additional serialization rules that can be used generically on arbitrary data</li>
+<li><code>always_write</code>: Always write to the cached file so that diffs can be examined in the user&rsquo;s VCS.</li>
+<li><code>cache_dir_rel_path</code>: String relative directory from <code>tests/</code>. Default resolves to <code>tests/assert-cache/</code>.</li>
+<li><code>cache_store</code>: Configurable class for managing the cache representation. Default is local JSON.</li>
+<li><code>converters</code>: register functions that handle conversion of unhandled types, such as pandas DataFrames</li>
+<li><code>validator</code>: Custom validator for identifying and summarizing the deviations from the cache.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="linenos" data-linenos="2 "></span>
@@ -1082,12 +1065,6 @@
 <h3 id="planned-global-configuration-options">Planned Global Configuration Options<a class="headerlink" href="#planned-global-configuration-options" title="Permanent link">⚓︎</a></h3>
 <p>These are ideas for future options that are not currently implemented, but could be if there is enough interest:</p>
 <ul>
-<li>PLANNED: Consider a record mode that will always-write to regenerate the cache while working on development</li>
-<li>The other edge case where a <code>mode</code> might be helpful is when file names or test names are changed and the cache metadata has too many duplicates and needs to be refreshed. Maybe a <code>rewrite_metadata</code> setting would be useful with options: <code>Always</code>, <code>Once</code> (Default), or <code>Never</code></li>
-<li>Note that errors where the same test is appending to the metadata are problems with the code and should not necessarily need configuration. The only exception would be hypothesis testing where the inputs could be variable. In this case, a function argument to turn off metadata would be useful (rather than a global config)<ul>
-<li>FIXME: Don&rsquo;t store variable datetime in the func_args!</li>
-</ul>
-</li>
 <li>PLANNED: <a href="https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70">Provide CLI arguments like <code>pytest-recording</code></a> (<code>request.config.getoption("--record-mode") or "none"</code>) for one-time changes to configuration</li>
 <li>PLANNED: Consider filters to prevent secrets from being cached: <code>filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]</code></li>
 </ul>
@@ -1117,7 +1094,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 27, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 8, 2022</span>
       
         <br>
         Created:
@@ -1179,7 +1156,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.5413a266.min.js"></script>
+      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       

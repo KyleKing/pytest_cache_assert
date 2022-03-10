@@ -34,7 +34,7 @@ class AssertConfig:
     converters: List[Converter] = field(factory=list, validator=type_validator())
     """Extend cache_store with custom functions for serializing novel types.
 
-    Example: `[Converters(types=(boto3.resources.base.ServiceResource), func=str)]`
+    Example: `[Converters(types=(boto3.resources.base.ServiceResource), func=lambda _s: str(_s))]`
 
     Useful for serializing data form pandas or other types that are unknown to the generic converters
 

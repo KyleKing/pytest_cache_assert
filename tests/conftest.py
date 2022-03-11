@@ -72,6 +72,6 @@ def cache_assert_config() -> AssertConfig:
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
         converters=[
             Converter(types=(pd.DataFrame), func=panda_to_json),
-            Converter(types=[ServiceResource], func=lambda _s: str(_s)),
+            Converter(types=(ServiceResource), func=str),
         ],
     )

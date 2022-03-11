@@ -64,7 +64,7 @@ def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
     try:
         return pjson.dumps(obj, sort_keys=sort_keys, indent=indent or None)
     except Unconvertable as exc:
-        raise ValueError('Conversion error. Try registering a new handler with AssertConfig') from exc
+        raise ValueError(f'Conversion error. Try registering a new handler with AssertConfig to fix: {exc}') from exc
 
 
 def pretty_dumps(obj: Any) -> str:

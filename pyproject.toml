@@ -68,6 +68,7 @@ pytest = ">=5.0.0"
 returns = ">=0.18.0"
 ujson = ">=5.1.0"      # PLANNED: Implement ujson as a faster alternative to json
 
+# FYI: New dev-dependencies need to be copied to noxfile.py
 [tool.poetry.dev-dependencies]
 bearboto3 = { version = ">=0.1.2", extras = ["s3"] }
 calcipy = { version = ">=0.14.5", extras = ["dev", "lint", "test"] }

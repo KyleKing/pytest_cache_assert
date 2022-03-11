@@ -63,6 +63,13 @@ def gen_s3_client():
     with mock_s3():
         yield boto3.client('s3')
 
+from preconvert.exceptions import Unconvertable
+
+def convert_data_class(instance):
+    if 'S3' in str(instance):  # S3 objects are dynamic
+        return str(instance)
+    raise Unconvertable(instance)
+
 
 @pytest.fixture(scope='module')
 @beartype
@@ -72,6 +79,6 @@ def cache_assert_config() -> AssertConfig:
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
         converters=[
             Converter(types=pd.DataFrame, func=panda_to_json),
-            Converter(types=(ServiceResource,), func=str),
+            Converter(types=(ServiceResource,object), func=convert_data_class),
         ],
     )

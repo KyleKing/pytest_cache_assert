@@ -7,6 +7,12 @@ from beartype.typing import Any, List
 from .differ import DiffResult
 
 
+class NoCacheError(FileNotFoundError):
+    """Custom Assertion when no cached data is available for read."""
+
+    ...
+
+
 class RichAssertionError(AssertionError):
     """Custom AssertionError with additional `error_info`."""
 

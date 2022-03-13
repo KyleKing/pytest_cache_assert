@@ -6,6 +6,7 @@ from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 
 from .constants import CACHE_README_TEXT, KEY_NAME_DATA, KEY_NAME_META
+from .error_message import NoCacheError
 from .serializer import dumps, loads, make_diffable, pretty_dumps
 
 
@@ -53,13 +54,16 @@ def _read_full_cache(path_cache_file: Path) -> Any:
 
 
 @beartype
-def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any) -> None:
+def write_cache_data(
+    path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False,
+) -> None:
     """Cache the specified data.
 
     Args:
         path_cache_file: location of the cache file to write
         metadata: optional dictionary for storing in the cache file
         test_data: arbitrary test data to store
+        always_write: if True, overwrite the cached data
 
     """
     metadata = make_diffable(metadata) if metadata else {}
@@ -67,7 +71,8 @@ def write_cache_data(path_cache_file: Path, *, metadata: Optional[Dict], test_da
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
         metadata = _merge_metadata(metadata, old_meta)
-        test_data = old_cache_dict[KEY_NAME_DATA]
+        if not always_write:
+            test_data = old_cache_dict[KEY_NAME_DATA]
     else:
         metadata = [metadata]
 
@@ -87,4 +92,6 @@ def load_cached_data(path_cache_file: Path) -> Any:
         Any: loaded data from cache file
 
     """
-    return _read_full_cache(path_cache_file)[KEY_NAME_DATA]
+    if path_cache_file.is_file():
+        return _read_full_cache(path_cache_file)[KEY_NAME_DATA]
+    raise NoCacheError(f'No cache for: {path_cache_file}')

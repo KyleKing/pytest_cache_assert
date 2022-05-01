@@ -5,4 +5,4 @@ from calcipy.dev.noxfile import (  # noqa: F401
 )
 
 # Ensure that non-calcipy dev-dependencies are available in Nox environments
-pin_dev_dependencies(['bearboto3[s3]>=0.1.2', 'moto>=3.0.6', 'pydantic>=1.8.2'])
+pin_dev_dependencies(['moto>=3.0.6', 'pydantic>=1.8.2'])

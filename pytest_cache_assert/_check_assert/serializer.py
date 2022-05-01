@@ -6,6 +6,7 @@ from pathlib import Path, PurePath
 
 from beartype import beartype
 from beartype.typing import Any, Callable, List, Pattern
+from boto3.resources.base import ServiceResource
 from preconvert import register
 from preconvert.exceptions import Unconvertable
 from preconvert.output import json as pjson
@@ -17,11 +18,23 @@ _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 """Regex for matching the hex memory address in a function signature."""
 
 
-@register.converter(Callable)
 @beartype
-def _replace_memory_address(obj: Callable) -> str:
+def replace_memory_address(obj: Any) -> str:
     # Remove hex memory address from partial function signature
     return _RE_MEMORY_ADDRESS.sub('(..)>', str(obj))  # noqa: PD005
+
+
+@register.converter(Callable)
+def _replace_callable_memory_address(obj: Any) -> Any:
+    return replace_memory_address(obj)
+
+
+# FIXME: Support multiple levels of registered converters
+@register.converter((ServiceResource, object))  # , override=True)
+def _generic_memory_address_serializer(obj: Any) -> Any:
+    if _RE_MEMORY_ADDRESS.search(str(obj)):
+        return replace_memory_address(obj)
+    raise Unconvertable(obj)
 
 
 @register.converter(Path, PurePath)
@@ -43,7 +56,7 @@ def _serialize_complex(obj: complex) -> List[float]:
 def register_user_converters(converters: List[Converter]) -> None:
     """Register the user-specified converters with preconvert."""
     for converter in converters:
-        register.converter(converter.types)(converter.func)
+        register.converter(converter.types, override=True)(converter.func)
 
 
 def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:

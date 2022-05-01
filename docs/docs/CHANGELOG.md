@@ -1,13 +1,15 @@
 ## Unreleased
 
-### Feat
+### Fix
 
-- implement DictDifferValidator
-- implement LocalJSONCacheStore
-- initialize new customization features
+- str can't be type-checked
+- resolve local test failures after initial refactor
+- commitizen changed Cerberus dependency version
 
 ### Refactor
 
+- support an optional Path
+- replace TEST_DATA_TYPE with Any
 - switch to preconvert internally
 - encapsulate JSON logic
 - combine into single CacheStore representation
@@ -15,10 +17,12 @@
 - remove optional validator argument
 - decouple AssertConfig from plugin
 
-### Fix
+### Feat
 
-- resolve local test failures after initial refactor
-- commitizen changed Cerberus dependency version
+- initialize configurable list of converters
+- implement DictDifferValidator
+- implement LocalJSONCacheStore
+- initialize new customization features
 
 ## 1.3.5 (2022-03-03)
 

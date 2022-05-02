@@ -73,7 +73,9 @@ class _CacheAssertSerializer(JSONEncoder):
 
     def default(self, obj: Any) -> Any:
         """Extend default encoder."""
-        if isinstance(obj, (str, list, dict)):
+        if isinstance(obj, (bytes)):
+            return str(obj)
+        if isinstance(obj, (str, bytes, list, dict)):
             return super().default(obj)
         if inspect.isclass(obj):
             return replace_memory_address(str(obj))
@@ -135,7 +137,7 @@ def _serialize_enum(obj: Enum) -> str:
         raise Unconvertable(exc) from None
 
 
-_CONVERTERS.register([Path, PurePath], _serialize_enum)
+_CONVERTERS.register([Enum], _serialize_enum)
 
 _CONVERTERS.register([Pattern, DateTime, UUID], str)
 

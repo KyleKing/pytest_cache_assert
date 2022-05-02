@@ -57,11 +57,12 @@ def assert_against_cache(
     path_cache_file = path_cache_dir / cache_name
     cache_store.initialize(path_cache_dir, config.converters)
     test_data = cache_store.serialize(test_data)
-    aw = always_write or (always_write is None and config.always_write)  # Function argument overrides global
+    # Function argument overrides global
+    aw = config.always_write if always_write is None else always_write
     try:
         cached_data = cache_store.read_cached_data(path_cache_file)
     except NoCacheError:
-        cached_data = {}
+        cached_data = test_data
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data, always_write=aw)
 
     validator: ValidatorType = config.validator

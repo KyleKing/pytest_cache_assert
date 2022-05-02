@@ -11,11 +11,11 @@ from pydantic import BaseModel
 from pytest_cache_assert._check_assert.config import CacheAssertContainerKeys
 
 
-def test_assert_against_cache_failure(fix_cache_path, assert_against_cache):
+def test_assert_against_cache_plugin_failure(fix_cache_path, assert_against_cache):
     """Test that a difference in test_data and cached data generates an error."""
     kwargs = {
         'path_cache_dir': fix_cache_path / 'custom/nested/dir',
-        'cache_name': 'test_assert_against_cache_failure-00.json',
+        'cache_name': 'test_assert_against_cache_plugin_failure-00.json',
     }
 
     assert_against_cache({'result': False}, **kwargs)  # act
@@ -33,7 +33,7 @@ def test_gen_s3_client(gen_s3_client, assert_against_cache):
     'test_data',
     [
         {'decorator': beartype},
-        {'func': test_assert_against_cache_failure},
+        {'func': test_assert_against_cache_plugin_failure},
         {'path': Path.home()},
         {'PureWindowsPath': PureWindowsPath('C:/Program Files')},
         {'enum': CacheAssertContainerKeys.CONFIG},

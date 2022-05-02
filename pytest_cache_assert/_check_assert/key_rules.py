@@ -1,5 +1,6 @@
 """Key Rules."""
 
+from contextlib import suppress
 from datetime import datetime, timedelta
 from enum import Enum
 from functools import partial
@@ -66,12 +67,10 @@ def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
     """
     for converter in [UUID, pendulum.parse, float]:
-        try:
+        with suppress((ValueError, ParserError, AttributeError, TypeError)):
             converter(old)
             converter(new)
             return True
-        except (ValueError, ParserError, AttributeError, TypeError):
-            pass
 
     return False
 

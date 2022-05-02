@@ -4,6 +4,7 @@ import inspect
 import json
 import re
 from collections import defaultdict
+from contextlib import suppress
 from enum import Enum
 from json import JSONEncoder
 from pathlib import Path, PurePath
@@ -13,7 +14,6 @@ from attrs import field, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, List, Pattern, Tuple
-from loguru import logger
 
 from .constants import DIFF_TYPES
 from .converter import Converter
@@ -78,28 +78,19 @@ class _CacheAssertSerializer(JSONEncoder):
 
         converters = _CONVERTERS.get_lookup().get(type(obj))
         for converter in converters or []:
-            try:
+            with suppress(Unconvertable):
                 return converter(obj)
-            except Unconvertable:
-                ...
-            except Exception as exc:
-                logger.exception(f'Unhandled error: {exc}')
 
         for typ, converters in _CONVERTERS.get_lookup().items():
             if isinstance(obj, typ):
                 for converter in converters:
-                    try:
+                    with suppress(Unconvertable):
                         return converter(obj)
-                    except Unconvertable:
-                        ...
-                    except Exception as exc:
-                        logger.exception(f'Unhandled error: {exc}')
 
-        # Fallback for types that aren't easily convertable
-        try:
+        # Fallback for classes (i.e. `UUID`) that are of type "type" and otherwise cannot be easily registered
+        with suppress(Unconvertable):
             return _generic_memory_address_serializer(obj)
-        except Unconvertable:
-            ...
+
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 
 
@@ -144,45 +135,36 @@ def _serialize_complex(obj: complex) -> List[float]:
 
 _CONVERTERS.register([complex], _serialize_complex)
 
-try:
+with suppress(ImportError):
     from pendulum.datetime import DateTime
     _CONVERTERS.register([DateTime], str)
-except ImportError:
-    ...
 
 
-try:
+with suppress(ImportError):
     import pandas as pd
 
     def _serialize_pandas(obj: pd.DataFrame) -> Dict:
         return obj.to_dict()
 
     _CONVERTERS.register([pd.DataFrame], _serialize_pandas)
-except ImportError:
-    ...
 
 
-try:
+with suppress(ImportError):
     import numpy as np
 
-    # FIXME: To list?
-
     def _serialize_numpy(obj: np.ndarray) -> Dict:
+        # FIXME: To list?
         return obj.tolist()
 
     _CONVERTERS.register([np.ndarray], _serialize_numpy)
-except ImportError:
-    ...
 
-try:
+with suppress(ImportError):
     from pydantic.main import BaseModel
 
     def _serialize_pydantic(obj: BaseModel) -> Dict:
         return obj.to_dict()
 
     _CONVERTERS.register([BaseModel], _serialize_pydantic)
-except ImportError:
-    ...
 
 
 @beartype

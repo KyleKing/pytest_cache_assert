@@ -9,15 +9,11 @@ from json import JSONEncoder
 from pathlib import Path, PurePath
 from uuid import UUID
 
-import numpy as np
-import pandas as pd
 from attrs import field, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, List, Pattern, Tuple
 from loguru import logger
-from pendulum.datetime import DateTime
-from pydantic.main import BaseModel
 
 from .constants import DIFF_TYPES
 from .converter import Converter
@@ -139,7 +135,7 @@ def _serialize_enum(obj: Enum) -> str:
 
 _CONVERTERS.register([Enum], _serialize_enum)
 
-_CONVERTERS.register([Pattern, DateTime, UUID], str)
+_CONVERTERS.register([Pattern, UUID], str)
 
 
 def _serialize_complex(obj: complex) -> List[float]:
@@ -148,27 +144,45 @@ def _serialize_complex(obj: complex) -> List[float]:
 
 _CONVERTERS.register([complex], _serialize_complex)
 
-
-def _serialize_pandas(obj: pd.DataFrame) -> Dict:
-    return obj.to_dict()
-
-
-_CONVERTERS.register([pd.DataFrame], _serialize_pandas)
-
-
-# FIXME: To list?
-def _serialize_numpy(obj: np.ndarray) -> Dict:
-    return obj.tolist()
+try:
+    from pendulum.datetime import DateTime
+    _CONVERTERS.register([DateTime], str)
+except ImportError:
+    ...
 
 
-_CONVERTERS.register([np.ndarray], _serialize_numpy)
+try:
+    import pandas as pd
+
+    def _serialize_pandas(obj: pd.DataFrame) -> Dict:
+        return obj.to_dict()
+
+    _CONVERTERS.register([pd.DataFrame], _serialize_pandas)
+except ImportError:
+    ...
 
 
-def _serialize_pydantic(obj: BaseModel) -> Dict:
-    return obj.to_dict()
+try:
+    import numpy as np
 
+    # FIXME: To list?
 
-_CONVERTERS.register([BaseModel], _serialize_pydantic)
+    def _serialize_numpy(obj: np.ndarray) -> Dict:
+        return obj.tolist()
+
+    _CONVERTERS.register([np.ndarray], _serialize_numpy)
+except ImportError:
+    ...
+
+try:
+    from pydantic.main import BaseModel
+
+    def _serialize_pydantic(obj: BaseModel) -> Dict:
+        return obj.to_dict()
+
+    _CONVERTERS.register([BaseModel], _serialize_pydantic)
+except ImportError:
+    ...
 
 
 @beartype

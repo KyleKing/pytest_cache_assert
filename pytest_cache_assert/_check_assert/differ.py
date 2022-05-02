@@ -140,14 +140,11 @@ def _parse_data(diff: DictDiff) -> DictDiff:
 @beartype
 def _parse_keys(diff: DictDiff) -> DictDiff:
     """Parse the key list from `dictdiffer.diff`."""
-    flattened_keys = []
-    for key in diff.keys:
-        if isinstance(key, int) and key == diff.keys[-1]:
-            diff.index = key
-            break
-        flattened_keys.append(key)
-
-    diff.keys = flattened_keys
+    last_key = diff.keys[-1] if diff.keys else None
+    if isinstance(last_key, int):
+        # Extract the last key as the index if an integer
+        diff.keys = diff.keys[:-1]
+        diff.index = last_key
     return diff
 
 
@@ -182,7 +179,7 @@ def get_diff_result(diff: DictDiff) -> DiffResult:
 
     """
     diff = _parse_raw_data_and_raw_keys(diff)
-    diff = _assign_old_and_new(_parse_data(_parse_keys(diff)))
+    diff = _assign_old_and_new(_parse_keys(_parse_data(diff)))
     return DiffResult(key_list=diff.keys, list_index=diff.index, old=diff.old, new=diff.new)
 
 

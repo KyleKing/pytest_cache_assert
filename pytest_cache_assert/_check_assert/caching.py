@@ -71,7 +71,7 @@ def write_cache_data(
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
         metadata = _merge_metadata(metadata, old_meta)
-        if not always_write:
+        if not always_write:  # Only change test_data if `always_write`
             test_data = old_cache_dict[KEY_NAME_DATA]
     else:
         metadata = [metadata]

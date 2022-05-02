@@ -11,7 +11,7 @@ from ._check_assert.key_rules import (  # noqa: F401
 )
 from ._check_assert.validator import DictDiffValidator, ValidatorType  # noqa: F401
 
-__version__ = '1.3.5'
+__version__ = '2.0.0'
 __pkg_name__ = 'pytest_cache_assert'
 
 # ====== Above is the recommended code from calcipy_template and may be updated on new releases ======

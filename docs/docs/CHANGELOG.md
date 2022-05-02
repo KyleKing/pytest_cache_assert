@@ -1,13 +1,30 @@
 ## Unreleased
 
+### Feat
+
+- make numpy, pandas, and pydantic optionally serialize
+- replace preconvert with custom registration logic
+- **#3**: implement always_write
+- initialize configurable list of converters
+- implement DictDifferValidator
+- implement LocalJSONCacheStore
+- initialize new customization features
+
 ### Fix
 
+- on first write use test_data for comparison
+- order of flow for parsing diff result
+- handling s3 serialization and remove returns
+- s3 serialization needs to catch all objects
+- try to fix s3 serialization
+- remove type checking entirely for str
 - str can't be type-checked
 - resolve local test failures after initial refactor
 - commitizen changed Cerberus dependency version
 
 ### Refactor
 
+- always override the converter
 - support an optional Path
 - replace TEST_DATA_TYPE with Any
 - switch to preconvert internally
@@ -16,13 +33,6 @@
 - separate functional logic from state for DictDiff
 - remove optional validator argument
 - decouple AssertConfig from plugin
-
-### Feat
-
-- initialize configurable list of converters
-- implement DictDifferValidator
-- implement LocalJSONCacheStore
-- initialize new customization features
 
 ## 1.3.5 (2022-03-03)
 

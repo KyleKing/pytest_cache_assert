@@ -256,7 +256,7 @@
 <text text-anchor="middle" x="4472.5" y="-129.3" font-family="Times,serif" font-size="14.00">_Converters</text>
 <polyline fill="none" stroke="black" points="4321,-121.5 4624,-121.5 "/>
 <text text-anchor="start" x="4329" y="-106.3" font-family="Times,serif" font-size="14.00">converter_lookup : Dict[Any, List[Callable]]</text>
-<text text-anchor="start" x="4329" y="-91.3" font-family="Times,serif" font-size="14.00">converter_lookup : defaultdict, dict</text>
+<text text-anchor="start" x="4329" y="-91.3" font-family="Times,serif" font-size="14.00">converter_lookup : dict, defaultdict</text>
 <text text-anchor="start" x="4329" y="-76.3" font-family="Times,serif" font-size="14.00">converters : List[Tuple[Any, Callable]]</text>
 <polyline fill="none" stroke="black" points="4321,-68.5 4624,-68.5 "/>
 <text text-anchor="start" x="4329" y="-53.3" font-family="Times,serif" font-size="14.00">get_lookup(): Dict[Any, List[Callable]]</text>

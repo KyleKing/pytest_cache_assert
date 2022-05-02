@@ -1,0 +1,34 @@
+{
+  "_info": [
+    {
+      "func_args": {
+        "test_data": {
+          "df": [
+            {
+              "col 1": "a",
+              "col 2": "b"
+            },
+            {
+              "col 1": "c",
+              "col 2": "d"
+            }
+          ]
+        }
+      },
+      "test_file": "test_plugin.py",
+      "test_name": "test_assert_against_cache"
+    }
+  ],
+  "_json": {
+    "df": [
+      {
+        "col 1": "a",
+        "col 2": "b"
+      },
+      {
+        "col 1": "c",
+        "col 2": "d"
+      }
+    ]
+  }
+}

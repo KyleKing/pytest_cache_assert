@@ -34,7 +34,7 @@ class AssertConfig:
     converters: List[Converter] = field(factory=list, validator=type_validator())
     """Extend cache_store with custom functions for serializing novel types.
 
-    Example: `[Converter(types=pd.DataFrame, func=panda_to_json)]` for
+    Example: `[Converter(types=[pd.DataFrame], func=panda_to_json)]` for
 
     ```py
     def panda_to_json(df: pd.DataFrame) -> List[Dict]:

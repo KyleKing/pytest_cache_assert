@@ -1826,19 +1826,6 @@ toml = "*"
 virtualenv = ">=20.0.8"
 
 [[package]]
-name = "preconvert"
-version = "0.0.6"
-description = "A Library to enable preconversion of any Python type into one that is easily serializable"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.extras]
-bson = ["pymongo"]
-msgpack = ["msgpack"]
-simplejson = ["simplejson"]
-
-[[package]]
 name = "prompt-toolkit"
 version = "3.0.29"
 description = "Library for building powerful interactive command lines in Python"
@@ -2758,7 +2745,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "496fd4a040dc1b88d95541b8aeb86c7c3c28aff917cf7b167c21f3284b2b6e03"
+content-hash = "d0aca9024c36f545ea5f6fa9388b496caaece00eb88675a8532a0c17e2680ba3"
 
 [metadata.files]
 absolufy-imports = [
@@ -3744,10 +3731,6 @@ pluggy = [
 pre-commit = [
     {file = "pre_commit-2.18.1-py2.py3-none-any.whl", hash = "sha256:02226e69564ebca1a070bd1f046af866aa1c318dbc430027c50ab832ed2b73f2"},
     {file = "pre_commit-2.18.1.tar.gz", hash = "sha256:5d445ee1fa8738d506881c5d84f83c62bb5be6b2838e32207433647e8e5ebe10"},
-]
-preconvert = [
-    {file = "preconvert-0.0.6-py3-none-any.whl", hash = "sha256:4824251345c20e4af085b463623ed7825da070e900df683c0ef4e34431ff832e"},
-    {file = "preconvert-0.0.6.tar.gz", hash = "sha256:ddc2c0b6cd8e02e9ed8ea9b983854a06c06ab4030f6e09836504157cde3b29c3"},
 ]
 prompt-toolkit = [
     {file = "prompt_toolkit-3.0.29-py3-none-any.whl", hash = "sha256:62291dad495e665fca0bda814e342c69952086afb0f4094d0893d357e5c78752"},

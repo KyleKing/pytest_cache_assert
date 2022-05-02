@@ -5,7 +5,6 @@ from attrs import Attribute, field, frozen, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional, Union
-from returns.pipeline import flow
 
 from .constants import DIFF_TYPES, TrueNull, Wildcards
 from .key_rules import KeyRule
@@ -182,13 +181,8 @@ def get_diff_result(diff: DictDiff) -> DiffResult:
         DiffResult: The diff_result
 
     """
-    diff = flow(
-        diff,
-        _parse_raw_data_and_raw_keys,
-        _parse_data,
-        _parse_keys,
-        _assign_old_and_new,
-    )
+    diff = _parse_raw_data_and_raw_keys(diff)
+    diff = _assign_old_and_new(_parse_data(_parse_keys(diff)))
     return DiffResult(key_list=diff.keys, list_index=diff.index, old=diff.old, new=diff.new)
 
 

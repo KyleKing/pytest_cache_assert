@@ -1,5 +1,6 @@
 """Implement a serializer for caching data to and from version controlled files."""
 
+import inspect
 import json
 import re
 from collections import defaultdict
@@ -8,12 +9,12 @@ from json import JSONEncoder
 from pathlib import Path, PurePath
 from uuid import UUID
 
+import numpy as np
 import pandas as pd
 from attrs import field, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, List, Pattern, Tuple
-from boto3.resources.base import ServiceResource
 from loguru import logger
 from pendulum.datetime import DateTime
 from pydantic.main import BaseModel
@@ -55,10 +56,6 @@ class _Converters:
             self.converter_lookup = defaultdict(list)
             for typ, converter in self.converters[::-1]:
                 self.converter_lookup[typ].append(converter)
-            # Add fallback for all registered types to check for a serializable address
-            types = [*self.converter_lookup.keys()]
-            for typ in types:
-                self.converter_lookup[typ].append(_generic_memory_address_serializer)
         return self.converter_lookup
 
 
@@ -78,6 +75,8 @@ class _CacheAssertSerializer(JSONEncoder):
         """Extend default encoder."""
         if isinstance(obj, (str, list, dict)):
             return super().default(obj)
+        if inspect.isclass(obj):
+            return replace_memory_address(str(obj))
 
         converters = _CONVERTERS.get_lookup().get(type(obj))
         for converter in converters or []:
@@ -98,6 +97,11 @@ class _CacheAssertSerializer(JSONEncoder):
                     except Exception as exc:
                         logger.exception(f'Unhandled error: {exc}')
 
+        # Fallback for types that aren't easily convertable
+        try:
+            return _generic_memory_address_serializer(obj)
+        except Unconvertable:
+            ...
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 
 
@@ -107,7 +111,7 @@ def _generic_memory_address_serializer(obj: Any) -> Any:
     raise Unconvertable("Not a match for 'replace_memory_address'")
 
 
-_CONVERTERS.register([ServiceResource, Callable], _generic_memory_address_serializer)
+_CONVERTERS.register([Callable], _generic_memory_address_serializer)
 
 
 def _no_op(obj: Any) -> Any:
@@ -125,7 +129,10 @@ _CONVERTERS.register([Path, PurePath], _serialize_path)
 
 
 def _serialize_enum(obj: Enum) -> str:
-    return obj.value
+    try:
+        return obj.value
+    except AttributeError as exc:
+        raise Unconvertable(exc) from None
 
 
 _CONVERTERS.register([Path, PurePath], _serialize_enum)
@@ -147,6 +154,14 @@ def _serialize_pandas(obj: pd.DataFrame) -> Dict:
 _CONVERTERS.register([pd.DataFrame], _serialize_pandas)
 
 
+# FIXME: To list?
+def _serialize_numpy(obj: np.ndarray) -> Dict:
+    return obj.tolist()
+
+
+_CONVERTERS.register([np.ndarray], _serialize_numpy)
+
+
 def _serialize_pydantic(obj: BaseModel) -> Dict:
     return obj.to_dict()
 
@@ -161,6 +176,7 @@ def register_user_converters(converters: List[Converter]) -> None:
         _CONVERTERS.register(converter.types, converter.func)
 
 
+@beartype
 def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
     """Serialize object to str.
 
@@ -182,6 +198,7 @@ def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
         raise Unconvertable(f'Conversion error. Try specifying new converters in AssertConfig to fix: {exc}') from exc
 
 
+@beartype
 def pretty_dumps(obj: Any) -> str:
     """Serialize object to a pretty-printable str.
 
@@ -195,6 +212,7 @@ def pretty_dumps(obj: Any) -> str:
     return dumps(obj, sort_keys=True, indent=2).strip() + '\n'
 
 
+@beartype
 def loads(raw: str) -> DIFF_TYPES:
     """Deserialize arbitrary JSON data back to Python types.
 
@@ -208,6 +226,7 @@ def loads(raw: str) -> DIFF_TYPES:
     return json.loads(raw)
 
 
+@beartype
 def make_diffable(data: Any) -> DIFF_TYPES:
     """Convert raw object to diffable types for assertion checks.
 

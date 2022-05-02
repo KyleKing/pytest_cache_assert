@@ -1,0 +1,14 @@
+{
+  "_info": [
+    {
+      "func_args": {
+        "gen_s3_client": "<botocore.client.S3 object(..)>"
+      },
+      "test_file": "test_plugin.py",
+      "test_name": "test_gen_s3_client"
+    }
+  ],
+  "_json": {
+    "gen_s3_client": "<botocore.client.S3 object(..)>"
+  }
+}

@@ -6,12 +6,11 @@ from enum import Enum
 from functools import partial
 from uuid import UUID
 
-import pendulum
+import arrow
 from attrs import field, mutable
 from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Union
-from pendulum.parsing.exceptions import ParserError
 
 from .constants import DIFF_TYPES, Wildcards
 
@@ -66,8 +65,8 @@ def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
         bool: True if both values are the same kind
 
     """
-    for converter in [UUID, pendulum.parse, float]:
-        with suppress((ValueError, ParserError, AttributeError, TypeError)):
+    for converter in [UUID, arrow.get, float]:
+        with suppress((ValueError, AttributeError, TypeError, arrow.parser.ParserError)):
             converter(old)
             converter(new)
             return True
@@ -113,12 +112,12 @@ def _check_date_range(
         bool: True if the new date is within the specified range
 
     """
-    new_date = pendulum.parse(new)
+    new_date = arrow.get(str(new))
 
-    # Converts datetime to pendulum to ensure consistent timezones with serialized data
-    if min_date and new_date < pendulum.parse(str(min_date)):
+    # Converts datetime to arrow to ensure consistent timezones with serialized data
+    if min_date and new_date < arrow.get(str(min_date)):
         return False
-    return not (max_date and new_date > pendulum.parse(str(max_date)))
+    return not (max_date and new_date > arrow.get(str(max_date)))
 
 
 @beartype
@@ -154,8 +153,8 @@ def _check_date_proximity(
         bool: True if the new date meets the proximity criteria of timedelta and comparator
 
     """
-    old_date = pendulum.parse(old)
-    new_date = pendulum.parse(new)
+    old_date = arrow.get(str(old))
+    new_date = arrow.get(str(new))
 
     if comparator == Comparator.LTE:
         return (new_date - old_date) <= time_delta

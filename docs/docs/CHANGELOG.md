@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Refactor
+
+- use suppress and remove loguru from pkg
+
+## 2.0.0 (2022-05-01)
+
 ### Feat
 
 - make numpy, pandas, and pydantic optionally serialize
@@ -80,15 +86,15 @@
 
 ## 1.2.0 (2022-02-27)
 
-### Fix
-
-- implement serializer before diffing
-- failing tests and run doit
-
 ### Feat
 
 - WIP serializer to support functions
 - copier update. Add Github Actions
+
+### Fix
+
+- implement serializer before diffing
+- failing tests and run doit
 
 ### Refactor
 
@@ -106,10 +112,6 @@
 
 ## 1.1.0 (2022-02-18)
 
-### Refactor
-
-- use beartype's typing imports
-
 ### Feat
 
 - new assert_against_dict for in-memory comparison
@@ -120,25 +122,22 @@
 - argument order issues in main
 - datetime comparison logic
 
+### Refactor
+
+- use beartype's typing imports
+
 ## 1.0.0 (2021-11-02)
+
+### Feat
+
+- improve serialization
 
 ### Fix
 
 - correctly implement an optional fixture
 - make config fixture optional
 
-### Feat
-
-- improve serialization
-
 ## 1.0.0rc0 (2021-11-02)
-
-### Refactor
-
-- code cleanup & documentation updates
-- simplify merge_metadata logic
-- serialize the func_args metadata recursively
-- improve code quality of _raw_diff
 
 ### Feat
 
@@ -155,15 +154,14 @@
 - add CNAME for custom subdomain
 - add missing check_imports file
 
+### Refactor
+
+- code cleanup & documentation updates
+- simplify merge_metadata logic
+- serialize the func_args metadata recursively
+- improve code quality of _raw_diff
+
 ## 0.1.0 (2021-10-31)
-
-### Fix
-
-- add tests and verify correctness of KeyRule
-- use full name instead of custom indexing for cache
-- use 2-spaces on JSON for pre-commit
-- reduce stored metadata and check args
-- re-run "poetry install" after entrypoint changes
 
 ### Feat
 
@@ -176,6 +174,14 @@
 - initialize package code and tests
 - start with Readme (RDD)
 - initialized project with copier
+
+### Fix
+
+- add tests and verify correctness of KeyRule
+- use full name instead of custom indexing for cache
+- use 2-spaces on JSON for pre-commit
+- reduce stored metadata and check args
+- re-run "poetry install" after entrypoint changes
 
 ### Refactor
 

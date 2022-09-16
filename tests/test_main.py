@@ -3,7 +3,7 @@
 from datetime import datetime
 from uuid import uuid4
 
-import pendulum
+import arrow
 import pytest
 from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
@@ -91,7 +91,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
             ], 'Check UUID types',
         ),
         (
-            {'dates': str(datetime.now())}, {'dates': str(pendulum.now().add(weeks=1))}, [
+            {'dates': str(datetime.now())}, {'dates': str(arrow.now().shift(weeks=1))}, [
                 KeyRule(pattern=['dates'], func=check_type),
             ], 'Check date types',
         ),

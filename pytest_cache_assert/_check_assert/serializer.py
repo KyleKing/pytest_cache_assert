@@ -21,18 +21,15 @@ from .converter import Converter
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 """Regex for matching the hex memory address in a function signature."""
 
-
 class Unconvertable(ValueError):
     """Custom Error to indicate conversion failure"""
 
     ...
 
-
 @beartype
 def replace_memory_address(obj: Any) -> str:
     # Remove hex memory address from partial function signature
     return _RE_MEMORY_ADDRESS.sub('(..)>', str(obj))  # noqa: PD005
-
 
 @mutable()
 class _Converters:
@@ -54,9 +51,7 @@ class _Converters:
                 self.converter_lookup[typ].append(converter)
         return self.converter_lookup
 
-
 _CONVERTERS = _Converters()
-
 
 class _CacheAssertSerializer(JSONEncoder):
     """Expand serializable types beyond default encoder.
@@ -93,29 +88,22 @@ class _CacheAssertSerializer(JSONEncoder):
 
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 
-
 def _generic_memory_address_serializer(obj: Any) -> Any:
     if _RE_MEMORY_ADDRESS.search(str(obj)):
         return replace_memory_address(obj)
     raise Unconvertable("Not a match for 'replace_memory_address'")
 
-
 _CONVERTERS.register([Callable], _generic_memory_address_serializer)
-
 
 def _no_op(obj: Any) -> Any:
     return obj
 
-
 _CONVERTERS.register([bool, int, float], _no_op)
-
 
 def _serialize_path(obj: Path) -> str:
     return obj.as_posix()
 
-
 _CONVERTERS.register([Path, PurePath], _serialize_path)
-
 
 def _serialize_enum(obj: Enum) -> str:
     try:
@@ -123,15 +111,12 @@ def _serialize_enum(obj: Enum) -> str:
     except AttributeError as exc:
         raise Unconvertable(exc) from None
 
-
 _CONVERTERS.register([Enum], _serialize_enum)
 
 _CONVERTERS.register([Pattern, UUID], str)
 
-
 def _serialize_complex(obj: complex) -> List[float]:
     return [obj.real, obj.imag]
-
 
 _CONVERTERS.register([complex], _serialize_complex)
 
@@ -139,6 +124,9 @@ with suppress(ImportError):
     from pendulum.datetime import DateTime
     _CONVERTERS.register([DateTime], str)
 
+with suppress(ImportError):
+    from arrow import Arrow
+    _CONVERTERS.register([Arrow], str)
 
 with suppress(ImportError):
     import pandas as pd
@@ -148,12 +136,10 @@ with suppress(ImportError):
 
     _CONVERTERS.register([pd.DataFrame], _serialize_pandas)
 
-
 with suppress(ImportError):
     import numpy as np
 
     def _serialize_numpy(obj: np.ndarray) -> Dict:
-        # FIXME: To list?
         return obj.tolist()
 
     _CONVERTERS.register([np.ndarray], _serialize_numpy)
@@ -166,13 +152,11 @@ with suppress(ImportError):
 
     _CONVERTERS.register([BaseModel], _serialize_pydantic)
 
-
 @beartype
 def register_user_converters(converters: List[Converter]) -> None:
     """Register the user-specified converters."""
     for converter in converters:
         _CONVERTERS.register(converter.types, converter.func)
-
 
 @beartype
 def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
@@ -195,7 +179,6 @@ def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
     except Unconvertable as exc:
         raise Unconvertable(f'Conversion error. Try specifying new converters in AssertConfig to fix: {exc}') from exc
 
-
 @beartype
 def pretty_dumps(obj: Any) -> str:
     """Serialize object to a pretty-printable str.
@@ -209,7 +192,6 @@ def pretty_dumps(obj: Any) -> str:
     """
     return dumps(obj, sort_keys=True, indent=2).strip() + '\n'
 
-
 @beartype
 def loads(raw: str) -> DIFF_TYPES:
     """Deserialize arbitrary JSON data back to Python types.
@@ -222,7 +204,6 @@ def loads(raw: str) -> DIFF_TYPES:
 
     """
     return json.loads(raw)
-
 
 @beartype
 def make_diffable(data: Any) -> DIFF_TYPES:

@@ -66,7 +66,7 @@ def write_cache_data(
         always_write: if True, overwrite the cached data
 
     """
-    metadata = make_diffable(metadata) if metadata else {}
+    metadata: Dict = make_diffable(metadata) if metadata else {}
     if path_cache_file.is_file():
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]

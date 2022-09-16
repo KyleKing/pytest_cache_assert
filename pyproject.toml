@@ -68,7 +68,7 @@ pytest = ">=5.0.0"
 ujson = ">=5.1.0"      # FIXME: Implement ujson as a faster alternative to json
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.14.5", extras = ["dev", "lint", "test"] }
+calcipy = { version = ">=0.16.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
 # FYI: New dev-dependencies need to be copied to noxfile.py
 moto = ">=4.0.3"
 pendulum = ">=2.1.2"

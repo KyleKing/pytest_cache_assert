@@ -110,7 +110,7 @@ The cached JSON files must be checked into version control and if needed, can be
 In your cached dictionary, you may have variable values with more complex logic to verify, such as dates, UUIDs, etc. These can be selectively ignored, matched-if-null, or some other user-specified check:
 
 ```py
-"""tests/test_main.py."""
+"""tests/test_readme.py."""
 
 from uuid import uuid4
 from datetime import datetime, timedelta

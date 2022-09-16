@@ -86,7 +86,8 @@ def assert_against_cache(
 
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)
-    cache_name = (rel_test_file.parent / f'{request.node.name}.json').as_posix()  # noqa: ECE001
+
+    cache_name = (rel_test_file.parent / rel_test_file.stem / f'{request.node.name}.json').as_posix() # noqa: ECE001
     metadata = attrs.asdict(TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file))
 
     # FYI: The partial function keyword arguments can be overridden when called

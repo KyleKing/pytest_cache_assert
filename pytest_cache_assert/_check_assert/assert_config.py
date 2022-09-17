@@ -4,7 +4,8 @@ import warnings
 
 import punq
 from beartype.typing import List
-from pydantic import BaseModel, Field
+from pydantic import Field
+from pydantic.dataclasses import dataclass
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, register, retrieve
@@ -13,7 +14,8 @@ from .converter import Converter
 from .validator import DictDiffValidator, ValidatorType
 
 
-class AssertConfig(BaseModel):
+@dataclass(kw_only=True)
+class AssertConfig:
     """User configuration data structure."""
 
     always_write: bool = False

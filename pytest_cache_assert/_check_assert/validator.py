@@ -11,9 +11,9 @@ from .error_message import RichAssertionError
 from .key_rules import KeyRule
 
 try:
-    from typing import Protocol, runtime_checkable
+    from typing import Protocol, runtime_checkable, Self
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable
+    from typing_extensions import Protocol, runtime_checkable, Self
 
 # FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users
 _WRAP_KEY = '--wrapped--'
@@ -90,7 +90,19 @@ class Validator(Interface):
 
 @runtime_checkable
 class ValidatorType(Protocol):
-    ...
+    """FYI: This is a workaround for typing. See: https://github.com/ksindi/implements/issues/28"""
+
+    @classmethod
+    def __get_validators__(cls):  # For Pydantic
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, value):
+        @beartype
+        def beartyper(value: Self) -> Self:
+            return value
+
+        return beartyper(value)
 
 
 @implements(Validator)

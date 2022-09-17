@@ -58,7 +58,7 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 [tool.poetry.dependencies]
 python = "^3.7.6"
 arrow = ">=1.2.3"
-attrs-strict = ">=0.2"
+attrs-strict = ">=0.2" # Required for differ.py
 beartype = ">=0.10.0"
 dictdiffer = ">=0.9"   # Alternative: https://pypi.org/project/deepdiff6
 implements = ">=0.3.0"

@@ -11,9 +11,9 @@ from .converter import Converter
 from .serializer import make_diffable, register_user_converters
 
 try:
-    from typing import Protocol, runtime_checkable
+    from typing import Protocol, runtime_checkable, Self
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable
+    from typing_extensions import Protocol, runtime_checkable, Self
 
 
 class CacheStore(Interface):
@@ -37,9 +37,19 @@ class CacheStore(Interface):
 
 @runtime_checkable
 class CacheStoreType(Protocol):
-    """FYI: This is a workaround for typing. See: """
+    """FYI: This is a workaround for typing. See: https://github.com/ksindi/implements/issues/28"""
 
-    ...
+    @classmethod
+    def __get_validators__(cls):  # For Pydantic
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, value):
+        @beartype
+        def beartyper(value: Self) -> Self:
+            return value
+
+        return beartyper(value)
 
 
 @implements(CacheStore)

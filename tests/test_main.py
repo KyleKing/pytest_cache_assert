@@ -46,23 +46,28 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
     ('cached_data', 'test_data', 'key_rules', 'help_text'), [
         (
             {'title': 'hello'}, {'title': 'Hello World!'}, [
-                KeyRule(pattern=['title'], func=check_suppress),
+                KeyRule(pattern="root['title']", func=check_suppress),
             ], 'Check suppressing a standard string',
         ),
         (
             {'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
-                KeyRule(pattern=['nested', 'title'], func=check_suppress),
+                KeyRule(pattern="root['nested']['title']", func=check_suppress),
             ], 'Check suppressing nested changes',
         ),
         (
+            {'top': {'nested': {'inner': []}}}, {'top': {'nested': {'title': 'hello'}}}, [
+                KeyRule(pattern=re.compile(r"'top'\]\[[^]]\].+"), func=check_suppress),
+            ], 'Check missing and added',
+        ),
+        (
             {'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
-                KeyRule(pattern=['added', 'Wildcards.SINGLE', 'Wildcards.SINGLE'], func=check_suppress),
-                KeyRule(pattern=['title'], func=check_suppress),
-            ], 'Check wildcards',
+                KeyRule(pattern='added', func=check_suppress),
+                KeyRule(pattern='title', func=check_suppress),
+            ], 'Check missing and added',
         ),
         (
             {}, {'added': {'recursive': {'title': 'hello'}}}, [
-                KeyRule(pattern=['added', 'Wildcards.RECURSIVE'], func=check_suppress),
+                KeyRule(pattern=re.compile(r'added.+'), func=check_suppress),
             ], 'Check suppressing new value',
         ),
         (
@@ -72,32 +77,32 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
         ),
         (
             {'numbers': 20}, {'numbers': 45}, [
-                KeyRule(pattern=['numbers'], func=check_type),
+                KeyRule(pattern='numbers', func=check_type),
             ], 'Check matching number types (2)',
         ),
         (
             {'numbers': 20}, {'numbers': 45.0}, [
-                KeyRule(pattern=['numbers'], func=check_type),
+                KeyRule(pattern='numbers', func=check_type),
             ], 'Check different number types',
         ),
         (
             {'numbers': '20'}, {'numbers': '45.0'}, [
-                KeyRule(pattern=['numbers'], func=check_type),
+                KeyRule(pattern='numbers', func=check_type),
             ], 'Check str(numbers) (Note: type checking does not differentiate between int and float)',
         ),
         (
             {'uuid': str(uuid4())}, {'uuid': str(uuid4())}, [
-                KeyRule(pattern=['uuid'], func=check_type),
+                KeyRule(pattern='uuid', func=check_type),
             ], 'Check UUID types',
         ),
         (
             {'dates': str(datetime.now())}, {'dates': str(arrow.now().shift(weeks=1))}, [
-                KeyRule(pattern=['dates'], func=check_type),
+                KeyRule(pattern='dates', func=check_type),
             ], 'Check date types',
         ),
         (
             {'dates': str(datetime.now())}, {'dates': None}, [
-                KeyRule(pattern=['dates'], func=check_suppress),
+                KeyRule(pattern='dates', func=check_suppress),
             ], 'Suppress date/null',
         ),
         (
@@ -109,9 +114,6 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
 )
 def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, help_text, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
-    if any(isinstance(kr.pattern, list) for kr in key_rules):
-        pytest.skip('Test needs to be refactored!')  # FIXME: Convert all lists to strings/regex
-
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
     # Verify that the key_rules allow the test to pass
     try:

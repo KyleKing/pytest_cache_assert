@@ -6,9 +6,7 @@ import pytest
 
 from pytest_cache_assert import KeyRule, check_suppress
 from pytest_cache_assert._check_assert.differ import DiffResults, _raw_diff, diff_with_rules
-from pytest_cache_assert._check_assert.key_rules import (
-    Comparator, check_exact, gen_check_date_proximity, gen_check_date_range,
-)
+from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
 
 @pytest.mark.parametrize(
@@ -222,29 +220,30 @@ _NOW = datetime.utcnow()
 
 @pytest.mark.parametrize(
     ('old_dict', 'new_dict', 'key_rules', 'help_text'), [
-        (
-            {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
-                KeyRule(pattern=['a', 'Wildcards.RECURSIVE'], func=check_exact),
-                KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
-                KeyRule(pattern=['a', 'Wildcards.SINGLE', 'Wildcards.SINGLE'], func=check_exact),
-            ], 'Check Sorting. Only the middle key_rule will suppress the error',
-        ),
-        (
-            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-                KeyRule(
-                    pattern=['a', 'Wildcards.LIST', 'b', 'Wildcards.LIST', 'c'],
-                    func=check_suppress,
-                ),
-            ], 'Supports Wildcards.LIST',
-        ),
-        (
-            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-                KeyRule(
-                    pattern=['a', 'Wildcards.LIST', 'Wildcards.RECURSIVE'],
-                    func=check_suppress,
-                ),
-            ], 'Supports Wildcards.LIST',
-        ),
+        # FIXME: Implement list regeular expressions!
+        # (
+        #     {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
+        #         KeyRule(pattern=['a', 'Wildcards.RECURSIVE'], func=check_exact),
+        #         KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
+        #         KeyRule(pattern=['a', 'Wildcards.SINGLE', 'Wildcards.SINGLE'], func=check_exact),
+        #     ], 'Check Sorting. Only the middle key_rule will suppress the error',
+        # ),
+        # (
+        #     {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+        #         KeyRule(
+        #             pattern=['a', 'Wildcards.LIST', 'b', 'Wildcards.LIST', 'c'],
+        #             func=check_suppress,
+        #         ),
+        #     ], 'Supports Wildcards.LIST',
+        # ),
+        # (
+        #     {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+        #         KeyRule(
+        #             pattern=['a', 'Wildcards.LIST', 'Wildcards.RECURSIVE'],
+        #             func=check_suppress,
+        #         ),
+        #     ], 'Supports Wildcards.LIST',
+        # ),
         (
             {'a.b.c': 1}, {'a.b.c': 2}, [
                 KeyRule(pattern='a.b.c', func=check_suppress),
@@ -252,39 +251,36 @@ _NOW = datetime.utcnow()
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern=['datetime'], func=gen_check_date_range(max_date=_NOW + timedelta(hours=3))),
+                KeyRule(pattern='datetime', func=gen_check_date_range(max_date=_NOW + timedelta(hours=3))),
             ], 'Test generated datetime comparison logic for a max date',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
                 KeyRule(
-                    pattern=['datetime'],
+                    pattern='datetime',
                     func=gen_check_date_range(_NOW - timedelta(hours=3), _NOW + timedelta(hours=3)),
                 ),
             ], 'Test generated datetime comparison logic for a date range',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
             ], 'Test generated datetime comparison logic for LTE',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
-                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
             ], 'Test generated datetime comparison logic for GTE',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern=['datetime'], func=gen_check_date_proximity(timedelta(hours=3))),
+                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3))),
             ], 'Test generated datetime comparison logic for Within',
         ),
     ],
 )
 def test_diff_with_rules(old_dict, new_dict, key_rules, help_text):
     """Test that the key rules work in various scenarios."""
-    if any(isinstance(kr.pattern, list) for kr in key_rules):
-        pytest.skip('Test needs to be refactored!')  # FIXME: Convert all lists to strings/regex
-
     result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=key_rules)
     assert result.to_dict() == {}
 

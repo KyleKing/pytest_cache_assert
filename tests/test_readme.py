@@ -1,5 +1,6 @@
 """Test example code for the README file."""
 
+import re
 import sys
 from datetime import datetime, timedelta
 from uuid import uuid4
@@ -63,17 +64,17 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     key_rules = [
         # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard,
         #   which aren't present in the test-data and would otherwise error
-        KeyRule(pattern=['ignored', 'Wildcards.SINGLE'], func=check_suppress),
+        KeyRule(pattern=['ignored', 'Wildcards.SINGLE'], func=check_suppress),  # TODO: ???
         # The pattern can also recursively apply to data below
         KeyRule(
-            pattern=['ignored', 'recursively', 'Wildcards.RECURSIVELY'],
+            pattern=re.compile('ignored.+recursively.+'),
             func=check_suppress,
         ),
         # Instead of suppressing, the type can be coerced from the string and verified
         #   This is useful for datetime or UUID's where the string will be different,
         #   but both values are the same type
-        KeyRule(pattern=['date'], func=check_type),
-        KeyRule(pattern=['nested', 'uuid'], func=check_type),
+        KeyRule(pattern='date', func=check_type),
+        KeyRule(pattern="root['nested']['uuid']", func=check_type),
         # Custom functions can also be specified to check a datetime format, etc.
         #   The function must accept the keyword arguments 'old' and 'new'
     ]

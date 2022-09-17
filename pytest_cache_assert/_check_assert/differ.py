@@ -1,5 +1,7 @@
 """Dictionary Differ."""
 
+from contextlib import suppress
+
 from beartype import beartype
 from beartype.typing import Dict, List
 from deepdiff import DeepSearch, extract
@@ -53,7 +55,7 @@ def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, key_rules: Li
         DiffResults: Diff Object
 
     """
-    # FIXME: Move to KeyRules?
+    # FIXME: Move to KeyRules? (is_regex?)
     key_str = 'str'
     key_pat = 'Pattern'
     collector = {key_str: [], key_pat: []}
@@ -68,11 +70,15 @@ def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, key_rules: Li
     )
 
     for kr in key_rules:
-        ds = DeepSearch(old_dict, kr.pattern, use_regexp=not isinstance(kr.pattern, str))
-        for pth in [*ds.get('matched_paths', {})]:
-            old_value = extract(old_dict, pth)
-            new_value = extract(new_dict, pth)
-            if not kr.func(old_value, new_value):
-                diff_result.append(kr, {'old_value': old_value, 'new_value': new_value})
+        paths = []
+        for data_set in [old_dict, new_dict]:
+            ds = DeepSearch(data_set, kr.pattern, use_regexp=not isinstance(kr.pattern, str))
+            paths.extend([*ds.get('matched_paths', {})])
+        for pth in set(paths):
+            with suppress(KeyError):  # FIXME: Use new <Missing> Class if not found!
+                old_value = extract(old_dict, pth)
+                new_value = extract(new_dict, pth)
+                if not kr.func(old_value, new_value):
+                    diff_result.append(kr, {'old_value': old_value, 'new_value': new_value})
 
     return diff_result

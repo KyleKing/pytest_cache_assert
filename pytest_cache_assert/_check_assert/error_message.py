@@ -1,10 +1,11 @@
 """Generate nice error messages."""
 
 from pathlib import Path
+from pprint import pformat
 
-from beartype.typing import Any, List
+from beartype.typing import Any
 
-from .differ import DiffResult
+from .differ import DiffResults
 
 
 class NoCacheError(FileNotFoundError):
@@ -24,7 +25,7 @@ class RichAssertionError(AssertionError):
     @classmethod
     def create_message(
         cls, test_data: Any, cached_data: Any, path_cache_file: Path,
-        diff_results: List[DiffResult],
+        diff_results: DiffResults,
     ) -> str:
         """Create the error message.
 
@@ -38,8 +39,8 @@ class RichAssertionError(AssertionError):
             str: pleasant error message
 
         """
-        # PLANNED: Cap length of error message. There might be a library that can help with that
-        return f"""For test data: {test_data}
-Found differences with: {path_cache_file}
-Differences: {diff_results}
+        return f"""
+> For test data: {pformat(test_data)}
+> Found differences with: {path_cache_file}
+> Differences: {diff_results.to_dict()}
 """

@@ -217,7 +217,7 @@ def loads(raw: str) -> DIFF_TYPES:
         raw: raw string JSON
 
     Returns:
-        DIFF_TYPES: DiffResult-safe data
+        DIFF_TYPES: DiffResults-safe data
 
     """
     return json.loads(raw)
@@ -231,7 +231,7 @@ def make_diffable(data: Any) -> DIFF_TYPES:
         data: data to serialize
 
     Returns:
-        DIFF_TYPES: DiffResult-safe data
+        DIFF_TYPES: DiffResults-safe data
 
     """
     return loads(dumps(data))

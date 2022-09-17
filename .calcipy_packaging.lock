@@ -383,13 +383,13 @@
         "name": "decorator",
         "version": "5.1.1"
     },
-    "dictdiffer": {
-        "datetime": "2021-07-22T13:24:26.783705Z",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2021-07-22T13:24:26.783705Z",
-        "latest_version": "0.9.0",
-        "name": "dictdiffer",
-        "version": "0.9.0"
+    "deepdiff6": {
+        "datetime": "2022-09-04T07:57:24.286688Z",
+        "domain": "https://pypi.org/pypi/{name}/json",
+        "latest_datetime": "2022-09-04T07:57:24.286688Z",
+        "latest_version": "6.2.0",
+        "name": "deepdiff6",
+        "version": "6.2.0"
     },
     "diff-cover": {
         "datetime": "2022-06-22T22:07:50.268916Z",
@@ -1030,6 +1030,14 @@
         "latest_version": "1.23.3",
         "name": "numpy",
         "version": "1.23.3"
+    },
+    "ordered-set": {
+        "datetime": "2022-01-26T14:38:48.677482Z",
+        "domain": "https://pypi.org/pypi/{name}/json",
+        "latest_datetime": "2022-01-26T14:38:48.677482Z",
+        "latest_version": "4.1.0",
+        "name": "ordered-set",
+        "version": "4.1.0"
     },
     "packaging": {
         "datetime": "2021-11-18T00:39:10.932370Z",

@@ -17,7 +17,7 @@ except ImportError:
 
 # FIXME: Need to remove this key from the Output for failed tests b/c confusing to end users
 _WRAP_KEY = '--wrapped--'
-"""Special key to convert lists to dictionaries for dictdiffer."""
+"""Special key to convert lists to dictionaries for diffing."""
 
 
 @beartype
@@ -128,7 +128,7 @@ class DictDiffValidator(ValidatorType):
         safe_tuple = _safe_types(cached_data=cached_data, test_data=test_data, key_rules=key_rules or [])
         diff_results = diff_with_rules(**safe_tuple)
 
-        if diff_results:
+        if diff_results.to_dict():
             kwargs = {
                 'test_data': test_data,
                 'cached_data': cached_data,

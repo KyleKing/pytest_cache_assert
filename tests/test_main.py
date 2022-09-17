@@ -10,13 +10,13 @@ from hypothesis import strategies as st
 
 from pytest_cache_assert import KeyRule, check_suppress, check_type
 from pytest_cache_assert._check_assert.constants import Wildcards
-from pytest_cache_assert._check_assert.differ import DiffResult
+from pytest_cache_assert._check_assert.differ import DiffResults
 from pytest_cache_assert._check_assert.error_message import RichAssertionError
 from pytest_cache_assert.main import assert_against_cache
 
 from .configuration import clear_test_cache
 
-DEF_ERROR_MESSAGE = r'For test data: .*\nFound differences with: .*'
+DEF_ERROR_MESSAGE = r'^\n> For test data: .+\n> Found differences with: .+\n> Differences: .+\n$'
 
 
 def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
@@ -24,7 +24,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
     cached_data = {'result': False}
     test_data = {'result': True}
     assert_against_cache(cached_data, **fix_tmp_assert)
-    diff_results = [DiffResult(key_list=['result'], list_index=None, old=False, new=True)]
+    diff_results = DiffResults(results={'values_changed': {"root['result']": {'new_value': True, 'old_value': False}}})
     error_info = None
 
     try:

@@ -6,6 +6,8 @@ import punq
 from beartype import beartype
 from beartype.typing import Any
 
+# FIXME: Replace punq with class-based alternative from calcipy (and merge these two files...)
+
 
 class CacheAssertContainerKeys(Enum):  # noqa: H601
     """Enum of keys used in `cache_assert_container`."""

@@ -45,6 +45,7 @@ def test_create_data(name, assert_against_cache):
 
 
 # FIXME: The README example doesn't work and could be improved...
+@pytest.mark.skip('FIXME: Update this test and the associated README...')
 def test_assert_against_cache_key_rules(assert_against_cache):
     """Demonstrate use of `key_rules`."""
     now = datetime.now()

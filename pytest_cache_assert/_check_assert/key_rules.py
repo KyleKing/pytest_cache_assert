@@ -179,9 +179,8 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-# FIXME: Maybe just use exclude? // Oh! Ignore in exclude, then filter later? // Yes!
 class KeyRule(BaseModel):  # noqa: H601
     """Key Rule."""
 
-    pattern: List[Union[str, Pattern]]
-    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = check_exact
+    pattern: Union[str, Pattern, List]  # FIXME: Drop support of List!
+    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool]

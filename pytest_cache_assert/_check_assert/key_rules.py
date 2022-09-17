@@ -7,10 +7,9 @@ from functools import partial
 from uuid import UUID
 
 import arrow
-from attrs import field, mutable
-from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Union
+from pydantic import BaseModel
 
 from .constants import DIFF_TYPES, Wildcards
 
@@ -180,9 +179,8 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-@mutable(kw_only=True)
-class KeyRule:  # noqa: H601
+class KeyRule(BaseModel):  # noqa: H601
     """Key Rule."""
 
-    pattern: List[Union[str, Wildcards]] = field(validator=type_validator())
-    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = field(default=check_exact, validator=type_validator())
+    pattern: List[Union[str, Wildcards]]
+    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = check_exact

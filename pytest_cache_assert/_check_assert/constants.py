@@ -29,11 +29,7 @@ class Wildcards(Enum):  # noqa: H601
 
 
 class TrueNull:  # noqa: H601
-    """Indicate that the old or new value does not exist.
-
-    Note: `attrs.NOTHING` is a singleton and can't be used for type annotations
-
-    """
+    """Indicate that the old or new value does not exist."""
 
     ...
 

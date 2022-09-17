@@ -1,13 +1,14 @@
 """Pytest Cache Assert Configuration Object."""
 
-from attrs import field, frozen
-from attrs_strict import type_validator
 from beartype.typing import Any, Callable, List
+from pydantic import BaseModel
 
 
-@frozen(kw_only=True)
-class Converter:
+class Converter(BaseModel):
     """User-specific converters to extend the default `cache_store`."""
 
-    types: List[Any] = field(validator=type_validator())
-    func: Callable[[Any], Any] = field(validator=type_validator())
+    types: List[Any]
+    func: Callable[[Any], Any]
+
+    class Config:
+        frozen = True

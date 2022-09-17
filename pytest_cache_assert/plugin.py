@@ -7,24 +7,25 @@ import inspect
 from functools import partial
 from pathlib import Path
 
-import attrs
 import pytest
 from _pytest.fixtures import FixtureRequest
-from attrs import field, frozen
-from attrs_strict import type_validator
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, Optional, Union
+from pydantic import BaseModel
 
 from . import AssertConfig, main
 
 
-@frozen(kw_only=True)
-class TestMetadata:
+class TestMetadata(BaseModel):
     """Test MetaData."""
 
-    test_file: str = field(validator=type_validator())
-    test_name: str = field(validator=type_validator())
-    func_args: Union[Dict, Iterable]  # = field(validator=type_validator())
+    test_file: str
+    test_name: str
+    func_args: Union[Dict, Iterable]
+
+    class Config:
+        arbitrary_types_allowed = True
+        frozen = True
 
     @classmethod
     @beartype
@@ -87,8 +88,8 @@ def assert_against_cache(
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)
 
-    cache_name = (rel_test_file.parent / rel_test_file.stem / f'{request.node.name}.json').as_posix() # noqa: ECE001
-    metadata = attrs.asdict(TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file))
+    cache_name = (rel_test_file.parent / rel_test_file.stem / f'{request.node.name}.json').as_posix()  # noqa: ECE001
+    metadata = TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file).dict()
 
     # FYI: The partial function keyword arguments can be overridden when called
     return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)

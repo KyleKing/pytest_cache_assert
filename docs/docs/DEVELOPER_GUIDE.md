@@ -65,5 +65,5 @@ poetry run doit run lock document deploy_docs publish
 | `pytest_cache_assert/validator.py`                   |           13 |         2 |          0 | 84.6%      |
 | **Totals**                                           |          428 |        34 |          0 | 92.1%      |
 
-Generated on: 2022-03-06T13:09:55.324249
+Generated on: 2022-03-06
 <!-- {cte} -->

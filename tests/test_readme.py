@@ -1,17 +1,15 @@
 """Test example code for the README file."""
 
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
+from uuid import uuid4
 
 import pytest
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 
-from uuid import uuid4
-from datetime import datetime, timedelta
-
-from pytest_cache_assert import KeyRule, check_suppress, check_type, Wildcards
+from pytest_cache_assert import KeyRule, Wildcards, check_suppress, check_type
 
 
 class User(BaseModel):  # noqa: H601
@@ -51,32 +49,32 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     """Demonstrate use of `key_rules`."""
     now = datetime.now()
     cached_data = {
-      'date': str(now),
-      'nested': {'uuid': str(uuid4())},
-      'ignored': {'a': 1, 'b': 2},
+        'date': str(now),
+        'nested': {'uuid': str(uuid4())},
+        'ignored': {'a': 1, 'b': 2},
     }
     test_data = {
-      'date': str(now + timedelta(hours=3)),
-      'nested': {'uuid': str(uuid4())},
-      'ignored': {'recursively': {'a': {'b': {'c': 1}}}},
+        'date': str(now + timedelta(hours=3)),
+        'nested': {'uuid': str(uuid4())},
+        'ignored': {'recursively': {'a': {'b': {'c': 1}}}},
     }
 
     key_rules = [
-      # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard,
-      #   which aren't present in the test-data and would otherwise error
-      KeyRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
-      # The pattern can also recursively apply to data below
-      KeyRule(
-        pattern=['ignored', 'recursively', Wildcards.RECURSIVELY],
-        func=check_suppress,
-      ),
-      # Instead of suppressing, the type can be coerced from the string and verified
-      #   This is useful for datetime or UUID's where the string will be different,
-      #   but both values are the same type
-      KeyRule(pattern=['date'], func=check_type),
-      KeyRule(pattern=['nested', 'uuid'], func=check_type),
-      # Custom functions can also be specified to check a datetime format, etc.
-      #   The function must accept the keyword arguments 'old' and 'new'
+        # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard,
+        #   which aren't present in the test-data and would otherwise error
+        KeyRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
+        # The pattern can also recursively apply to data below
+        KeyRule(
+            pattern=['ignored', 'recursively', Wildcards.RECURSIVELY],
+            func=check_suppress,
+        ),
+        # Instead of suppressing, the type can be coerced from the string and verified
+        #   This is useful for datetime or UUID's where the string will be different,
+        #   but both values are the same type
+        KeyRule(pattern=['date'], func=check_type),
+        KeyRule(pattern=['nested', 'uuid'], func=check_type),
+        # Custom functions can also be specified to check a datetime format, etc.
+        #   The function must accept the keyword arguments 'old' and 'new'
     ]
 
     # In this example, the cache file has been deleted, so first call will recreate it

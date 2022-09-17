@@ -2,10 +2,12 @@
 
 ### Feat
 
+- start migration of attrs to pydantic
 - migrate from pendulum to arrow
 
 ### Refactor
 
+- add pydantic validators to custom types
 - by default nest the caches by test file
 - use suppress and remove loguru from pkg
 

@@ -1,7 +1,7 @@
 """nox-poetry configuration file."""
 
 from calcipy.dev.noxfile import (  # noqa: F401
-    build_check, build_dist, check_safety, check_security, coverage, pin_dev_dependencies, tests,
+    build_check, build_dist, check_security, coverage, pin_dev_dependencies, tests,
 )
 
 # Ensure that non-calcipy dev-dependencies are available in Nox environments

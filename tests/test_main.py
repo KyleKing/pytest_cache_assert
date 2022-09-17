@@ -110,11 +110,15 @@ def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, 
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
     # Verify that the key_rules allow the test to pass
-    assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
-    # Then, verify that without key rules, an AssertionError is raised
+    try:
+        assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
+    except Exception as exc:
+        raise AssertionError(f'Failed {help_text}') from exc
 
+    # Then, verify that without key rules, an AssertionError is raised
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(test_data, **fix_tmp_assert)  # act
+        raise RuntimeError(f'Failed to raise an AssertionError for: {help_text}')
 
 
 @pytest.mark.parametrize(

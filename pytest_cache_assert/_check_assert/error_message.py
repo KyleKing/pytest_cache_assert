@@ -3,6 +3,7 @@
 from pathlib import Path
 from pprint import pformat
 
+from beartype import beartype
 from beartype.typing import Any
 
 from .differ import DiffResults
@@ -39,8 +40,13 @@ class RichAssertionError(AssertionError):
             str: pleasant error message
 
         """
-        return f"""
-> For test data: {pformat(test_data)}
-> Found differences with: {path_cache_file}
-> Differences: {diff_results.to_dict()}
-"""
+        @beartype
+        def fmt_line(prefix: str, data: Any) -> str:
+            indented_data = ('\n' + ' ' * len(prefix)).join(pformat(data).split('\n'))
+            return f'{prefix}{indented_data}'
+
+        data_prefix = '> For test data: '
+        diff_prefix = '> Differences: '
+        line_data = fmt_line(data_prefix, test_data)
+        line_diff = fmt_line(diff_prefix, diff_results.to_dict())
+        return f'\n{line_data}\n> Found differences with: {path_cache_file}\n{line_diff}\n'

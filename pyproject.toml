@@ -1,5 +1,5 @@
 [build-system]
-requires = ["poetry-core>=1.0.7"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
@@ -13,7 +13,6 @@ line_length = 120
 multi_line_output = 5
 
 [tool.calcipy.test]
-pythons = ["3.7", "3.9"]
 args_diff = "--fail-under=85"
 
 [tool.commitizen]

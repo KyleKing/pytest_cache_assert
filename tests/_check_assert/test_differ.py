@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import pytest
 
 from pytest_cache_assert import KeyRule, check_suppress
-from pytest_cache_assert._check_assert.differ import DiffResults, diff_with_rules
+from pytest_cache_assert._check_assert.differ import DiffResults, _raw_diff, diff_with_rules
 from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
 
@@ -205,9 +205,9 @@ from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_da
         ),
     ],
 )
-def test_diff_with_rules_without(old_dict, new_dict, expected, help_text):
+def test_raw_diff(old_dict, new_dict, expected, help_text):
     """Test the low level diff logic."""
-    result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=[])
+    result = _raw_diff(old_dict=old_dict, new_dict=new_dict)
 
     try:
         assert result == expected

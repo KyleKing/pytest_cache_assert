@@ -2,6 +2,7 @@
 
 ### Feat
 
+- start switch from dictdiffer to deepdiff
 - start migration of attrs to pydantic
 - migrate from pendulum to arrow
 

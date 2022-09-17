@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from pytest_cache_assert import KeyRule, Wildcards, check_suppress
-from pytest_cache_assert._check_assert.differ import DiffResults, _raw_diff, diff_with_rules
+from pytest_cache_assert import KeyRule, check_suppress
+from pytest_cache_assert._check_assert.differ import DiffResults, diff_with_rules
 from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
 
@@ -205,9 +205,9 @@ from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_da
         ),
     ],
 )
-def test_raw_diff(old_dict, new_dict, expected, help_text):
+def test_diff_with_rules_without(old_dict, new_dict, expected, help_text):
     """Test the low level diff logic."""
-    result = _raw_diff(old_dict=old_dict, new_dict=new_dict)
+    result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=[])
 
     try:
         assert result == expected
@@ -222,15 +222,15 @@ _NOW = datetime.utcnow()
     ('old_dict', 'new_dict', 'key_rules', 'help_text'), [
         (
             {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
-                KeyRule(pattern=['a', Wildcards.RECURSIVE]),
+                KeyRule(pattern=['a', 'Wildcards.RECURSIVE']),
                 KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
-                KeyRule(pattern=['a', Wildcards.SINGLE, Wildcards.SINGLE]),
+                KeyRule(pattern=['a', 'Wildcards.SINGLE', 'Wildcards.SINGLE']),
             ], 'Check Sorting. Only the middle key_rule will suppress the error',
         ),
         (
             {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
                 KeyRule(
-                    pattern=['a', Wildcards.LIST, 'b', Wildcards.LIST, 'c'],
+                    pattern=['a', 'Wildcards.LIST', 'b', 'Wildcards.LIST', 'c'],
                     func=check_suppress,
                 ),
             ], 'Supports Wildcards.LIST',
@@ -238,7 +238,7 @@ _NOW = datetime.utcnow()
         (
             {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
                 KeyRule(
-                    pattern=['a', Wildcards.LIST, Wildcards.RECURSIVE],
+                    pattern=['a', 'Wildcards.LIST', 'Wildcards.RECURSIVE'],
                     func=check_suppress,
                 ),
             ], 'Supports Wildcards.LIST',

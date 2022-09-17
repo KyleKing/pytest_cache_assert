@@ -8,10 +8,10 @@ from uuid import UUID
 
 import arrow
 from beartype import beartype
-from beartype.typing import Callable, List, Optional, Union
+from beartype.typing import Callable, List, Optional, Pattern, Union
 from pydantic import BaseModel
 
-from .constants import DIFF_TYPES, Wildcards
+from .constants import DIFF_TYPES
 
 
 class Comparator(Enum):  # noqa: H601
@@ -179,8 +179,9 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
+# FIXME: Maybe just use exclude? // Oh! Ignore in exclude, then filter later? // Yes!
 class KeyRule(BaseModel):  # noqa: H601
     """Key Rule."""
 
-    pattern: List[Union[str, Wildcards]]
+    pattern: List[Union[str, Pattern]]
     func: Callable[[DIFF_TYPES, DIFF_TYPES], bool] = check_exact

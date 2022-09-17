@@ -3,7 +3,6 @@
 from ._check_assert.assert_config import AssertConfig  # noqa: F401
 from ._check_assert.cache_store import CacheStoreType, LocalJSONCacheStore  # noqa: F401
 from ._check_assert.config import CacheAssertContainerKeys, retrieve  # noqa: F401
-from ._check_assert.constants import Wildcards  # noqa: F401
 from ._check_assert.converter import Converter  # noqa: F401
 from ._check_assert.error_message import NoCacheError  # noqa: F401
 from ._check_assert.key_rules import (  # noqa: F401

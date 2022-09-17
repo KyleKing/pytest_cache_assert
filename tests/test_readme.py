@@ -9,7 +9,7 @@ from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 
-from pytest_cache_assert import KeyRule, Wildcards, check_suppress, check_type
+from pytest_cache_assert import KeyRule, check_suppress, check_type
 
 
 class User(BaseModel):  # noqa: H601
@@ -62,10 +62,10 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     key_rules = [
         # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard,
         #   which aren't present in the test-data and would otherwise error
-        KeyRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
+        KeyRule(pattern=['ignored', 'Wildcards.SINGLE'], func=check_suppress),
         # The pattern can also recursively apply to data below
         KeyRule(
-            pattern=['ignored', 'recursively', Wildcards.RECURSIVELY],
+            pattern=['ignored', 'recursively', 'Wildcards.RECURSIVELY'],
             func=check_suppress,
         ),
         # Instead of suppressing, the type can be coerced from the string and verified

@@ -9,7 +9,6 @@ from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 
 from pytest_cache_assert import KeyRule, check_suppress, check_type
-from pytest_cache_assert._check_assert.constants import Wildcards
 from pytest_cache_assert._check_assert.differ import DiffResults
 from pytest_cache_assert._check_assert.error_message import RichAssertionError
 from pytest_cache_assert.main import assert_against_cache
@@ -56,13 +55,13 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
         ),
         (
             {'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
-                KeyRule(pattern=['added', Wildcards.SINGLE, Wildcards.SINGLE], func=check_suppress),
+                KeyRule(pattern=['added', 'Wildcards.SINGLE', 'Wildcards.SINGLE'], func=check_suppress),
                 KeyRule(pattern=['title'], func=check_suppress),
             ], 'Check wildcards',
         ),
         (
             {}, {'added': {'recursive': {'title': 'hello'}}}, [
-                KeyRule(pattern=['added', Wildcards.RECURSIVE], func=check_suppress),
+                KeyRule(pattern=['added', 'Wildcards.RECURSIVE'], func=check_suppress),
             ], 'Check suppressing new value',
         ),
         (

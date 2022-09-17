@@ -11,9 +11,9 @@ from .converter import Converter
 from .serializer import make_diffable, register_user_converters
 
 try:
-    from typing import Protocol, runtime_checkable, Self
+    from typing import Protocol, Self, runtime_checkable
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable, Self
+    from typing_extensions import Protocol, Self, runtime_checkable
 
 
 class CacheStore(Interface):

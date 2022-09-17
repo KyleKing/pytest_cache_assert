@@ -22,7 +22,7 @@ _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
 
 
 class Unconvertable(ValueError):
-    """Custom Error to indicate conversion failure"""
+    """Custom Error to indicate conversion failure."""
 
     ...
 

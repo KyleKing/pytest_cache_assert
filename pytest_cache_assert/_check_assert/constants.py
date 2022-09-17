@@ -1,10 +1,8 @@
 """Constants."""
 
 from datetime import datetime
-from enum import Enum
 
-from beartype.typing import Dict, Iterable, List, Type, Union
-
+from beartype.typing import Dict, Iterable, List, Union
 
 _SAFE_T = Union[str, int, float, bool, None]
 """Safe types for json serialization."""

@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional
+from beartype.typing import Any, List, Optional
 from implements import Interface, implements
 
 from .differ import diff_with_rules

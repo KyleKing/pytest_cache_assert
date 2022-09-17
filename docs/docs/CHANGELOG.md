@@ -2,9 +2,16 @@
 
 ### Feat
 
+- begin supporting string-based KeyRules!
+- even better error messages
 - start switch from dictdiffer to deepdiff
 - start migration of attrs to pydantic
 - migrate from pendulum to arrow
+
+### Fix
+
+- continue to update tests for change in pattern syntax
+- start removing the Wildcards and legacy KeyRules
 
 ### Refactor
 

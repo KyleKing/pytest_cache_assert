@@ -109,6 +109,16 @@ _CONVERTERS.register([bool, int, float], _no_op)
 
 
 def _serialize_path(obj: Path) -> str:
+    """Attempt to provide a path agnostic of working directory or device."""
+    cwd = Path.cwd()
+    pth = obj
+    with suppress(AttributeError):
+        pth = obj.resolve()  # Attempt to remove ".."
+    # if pth.is_relative_to(cwd):  # PLANNED: Faster to LBYL or EAFP?
+    with suppress(ValueError):
+        return f'--/{pth.relative_to(cwd).as_posix()}'
+    with suppress(ValueError):
+        return f'~/{pth.relative_to(Path.home()).as_posix()}'
     return obj.as_posix()
 
 

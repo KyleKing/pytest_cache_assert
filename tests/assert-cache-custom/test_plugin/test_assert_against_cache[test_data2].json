@@ -3,7 +3,7 @@
     {
       "func_args": {
         "test_data": {
-          "path": "/Users/kyleking"
+          "path": "~/."
         }
       },
       "test_file": "test_plugin.py",
@@ -11,6 +11,6 @@
     }
   ],
   "_json": {
-    "path": "/Users/kyleking"
+    "path": "~/."
   }
 }

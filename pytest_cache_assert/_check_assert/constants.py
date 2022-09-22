@@ -4,6 +4,12 @@ from datetime import datetime
 
 from beartype.typing import Dict, Iterable, List, Union
 
+
+class NotFound:
+
+    ...
+
+
 _SAFE_T = Union[str, int, float, bool, None]
 """Safe types for json serialization."""
 
@@ -13,7 +19,7 @@ _NESTED_DICT = Dict[_SAFE_T, Union[_SAFE_T, Dict[_SAFE_T, Union[_SAFE_T, dict]]]
 _NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
 """Nested list type."""
 
-_DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime]
+_DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime, NotFound]
 """Single types for DIFF_TYPES."""
 
 DIFF_TYPES = Union[_DIFF_SINGLE_TYPES, Iterable[_DIFF_SINGLE_TYPES]]

@@ -56,7 +56,7 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
         ),
         (
             {'top': {'nested': {'inner': []}}}, {'top': {'nested': {'title': 'hello'}}}, [
-                KeyRule(pattern=re.compile(r"'top'\]\[[^]]\].+"), func=check_suppress),
+                KeyRule(pattern=re.compile(r"root\['top'\](?:\[[^\]]+\]){2}"), func=check_suppress),
             ], 'Check missing and added',
         ),
         (

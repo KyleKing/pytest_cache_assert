@@ -4,12 +4,13 @@ from contextlib import suppress
 from datetime import datetime, timedelta
 from enum import Enum
 from functools import partial
+from typing import ClassVar
 from uuid import UUID
 
 import arrow
 from beartype import beartype
-from beartype.typing import Callable, List, Optional, Pattern, Union
-from pydantic import BaseModel
+from beartype.typing import Callable, Optional, Pattern, Union
+from pydantic.dataclasses import dataclass
 
 from .constants import DIFF_TYPES
 
@@ -179,8 +180,14 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-class KeyRule(BaseModel):  # noqa: H601
+@dataclass(kw_only=True)
+class KeyRule:  # noqa: H601
     """Key Rule."""
 
-    pattern: Union[str, Pattern, List]  # FIXME: Drop support of List!
+    pattern: Union[str, Pattern]
     func: Callable[[DIFF_TYPES, DIFF_TYPES], bool]
+    is_regex: ClassVar[bool]
+
+    def __post_init__(self) -> None:
+        """Register the configuration object."""
+        self.is_regex = not isinstance(self.pattern, str)

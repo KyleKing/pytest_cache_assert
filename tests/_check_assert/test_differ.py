@@ -1,10 +1,11 @@
 """Test the differ logic."""
 
+import re
 from datetime import datetime, timedelta
 
 import pytest
 
-from pytest_cache_assert import KeyRule, check_suppress
+from pytest_cache_assert import KeyRule, check_exact, check_suppress
 from pytest_cache_assert._check_assert.differ import DiffResults, _raw_diff, diff_with_rules
 from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
@@ -218,32 +219,32 @@ def test_raw_diff(old_dict, new_dict, expected, help_text):
 _NOW = datetime.utcnow()
 
 
+# FIXME: Provide class that builds a KeyRule pattern?
 @pytest.mark.parametrize(
     ('old_dict', 'new_dict', 'key_rules', 'help_text'), [
-        # FIXME: Implement list regeular expressions!
-        # (
-        #     {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
-        #         KeyRule(pattern=['a', 'Wildcards.RECURSIVE'], func=check_exact),
-        #         KeyRule(pattern=['a', 'b', 'c'], func=check_suppress),
-        #         KeyRule(pattern=['a', 'Wildcards.SINGLE', 'Wildcards.SINGLE'], func=check_exact),
-        #     ], 'Check Sorting. Only the middle key_rule will suppress the error',
-        # ),
-        # (
-        #     {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-        #         KeyRule(
-        #             pattern=['a', 'Wildcards.LIST', 'b', 'Wildcards.LIST', 'c'],
-        #             func=check_suppress,
-        #         ),
-        #     ], 'Supports Wildcards.LIST',
-        # ),
-        # (
-        #     {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-        #         KeyRule(
-        #             pattern=['a', 'Wildcards.LIST', 'Wildcards.RECURSIVE'],
-        #             func=check_suppress,
-        #         ),
-        #     ], 'Supports Wildcards.LIST',
-        # ),
+        (
+            {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
+                KeyRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\])+"), func=check_exact),
+                KeyRule(pattern="root['a']['b']['c']", func=check_suppress),
+                KeyRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\]){2}"), func=check_exact),
+            ], 'Check Sorting. Only the middle key_rule will suppress the error',
+        ),
+        (
+            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+                KeyRule(
+                    pattern=re.compile(r"root\['a'\]\[\d+\]\['b'\]\[\d+\]\['c'\]"),
+                    func=check_suppress,
+                ),
+            ], 'Supports Wildcards.LIST',
+        ),
+        (
+            {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
+                KeyRule(
+                    pattern=re.compile(r"root\['a'\]\[\d+\]\[.+"),
+                    func=check_suppress,
+                ),
+            ], 'Supports Wildcards.LIST',
+        ),
         (
             {'a.b.c': 1}, {'a.b.c': 2}, [
                 KeyRule(pattern='a.b.c', func=check_suppress),

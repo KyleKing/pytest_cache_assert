@@ -219,7 +219,6 @@ def test_raw_diff(old_dict, new_dict, expected, help_text):
 _NOW = datetime.utcnow()
 
 
-# FIXME: Provide class that builds a KeyRule pattern?
 @pytest.mark.parametrize(
     ('old_dict', 'new_dict', 'key_rules', 'help_text'), [
         (

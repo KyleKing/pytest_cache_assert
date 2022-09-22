@@ -3,24 +3,6 @@
     {
       "func_args": {
         "test_data": {
-          "df": [
-            {
-              "col 1": "a",
-              "col 2": "b"
-            },
-            {
-              "col 1": "c",
-              "col 2": "d"
-            }
-          ]
-        }
-      },
-      "test_file": "test_plugin.py",
-      "test_name": "test_assert_against_cache"
-    },
-    {
-      "func_args": {
-        "test_data": {
           "df": {
             "col 1": {
               "0": "a",
@@ -38,15 +20,15 @@
     }
   ],
   "_json": {
-    "df": [
-      {
-        "col 1": "a",
-        "col 2": "b"
+    "df": {
+      "col 1": {
+        "0": "a",
+        "1": "c"
       },
-      {
-        "col 1": "c",
-        "col 2": "d"
+      "col 2": {
+        "0": "b",
+        "1": "d"
       }
-    ]
+    }
   }
 }

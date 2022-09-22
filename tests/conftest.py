@@ -1,13 +1,11 @@
 """PyTest configuration."""
 
-import json
 from pathlib import Path
 
 import boto3
-import pandas as pd
 import pytest
 from beartype import beartype
-from beartype.typing import Dict, List, Union
+from beartype.typing import Dict, Union
 from calcipy.dev.conftest import pytest_configure  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
 from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
@@ -51,16 +49,23 @@ def fix_tmp_assert(fix_cache_path: Path) -> Dict[str, Union[str, Path]]:
     }
 
 
-@beartype
-def panda_to_json(df: pd.DataFrame) -> List[Dict]:
-    return json.loads(df.to_json(orient='records'))
-
-
 # https://github.com/beartype/bearboto3/blob/c212ca885623dd3b0c45868ec2ed66e8c5b8043c/tests/s3/s3_fixtures.py#L7-L10
 @pytest.fixture()
 def gen_s3_client():
     with mock_s3():
         yield boto3.client('s3')
+
+
+class CustomType:
+    """Arbitrary custom type used for testing user configuration.
+
+    Note: I previously tested the `to_json(origin='records')` version of the pandas dataframe serializer to override the default, but this test suite was sometimes restoring the default and sometimes not, which was hard to troubleshoot
+
+    """
+
+    @staticmethod
+    def to_str(arg) -> str:
+        return 'Serialized!'
 
 
 @pytest.fixture(scope='module')
@@ -71,6 +76,6 @@ def cache_assert_config() -> AssertConfig:
         always_write=False,
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
         converters=[
-            Converter(types=[pd.DataFrame], func=panda_to_json),
+            Converter(types=[CustomType], func=CustomType.to_str),
         ],
     )

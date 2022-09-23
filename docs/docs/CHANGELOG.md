@@ -2,6 +2,7 @@
 
 ### Feat
 
+- add serializer to store only relative paths
 - begin supporting string-based KeyRules!
 - even better error messages
 - start switch from dictdiffer to deepdiff
@@ -10,6 +11,8 @@
 
 ### Fix
 
+- resolve list regex matching rules
+- determine how to match regex for nested paths
 - continue to update tests for change in pattern syntax
 - start removing the Wildcards and legacy KeyRules
 

@@ -63,6 +63,7 @@ implements = ">=0.3.0"
 punq = ">=0.6.2"
 pydantic = ">=1.10.2"
 pytest = ">=5.0.0"
+StrEnum = ">=0.4.8"
 ujson = ">=5.1.0"      # FIXME: Implement ujson as a faster alternative to json
 
 [tool.poetry.dev-dependencies]

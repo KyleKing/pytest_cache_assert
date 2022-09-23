@@ -64,7 +64,7 @@ class CustomType:
     """
 
     @staticmethod
-    def to_str(arg) -> str:
+    def to_str(_arg) -> str:
         return 'Serialized!'
 
 

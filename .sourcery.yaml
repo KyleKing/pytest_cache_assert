@@ -1,7 +1,6 @@
 ---
 # See: https://docs.sourcery.ai/Configuration/
 refactor:
-
   python_version: '3.8'
 
 # Full Google Style Set from: https://sourcery.ai/blog/google-python-style-guide/

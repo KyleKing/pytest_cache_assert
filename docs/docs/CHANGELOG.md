@@ -19,6 +19,8 @@
 
 ### Refactor
 
+- additional changes to pass type checks
+- better support mypy
 - add pydantic validators to custom types
 - by default nest the caches by test file
 - use suppress and remove loguru from pkg

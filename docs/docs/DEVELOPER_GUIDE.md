@@ -49,21 +49,22 @@ poetry run doit run lock document deploy_docs publish
 <!-- {cts} COVERAGE -->
 | File                                                 |   Statements |   Missing |   Excluded | Coverage   |
 |------------------------------------------------------|--------------|-----------|------------|------------|
-| `pytest_cache_assert/__init__.py`                    |            4 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/__init__.py`                    |            9 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/caching.py`       |           31 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/config.py`        |           13 |         1 |          0 | 92.3%      |
-| `pytest_cache_assert/_check_assert/constants.py`     |           22 |         1 |          0 | 95.5%      |
-| `pytest_cache_assert/_check_assert/differ.py`        |          108 |        10 |          0 | 90.7%      |
-| `pytest_cache_assert/_check_assert/error_message.py` |           10 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/key_rules.py`     |           61 |         3 |          0 | 95.1%      |
-| `pytest_cache_assert/_check_assert/serializer.py`    |           37 |         3 |          0 | 91.9%      |
-| `pytest_cache_assert/cache_rel_path_resolver.py`     |           13 |         2 |          0 | 84.6%      |
-| `pytest_cache_assert/main.py`                        |           41 |         7 |          0 | 82.9%      |
-| `pytest_cache_assert/plugin.py`                      |           62 |         3 |          0 | 95.2%      |
-| `pytest_cache_assert/serializer.py`                  |           13 |         2 |          0 | 84.6%      |
-| `pytest_cache_assert/validator.py`                   |           13 |         2 |          0 | 84.6%      |
-| **Totals**                                           |          428 |        34 |          0 | 92.1%      |
+| `pytest_cache_assert/_check_assert/assert_config.py` |           28 |         1 |          0 | 96.4%      |
+| `pytest_cache_assert/_check_assert/assert_rules.py`  |           82 |         7 |          0 | 91.5%      |
+| `pytest_cache_assert/_check_assert/cache_store.py`   |           56 |         8 |          0 | 85.7%      |
+| `pytest_cache_assert/_check_assert/caching.py`       |           36 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/config.py`        |           13 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/constants.py`     |           11 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/converter.py`     |            6 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/differ.py`        |           41 |         2 |          0 | 95.1%      |
+| `pytest_cache_assert/_check_assert/error_message.py` |           22 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/serializer.py`    |          124 |        10 |          0 | 91.9%      |
+| `pytest_cache_assert/_check_assert/validator.py`     |           35 |         5 |          0 | 85.7%      |
+| `pytest_cache_assert/main.py`                        |           27 |         6 |          0 | 77.8%      |
+| `pytest_cache_assert/plugin.py`                      |           43 |         2 |          0 | 95.3%      |
+| **Totals**                                           |          533 |        41 |          0 | 92.3%      |
 
-Generated on: 2022-03-06
+Generated on: 2022-09-25
 <!-- {cte} -->

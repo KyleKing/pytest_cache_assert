@@ -55,9 +55,8 @@ def _read_full_cache(path_cache_file: Path) -> Any:
 
 @beartype
 def write_cache_data(
-    # type: ignore[type-arg]
     path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False,
-) -> None:
+) -> None:    # type: ignore[type-arg]
     """Cache the specified data.
 
     Args:

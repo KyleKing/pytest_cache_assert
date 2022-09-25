@@ -86,10 +86,6 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml
         types_or: []
         types: [file, yaml]
-  - repo: https://github.com/isidentical/teyit
-    rev: 0.4.3
-    hooks:
-      - id: teyit
   - repo: local
     hooks:
       - id: copier-forbidden-files

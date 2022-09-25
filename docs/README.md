@@ -199,14 +199,8 @@ See the `Open Issues` and/or the [CODE_TAG_SUMMARY]. For release history, see th
 These are ideas for future options that are not currently implemented, but could be if there is enough interest:
 
 - PLANNED: [Provide CLI arguments like `pytest-recording`](https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70) (`request.config.getoption("--record-mode") or "none"`) for one-time changes to configuration
-- PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]`
-
-### Other Planned Features
-
-- PLANNED: Consider inline corrections to cached data like this [feature from Jest](https://jestjs.io/docs/snapshot-testing#inline-snapshots)
-  - Show the diff between the cached data and the test data? Would need to look for a package that can show the comparison between two dictionaries in terminal
-    - [ydiff](https://github.com/ymattw/ydiff) might be a great choice, but I would need to support git (and ask if anyone needs SVN support) to write the change and compare. Probably better to more directly ask if the user wants the test case (shown by name and maybe a brief list of changes) to be replaced or not
-- PLANNED: [Add tips from Jest on best practices](https://jestjs.io/docs/snapshot-testing#best-practices) -- treat snapshots as code, etc.
+- PLANNED: Consider filters to prevent secrets from being cached: `filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]` (Although, you should be using a pre-commit hook and formatting the dict before passing to to the cache)
+- TODO: [Add tips from Jest on best practices](https://jestjs.io/docs/snapshot-testing#best-practices) -- treat snapshots as code, etc.
 
 ## Contributing
 

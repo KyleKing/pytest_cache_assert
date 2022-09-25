@@ -5,7 +5,7 @@ from datetime import datetime
 
 import pytest
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional
+from beartype.typing import Dict, List, Optional
 from pydantic import BaseModel
 
 
@@ -19,7 +19,7 @@ class User(BaseModel):  # noqa: H601
 
 
 @beartype
-def create_data(name: str) -> Dict[str, Any]:
+def create_data(name: str) -> Dict:
     """Arbitrary function that returns a dictionary.
 
     This demonstration uses pydantic, but any dictionary can be tested!

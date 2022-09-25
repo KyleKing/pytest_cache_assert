@@ -7,13 +7,14 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional
+from beartype.typing import Any, Dict, List, Optional, cast
 
-from . import AssertConfig, AssertRule, CacheAssertContainerKeys, CacheStoreType, NoCacheError, ValidatorType, retrieve
+from . import AssertRule, CacheAssertContainerKeys, CacheStoreType, NoCacheError, ValidatorType, retrieve
 
 
 @beartype
-def assert_against_dict(old_dict: dict, new_dict: dict, assert_rules: Optional[List[AssertRule]] = None) -> None:
+# type: ignore[type-arg]
+def assert_against_dict(old_dict: Dict, new_dict: Dict, assert_rules: Optional[List[AssertRule]] = None) -> None:
     """Utilize custom DictDiffer logic to compare in-memory dictionaries.
 
     Args:
@@ -22,12 +23,12 @@ def assert_against_dict(old_dict: dict, new_dict: dict, assert_rules: Optional[L
         assert_rules: dictionary of AssertRules to apply when selectively ignoring differences
 
     """
-    config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
-    cache_store: CacheStoreType = config.cache_store
+    config = retrieve(CacheAssertContainerKeys.CONFIG)
+    cache_store = cast(config.cache_store, CacheStoreType)  # type: ignore[name-defined]
     cache_store.initialize(None, config.converters)
     new_dict = cache_store.serialize(new_dict)
 
-    validator: ValidatorType = config.validator
+    validator = cast(config.validator, ValidatorType)  # type: ignore[name-defined]
     validator.assertion(cached_data=old_dict, test_data=new_dict, assert_rules=assert_rules or [])
 
 
@@ -38,7 +39,7 @@ def assert_against_cache(
     path_cache_dir: Path,
     cache_name: str,
     assert_rules: Optional[List[AssertRule]] = None,
-    metadata: Optional[Dict] = None,
+    metadata: Optional[Dict] = None,  # type: ignore[type-arg]
     always_write: Optional[bool] = None,
 ) -> None:
     """Core logic for pytest_cache_assert to handle caching and assertion-checking.
@@ -52,8 +53,8 @@ def assert_against_cache(
         always_write: if True, always write the changes
 
     """
-    config: AssertConfig = retrieve(CacheAssertContainerKeys.CONFIG)
-    cache_store: CacheStoreType = config.cache_store
+    config = retrieve(CacheAssertContainerKeys.CONFIG)
+    cache_store = cast(config.cache_store, CacheStoreType)  # type: ignore[name-defined]
     path_cache_file = path_cache_dir / cache_name
     cache_store.initialize(path_cache_dir, config.converters)
     test_data = cache_store.serialize(test_data)
@@ -65,7 +66,7 @@ def assert_against_cache(
         cached_data = test_data
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data, always_write=aw)
 
-    validator: ValidatorType = config.validator
+    validator = cast(config.validator, ValidatorType)  # type: ignore[name-defined]
     validator.assertion(
         cached_data=cached_data, test_data=test_data, assert_rules=assert_rules or [],
         path_cache_file=path_cache_file,

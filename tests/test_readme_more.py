@@ -16,14 +16,11 @@ def test_assert_against_cache_key_rules(assert_against_cache):
         'date': str(now),
         'nested': {'uuid': str(uuid4())},
         'ignored': {'a': 1, 'b': 2},
-        # 'ignored_within_list': [{'a': 1}, {'b': 2}],
-        # TODO: Added/remove field, etc.
     }
     test_data = {
         'date': str(now + timedelta(hours=3)),
         'nested': {'uuid': str(uuid4())},
         'ignored': {'recursively': {'a': {'b': {'c': 1}}}},
-        # 'ignored_within_list': [{'a': 1}, {'b': 2}],
     }
     with suppress(AssertionError):
         # Ensures that the cache file has been created

@@ -21,7 +21,7 @@ class TestMetadata(BaseModel):
 
     test_file: str
     test_name: str
-    func_args: Union[Dict, Iterable]
+    func_args: Union[Dict, Iterable]  # type: ignore[type-arg]
 
     class Config:
         arbitrary_types_allowed = True

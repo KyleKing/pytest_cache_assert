@@ -23,7 +23,7 @@ def init_cache(path_cache_dir: Path) -> None:
 
 
 @beartype
-def _merge_metadata(new_metadata: Dict[str, Any], cached_meta_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _merge_metadata(new_metadata: Dict, cached_meta_list: List[Dict]) -> List[Dict]:  # type: ignore[type-arg]
     """Merge metadata for caching. Filter duplicates.
 
     Args:
@@ -55,6 +55,7 @@ def _read_full_cache(path_cache_file: Path) -> Any:
 
 @beartype
 def write_cache_data(
+    # type: ignore[type-arg]
     path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False,
 ) -> None:
     """Cache the specified data.
@@ -66,17 +67,16 @@ def write_cache_data(
         always_write: if True, overwrite the cached data
 
     """
-    metadata: Dict = make_diffable(metadata) if metadata else {}
+    metadata = make_diffable(metadata or {})
+    meta = []
     if path_cache_file.is_file():
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
-        metadata = _merge_metadata(metadata, old_meta)
+        meta = _merge_metadata(metadata or {}, old_meta)
         if not always_write:  # Only change test_data if `always_write`
             test_data = old_cache_dict[KEY_NAME_DATA]
-    else:
-        metadata = [metadata]
 
-    cache_dict = {KEY_NAME_META: metadata, KEY_NAME_DATA: test_data}
+    cache_dict = {KEY_NAME_META: meta, KEY_NAME_DATA: test_data}
     path_cache_file.parent.mkdir(exist_ok=True, parents=True)
     path_cache_file.write_text(pretty_dumps(cache_dict))
 

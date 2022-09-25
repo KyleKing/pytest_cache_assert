@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional
+from beartype.typing import Any, Callable, Dict, Generator, List, Optional, Protocol
 from implements import Interface, implements
 
 from .caching import init_cache, load_cached_data, write_cache_data
@@ -11,12 +11,12 @@ from .converter import Converter
 from .serializer import make_diffable, register_user_converters
 
 try:
-    from typing import Protocol, Self, runtime_checkable
+    from typing import Self, runtime_checkable  # type: ignore[attr-defined]
 except ImportError:
-    from typing_extensions import Protocol, Self, runtime_checkable
+    from typing_extensions import Self, runtime_checkable
 
 
-class CacheStore(Interface):
+class CacheStore(Interface):  # type: ignore[misc]
 
     @staticmethod
     def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
@@ -27,6 +27,7 @@ class CacheStore(Interface):
         ...
 
     @staticmethod
+    # type: ignore[type-arg]
     def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False) -> None:
         ...
 
@@ -40,14 +41,14 @@ class CacheStoreType(Protocol):
     """FYI: This is a workaround for typing. See: https://github.com/ksindi/implements/issues/28"""
 
     @classmethod
-    def __get_validators__(cls):  # For Pydantic
+    def __get_validators__(cls) -> Generator[Callable[[Any], Any], None, None]:  # For Pydantic
         yield cls.validate
 
     @classmethod
-    def validate(cls, value):
+    def validate(cls, value: Self) -> Self:
         @beartype
-        def beartyper(value: Self) -> Self:
-            return value
+        def beartyper(val: Self) -> Self:
+            return val
 
         return beartyper(value)
 
@@ -71,6 +72,7 @@ class LocalJSONCacheStore(CacheStoreType):
 
     @staticmethod
     @beartype
+    # type: ignore[type-arg]
     def write(path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False) -> None:
         write_cache_data(
             path_cache_file=path_cache_file, metadata=metadata, test_data=test_data, always_write=always_write,

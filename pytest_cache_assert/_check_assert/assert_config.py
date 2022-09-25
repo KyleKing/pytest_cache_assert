@@ -14,7 +14,7 @@ from .converter import Converter
 from .validator import DictDiffValidator, ValidatorType
 
 
-@dataclass(kw_only=True)
+@dataclass
 class AssertConfig:
     """User configuration data structure."""
 

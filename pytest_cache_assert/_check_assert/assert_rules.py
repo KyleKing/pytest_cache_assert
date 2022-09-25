@@ -221,4 +221,5 @@ class AssertRule(BaseModel):
         return cls(pattern=re.compile(pattern_re), func=func)
 
     def is_regex(self) -> bool:
+        """Helper for checking if pattern is a regex or string."""
         return not isinstance(self.pattern, str)

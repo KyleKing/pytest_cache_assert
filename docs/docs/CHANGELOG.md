@@ -12,6 +12,7 @@
 
 ### Fix
 
+- cast to Interface and not Protocol
 - resolve list regex matching rules
 - determine how to match regex for nested paths
 - continue to update tests for change in pattern syntax
@@ -19,6 +20,7 @@
 
 ### Refactor
 
+- correct type ignore comments
 - additional changes to pass type checks
 - better support mypy
 - add pydantic validators to custom types

@@ -28,8 +28,12 @@ class CacheStore(Interface):  # type: ignore[misc]
 
     @staticmethod
     def write(
-        path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False,
-    ) -> None:  # type: ignore[type-arg]
+        path_cache_file: Path,
+        *,
+        metadata: Optional[Dict],  # type: ignore[type-arg]
+        test_data: Any,
+        always_write: bool = False,
+    ) -> None:
         ...
 
     @staticmethod
@@ -74,8 +78,12 @@ class LocalJSONCacheStore(CacheStoreType):
     @staticmethod
     @beartype
     def write(
-        path_cache_file: Path, *, metadata: Optional[Dict], test_data: Any, always_write: bool = False,
-    ) -> None:  # type: ignore[type-arg]
+        path_cache_file: Path,
+        *,
+        metadata: Optional[Dict],  # type: ignore[type-arg]
+        test_data: Any,
+        always_write: bool = False,
+    ) -> None:
         write_cache_data(
             path_cache_file=path_cache_file, metadata=metadata, test_data=test_data, always_write=always_write,
         )

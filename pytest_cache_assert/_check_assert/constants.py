@@ -1,8 +1,7 @@
 """Constants."""
 
-from datetime import datetime
 
-from beartype.typing import Dict, Iterable, List, Union
+from beartype.typing import Any, Callable, Dict, List, Optional, Union
 
 
 class NotFound:
@@ -10,19 +9,13 @@ class NotFound:
     ...
 
 
-_SAFE_T = Union[str, int, float, bool, None]
-"""Safe types for json serialization."""
+T_SER = Optional[Union[str, int, float, bool, List, Dict]]
+"""JSON-Serializable types."""
 
-_NESTED_DICT = Dict[_SAFE_T, Union[_SAFE_T, Dict[_SAFE_T, Union[_SAFE_T, dict]]]]  # noqa: ECE001
-"""Nested dictionary type."""
+T_CONVERTER = Callable[[Any], T_SER]
+"""Generic type for converters with a single argument."""
 
-_NESTED_LIST = List[Union[_NESTED_DICT, _SAFE_T, list]]  # noqa: ECE001
-"""Nested list type."""
-
-_DIFF_SINGLE_TYPES = Union[None, str, int, float, datetime, NotFound]
-"""Single types for DIFF_TYPES."""
-
-DIFF_TYPES = Union[_DIFF_SINGLE_TYPES, Iterable[_DIFF_SINGLE_TYPES]]
+T_DIFF = Any
 """Possible Old or New difference type."""
 
 DEF_CACHE_DIR_NAME = 'assert-cache'

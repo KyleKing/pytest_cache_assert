@@ -5,16 +5,15 @@ from contextlib import suppress
 from datetime import datetime, timedelta
 from enum import Enum
 from functools import partial
-from typing import ClassVar
 from uuid import UUID
 
 import arrow
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Pattern, Union
-from pydantic.dataclasses import dataclass
+from pydantic import BaseModel
 from strenum import StrEnum
 
-from .constants import DIFF_TYPES
+from .constants import T_DIFF
 
 
 class Comparator(Enum):  # noqa: H601
@@ -26,7 +25,7 @@ class Comparator(Enum):  # noqa: H601
 
 
 @beartype
-def check_suppress(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_suppress(old: T_DIFF, new: T_DIFF) -> bool:
     """Return True to suppress differences.
 
     Args:
@@ -41,7 +40,7 @@ def check_suppress(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
 
 @beartype
-def check_exact(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_exact(old: T_DIFF, new: T_DIFF) -> bool:
     """Check for value equality.
 
     Args:
@@ -52,11 +51,11 @@ def check_exact(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
         bool: True if both values are the exact same
 
     """
-    return old == new
+    return old == new  # type: ignore[no-any-return]
 
 
 @beartype
-def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def _try_type_coercion(old: T_DIFF, new: T_DIFF) -> bool:
     """Attempt to coerce strings to UUID, datetime, or int/float.
 
     Args:
@@ -68,16 +67,16 @@ def _try_type_coercion(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
     """
     for converter in [UUID, arrow.get, float]:
-        with suppress((ValueError, AttributeError, TypeError, arrow.parser.ParserError)):
-            converter(old)
-            converter(new)
+        with suppress((ValueError, AttributeError, TypeError, arrow.parser.ParserError)):  # type: ignore[arg-type]
+            converter(old)  # type: ignore[operator]
+            converter(new)  # type: ignore[operator]
             return True
 
     return False
 
 
 @beartype
-def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
+def check_type(old: T_DIFF, new: T_DIFF) -> bool:
     """Check if both values are the exact same or same non-string type. Will attempt conversion from string.
 
     Args:
@@ -99,7 +98,7 @@ def check_type(old: DIFF_TYPES, new: DIFF_TYPES) -> bool:
 
 @beartype
 def _check_date_range(
-    old: DIFF_TYPES, new: DIFF_TYPES,
+    old: T_DIFF, new: T_DIFF,
     min_date: Optional[datetime] = None, max_date: Optional[datetime] = None,
 ) -> bool:
     """Check if the new date falls within the specified range. Will ignores old date.
@@ -125,7 +124,7 @@ def _check_date_range(
 @beartype
 def gen_check_date_range(
     min_date: Optional[datetime] = None, max_date: Optional[datetime] = None,
-) -> Callable[[DIFF_TYPES, DIFF_TYPES], bool]:
+) -> Callable[[T_DIFF, T_DIFF], bool]:
     """Generate a AssertRule check for date within the specified range.
 
     Args:
@@ -133,7 +132,7 @@ def gen_check_date_range(
         max_date: optional maximum datetime
 
     Returns:
-        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: AssertRule check
+        Callable[[T_DIFF, T_DIFF], bool]: AssertRule check
 
     """
     return partial(_check_date_range, min_date=min_date, max_date=max_date)
@@ -141,7 +140,7 @@ def gen_check_date_range(
 
 @beartype
 def _check_date_proximity(
-    old: DIFF_TYPES, new: DIFF_TYPES, time_delta: timedelta, comparator: Comparator,
+    old: T_DIFF, new: T_DIFF, time_delta: timedelta, comparator: Comparator,
 ) -> bool:
     """Check if the new date is proximal to the old date based on a time_delta and comparison logic.
 
@@ -168,7 +167,7 @@ def _check_date_proximity(
 @beartype
 def gen_check_date_proximity(
     time_delta: timedelta, comparator: Comparator = Comparator.WITHIN,
-) -> Callable[[DIFF_TYPES, DIFF_TYPES], bool]:
+) -> Callable[[T_DIFF, T_DIFF], bool]:
     """Generate a AssertRule check for date within the specified range.
 
     Args:
@@ -176,7 +175,7 @@ def gen_check_date_proximity(
         comparator: defaults to Comparator.WITHIN. Can make directional by setting LTE or GTE
 
     Returns:
-        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: AssertRule check
+        Callable[[T_DIFF, T_DIFF], bool]: AssertRule check
 
     """
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
@@ -185,7 +184,7 @@ def gen_check_date_proximity(
 _PAT_JOIN = r"'\]\['"
 
 
-class Wild(StrEnum):
+class Wild(StrEnum):  # type: ignore[misc]
     """AssertRule Wildcard Patterns."""
 
     @staticmethod  # sourcery skip: do-not-use-staticmethod
@@ -205,20 +204,14 @@ class Wild(StrEnum):
         return cls._build(r'[^\]]+', count)
 
 
-@dataclass(kw_only=True)
-class AssertRule:  # noqa: H601
+class AssertRule(BaseModel):
     """Key Rule."""
 
-    pattern: Union[str, Pattern]
-    func: Callable[[DIFF_TYPES, DIFF_TYPES], bool]
-    is_regex: ClassVar[bool]
-
-    def __post_init__(self) -> None:
-        """Register the configuration object."""
-        self.is_regex = not isinstance(self.pattern, str)
+    pattern: Union[str, Pattern]  # type: ignore[type-arg] # https://github.com/pydantic/pydantic/issues/2636
+    func: Callable[[T_DIFF, T_DIFF], bool]
 
     @classmethod
-    def build_re(cls, pattern: List[Union[str, Wild]], func: Callable[[DIFF_TYPES, DIFF_TYPES], bool]) -> 'AssertRule':
+    def build_re(cls, pattern: List[Union[str, Wild]], func: Callable[[T_DIFF, T_DIFF], bool]) -> 'AssertRule':
         """Build a regex pattern from list."""
         if not pattern:
             raise ValueError("Expected at least one item in 'pattern'")
@@ -226,3 +219,6 @@ class AssertRule:  # noqa: H601
             raise ValueError("Exclude 'root' and brackets. This method builds it for you")
         pattern_re = r"root\['" + _PAT_JOIN.join(pattern) + r"'\]"
         return cls(pattern=re.compile(pattern_re), func=func)
+
+    def is_regex(self) -> bool:
+        return not isinstance(self.pattern, str)

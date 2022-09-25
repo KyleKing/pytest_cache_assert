@@ -52,7 +52,7 @@ class AssertConfig:
         arbitrary_types_allowed = True
         frozen = True
 
-    def __post_init__(self) -> None:
+    def __post_init_post_parse__(self) -> None:
         """Register the configuration object."""
         if self.always_write:
             warnings.warn('User has configured always_write globally. Make sure to check-in files to a VCS')

@@ -9,7 +9,7 @@ from deepdiff.diff import DeepDiff
 from pydantic import BaseModel
 
 from .assert_rules import AssertRule
-from .constants import DIFF_TYPES, NotFound
+from .constants import T_DIFF, NotFound
 
 
 class DiffResults(BaseModel):
@@ -27,7 +27,7 @@ class DiffResults(BaseModel):
 
 
 @beartype
-def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, **diff_kwargs) -> DiffResults:
+def _raw_diff(*, old_dict: T_DIFF, new_dict: T_DIFF, **diff_kwargs) -> DiffResults:
     """Determine the differences between two dictionaries.
 
     Args:
@@ -43,7 +43,7 @@ def _raw_diff(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, **diff_kwargs) -> D
 
 
 @beartype
-def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, assert_rules: List[AssertRule]) -> DiffResults:
+def diff_with_rules(*, old_dict: T_DIFF, new_dict: T_DIFF, assert_rules: List[AssertRule]) -> DiffResults:
     """Determine the differences between two dictionaries.
 
     Args:
@@ -59,7 +59,7 @@ def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, assert_rules:
     key_re = 'regex'
     collector = {key_str: [], key_re: []}
     for ar in assert_rules:
-        collector[key_re if ar.is_regex else key_str].append(ar.pattern)
+        collector[key_re if ar.is_regex() else key_str].append(ar.pattern)
 
     diff_result = _raw_diff(
         old_dict=old_dict,
@@ -71,7 +71,7 @@ def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, assert_rules:
     for ar in assert_rules:
         paths = []
         for data_set in [old_dict, new_dict]:
-            ds = DeepSearch(data_set, ar.pattern, use_regexp=ar.is_regex)
+            ds = DeepSearch(data_set, ar.pattern, use_regexp=ar.is_regex())
             paths.extend([*ds.get('matched_paths', {})])
         for pth in set(paths):
             new_value, old_value = NotFound(), NotFound()

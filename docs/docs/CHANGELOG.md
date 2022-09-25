@@ -2,6 +2,7 @@
 
 ### Feat
 
+- initiaiize Wild class and rename KeyRule to AssertRule
 - add serializer to store only relative paths
 - begin supporting string-based KeyRules!
 - even better error messages

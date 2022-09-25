@@ -14,7 +14,7 @@ from beartype import beartype
 from beartype.typing import Any, Callable, Dict, List, Pattern, Tuple
 from pydantic import BaseModel, Field
 
-from .constants import DIFF_TYPES
+from .constants import T_CONVERTER, T_DIFF
 from .converter import Converter
 
 _RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
@@ -36,16 +36,16 @@ def replace_memory_address(obj: Any) -> str:
 class _Converters(BaseModel):
     """Register converters for application."""
 
-    converters: List[Tuple[Any, Callable]] = Field(default_factory=list)
-    converter_lookup: Dict[Any, List[Callable]] = Field(default_factory=dict)
+    converters: List[Tuple[Any, T_CONVERTER]] = Field(default_factory=list)
+    converter_lookup: Dict[Any, List[T_CONVERTER]] = Field(default_factory=dict)
 
     @beartype
-    def register(self, types: List[Any], converter: Callable) -> None:
+    def register(self, types: List[Any], converter: T_CONVERTER) -> None:
         self.converters.extend((typ, converter) for typ in types)
         self.converter_lookup = {}
 
     @beartype
-    def get_lookup(self) -> Dict[Any, List[Callable]]:
+    def get_lookup(self) -> Dict[Any, List[T_CONVERTER]]:
         if not self.converter_lookup:
             self.converter_lookup = defaultdict(list)
             for typ, converter in self.converters[::-1]:
@@ -127,7 +127,7 @@ _CONVERTERS.register([Path, PurePath], _serialize_path)
 
 def _serialize_enum(obj: Enum) -> str:
     try:
-        return obj.value
+        return str(obj.value)
     except AttributeError as exc:
         raise Unconvertable(exc) from None
 
@@ -154,24 +154,24 @@ with suppress(ImportError):
 with suppress(ImportError):
     import pandas as pd
 
-    def _serialize_pandas(obj: pd.DataFrame) -> Dict:
-        return obj.to_dict()
+    def _serialize_pandas(obj: pd.DataFrame) -> Dict:  # type: ignore[type-arg]
+        return obj.to_dict()  # type: ignore[no-any-return]
 
     _CONVERTERS.register([pd.DataFrame], _serialize_pandas)
 
 with suppress(ImportError):
     import numpy as np
 
-    def _serialize_numpy(obj: np.ndarray) -> Dict:
-        return obj.tolist()
+    def _serialize_numpy(obj: np.ndarray) -> List:  # type: ignore[type-arg]
+        return obj.tolist()  # type: ignore[no-any-return]
 
     _CONVERTERS.register([np.ndarray], _serialize_numpy)
 
 with suppress(ImportError):
     from pydantic.main import BaseModel
 
-    def _serialize_pydantic(obj: BaseModel) -> Dict:
-        return obj.to_dict()
+    def _serialize_pydantic(obj: BaseModel) -> Dict:  # type: ignore[type-arg]
+        return obj.to_dict()  # type: ignore[attr-defined,no-any-return]
 
     _CONVERTERS.register([BaseModel], _serialize_pydantic)
 
@@ -180,7 +180,7 @@ with suppress(ImportError):
 def register_user_converters(converters: List[Converter]) -> None:
     """Register the user-specified converters."""
     for converter in converters:
-        _CONVERTERS.register(converter.types, converter.func)
+        _CONVERTERS.register(converter.types, converter.func)  # type: ignore[arg-type]
 
 
 @beartype
@@ -220,28 +220,28 @@ def pretty_dumps(obj: Any) -> str:
 
 
 @beartype
-def loads(raw: str) -> DIFF_TYPES:
+def loads(raw: str) -> T_DIFF:
     """Deserialize arbitrary JSON data back to Python types.
 
     Args:
         raw: raw string JSON
 
     Returns:
-        DIFF_TYPES: DiffResults-safe data
+        T_DIFF: DiffResults-safe data
 
     """
     return json.loads(raw)
 
 
 @beartype
-def make_diffable(data: Any) -> DIFF_TYPES:
+def make_diffable(data: Any) -> T_DIFF:
     """Convert raw object to diffable types for assertion checks.
 
     Args:
         data: data to serialize
 
     Returns:
-        DIFF_TYPES: DiffResults-safe data
+        T_DIFF: DiffResults-safe data
 
     """
     return loads(dumps(data))

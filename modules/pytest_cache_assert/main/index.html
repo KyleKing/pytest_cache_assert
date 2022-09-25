@@ -736,70 +736,73 @@
 <span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="linenos" data-linenos=" 8 "></span>
 <span class="linenos" data-linenos=" 9 "></span><span class="kn">from</span> <span class="nn">beartype</span> <span class="kn">import</span> <span class="n">beartype</span>
-<span class="linenos" data-linenos="10 "></span><span class="kn">from</span> <span class="nn">beartype.typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+<span class="linenos" data-linenos="10 "></span><span class="kn">from</span> <span class="nn">beartype.typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos" data-linenos="11 "></span>
-<span class="linenos" data-linenos="12 "></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AssertRule</span><span class="p">,</span> <span class="n">CacheAssertContainerKeys</span><span class="p">,</span> <span class="n">CacheStoreType</span><span class="p">,</span> <span class="n">NoCacheError</span><span class="p">,</span> <span class="n">ValidatorType</span><span class="p">,</span> <span class="n">retrieve</span>
+<span class="linenos" data-linenos="12 "></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AssertRule</span><span class="p">,</span> <span class="n">CacheAssertContainerKeys</span><span class="p">,</span> <span class="n">NoCacheError</span><span class="p">,</span> <span class="n">retrieve</span>
 <span class="linenos" data-linenos="13 "></span>
 <span class="linenos" data-linenos="14 "></span>
 <span class="linenos" data-linenos="15 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="16 "></span><span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="17 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="18 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
-<span class="linenos" data-linenos="19 "></span>
-<span class="linenos" data-linenos="20 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="21 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
-<span class="linenos" data-linenos="22 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
-<span class="linenos" data-linenos="23 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
-<span class="linenos" data-linenos="24 "></span>
-<span class="linenos" data-linenos="25 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="26 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span><span class="p">,</span> <span class="n">CacheStoreType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="28 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
-<span class="linenos" data-linenos="29 "></span>    <span class="n">new_dict</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
-<span class="linenos" data-linenos="30 "></span>
-<span class="linenos" data-linenos="31 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span> <span class="n">ValidatorType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="32 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="16 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">new_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="20 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="24 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
+<span class="linenos" data-linenos="25 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
+<span class="linenos" data-linenos="26 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="27 "></span>
+<span class="linenos" data-linenos="28 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="linenos" data-linenos="30 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
+<span class="linenos" data-linenos="31 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
+<span class="linenos" data-linenos="32 "></span>    <span class="n">new_dict</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
 <span class="linenos" data-linenos="33 "></span>
-<span class="linenos" data-linenos="34 "></span>
-<span class="linenos" data-linenos="35 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="36 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos="37 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos" data-linenos="38 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="39 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
-<span class="linenos" data-linenos="40 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="41 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="42 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="44 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
-<span class="linenos" data-linenos="46 "></span>
-<span class="linenos" data-linenos="47 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="48 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
-<span class="linenos" data-linenos="49 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
-<span class="linenos" data-linenos="50 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
-<span class="linenos" data-linenos="51 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
-<span class="linenos" data-linenos="52 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
-<span class="linenos" data-linenos="53 "></span><span class="sd">        always_write: if True, always write the changes</span>
-<span class="linenos" data-linenos="54 "></span>
-<span class="linenos" data-linenos="55 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="56 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
-<span class="linenos" data-linenos="57 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span><span class="p">,</span> <span class="n">CacheStoreType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="58 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
-<span class="linenos" data-linenos="59 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
-<span class="linenos" data-linenos="60 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="linenos" data-linenos="61 "></span>    <span class="c1"># Function argument overrides global</span>
-<span class="linenos" data-linenos="62 "></span>    <span class="n">aw</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">always_write</span> <span class="k">if</span> <span class="n">always_write</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">always_write</span>
-<span class="linenos" data-linenos="63 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="64 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">read_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="65 "></span>    <span class="k">except</span> <span class="n">NoCacheError</span><span class="p">:</span>
-<span class="linenos" data-linenos="66 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">test_data</span>
-<span class="linenos" data-linenos="67 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">always_write</span><span class="o">=</span><span class="n">aw</span><span class="p">)</span>
-<span class="linenos" data-linenos="68 "></span>
-<span class="linenos" data-linenos="69 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span> <span class="n">ValidatorType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="70 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span>
-<span class="linenos" data-linenos="71 "></span>        <span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[],</span>
-<span class="linenos" data-linenos="72 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
-<span class="linenos" data-linenos="73 "></span>    <span class="p">)</span>
+<span class="linenos" data-linenos="34 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
+<span class="linenos" data-linenos="35 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="36 "></span>
+<span class="linenos" data-linenos="37 "></span>
+<span class="linenos" data-linenos="38 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="39 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="40 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos="41 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos="46 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="47 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="48 "></span>    <span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
+<span class="linenos" data-linenos="49 "></span>
+<span class="linenos" data-linenos="50 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="51 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
+<span class="linenos" data-linenos="52 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
+<span class="linenos" data-linenos="53 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
+<span class="linenos" data-linenos="54 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="55 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
+<span class="linenos" data-linenos="56 "></span><span class="sd">        always_write: if True, always write the changes</span>
+<span class="linenos" data-linenos="57 "></span>
+<span class="linenos" data-linenos="58 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="59 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="linenos" data-linenos="60 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
+<span class="linenos" data-linenos="61 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
+<span class="linenos" data-linenos="62 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
+<span class="linenos" data-linenos="63 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="64 "></span>    <span class="c1"># Function argument overrides global</span>
+<span class="linenos" data-linenos="65 "></span>    <span class="n">aw</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">always_write</span> <span class="k">if</span> <span class="n">always_write</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">always_write</span>
+<span class="linenos" data-linenos="66 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="67 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">read_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="68 "></span>    <span class="k">except</span> <span class="n">NoCacheError</span><span class="p">:</span>
+<span class="linenos" data-linenos="69 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">test_data</span>
+<span class="linenos" data-linenos="70 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">always_write</span><span class="o">=</span><span class="n">aw</span><span class="p">)</span>
+<span class="linenos" data-linenos="71 "></span>
+<span class="linenos" data-linenos="72 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
+<span class="linenos" data-linenos="73 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span>
+<span class="linenos" data-linenos="74 "></span>        <span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[],</span>
+<span class="linenos" data-linenos="75 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
+<span class="linenos" data-linenos="76 "></span>    <span class="p">)</span>
 </code></pre></div>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
@@ -874,7 +877,7 @@
 <span class="linenos" data-linenos="20 "></span>
 <span class="linenos" data-linenos="21 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="22 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
-<span class="linenos" data-linenos="23 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span><span class="p">,</span> <span class="n">CacheStoreType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
 <span class="linenos" data-linenos="24 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
 <span class="linenos" data-linenos="25 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
 <span class="linenos" data-linenos="26 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
@@ -886,7 +889,7 @@
 <span class="linenos" data-linenos="32 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">test_data</span>
 <span class="linenos" data-linenos="33 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">always_write</span><span class="o">=</span><span class="n">aw</span><span class="p">)</span>
 <span class="linenos" data-linenos="34 "></span>
-<span class="linenos" data-linenos="35 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span> <span class="n">ValidatorType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
+<span class="linenos" data-linenos="35 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
 <span class="linenos" data-linenos="36 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span>
 <span class="linenos" data-linenos="37 "></span>        <span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[],</span>
 <span class="linenos" data-linenos="38 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
@@ -927,23 +930,26 @@
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 4 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
-<span class="linenos" data-linenos=" 5 "></span>
-<span class="linenos" data-linenos=" 6 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
-<span class="linenos" data-linenos="10 "></span>
-<span class="linenos" data-linenos="11 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="12 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
-<span class="linenos" data-linenos="13 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span><span class="p">,</span> <span class="n">CacheStoreType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
-<span class="linenos" data-linenos="15 "></span>    <span class="n">new_dict</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
-<span class="linenos" data-linenos="16 "></span>
-<span class="linenos" data-linenos="17 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span> <span class="n">ValidatorType</span><span class="p">)</span>  <span class="c1"># type: ignore[name-defined]</span>
-<span class="linenos" data-linenos="18 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[])</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">new_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="sd">&quot;&quot;&quot;Utilize custom DictDiffer logic to compare in-memory dictionaries.</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="10 "></span><span class="sd">        old_dict: old dictionary (typically cached one)</span>
+<span class="linenos" data-linenos="11 "></span><span class="sd">        new_dict: new dictionary (typically test data)</span>
+<span class="linenos" data-linenos="12 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">new_dict</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[])</span>
 </code></pre></div>
 </details>
 

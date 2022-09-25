@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.1">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.3">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2e8b5541.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
@@ -419,20 +419,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../CODE_OF_CONDUCT/" class="md-nav__link">
-        Contributor Covenant Code of Conduct
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -459,36 +445,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../CONTRIBUTING/" class="md-nav__link">
-        Contributing
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../DEVELOPER_GUIDE/" class="md-nav__link">
         Developer Notes
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SECURITY/" class="md-nav__link">
-        Security
       </a>
     </li>
   
@@ -689,16 +647,16 @@
 </thead>
 <tbody>
 <tr>
-<td>PLANNED</td>
+<td>FIXME</td>
 <td>Needs to support mkdocs: https://github.com/executablebooks/mdformat/issues/317</td>
-<td>2022-09-16</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/db164248693f53faa544283ced78bfc8cd174212/.pre-commit-config.yaml#L46">.pre-commit-config.yaml:46</a></td>
+<td>2022-09-17</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/6a374d2a40da114ed2b14de63fdfcb87fa8cef3b/.pre-commit-config.yaml#L47">.pre-commit-config.yaml:47</a></td>
 </tr>
 <tr>
 <td>PLANNED</td>
 <td>newest version fails on positional argument errors: https://github.com/tox-dev/pyproject-fmt</td>
 <td>2022-09-16</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/db164248693f53faa544283ced78bfc8cd174212/.pre-commit-config.yaml#L65">.pre-commit-config.yaml:65</a></td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/db164248693f53faa544283ced78bfc8cd174212/.pre-commit-config.yaml#L65">.pre-commit-config.yaml:67</a></td>
 </tr>
 <tr>
 <td>TODO</td>
@@ -707,52 +665,40 @@
 <td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/db164248693f53faa544283ced78bfc8cd174212/.pylintrc#L1">.pylintrc:1</a></td>
 </tr>
 <tr>
+<td>TODO</td>
+<td>Added/remove field, etc.</td>
+<td>2022-09-25</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/eff8dd9445ece5e760baad19933001b0c6d96f25/docs/README.md#L132">docs/README.md:132</a></td>
+</tr>
+<tr>
 <td>PLANNED</td>
 <td><a href="https://github.com/kiwicom/pytest-recording/blob/484bb887dd43fcaf44149160d57b58a7215e2c8a/src/pytest_recording/plugin.py#L37-L70">Provide CLI arguments like <code>pytest-recording</code></a> (<code>request.config.getoption("--record-mode") or "none"</code>) for one-time changes to configuration</td>
 <td>2021-11-02</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/59b53b867385ee55fb5d6c280931e1200f242f8c/docs/README.md#L191">docs/README.md:203</a></td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/59b53b867385ee55fb5d6c280931e1200f242f8c/docs/README.md#L191">docs/README.md:204</a></td>
 </tr>
 <tr>
 <td>PLANNED</td>
-<td>Consider filters to prevent secrets from being cached: <code>filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]</code></td>
-<td>2021-11-02</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/59b53b867385ee55fb5d6c280931e1200f242f8c/docs/README.md#L192">docs/README.md:204</a></td>
+<td>Consider filters to prevent secrets from being cached: <code>filter_headers=[['authorization', 'id'], ['authorization', 'cookies']]</code> (Although, you should be using a pre-commit hook and formatting the dict before passing to to the cache)</td>
+<td>2022-09-25</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/1c451fabfe0b992abcbd7f53f16d0b55396bac47/docs/README.md#L202">docs/README.md:205</a></td>
 </tr>
 <tr>
-<td>PLANNED</td>
-<td>Consider inline corrections to cached data like this <a href="https://jestjs.io/docs/snapshot-testing#inline-snapshots">feature from Jest</a></td>
-<td>2021-11-03</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/0b3976e638b5f059cb1d4a8aecd008cee14ae70f/docs/README.md#L228">docs/README.md:208</a></td>
-</tr>
-<tr>
-<td>PLANNED</td>
+<td>TODO</td>
 <td><a href="https://jestjs.io/docs/snapshot-testing#best-practices">Add tips from Jest on best practices</a> &ndash; treat snapshots as code, etc.</td>
-<td>2021-11-03</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/0b3976e638b5f059cb1d4a8aecd008cee14ae70f/docs/README.md#L231">docs/README.md:211</a></td>
+<td>2022-09-25</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/1c451fabfe0b992abcbd7f53f16d0b55396bac47/docs/README.md#L203">docs/README.md:206</a></td>
 </tr>
 <tr>
 <td>FIXME</td>
 <td>Implement ujson as a faster alternative to json</td>
 <td>2022-05-02</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/19566b808c53ece745ba4280c3e671892e231510/pyproject.toml#L67">pyproject.toml:66</a></td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/19566b808c53ece745ba4280c3e671892e231510/pyproject.toml#L67">pyproject.toml:67</a></td>
 </tr>
 <tr>
-<td>FIXME</td>
-<td>Move to KeyRules? (is_regex?)</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/b3fd8ea21092c2dbad497a0e96934797bbffe794/pytest_cache_assert/_check_assert/differ.py#L58">pytest_cache_assert/_check_assert/differ.py:58</a></td>
-</tr>
-<tr>
-<td>FIXME</td>
-<td>Use new <Missing> Class if not found!</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/b3fd8ea21092c2dbad497a0e96934797bbffe794/pytest_cache_assert/_check_assert/differ.py#L78">pytest_cache_assert/_check_assert/differ.py:78</a></td>
-</tr>
-<tr>
-<td>FIXME</td>
-<td>Drop support of List!</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/cd4c79496fc63a1e3ed6432a361787f6e73f6db7/pytest_cache_assert/_check_assert/key_rules.py#L185">pytest_cache_assert/_check_assert/key_rules.py:185</a></td>
+<td>PLANNED</td>
+<td>Faster to LBYL or EAFP?</td>
+<td>2022-09-22</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/30bcaa3895cb64514791857a6986d7d1ceea93c2/pytest_cache_assert/_check_assert/serializer.py#L117">pytest_cache_assert/_check_assert/serializer.py:117</a></td>
 </tr>
 <tr>
 <td>FIXME</td>
@@ -761,38 +707,20 @@
 <td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/de5c14ec02a9b3db952957a391ad4fbf317567ae/scripts/check_imports.py#L7">scripts/check_imports.py:7</a></td>
 </tr>
 <tr>
-<td>FIXME</td>
-<td>Implement list regeular expressions!</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/b3fd8ea21092c2dbad497a0e96934797bbffe794/tests/_check_assert/test_differ.py#L223">tests/_check_assert/test_differ.py:223</a></td>
-</tr>
-<tr>
 <td>TODO</td>
 <td>Add tests for additional types: st.binary(), etc.</td>
 <td>2022-03-07</td>
 <td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/f997474b9c84f354dd74de1da7f78e3f61af8c51/tests/test_main.py#L143">tests/test_main.py:152</a></td>
 </tr>
 <tr>
-<td>FIXME</td>
-<td>The README example doesn&rsquo;t work and could be improved&hellip;</td>
-<td>2022-09-16</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/05a0a9fbda7048229f5d2f8854c672573796c9ac/tests/test_readme.py#L49">tests/test_readme.py:48</a></td>
-</tr>
-<tr>
-<td>FIXME</td>
-<td>Update this test and the associated README&hellip;&rsquo;)</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/cd4c79496fc63a1e3ed6432a361787f6e73f6db7/tests/test_readme.py#L48">tests/test_readme.py:49</a></td>
-</tr>
-<tr>
 <td>TODO</td>
-<td>???</td>
-<td>2022-09-17</td>
-<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/b3fd8ea21092c2dbad497a0e96934797bbffe794/tests/test_readme.py#L67">tests/test_readme.py:67</a></td>
+<td>Added/remove field, etc.</td>
+<td>2022-09-25</td>
+<td><a href="https://github.com/KyleKing/pytest_cache_assert/blame/eff8dd9445ece5e760baad19933001b0c6d96f25/tests/test_readme_more.py#L20">tests/test_readme_more.py:20</a></td>
 </tr>
 </tbody>
 </table>
-<p>Found code tags for FIXME (8), TODO (3), PLANNED (6)</p>
+<p>Found code tags for FIXME (3), TODO (5), PLANNED (4)</p>
 <!-- calcipy:skip_tags -->
 
   <hr>
@@ -800,7 +728,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 17, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 25, 2022</span>
       
         <br>
         Created:
@@ -829,7 +757,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../CODE_OF_CONDUCT/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Contributor Covenant Code of Conduct" rel="prev">
+        <a href="../CHANGELOG/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CHANGELOG" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -838,20 +766,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Contributor Covenant Code of Conduct
+              CHANGELOG
             </div>
           </div>
         </a>
       
       
         
-        <a href="../CONTRIBUTING/" class="md-footer__link md-footer__link--next" aria-label="Next: Contributing" rel="next">
+        <a href="../DEVELOPER_GUIDE/" class="md-footer__link md-footer__link--next" aria-label="Next: Developer Notes" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Contributing
+              Developer Notes
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -882,10 +810,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d691e9de.min.js"></script>
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       

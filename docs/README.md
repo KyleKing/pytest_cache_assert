@@ -6,13 +6,13 @@ Cache assertion data to simplify regression testing of complex serializable data
 
 `poetry add pytest_assert_check --dev`
 
-## Quick Start
+## Usage
 
 The primary use case of this package is regression testing of large, serializable dictionaries, such as from an API under development.
 
 You may have parameterized test cases where you need to assert that the created dictionary stays the same, but you don’t want to manually generate the expected fields and values to compare. Instead you can capture a snapshot of the serialized data and cache the result then use the cached data to check for consistency in repeated test runs. The cached files should be checked into version control, which can be very useful as documentation
 
-This package can minimize test case logic, while improving test thoroughness
+This package can minimize test case logic, while improving regression testing thoroughness
 
 This project was heavily inspired by the excellent [pytest-recording](https://github.com/kiwicom/pytest-recording)
 
@@ -160,9 +160,9 @@ def test_assert_against_cache_key_rules(assert_against_cache):
         assert_against_cache(test_data)
 ```
 
-### Even More Example
+### Even More Examples
 
-For more examples, see [Scripts](https://github.com/kyleking/pytest_cache_assert/scripts) or [Tests](https://github.com/kyleking/pytest_cache_assert/tests)
+For more example code, see the [scripts] directory or the [tests].
 
 ## Customization (`beta`)
 
@@ -190,11 +190,9 @@ def cache_assert_config():
     return AssertConfig(cache_dir_rel_path='custom/cache/dir')
 ```
 
-## Roadmap
+## Project Status
 
-See the `Open Issues` and `Milestones` for current status and [./docs/CODE_TAG_SUMMARY.md](./docs/CODE_TAG_SUMMARY.md) for annotations in the source code.
-
-For release history, see the [./docs/CHANGELOG.md](./docs/CHANGELOG.md)
+See the `Open Issues` and/or the [CODE_TAG_SUMMARY]. For release history, see the [CHANGELOG].
 
 ### Planned Global Configuration Options
 
@@ -212,14 +210,30 @@ These are ideas for future options that are not currently implemented, but could
 
 ## Contributing
 
-See the Developer Guide, Contribution Guidelines, etc
+We welcome pull requests! For your pull request to be accepted smoothly, we suggest that you first open a GitHub issue to discuss your idea. For resources on getting started with the code base, see the below documentation:
 
-- [./docs/DEVELOPER_GUIDE.md](./docs/DEVELOPER_GUIDE.md)
-- [./docs/STYLE_GUIDE.md](./docs/STYLE_GUIDE.md)
-- [./docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)
-- [./docs/CODE_OF_CONDUCT.md](./docs/CODE_OF_CONDUCT.md)
-- [./docs/SECURITY.md](./docs/SECURITY.md)
+- [DEVELOPER_GUIDE]
+- [STYLE_GUIDE]
+- [CONTRIBUTING]
+
+## Code of Conduct
+
+We follow the [Contributor Covenant Code of Conduct][contributor-covenant].
+
+## Responsible Disclosure
+
+If you have any security issue to report, please contact the project maintainers privately. You can reach us at [dev.act.kyle@gmail.com](mailto:dev.act.kyle@gmail.com).
 
 ## License
 
-[LICENSE](https://github.com/kyleking/pytest_cache_assert/LICENSE)
+[LICENSE]
+
+[changelog]: ./docs/CHANGELOG.md
+[code_tag_summary]: ./docs/CODE_TAG_SUMMARY.md
+[contributing]: ./docs/CONTRIBUTING.md
+[contributor-covenant]: https://www.contributor-covenant.org
+[developer_guide]: ./docs/DEVELOPER_GUIDE.md
+[license]: https://github.com/kyleking/pytest_cache_assert/LICENSE
+[scripts]: https://github.com/kyleking/pytest_cache_assert/scripts
+[style_guide]: ./docs/STYLE_GUIDE.md
+[tests]: https://github.com/kyleking/pytest_cache_assert/tests

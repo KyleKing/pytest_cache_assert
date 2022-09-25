@@ -18,6 +18,10 @@ from .validator import DictDiffValidator, ValidatorType
 class AssertConfig:
     """User configuration data structure."""
 
+    class Config:
+        arbitrary_types_allowed = True
+        frozen = True
+
     always_write: bool = False
     """Always write to the cached file so that diffs can be examined in the user's VCS."""
 
@@ -47,10 +51,6 @@ class AssertConfig:
 
     validator: ValidatorType = Field(default_factory=DictDiffValidator)
     """Custom validator for identifying and summarizing the deviations from the cache."""
-
-    class Config:
-        arbitrary_types_allowed = True
-        frozen = True
 
     def __post_init_post_parse__(self) -> None:
         """Register the configuration object."""

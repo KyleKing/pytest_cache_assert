@@ -19,13 +19,13 @@ from . import AssertConfig, main
 class TestMetadata(BaseModel):
     """Test MetaData."""
 
-    test_file: str
-    test_name: str
-    func_args: Union[Dict, Iterable]  # type: ignore[type-arg]
-
     class Config:
         arbitrary_types_allowed = True
         frozen = True
+
+    test_file: str
+    test_name: str
+    func_args: Union[Dict, Iterable]  # type: ignore[type-arg]
 
     @classmethod
     @beartype

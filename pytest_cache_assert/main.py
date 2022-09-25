@@ -7,17 +7,17 @@ FYI: Should not require any pytest functionality
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Dict, List, Optional, cast
+from beartype.typing import Any, Dict, List, Optional
 
 from . import AssertRule, CacheAssertContainerKeys, NoCacheError, retrieve
-from ._check_assert.cache_store import CacheStore
-from ._check_assert.validator import Validator
 
 
 @beartype
 def assert_against_dict(
-    old_dict: Dict, new_dict: Dict, assert_rules: Optional[List[AssertRule]] = None,
-) -> None:  # type: ignore[type-arg]
+    old_dict: Dict,  # type: ignore[type-arg]
+    new_dict: Dict,  # type: ignore[type-arg]
+    assert_rules: Optional[List[AssertRule]] = None,
+) -> None:
     """Utilize custom DictDiffer logic to compare in-memory dictionaries.
 
     Args:
@@ -27,11 +27,11 @@ def assert_against_dict(
 
     """
     config = retrieve(CacheAssertContainerKeys.CONFIG)
-    cache_store = cast(config.cache_store, CacheStore)  # type: ignore[name-defined]
+    cache_store = config.cache_store
     cache_store.initialize(None, config.converters)
     new_dict = cache_store.serialize(new_dict)
 
-    validator = cast(config.validator, Validator)  # type: ignore[name-defined]
+    validator = config.validator
     validator.assertion(cached_data=old_dict, test_data=new_dict, assert_rules=assert_rules or [])
 
 
@@ -57,7 +57,7 @@ def assert_against_cache(
 
     """
     config = retrieve(CacheAssertContainerKeys.CONFIG)
-    cache_store = cast(config.cache_store, CacheStore)  # type: ignore[name-defined]
+    cache_store = config.cache_store
     path_cache_file = path_cache_dir / cache_name
     cache_store.initialize(path_cache_dir, config.converters)
     test_data = cache_store.serialize(test_data)
@@ -69,7 +69,7 @@ def assert_against_cache(
         cached_data = test_data
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data, always_write=aw)
 
-    validator = cast(config.validator, Validator)  # type: ignore[name-defined]
+    validator = config.validator
     validator.assertion(
         cached_data=cached_data, test_data=test_data, assert_rules=assert_rules or [],
         path_cache_file=path_cache_file,

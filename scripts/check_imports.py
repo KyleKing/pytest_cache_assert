@@ -9,5 +9,5 @@ FIXME: Replace with programmatic imports? Maybe explicit imports to check backwa
 
 """
 
-from pytest_cache_assert import KeyRule, check_exact, check_suppress, check_type  # noqa: F401
+from pytest_cache_assert import AssertRule, check_exact, check_suppress, check_type  # noqa: F401
 from pytest_cache_assert.plugin import assert_against_cache  # noqa: F401

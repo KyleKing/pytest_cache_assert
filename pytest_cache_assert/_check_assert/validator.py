@@ -6,9 +6,9 @@ from beartype import beartype
 from beartype.typing import Any, List, Optional
 from implements import Interface, implements
 
+from .assert_rules import AssertRule
 from .differ import diff_with_rules
 from .error_message import RichAssertionError
-from .key_rules import KeyRule
 
 try:
     from typing import Protocol, Self, runtime_checkable
@@ -21,7 +21,7 @@ class Validator(Interface):
 
     @staticmethod
     def assertion(
-        *, test_data: Any, cached_data: Any, key_rules: List[KeyRule], path_cache_file: Optional[Path],
+        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path],
     ) -> None:
         ...
 
@@ -50,20 +50,20 @@ class DictDiffValidator(ValidatorType):
     @staticmethod
     @beartype
     def assertion(
-        *, test_data: Any, cached_data: Any, key_rules: List[KeyRule], path_cache_file: Optional[Path],
+        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path],
     ) -> None:
         """Validate test data against cached data.
 
         Args:
             test_data: data to compare
             cached_data: data to compare
-            key_rules: list of key rules to apply
+            assert_rules: list of key rules to apply
 
         Raises:
             RichAssertionError: if any assertion comparison fails
 
         """
-        diff_results = diff_with_rules(old_dict=cached_data, new_dict=test_data, key_rules=key_rules or [])
+        diff_results = diff_with_rules(old_dict=cached_data, new_dict=test_data, assert_rules=assert_rules or [])
         if diff_results.to_dict():
             kwargs = {
                 'test_data': test_data,

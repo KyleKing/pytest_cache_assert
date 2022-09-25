@@ -1,5 +1,6 @@
 """Key Rules."""
 
+import re
 from contextlib import suppress
 from datetime import datetime, timedelta
 from enum import Enum
@@ -9,14 +10,15 @@ from uuid import UUID
 
 import arrow
 from beartype import beartype
-from beartype.typing import Callable, Optional, Pattern, Union
+from beartype.typing import Callable, List, Optional, Pattern, Union
 from pydantic.dataclasses import dataclass
+from strenum import StrEnum
 
 from .constants import DIFF_TYPES
 
 
 class Comparator(Enum):  # noqa: H601
-    """Comparator Enum for KeyRules."""
+    """Comparator Enum for AssertRules."""
 
     LTE = 'new - old <= value'
     GTE = 'new - old >= value'
@@ -124,14 +126,14 @@ def _check_date_range(
 def gen_check_date_range(
     min_date: Optional[datetime] = None, max_date: Optional[datetime] = None,
 ) -> Callable[[DIFF_TYPES, DIFF_TYPES], bool]:
-    """Generate a KeyRule check for date within the specified range.
+    """Generate a AssertRule check for date within the specified range.
 
     Args:
         min_date: optional minimum datetime
         max_date: optional maximum datetime
 
     Returns:
-        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: KeyRule check
+        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: AssertRule check
 
     """
     return partial(_check_date_range, min_date=min_date, max_date=max_date)
@@ -167,21 +169,38 @@ def _check_date_proximity(
 def gen_check_date_proximity(
     time_delta: timedelta, comparator: Comparator = Comparator.WITHIN,
 ) -> Callable[[DIFF_TYPES, DIFF_TYPES], bool]:
-    """Generate a KeyRule check for date within the specified range.
+    """Generate a AssertRule check for date within the specified range.
 
     Args:
         time_delta: timedelta to use for checking that the new data is
         comparator: defaults to Comparator.WITHIN. Can make directional by setting LTE or GTE
 
     Returns:
-        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: KeyRule check
+        Callable[[DIFF_TYPES, DIFF_TYPES], bool]: AssertRule check
 
     """
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
+_PAT_JOIN = r'\]\['
+
+
+class Wild(StrEnum):
+    """AssertRule Wildcard Patterns."""
+
+    @classmethod
+    def index(cls, count: int = 1) -> str:
+        """Return pattern that matches one or more nested lists in the cached data."""
+        return _PAT_JOIN.join([r'\d+'] * count)
+
+    @classmethod
+    def keys(cls, count: int = 1) -> str:
+        """Return pattern that matches one or more nested dictionary keys."""
+        return _PAT_JOIN.join([r'[^\]]+'] * count)
+
+
 @dataclass(kw_only=True)
-class KeyRule:  # noqa: H601
+class AssertRule:  # noqa: H601
     """Key Rule."""
 
     pattern: Union[str, Pattern]
@@ -191,3 +210,13 @@ class KeyRule:  # noqa: H601
     def __post_init__(self) -> None:
         """Register the configuration object."""
         self.is_regex = not isinstance(self.pattern, str)
+
+    @classmethod
+    def build_re(cls, pattern: List[Union[str, Wild]], func: Callable[[DIFF_TYPES, DIFF_TYPES], bool]) -> 'AssertRule':
+        """Build a regex pattern from list."""
+        if not pattern:
+            raise ValueError("Expected at least one item in 'pattern'")
+        if pattern[0].startswith('root['):
+            raise ValueError("Exclude 'root' and brackets. This method builds it for you")
+        pattern_re = r"root\['" + _PAT_JOIN.join(pattern) + r'\]'
+        return cls(pattern=re.compile(pattern_re), func=func)

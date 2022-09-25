@@ -115,11 +115,11 @@ In your cached dictionary, you may have variable values with more complex logic 
 from uuid import uuid4
 from datetime import datetime, timedelta
 
-from pytest_cache_assert import KeyRule, check_suppress, check_type, Wildcards
+from pytest_cache_assert import AssertRule, check_suppress, check_type, Wildcards
 
 
 def test_assert_against_cache_key_rules(assert_against_cache):
-    """Demonstrate use of `key_rules`."""
+    """Demonstrate use of `assert_rules`."""
     now = datetime.now()
     cached_data = {
       'date': str(now),
@@ -132,28 +132,28 @@ def test_assert_against_cache_key_rules(assert_against_cache):
       {'ignored': {'recursively': {'a': {'b': {'c': 1}}}}},
     }
 
-    key_rules = [
+    assert_rules = [
       # Suppress keys 'ignored.a' and 'ignored.b' with the SINGLE wildcard,
       #   which aren't present in the test-data and would otherwise error
-      KeyRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
+      AssertRule(pattern=['ignored', Wildcards.SINGLE], func=check_suppress),
       # The pattern can also recursively apply to data below
-      KeyRule(
+      AssertRule(
         pattern=['ignored', 'recursively', Wildcards.RECURSIVELY],
         func=check_suppress,
       ),
       # Instead of suppressing, the type can be coerced from the string and verified
       #   This is useful for datetime or UUID's where the string will be different,
       #   but both values are the same type
-      KeyRule(pattern=['date'], func=check_type),
-      KeyRule(pattern=['nested', 'uuid'], func=check_type),
+      AssertRule(pattern=['date'], func=check_type),
+      AssertRule(pattern=['nested', 'uuid'], func=check_type),
       # Custom functions can also be specified to check a datetime format, etc.
       #   The function must accept the keyword arguments 'old' and 'new'
     ]
 
     # In this example, the cache file has been deleted, so first call will recreate it
     assert_against_cache(cached_data)
-    # Then this line demonstrates that key_rules will suppress the errors
-    assert_against_cache(test_data, key_rules=key_rules)
+    # Then this line demonstrates that assert_rules will suppress the errors
+    assert_against_cache(test_data, assert_rules=assert_rules)
 
     # While without key rules, an AssertionError is raised
     with pytest.raises(AssertionError):

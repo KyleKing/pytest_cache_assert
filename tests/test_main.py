@@ -9,7 +9,7 @@ import pytest
 from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 
-from pytest_cache_assert import KeyRule, check_suppress, check_type
+from pytest_cache_assert import AssertRule, check_suppress, check_type
 from pytest_cache_assert._check_assert.differ import DiffResults
 from pytest_cache_assert._check_assert.error_message import RichAssertionError
 from pytest_cache_assert.main import assert_against_cache
@@ -43,81 +43,81 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
 
 
 @pytest.mark.parametrize(
-    ('cached_data', 'test_data', 'key_rules', 'help_text'), [
+    ('cached_data', 'test_data', 'assert_rules', 'help_text'), [
         (
             {'title': 'hello'}, {'title': 'Hello World!'}, [
-                KeyRule(pattern="root['title']", func=check_suppress),
+                AssertRule(pattern="root['title']", func=check_suppress),
             ], 'Check suppressing a standard string',
         ),
         (
             {'nested': {'title': 'hello'}}, {'nested': {'title': 'Hello World!'}}, [
-                KeyRule(pattern="root['nested']['title']", func=check_suppress),
+                AssertRule(pattern="root['nested']['title']", func=check_suppress),
             ], 'Check suppressing nested changes',
         ),
         (
             {'top': {'nested': {'inner': []}}}, {'top': {'nested': {'title': 'hello'}}}, [
-                KeyRule(pattern=re.compile(r"root\['top'\](?:\[[^\]]+\]){2}"), func=check_suppress),
+                AssertRule(pattern=re.compile(r"root\['top'\](?:\[[^\]]+\]){2}"), func=check_suppress),
             ], 'Check missing and added',
         ),
         (
             {'title': 'hello'}, {'added': {'nested': {'title': 'hello'}}}, [
-                KeyRule(pattern='added', func=check_suppress),
-                KeyRule(pattern='title', func=check_suppress),
+                AssertRule(pattern='added', func=check_suppress),
+                AssertRule(pattern='title', func=check_suppress),
             ], 'Check missing and added',
         ),
         (
             {}, {'added': {'recursive': {'title': 'hello'}}}, [
-                KeyRule(pattern=re.compile(r'added.+'), func=check_suppress),
+                AssertRule(pattern=re.compile(r'added.+'), func=check_suppress),
             ], 'Check suppressing new value',
         ),
         (
             {'number_list': [90, 91, 92, 96, 100]}, {'number_list': [90, 91, 92, 93, 94, 100]}, [
-                KeyRule(pattern="root['number_list']", func=check_suppress),
+                AssertRule(pattern="root['number_list']", func=check_suppress),
             ], 'Check matching number types (1)',
         ),
         (
             {'numbers': 20}, {'numbers': 45}, [
-                KeyRule(pattern='numbers', func=check_type),
+                AssertRule(pattern='numbers', func=check_type),
             ], 'Check matching number types (2)',
         ),
         (
             {'numbers': 20}, {'numbers': 45.0}, [
-                KeyRule(pattern='numbers', func=check_type),
+                AssertRule(pattern='numbers', func=check_type),
             ], 'Check different number types',
         ),
         (
             {'numbers': '20'}, {'numbers': '45.0'}, [
-                KeyRule(pattern='numbers', func=check_type),
+                AssertRule(pattern='numbers', func=check_type),
             ], 'Check str(numbers) (Note: type checking does not differentiate between int and float)',
         ),
         (
             {'uuid': str(uuid4())}, {'uuid': str(uuid4())}, [
-                KeyRule(pattern='uuid', func=check_type),
+                AssertRule(pattern='uuid', func=check_type),
             ], 'Check UUID types',
         ),
         (
             {'dates': str(datetime.now())}, {'dates': str(arrow.now().shift(weeks=1))}, [
-                KeyRule(pattern='dates', func=check_type),
+                AssertRule(pattern='dates', func=check_type),
             ], 'Check date types',
         ),
         (
             {'dates': str(datetime.now())}, {'dates': None}, [
-                KeyRule(pattern='dates', func=check_suppress),
+                AssertRule(pattern='dates', func=check_suppress),
             ], 'Suppress date/null',
         ),
         (
             {'*': 50}, {'*': 51}, [
-                KeyRule(pattern=re.compile('.+'), func=check_type),
+                AssertRule(pattern=re.compile('.+'), func=check_type),
             ], 'Verify that asterisk keys work',
         ),
     ],
 )
-def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, help_text, fix_tmp_assert):
+def test_assert_against_cache_good_key_rules(cached_data, test_data, assert_rules, help_text, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
-    # Verify that the key_rules allow the test to pass
+    # Verify that the assert_rules allow the test to pass
     try:
-        assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
+        assert_against_cache(test_data, assert_rules=assert_rules, **fix_tmp_assert)
     except Exception as exc:
         raise AssertionError(f'Failed {help_text}') from exc
 
@@ -128,21 +128,21 @@ def test_assert_against_cache_good_key_rules(cached_data, test_data, key_rules, 
 
 
 @pytest.mark.parametrize(
-    ('cached_data', 'test_data', 'key_rules', 'help_text'), [
+    ('cached_data', 'test_data', 'assert_rules', 'help_text'), [
         (
             {'a': 50}, {'a': 51}, [
-                KeyRule(pattern='.', func=check_type),
+                AssertRule(pattern='.', func=check_type),
             ], 'Verify that regex is only used for compiled patterns (i.e. "." should not match "a")',
         ),
     ],
 )
-def test_assert_against_cache_bad_key_rules(cached_data, test_data, key_rules, help_text, fix_tmp_assert):
+def test_assert_against_cache_bad_key_rules(cached_data, test_data, assert_rules, help_text, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
 
-    # Even with key_rules, the diff will fail
+    # Even with assert_rules, the diff will fail
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
-        assert_against_cache(test_data, key_rules=key_rules, **fix_tmp_assert)
+        assert_against_cache(test_data, assert_rules=assert_rules, **fix_tmp_assert)
 
 
 # -----------------------------------------------------------------------------

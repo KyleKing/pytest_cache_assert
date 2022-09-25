@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from pytest_cache_assert import KeyRule, check_exact, check_suppress
+from pytest_cache_assert import AssertRule, check_exact, check_suppress
+from pytest_cache_assert._check_assert.assert_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 from pytest_cache_assert._check_assert.differ import DiffResults, _raw_diff, diff_with_rules
-from pytest_cache_assert._check_assert.key_rules import Comparator, gen_check_date_proximity, gen_check_date_range
 
 
 @pytest.mark.parametrize(
@@ -220,17 +220,17 @@ _NOW = datetime.utcnow()
 
 
 @pytest.mark.parametrize(
-    ('old_dict', 'new_dict', 'key_rules', 'help_text'), [
+    ('old_dict', 'new_dict', 'assert_rules', 'help_text'), [
         (
             {'a': {'b': {'c': None}}}, {'a': {'b': {'c': 'Not Null'}}}, [
-                KeyRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\])+"), func=check_exact),
-                KeyRule(pattern="root['a']['b']['c']", func=check_suppress),
-                KeyRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\]){2}"), func=check_exact),
-            ], 'Check Sorting. Only the middle key_rule will suppress the error',
+                AssertRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\])+"), func=check_exact),
+                AssertRule(pattern="root['a']['b']['c']", func=check_suppress),
+                AssertRule(pattern=re.compile(r"root\['a'\](?:\[[^]]\]){2}"), func=check_exact),
+            ], 'Check Sorting. Only the middle assert_rule will suppress the error',
         ),
         (
             {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-                KeyRule(
+                AssertRule(
                     pattern=re.compile(r"root\['a'\]\[\d+\]\['b'\]\[\d+\]\['c'\]"),
                     func=check_suppress,
                 ),
@@ -238,7 +238,7 @@ _NOW = datetime.utcnow()
         ),
         (
             {'a': [{'b': [{'c': 1}]}]}, {'a': [{'b': [{'c': 2}]}]}, [
-                KeyRule(
+                AssertRule(
                     pattern=re.compile(r"root\['a'\]\[\d+\]\[.+"),
                     func=check_suppress,
                 ),
@@ -246,17 +246,17 @@ _NOW = datetime.utcnow()
         ),
         (
             {'a.b.c': 1}, {'a.b.c': 2}, [
-                KeyRule(pattern='a.b.c', func=check_suppress),
+                AssertRule(pattern='a.b.c', func=check_suppress),
             ], 'Supports dotted-key names',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern='datetime', func=gen_check_date_range(max_date=_NOW + timedelta(hours=3))),
+                AssertRule(pattern='datetime', func=gen_check_date_range(max_date=_NOW + timedelta(hours=3))),
             ], 'Test generated datetime comparison logic for a max date',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
-                KeyRule(
+                AssertRule(
                     pattern='datetime',
                     func=gen_check_date_range(_NOW - timedelta(hours=3), _NOW + timedelta(hours=3)),
                 ),
@@ -264,28 +264,28 @@ _NOW = datetime.utcnow()
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+                AssertRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
             ], 'Test generated datetime comparison logic for LTE',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW - timedelta(hours=3))}, [
-                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
+                AssertRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3), Comparator.LTE)),
             ], 'Test generated datetime comparison logic for GTE',
         ),
         (
             {'datetime': str(_NOW)}, {'datetime': str(_NOW + timedelta(hours=3))}, [
-                KeyRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3))),
+                AssertRule(pattern='datetime', func=gen_check_date_proximity(timedelta(hours=3))),
             ], 'Test generated datetime comparison logic for Within',
         ),
     ],
 )
-def test_diff_with_rules(old_dict, new_dict, key_rules, help_text):
+def test_diff_with_rules(old_dict, new_dict, assert_rules, help_text):
     """Test that the key rules work in various scenarios."""
-    result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=key_rules)
+    result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, assert_rules=assert_rules)
     assert result.to_dict() == {}
 
     try:
-        errors = diff_with_rules(old_dict=old_dict, new_dict=new_dict, key_rules=[])
+        errors = diff_with_rules(old_dict=old_dict, new_dict=new_dict, assert_rules=[])
     except Exception as exc:
         raise AssertionError(f'Failed {help_text}') from exc
     assert errors.to_dict() != {}

@@ -57,7 +57,7 @@ class DictDiffValidator(ValidatorType):
         Args:
             test_data: data to compare
             cached_data: data to compare
-            assert_rules: list of key rules to apply
+            assert_rules: list of assert rules to apply
 
         Raises:
             RichAssertionError: if any assertion comparison fails

@@ -280,7 +280,7 @@ _NOW = datetime.utcnow()
     ],
 )
 def test_diff_with_rules(old_dict, new_dict, assert_rules, help_text):
-    """Test that the key rules work in various scenarios."""
+    """Test that the assert rules work in various scenarios."""
     result = diff_with_rules(old_dict=old_dict, new_dict=new_dict, assert_rules=assert_rules)
     assert result.to_dict() == {}
 

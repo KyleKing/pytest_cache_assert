@@ -121,7 +121,7 @@ def test_assert_against_cache_good_key_rules(cached_data, test_data, assert_rule
     except Exception as exc:
         raise AssertionError(f'Failed {help_text}') from exc
 
-    # Then, verify that without key rules, an AssertionError is raised
+    # Then, verify that without assert rules, an AssertionError is raised
     with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
         assert_against_cache(test_data, **fix_tmp_assert)  # act
         raise RuntimeError(f'Failed to raise an AssertionError for: {help_text}')

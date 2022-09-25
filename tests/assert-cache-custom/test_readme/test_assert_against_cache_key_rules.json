@@ -1,0 +1,19 @@
+{
+  "_info": [
+    {
+      "func_args": {},
+      "test_file": "test_readme.py",
+      "test_name": "test_assert_against_cache_key_rules"
+    }
+  ],
+  "_json": {
+    "date": "2022-09-25 09:06:19.329682",
+    "ignored": {
+      "a": 1,
+      "b": 2
+    },
+    "nested": {
+      "uuid": "9675d64e-0e81-421e-a191-8a4ee4a9e44a"
+    }
+  }
+}

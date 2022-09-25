@@ -49,7 +49,7 @@ def diff_with_rules(*, old_dict: DIFF_TYPES, new_dict: DIFF_TYPES, assert_rules:
     Args:
         old_dict: old dictionary (typically cached one)
         new_dict: new dictionary (typically test data)
-        assert_rules: list of key rules to ignore certain differences
+        assert_rules: list of assert rules to ignore certain differences
 
     Returns:
         DiffResults: Diff Object

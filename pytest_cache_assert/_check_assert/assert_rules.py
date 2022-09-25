@@ -182,21 +182,27 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-_PAT_JOIN = r'\]\['
+_PAT_JOIN = r"'\]\['"
 
 
 class Wild(StrEnum):
     """AssertRule Wildcard Patterns."""
 
+    @staticmethod  # sourcery skip: do-not-use-staticmethod
+    def _build(inner_pattern: str, count: int) -> str:
+        if count < 1:
+            raise ValueError('Count must be at least one')
+        return _PAT_JOIN.join([inner_pattern] * count)
+
     @classmethod
     def index(cls, count: int = 1) -> str:
         """Return pattern that matches one or more nested lists in the cached data."""
-        return _PAT_JOIN.join([r'\d+'] * count)
+        return cls._build(r'\d+', count)
 
     @classmethod
     def keys(cls, count: int = 1) -> str:
         """Return pattern that matches one or more nested dictionary keys."""
-        return _PAT_JOIN.join([r'[^\]]+'] * count)
+        return cls._build(r'[^\]]+', count)
 
 
 @dataclass(kw_only=True)
@@ -218,5 +224,5 @@ class AssertRule:  # noqa: H601
             raise ValueError("Expected at least one item in 'pattern'")
         if pattern[0].startswith('root['):
             raise ValueError("Exclude 'root' and brackets. This method builds it for you")
-        pattern_re = r"root\['" + _PAT_JOIN.join(pattern) + r'\]'
+        pattern_re = r"root\['" + _PAT_JOIN.join(pattern) + r"'\]"
         return cls(pattern=re.compile(pattern_re), func=func)

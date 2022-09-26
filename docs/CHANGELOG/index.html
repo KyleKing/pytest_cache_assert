@@ -1461,6 +1461,7 @@
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">⚓︎</a></h2>
 <h3 id="feat">Feat<a class="headerlink" href="#feat" title="Permanent link">⚓︎</a></h3>
 <ul>
+<li>add missing Wild.recur</li>
 <li>initiaiize Wild class and rename KeyRule to AssertRule</li>
 <li>add serializer to store only relative paths</li>
 <li>begin supporting string-based KeyRules!</li>
@@ -1471,6 +1472,7 @@
 </ul>
 <h3 id="fix">Fix<a class="headerlink" href="#fix" title="Permanent link">⚓︎</a></h3>
 <ul>
+<li>replace punq with dictionary config for failing tests</li>
 <li>remove casts because they break the tests</li>
 <li>cast to Interface and not Protocol</li>
 <li>resolve list regex matching rules</li>
@@ -1480,6 +1482,7 @@
 </ul>
 <h3 id="refactor">Refactor<a class="headerlink" href="#refactor" title="Permanent link">⚓︎</a></h3>
 <ul>
+<li>considered ssort, but blocked by https://github.com/bwhmather/ssort/issues/70</li>
 <li>last fix to restore mypy passing</li>
 <li>correct type ignore comments</li>
 <li>additional changes to pass type checks</li>
@@ -1666,7 +1669,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 25, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 26, 2022</span>
       
         <br>
         Created:

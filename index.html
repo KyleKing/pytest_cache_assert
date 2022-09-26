@@ -980,38 +980,34 @@
 <span class="linenos" data-linenos="16 "></span>        <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="p">),</span>
 <span class="linenos" data-linenos="17 "></span>        <span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())},</span>
 <span class="linenos" data-linenos="18 "></span>        <span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
-<span class="linenos" data-linenos="19 "></span>        <span class="c1"># &#39;ignored_within_list&#39;: [{&#39;a&#39;: 1}, {&#39;b&#39;: 2}],</span>
-<span class="linenos" data-linenos="20 "></span>        <span class="c1"># TODO: Added/remove field, etc.</span>
-<span class="linenos" data-linenos="21 "></span>    <span class="p">}</span>
-<span class="linenos" data-linenos="22 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos" data-linenos="23 "></span>        <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
-<span class="linenos" data-linenos="24 "></span>        <span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())},</span>
-<span class="linenos" data-linenos="25 "></span>        <span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recursively&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}},</span>
-<span class="linenos" data-linenos="26 "></span>        <span class="c1"># &#39;ignored_within_list&#39;: [{&#39;a&#39;: 1}, {&#39;b&#39;: 2}],</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="p">}</span>
-<span class="linenos" data-linenos="28 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
-<span class="linenos" data-linenos="29 "></span>        <span class="c1"># Ensures that the cache file has been created</span>
-<span class="linenos" data-linenos="30 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
-<span class="linenos" data-linenos="31 "></span>
-<span class="linenos" data-linenos="32 "></span>    <span class="n">assert_rules</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos" data-linenos="33 "></span>        <span class="c1"># To ignore values for &#39;ignored.a&#39; and &#39;ignored.b&#39;, create a rule</span>
-<span class="linenos" data-linenos="34 "></span>        <span class="c1">#   Here, we use the wildcard for dictionary keys</span>
-<span class="linenos" data-linenos="35 "></span>        <span class="n">AssertRule</span><span class="o">.</span><span class="n">build_re</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wild</span><span class="o">.</span><span class="n">keys</span><span class="p">()],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
-<span class="linenos" data-linenos="36 "></span>        <span class="n">AssertRule</span><span class="o">.</span><span class="n">build_re</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wild</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
-<span class="linenos" data-linenos="37 "></span>
-<span class="linenos" data-linenos="38 "></span>        <span class="c1"># Instead of suppressing, the type of data could be resolved and compared</span>
-<span class="linenos" data-linenos="39 "></span>        <span class="c1">#   This is useful for datetime or UUID values where we expect variability</span>
-<span class="linenos" data-linenos="40 "></span>        <span class="n">AssertRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
-<span class="linenos" data-linenos="41 "></span>        <span class="n">AssertRule</span><span class="o">.</span><span class="n">build_re</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
-<span class="linenos" data-linenos="42 "></span>
-<span class="linenos" data-linenos="43 "></span>        <span class="c1"># Any &quot;func&quot; with arguments &#39;old&#39; and &#39;new&#39; can be used as a rule</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="p">]</span>
-<span class="linenos" data-linenos="45 "></span>
-<span class="linenos" data-linenos="46 "></span>    <span class="c1"># Without assert rules, an AssertionError is raised</span>
-<span class="linenos" data-linenos="47 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
-<span class="linenos" data-linenos="48 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="linenos" data-linenos="49 "></span>    <span class="c1"># But, with the custom logic, the cache assertion check will succeed</span>
-<span class="linenos" data-linenos="50 "></span>    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span><span class="p">)</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())},</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="s1">&#39;ignored&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;recursively&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}}},</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="c1"># Ensures that the cache file has been created</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span>    <span class="n">assert_rules</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="c1"># To ignore values for &#39;ignored.a&#39; and &#39;ignored.b&#39;, create a rule</span>
+<span class="linenos" data-linenos="31 "></span>        <span class="c1">#   Here, we use the wildcard for dictionary keys</span>
+<span class="linenos" data-linenos="32 "></span>        <span class="n">AssertRule</span><span class="o">.</span><span class="n">build_re</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ignored&#39;</span><span class="p">,</span> <span class="n">Wild</span><span class="o">.</span><span class="n">recur</span><span class="p">()],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_suppress</span><span class="p">),</span>
+<span class="linenos" data-linenos="33 "></span>
+<span class="linenos" data-linenos="34 "></span>        <span class="c1"># Instead of suppressing, the type of data could be resolved and compared</span>
+<span class="linenos" data-linenos="35 "></span>        <span class="c1">#   This is useful for datetime or UUID values where we expect variability</span>
+<span class="linenos" data-linenos="36 "></span>        <span class="n">AssertRule</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
+<span class="linenos" data-linenos="37 "></span>        <span class="n">AssertRule</span><span class="o">.</span><span class="n">build_re</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">check_type</span><span class="p">),</span>
+<span class="linenos" data-linenos="38 "></span>
+<span class="linenos" data-linenos="39 "></span>        <span class="c1"># Any &quot;func&quot; with arguments &#39;old&#39; and &#39;new&#39; can be used as a rule</span>
+<span class="linenos" data-linenos="40 "></span>    <span class="p">]</span>
+<span class="linenos" data-linenos="41 "></span>
+<span class="linenos" data-linenos="42 "></span>    <span class="c1"># Without assert rules, an AssertionError is raised</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="c1"># But, with the custom logic, the cache assertion check will succeed</span>
+<span class="linenos" data-linenos="46 "></span>    <span class="n">assert_against_cache</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="even-more-examples">Even More Examples<a class="headerlink" href="#even-more-examples" title="Permanent link">⚓︎</a></h3>
 <p>For more example code, see the <a href="https://github.com/kyleking/pytest_cache_assert/scripts">scripts</a> directory or the <a href="https://github.com/kyleking/pytest_cache_assert/tests">tests</a>.</p>
@@ -1066,7 +1062,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 25, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 26, 2022</span>
       
         <br>
         Created:

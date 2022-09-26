@@ -86,6 +86,10 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml
         types_or: []
         types: [file, yaml]
+  - repo: https://github.com/luttik/auto-optional
+    rev: v0.3.2
+    hooks:
+      - id: auto-optional
   - repo: local
     hooks:
       - id: copier-forbidden-files

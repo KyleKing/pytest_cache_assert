@@ -2014,14 +2014,6 @@ future = ">=0.18.2,<0.19.0"
 six = ">=1.15.0,<2.0.0"
 
 [[package]]
-name = "punq"
-version = "0.6.2"
-description = "An IOC Container for Python 3.6+"
-category = "main"
-optional = false
-python-versions = ">=3.6.2,<4.0.0"
-
-[[package]]
 name = "py"
 version = "1.11.0"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
@@ -2995,7 +2987,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "005efef4b5f6194f289196d14e5d7cd6c259cfc591c5cdd13ddd3146596b916a"
+content-hash = "e365d937a0bb31149c476b31c5a361ad54c72d2e43519dabef9c2c711d47f4da"
 
 [metadata.files]
 absolufy-imports = [
@@ -4086,10 +4078,6 @@ prompt-toolkit = [
 proselint = [
     {file = "proselint-0.13.0-py3-none-any.whl", hash = "sha256:5799a26c79e52aed18a1b7671f74381c035b3f62a565b478306298fb134c80c4"},
     {file = "proselint-0.13.0.tar.gz", hash = "sha256:7dd2b63cc2aa390877c4144fcd3c80706817e860b017f04882fbcd2ab0852a58"},
-]
-punq = [
-    {file = "punq-0.6.2-py3-none-any.whl", hash = "sha256:8d365bdc01038897dfcc0c9bf63bc8910a95afc46e5e427c2a7abbda7144502b"},
-    {file = "punq-0.6.2.tar.gz", hash = "sha256:4d824c92ca640feefb080c1ecdd034e37f79833b3cb88dacac38ed7e048f4dca"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},

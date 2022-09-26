@@ -60,7 +60,6 @@ arrow = ">=1.2.3"
 beartype = ">=0.10.0"
 deepdiff6 = ">=6.2.0"  # FYI: Only temporarily named deepdiff6 (was deepdiff)
 implements = ">=0.3.0"
-punq = ">=0.6.2"
 pydantic = ">=1.10.2"
 pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"

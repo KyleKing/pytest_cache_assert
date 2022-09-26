@@ -2,13 +2,12 @@
 
 import warnings
 
-import punq
 from beartype.typing import List
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
-from .config import CacheAssertContainerKeys, register, retrieve
+from .config import CacheAssertContainerKeys, MissingConfigItemError, register, retrieve
 from .constants import DEF_CACHE_DIR_NAME
 from .converter import Converter
 from .validator import DictDiffValidator, ValidatorType
@@ -62,5 +61,5 @@ class AssertConfig:
 # Ensure that a default AssertConfig is always registered
 try:
     retrieve(CacheAssertContainerKeys.CONFIG)
-except punq.MissingDependencyError:
+except MissingConfigItemError:
     register(CacheAssertContainerKeys.CONFIG, AssertConfig())

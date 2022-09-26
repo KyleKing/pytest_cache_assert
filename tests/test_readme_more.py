@@ -29,8 +29,7 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     assert_rules = [
         # To ignore values for 'ignored.a' and 'ignored.b', create a rule
         #   Here, we use the wildcard for dictionary keys
-        AssertRule.build_re(pattern=['ignored', Wild.keys()], func=check_suppress),
-        AssertRule.build_re(pattern=['ignored', Wild.keys(2)], func=check_suppress),
+        AssertRule.build_re(pattern=['ignored', Wild.recur()], func=check_suppress),
 
         # Instead of suppressing, the type of data could be resolved and compared
         #   This is useful for datetime or UUID values where we expect variability

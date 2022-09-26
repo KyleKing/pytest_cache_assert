@@ -128,14 +128,11 @@ def test_assert_against_cache_key_rules(assert_against_cache):
         'date': str(now),
         'nested': {'uuid': str(uuid4())},
         'ignored': {'a': 1, 'b': 2},
-        # 'ignored_within_list': [{'a': 1}, {'b': 2}],
-        # TODO: Added/remove field, etc.
     }
     test_data = {
         'date': str(now + timedelta(hours=3)),
         'nested': {'uuid': str(uuid4())},
         'ignored': {'recursively': {'a': {'b': {'c': 1}}}},
-        # 'ignored_within_list': [{'a': 1}, {'b': 2}],
     }
     with suppress(AssertionError):
         # Ensures that the cache file has been created
@@ -144,8 +141,7 @@ def test_assert_against_cache_key_rules(assert_against_cache):
     assert_rules = [
         # To ignore values for 'ignored.a' and 'ignored.b', create a rule
         #   Here, we use the wildcard for dictionary keys
-        AssertRule.build_re(pattern=['ignored', Wild.keys()], func=check_suppress),
-        AssertRule.build_re(pattern=['ignored', Wild.keys(2)], func=check_suppress),
+        AssertRule.build_re(pattern=['ignored', Wild.recur()], func=check_suppress),
 
         # Instead of suppressing, the type of data could be resolved and compared
         #   This is useful for datetime or UUID values where we expect variability
@@ -160,7 +156,6 @@ def test_assert_against_cache_key_rules(assert_against_cache):
         assert_against_cache(test_data)
     # But, with the custom logic, the cache assertion check will succeed
     assert_against_cache(test_data, assert_rules=assert_rules)
-
 ```
 
 ### Even More Examples

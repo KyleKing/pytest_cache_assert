@@ -181,27 +181,35 @@ def gen_check_date_proximity(
     return partial(_check_date_proximity, time_delta=time_delta, comparator=comparator)
 
 
-_PAT_JOIN = r"'\]\['"
+_PAT_START = r"\['"
+_PAT_END = r"'\]"
+_PAT_JOIN = _PAT_END + _PAT_START
 
 
 class Wild(StrEnum):  # type: ignore[misc]
     """AssertRule Wildcard Patterns."""
 
-    @staticmethod  # sourcery skip: do-not-use-staticmethod
-    def _build(inner_pattern: str, count: int) -> str:
+    @classmethod
+    def build(cls, inner_pattern: str, count: int = 1) -> str:
+        """Specify a custom regular expression to match nested keys."""
         if count < 1:
             raise ValueError('Count must be at least one')
         return _PAT_JOIN.join([inner_pattern] * count)
 
     @classmethod
     def index(cls, count: int = 1) -> str:
-        """Return pattern that matches one or more nested lists in the cached data."""
-        return cls._build(r'\d+', count)
+        """Return pattern that matches a specific number of nested lists in the cached data."""
+        return cls.build(r'\d+', count)
 
     @classmethod
     def keys(cls, count: int = 1) -> str:
-        """Return pattern that matches one or more nested dictionary keys."""
-        return cls._build(r'[^\]]+', count)
+        """Return pattern that matches a specific number of nested dictionary keys."""
+        return cls.build(r'[^\]]+', count)
+
+    @classmethod
+    def recur(cls, count: int = 1) -> str:
+        """Return pattern that matches any level of nested dictionary keys or lists indices."""
+        return cls.build(r'.+', count)
 
 
 class AssertRule(BaseModel):
@@ -217,7 +225,7 @@ class AssertRule(BaseModel):
             raise ValueError("Expected at least one item in 'pattern'")
         if pattern[0].startswith('root['):
             raise ValueError("Exclude 'root' and brackets. This method builds it for you")
-        pattern_re = r"root\['" + _PAT_JOIN.join(pattern) + r"'\]"
+        pattern_re = f'root{_PAT_START}{_PAT_JOIN.join(pattern)}{_PAT_END}'
         return cls(pattern=re.compile(pattern_re), func=func)
 
     def is_regex(self) -> bool:

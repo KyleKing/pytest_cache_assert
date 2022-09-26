@@ -51,11 +51,11 @@ poetry run doit run lock document deploy_docs publish
 |------------------------------------------------------|--------------|-----------|------------|------------|
 | `pytest_cache_assert/__init__.py`                    |            9 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/assert_config.py` |           28 |         1 |          0 | 96.4%      |
-| `pytest_cache_assert/_check_assert/assert_rules.py`  |           82 |         7 |          0 | 91.5%      |
+| `pytest_cache_assert/_check_assert/assert_config.py` |           27 |         1 |          0 | 96.3%      |
+| `pytest_cache_assert/_check_assert/assert_rules.py`  |           87 |         8 |          0 | 90.8%      |
 | `pytest_cache_assert/_check_assert/cache_store.py`   |           56 |         8 |          0 | 85.7%      |
 | `pytest_cache_assert/_check_assert/caching.py`       |           36 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/config.py`        |           13 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/config.py`        |           26 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/constants.py`     |           11 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/converter.py`     |            6 |         0 |          0 | 100.0%     |
 | `pytest_cache_assert/_check_assert/differ.py`        |           41 |         2 |          0 | 95.1%      |
@@ -64,7 +64,7 @@ poetry run doit run lock document deploy_docs publish
 | `pytest_cache_assert/_check_assert/validator.py`     |           35 |         5 |          0 | 85.7%      |
 | `pytest_cache_assert/main.py`                        |           27 |         6 |          0 | 77.8%      |
 | `pytest_cache_assert/plugin.py`                      |           43 |         2 |          0 | 95.3%      |
-| **Totals**                                           |          533 |        41 |          0 | 92.3%      |
+| **Totals**                                           |          550 |        42 |          0 | 92.4%      |
 
 Generated on: 2022-09-25
 <!-- {cte} -->

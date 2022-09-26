@@ -1279,14 +1279,6 @@
         "name": "proselint",
         "version": "0.13.0"
     },
-    "punq": {
-        "datetime": "2022-02-17T09:16:12.094458+00:00",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-02-17T09:16:12.094458+00:00",
-        "latest_version": "0.6.2",
-        "name": "punq",
-        "version": "0.6.2"
-    },
     "py": {
         "datetime": "2021-11-04T17:17:00.152107+00:00",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",

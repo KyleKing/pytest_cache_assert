@@ -2,6 +2,7 @@
 
 ### Feat
 
+- add missing Wild.recur
 - initiaiize Wild class and rename KeyRule to AssertRule
 - add serializer to store only relative paths
 - begin supporting string-based KeyRules!
@@ -12,6 +13,8 @@
 
 ### Fix
 
+- replace punq with dictionary config for failing tests
+- remove casts because they break the tests
 - cast to Interface and not Protocol
 - resolve list regex matching rules
 - determine how to match regex for nested paths
@@ -20,6 +23,8 @@
 
 ### Refactor
 
+- considered ssort, but blocked by https://github.com/bwhmather/ssort/issues/70
+- last fix to restore mypy passing
 - correct type ignore comments
 - additional changes to pass type checks
 - better support mypy

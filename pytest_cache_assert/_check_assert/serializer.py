@@ -56,12 +56,6 @@ class _Converters(BaseModel):
 _CONVERTERS = _Converters()
 
 
-def _generic_memory_address_serializer(obj: Any) -> Any:
-    if _RE_MEMORY_ADDRESS.search(str(obj)):
-        return replace_memory_address(obj)
-    raise Unconvertable("Not a match for 'replace_memory_address'")
-
-
 class _CacheAssertSerializer(JSONEncoder):
     """Expand serializable types beyond default encoder.
 
@@ -96,6 +90,12 @@ class _CacheAssertSerializer(JSONEncoder):
             return _generic_memory_address_serializer(obj)
 
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
+
+
+def _generic_memory_address_serializer(obj: Any) -> Any:
+    if _RE_MEMORY_ADDRESS.search(str(obj)):
+        return replace_memory_address(obj)
+    raise Unconvertable("Not a match for 'replace_memory_address'")
 
 
 _CONVERTERS.register([Callable], _generic_memory_address_serializer)

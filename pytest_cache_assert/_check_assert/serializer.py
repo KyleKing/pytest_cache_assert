@@ -17,8 +17,8 @@ from pydantic import BaseModel, Field
 from .constants import T_CONVERTER, T_DIFF
 from .converter import Converter
 
-_RE_MEMORY_ADDRESS = re.compile(r' at 0x[^>]+>')
-"""Regex for matching the hex memory address in a function signature."""
+_RE_MEMORY_ADDRESS = re.compile(r'(?: at 0x[^>]+|["\']\d+["\'])>')
+"""Regex for matching the hex memory address or MagicMock id in a function signature."""
 
 
 class Unconvertable(ValueError):
@@ -79,15 +79,15 @@ class _CacheAssertSerializer(JSONEncoder):
             with suppress(Unconvertable):
                 return converter(obj)
 
+        # Fallback for obj of type "type" (i.e. `MagicMock`)
+        with suppress(Unconvertable):
+            return _generic_memory_address_serializer(obj)
+
         for typ, converters in _CONVERTERS.get_lookup().items():
             if isinstance(obj, typ):
                 for converter in converters:
                     with suppress(Unconvertable):
                         return converter(obj)
-
-        # Fallback for classes (i.e. `UUID`) that are of type "type" and otherwise cannot be easily registered
-        with suppress(Unconvertable):
-            return _generic_memory_address_serializer(obj)
 
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 

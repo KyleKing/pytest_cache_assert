@@ -2,6 +2,7 @@
 
 import json
 from functools import partial
+from unittest.mock import MagicMock
 from uuid import UUID
 
 import arrow
@@ -25,6 +26,7 @@ from pytest_cache_assert._check_assert.serializer import make_diffable
             {'partial': partial(json.dumps, sort_keys=True)},
             {'partial': 'functools.partial(<function dumps(..)>, sort_keys=True)'},
         ),
+        (MagicMock(), '<MagicMock id=(..)>'),
     ],
 )
 def test_make_diffable(value, expected):

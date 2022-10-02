@@ -12,7 +12,7 @@ from hypothesis import strategies as st
 from pytest_cache_assert import AssertRule, check_suppress, check_type
 from pytest_cache_assert._check_assert.differ import DiffResults
 from pytest_cache_assert._check_assert.error_message import RichAssertionError
-from pytest_cache_assert.main import assert_against_cache
+from pytest_cache_assert.main import assert_against_cache, assert_against_dict
 
 from .configuration import clear_test_cache
 
@@ -36,6 +36,14 @@ def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01
     assert error_info['cached_data'] == cached_data
     assert error_info['path_cache_file'].name == fix_tmp_assert['cache_name']
     assert error_info['diff_results'] == diff_results
+
+
+def test_assert_against_dict():
+    """Quick check that the in-memory assert works as expected."""
+    old = {'key': 1, 'keys': [{'nested': 2}]}
+    new = {'key': 1, 'keys': [{'nested': 2}]}
+
+    assert_against_dict(old, new)
 
 
 # -----------------------------------------------------------------------------

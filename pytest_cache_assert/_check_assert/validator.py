@@ -21,7 +21,7 @@ class Validator(Interface):  # type: ignore[misc]
 
     @staticmethod
     def assertion(
-        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path],
+        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path] = None,
     ) -> None:
         ...
 
@@ -50,7 +50,7 @@ class DictDiffValidator(ValidatorType):
     @staticmethod
     @beartype
     def assertion(
-        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path],
+        *, test_data: Any, cached_data: Any, assert_rules: List[AssertRule], path_cache_file: Optional[Path] = None,
     ) -> None:
         """Validate test data against cached data.
 
@@ -58,6 +58,7 @@ class DictDiffValidator(ValidatorType):
             test_data: data to compare
             cached_data: data to compare
             assert_rules: list of assert rules to apply
+            path_cache_file: optional Path to the cached data
 
         Raises:
             RichAssertionError: if any assertion comparison fails

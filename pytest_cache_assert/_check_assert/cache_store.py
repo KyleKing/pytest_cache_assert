@@ -3,20 +3,20 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict, Generator, List, Optional, Protocol
-from implements import Interface, implements
+from beartype.typing import Any, Dict, List, Optional, Protocol
 
 from .caching import init_cache, load_cached_data, write_cache_data
 from .converter import Converter
 from .serializer import make_diffable, register_user_converters
 
 try:
-    from typing import Self, runtime_checkable  # type: ignore[attr-defined]
+    from typing import runtime_checkable
 except ImportError:
-    from typing_extensions import Self, runtime_checkable
+    from typing_extensions import runtime_checkable
 
 
-class CacheStore(Interface):  # type: ignore[misc]
+@runtime_checkable
+class CacheStoreType(Protocol):
 
     @staticmethod
     def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
@@ -41,25 +41,7 @@ class CacheStore(Interface):  # type: ignore[misc]
         ...
 
 
-@runtime_checkable
-class CacheStoreType(Protocol):
-    """FYI: This is a workaround for typing. See: https://github.com/ksindi/implements/issues/28"""
-
-    @classmethod
-    def __get_validators__(cls) -> Generator[Callable[[Any], Any], None, None]:  # For Pydantic
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, value: Self) -> Self:
-        @beartype
-        def beartyper(val: Self) -> Self:
-            return val
-
-        return beartyper(value)
-
-
-@implements(CacheStore)
-class LocalJSONCacheStore(CacheStoreType):
+class LocalJSONCacheStore:
     """Implementation of the CacheStore interface for a local JSON store."""
 
     @staticmethod

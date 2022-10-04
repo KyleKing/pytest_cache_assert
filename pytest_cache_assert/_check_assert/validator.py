@@ -3,20 +3,20 @@
 from pathlib import Path
 
 from beartype import beartype
-from beartype.typing import Any, Callable, Generator, List, Optional, Protocol
-from implements import Interface, implements
+from beartype.typing import Any, List, Optional, Protocol
 
 from .assert_rules import AssertRule
 from .differ import diff_with_rules
 from .error_message import RichAssertionError
 
 try:
-    from typing import Self, runtime_checkable  # type: ignore[attr-defined]
+    from typing import runtime_checkable
 except ImportError:
-    from typing_extensions import Self, runtime_checkable
+    from typing_extensions import runtime_checkable
 
 
-class Validator(Interface):  # type: ignore[misc]
+@runtime_checkable
+class ValidatorType(Protocol):
     """Validator Interface."""
 
     @staticmethod
@@ -26,25 +26,7 @@ class Validator(Interface):  # type: ignore[misc]
         ...
 
 
-@runtime_checkable
-class ValidatorType(Protocol):
-    """FYI: This is a workaround for typing. See: https://github.com/ksindi/implements/issues/28"""
-
-    @classmethod
-    def __get_validators__(cls) -> Generator[Callable[[Any], Any], None, None]:  # For Pydantic
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, value: Self) -> Self:
-        @beartype
-        def beartyper(val: Self) -> Self:
-            return val
-
-        return beartyper(value)
-
-
-@implements(Validator)
-class DictDiffValidator(ValidatorType):
+class DictDiffValidator:
     """Default Validator."""
 
     @staticmethod

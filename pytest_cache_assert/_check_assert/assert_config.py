@@ -3,8 +3,7 @@
 import warnings
 
 from beartype.typing import List
-from pydantic import Field
-from pydantic.dataclasses import dataclass
+from pydantic import BaseModel, Field
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, MissingConfigItemError, register, retrieve
@@ -13,8 +12,7 @@ from .converter import Converter
 from .validator import DictDiffValidator, ValidatorType
 
 
-@dataclass
-class AssertConfig:
+class AssertConfig(BaseModel):
     """User configuration data structure."""
 
     always_write: bool = False
@@ -49,13 +47,6 @@ class AssertConfig:
 
     class Config:
         arbitrary_types_allowed = True
-        frozen = True
-
-    def __post_init_post_parse__(self) -> None:
-        """Register the configuration object."""
-        if self.always_write:
-            warnings.warn('User has configured always_write globally. Make sure to check-in files to a VCS')
-        register(CacheAssertContainerKeys.CONFIG, self)
 
 
 # Ensure that a default AssertConfig is always registered

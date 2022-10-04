@@ -41,6 +41,10 @@
       
     
     
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="css/mkdocstrings.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -200,15 +204,11 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="adr/" class="md-tabs__link">
-        Adr
-      </a>
-    </li>
-  
+  <li class="md-tabs__item">
+    <a href="adr/" class="md-tabs__link">
+      Adr
+    </a>
+  </li>
 
       
         
@@ -216,26 +216,17 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="docs/CHANGELOG/" class="md-tabs__link">
-        Docs
-      </a>
-    </li>
-  
+  <li class="md-tabs__item">
+    <a href="docs/CHANGELOG/" class="md-tabs__link">
+      Docs
+    </a>
+  </li>
 
       
         
   
   
 
-
-  
-  
-  
-    
 
   
   
@@ -247,7 +238,17 @@
     </li>
   
 
+      
+        
   
+  
+
+
+  <li class="md-tabs__item">
+    <a href="reference/SUMMARY/" class="md-tabs__link">
+      Reference
+    </a>
+  </li>
 
       
     </ul>
@@ -462,10 +463,16 @@
       
       
       
-        <label class="md-nav__link" for="__nav_2">
-          Adr
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="adr/">Adr</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Adr" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
@@ -473,20 +480,6 @@
           Adr
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="adr/" class="md-nav__link">
-        ADR Documentation
-      </a>
-    </li>
-  
-
-            
           
             
               
@@ -524,10 +517,16 @@
       
       
       
-        <label class="md-nav__link" for="__nav_3">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="docs/CHANGELOG/">Docs</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Docs" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
@@ -535,20 +534,6 @@
           Docs
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="docs/CHANGELOG/" class="md-nav__link">
-        CHANGELOG
-      </a>
-    </li>
-  
-
-            
           
             
               
@@ -631,35 +616,9 @@
   
   
   
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_1">
-          Pytest cache assert
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Pytest cache assert" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_1">
-          <span class="md-nav__icon md-icon"></span>
-          Pytest cache assert
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
     <li class="md-nav__item">
       <a href="modules/pytest_cache_assert/_code_diagrams/" class="md-nav__link">
-        Code Diagrams
+        Pytest cache assert
       </a>
     </li>
   
@@ -671,10 +630,18 @@
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/SUMMARY/" class="md-nav__link">
+        Reference
+      </a>
     </li>
   
 
@@ -841,10 +808,12 @@
 <ul>
 <li><a href="https://github.com/kiwicom/pytest-recording">pytest-recording</a>: this is the package I use and highly recommend for recording and replaying <strong>external</strong> API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github&rsquo;s API called from a test suite)</li>
 <li><a href="https://pypi.org/project/pytest-snapshot/">pytest-snapshot</a>: I only found this package after already releasing a 1.0.0 version of <code>pytest_assert_cache</code>. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info</li>
-<li><a href="https://github.com/syrusakbary/snapshottest">snapshottest</a>: This was another find after releasing a 1.0.0 version and would probably be <strong>a good alterantive for most users</strong></li>
+<li><a href="https://github.com/syrusakbary/snapshottest">snapshottest</a>: This was another find after releasing a 1.0.0 version and would probably be <strong>a good alterantive for most users</strong><ul>
 <li><code>pytest-snapshot</code> is much more configurable, has many more users, and is a better name<ul>
 <li>I really like the ability to quickly regenerate the cached files with <a href="https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py">&ndash;snapshot-update</a></li>
 <li><a href="https://github.com/syrusakbary/snapshottest/issues/21">There is some interesting discussion on how best to handle fields that change between tests</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="https://github.com/samuelcolvin/dirty-equals">dirty-equals</a>: broadly check values (i.e. <code>assert result == {'counter': IsPositiveInt, ...}</code>, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review</li>
@@ -976,12 +945,14 @@
 <p>For 2.0.0, <code>pytest_cache_assert</code> was refactored to be more easily customizable with configuration options for not just the cache directory, but also for a way to override how files are named and to override how the cached test data is serialized and validated.</p>
 <p>With these configuration options, users or 3rd party packages can replace the default package behavior, such as changing the file format for data serialization (<code>yaml</code>, <code>jsonlines</code>, etc.) and/or specifying a different serialization logic. All configuration options are available by creating a <code>cache_assert_config</code> fixture with the provided implementations.</p>
 <ul>
-<li>See <code>AssertConfig</code> in <code>plugin.py</code> for configuration options and more information</li>
+<li>See <code>AssertConfig</code> in <code>plugin.py</code> for configuration options and more information<ul>
 <li><code>always_write</code>: Always write to the cached file so that diffs can be examined in the user&rsquo;s VCS.</li>
 <li><code>cache_dir_rel_path</code>: String relative directory from <code>tests/</code>. Default resolves to <code>tests/assert-cache/</code>.</li>
 <li><code>cache_store</code>: Configurable class for managing the cache representation. Default is local JSON.</li>
 <li><code>converters</code>: register functions that handle conversion of unhandled types, such as pandas DataFrames</li>
 <li><code>validator</code>: Custom validator for identifying and summarizing the deviations from the cache.</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="linenos" data-linenos="2 "></span>
@@ -1050,13 +1021,13 @@
       
       
         
-        <a href="adr/" class="md-footer__link md-footer__link--next" aria-label="Next: ADR Documentation" rel="next">
+        <a href="adr/" class="md-footer__link md-footer__link--next" aria-label="Next: Adr" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              ADR Documentation
+              Adr
             </div>
           </div>
           <div class="md-footer__button md-icon">

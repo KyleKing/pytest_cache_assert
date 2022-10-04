@@ -17,7 +17,7 @@
     
     
       
-        <title>ADR Documentation - pytest_cache_assert</title>
+        <title>Adr - pytest_cache_assert</title>
       
     
     
@@ -40,6 +40,10 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../css/mkdocstrings.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -103,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR Documentation
+              Adr
             
           </span>
         </div>
@@ -200,15 +204,11 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
-        Adr
-      </a>
-    </li>
-  
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Adr
+    </a>
+  </li>
 
       
         
@@ -216,26 +216,17 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../docs/CHANGELOG/" class="md-tabs__link">
-        Docs
-      </a>
-    </li>
-  
+  <li class="md-tabs__item">
+    <a href="../docs/CHANGELOG/" class="md-tabs__link">
+      Docs
+    </a>
+  </li>
 
       
         
   
   
 
-
-  
-  
-  
-    
 
   
   
@@ -247,7 +238,17 @@
     </li>
   
 
+      
+        
   
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../reference/SUMMARY/" class="md-tabs__link">
+      Reference
+    </a>
+  </li>
 
       
     </ul>
@@ -327,10 +328,16 @@
       
       
       
-        <label class="md-nav__link" for="__nav_2">
-          Adr
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Adr</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Adr" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
@@ -338,61 +345,6 @@
           Adr
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          ADR Documentation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        ADR Documentation
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#adrs" class="md-nav__link">
-    ADRs
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
           
             
               
@@ -430,10 +382,16 @@
       
       
       
-        <label class="md-nav__link" for="__nav_3">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../docs/CHANGELOG/">Docs</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" aria-label="Docs" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
@@ -441,20 +399,6 @@
           Docs
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../docs/CHANGELOG/" class="md-nav__link">
-        CHANGELOG
-      </a>
-    </li>
-  
-
-            
           
             
               
@@ -537,35 +481,9 @@
   
   
   
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_1">
-          Pytest cache assert
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Pytest cache assert" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_1">
-          <span class="md-nav__icon md-icon"></span>
-          Pytest cache assert
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
     <li class="md-nav__item">
       <a href="../modules/pytest_cache_assert/_code_diagrams/" class="md-nav__link">
-        Code Diagrams
+        Pytest cache assert
       </a>
     </li>
   
@@ -577,10 +495,18 @@
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/SUMMARY/" class="md-nav__link">
+        Reference
+      </a>
     </li>
   
 

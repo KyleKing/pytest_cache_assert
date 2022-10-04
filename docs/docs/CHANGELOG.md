@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.2 (2022-10-04)
+
 ### Fix
 
 - write metadata on first pass and autouse custom config

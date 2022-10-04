@@ -1,5 +1,12 @@
 ## Unreleased
 
+### Fix
+
+- support in-memory assertion checking
+- handle serializing MagicMock
+
+## 3.0.0 (2022-09-25)
+
 ### Feat
 
 - add missing Wild.recur

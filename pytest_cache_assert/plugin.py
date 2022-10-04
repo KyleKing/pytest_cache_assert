@@ -12,7 +12,7 @@ from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, Optional, Union
 from pydantic import BaseModel
 
-from . import AssertConfig, main
+from . import AssertConfig, CacheAssertContainerKeys, main, register
 
 
 class TestMetadata(BaseModel):
@@ -49,7 +49,7 @@ class TestMetadata(BaseModel):
 @beartype
 def assert_against_cache(
     request: FixtureRequest,
-    cache_assert_config: Optional[AssertConfig] = None,  # Optional configuration fixture
+    cache_assert_config: Optional[AssertConfig] = None,
 ) -> Callable[[Any], None]:
     """Return main.assert_against_cache with pytest-specific arguments already specified.
 
@@ -64,7 +64,8 @@ def assert_against_cache(
         RuntimeError: if the test directory cannot be determined
 
     """
-    cache_assert_config = cache_assert_config or AssertConfig()
+    assert_config = cache_assert_config or AssertConfig()
+    register(CacheAssertContainerKeys.CONFIG, assert_config)
 
     test_dir = None
     for sub_dir in ['tests', 'test']:
@@ -75,7 +76,7 @@ def assert_against_cache(
         raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
 
     # Read user settings
-    path_cache_dir = test_dir / cache_assert_config.cache_dir_rel_path
+    path_cache_dir = test_dir / assert_config.cache_dir_rel_path
 
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)

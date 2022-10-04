@@ -16,7 +16,7 @@ from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
 from calcipy.dev.conftest import pytest_runtest_makereport  # noqa: F401
 from moto import mock_s3
 
-from pytest_cache_assert import AssertConfig, Converter
+from pytest_cache_assert import AssertConfig, CacheAssertContainerKeys, Converter, register
 from pytest_cache_assert._check_assert.constants import DEF_CACHE_DIR_NAME
 
 from .configuration import TEST_TMP_CACHE, clear_test_cache
@@ -74,12 +74,13 @@ class CustomType:
 
 @pytest.fixture(scope='module')
 @beartype
-def cache_assert_config() -> AssertConfig:
-    """Override the default AssertConfig."""
-    return AssertConfig(
+def register_custom_cache_assert_config() -> None:
+    """Register a new AssertConfig."""
+    assert_config = AssertConfig(
         always_write=False,
         cache_dir_rel_path=f'{DEF_CACHE_DIR_NAME}-custom',
         converters=[
             Converter(types=[CustomType], func=CustomType.to_str),
         ],
     )
+    register(CacheAssertContainerKeys.CONFIG, assert_config)

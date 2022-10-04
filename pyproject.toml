@@ -64,6 +64,9 @@ pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
 ujson = ">=5.1.0"      # FIXME: Implement ujson as a faster alternative to json
 
+# Hack: poetry doesn't like "importlib-metadata" >=5.0 yet which causes publish to fail
+importlib-metadata = "^4.4.0"
+
 [tool.poetry.dev-dependencies]
 calcipy = { version = ">=0.18.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
 # FYI: New dev-dependencies need to be copied to noxfile.py

@@ -2,6 +2,8 @@
 
 ### Fix
 
+- register the AssertConfig when set
+- only set override fixture once (in client tests)
 - move generic memory serializer after type lookup
 - support in-memory assertion checking
 - handle serializing MagicMock

@@ -1,6 +1,5 @@
 """Pytest Cache Assert Configuration Object."""
 
-import warnings
 
 from beartype.typing import List
 from pydantic import BaseModel, Field

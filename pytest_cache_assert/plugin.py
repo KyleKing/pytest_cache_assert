@@ -1,6 +1,5 @@
 """Pytest Plugin."""
 
-
 from __future__ import annotations
 
 import inspect
@@ -48,16 +47,9 @@ class TestMetadata(BaseModel):
 
 @pytest.fixture()
 @beartype
-def cache_assert_config() -> AssertConfig:
-    """Configure pytest_cache_assert using `AssertConfig`."""
-    return AssertConfig()
-
-
-@pytest.fixture()
-@beartype
 def assert_against_cache(
     request: FixtureRequest,
-    cache_assert_config: Optional[AssertConfig],
+    cache_assert_config: Optional[AssertConfig] = None,  # Optional configuration fixture
 ) -> Callable[[Any], None]:
     """Return main.assert_against_cache with pytest-specific arguments already specified.
 

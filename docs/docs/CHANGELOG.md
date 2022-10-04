@@ -2,8 +2,14 @@
 
 ### Fix
 
+- move generic memory serializer after type lookup
 - support in-memory assertion checking
 - handle serializing MagicMock
+
+### Refactor
+
+- type ignore comment removal
+- switch to BaseModel and Protocol
 
 ## 3.0.0 (2022-09-25)
 

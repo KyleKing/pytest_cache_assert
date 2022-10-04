@@ -2968,7 +2968,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "b073ef12fed5d8a64ead310ff8540e47ba1cefa665020f4f4476f8038a4314b0"
+content-hash = "a9dd21647f28b0eb7fa662b981ba715065e070513cd17ecec21bdc3c83492e2c"
 
 [metadata.files]
 absolufy-imports = [

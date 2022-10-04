@@ -11,7 +11,7 @@ from ._check_assert.converter import Converter  # noqa: F401
 from ._check_assert.error_message import NoCacheError  # noqa: F401
 from ._check_assert.validator import DictDiffValidator, ValidatorType  # noqa: F401
 
-__version__ = '3.0.1'
+__version__ = '3.0.2'
 __pkg_name__ = 'pytest_cache_assert'
 
 # ====== Above is the recommended code from calcipy_template and may be updated on new releases ======

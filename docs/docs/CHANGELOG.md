@@ -2,6 +2,13 @@
 
 ### Fix
 
+- write metadata on first pass and autouse custom config
+- pin maximum importlib-metadata for poetry publish
+
+## 3.0.1 (2022-10-04)
+
+### Fix
+
 - register the AssertConfig when set
 - only set override fixture once (in client tests)
 - move generic memory serializer after type lookup

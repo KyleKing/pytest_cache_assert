@@ -12,7 +12,7 @@ from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, Optional, Union
 from pydantic import BaseModel
 
-from . import AssertConfig, CacheAssertContainerKeys, main, register
+from . import AssertConfig, CacheAssertContainerKeys, main, register, retrieve
 
 
 class TestMetadata(BaseModel):
@@ -64,8 +64,9 @@ def assert_against_cache(
         RuntimeError: if the test directory cannot be determined
 
     """
-    assert_config = cache_assert_config or AssertConfig()
-    register(CacheAssertContainerKeys.CONFIG, assert_config)
+    if cache_assert_config:
+        register(CacheAssertContainerKeys.CONFIG, cache_assert_config)
+    assert_config = retrieve(CacheAssertContainerKeys.CONFIG)
 
     test_dir = None
     for sub_dir in ['tests', 'test']:

@@ -71,11 +71,11 @@ def write_cache_data(
 
     """
     metadata = make_diffable(metadata or {})
-    meta = []
+    meta = [metadata or {}]
     if path_cache_file.is_file():
         old_cache_dict = _read_full_cache(path_cache_file)
         old_meta = old_cache_dict[KEY_NAME_META]
-        meta = _merge_metadata(metadata or {}, old_meta)
+        meta = _merge_metadata(meta[0], old_meta)
         if not always_write:  # Only change test_data if `always_write`
             test_data = old_cache_dict[KEY_NAME_DATA]
 

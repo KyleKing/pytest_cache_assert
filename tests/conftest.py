@@ -72,7 +72,7 @@ class CustomType:
         return 'Serialized!'
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(autouse=True)  # FYI: This is a workaround since other internal tests register a different config
 @beartype
 def register_custom_cache_assert_config() -> None:
     """Register a new AssertConfig."""

@@ -180,7 +180,7 @@ with suppress(ImportError):
 def register_user_converters(converters: List[Converter]) -> None:
     """Register the user-specified converters."""
     for converter in converters:
-        _CONVERTERS.register(converter.types, converter.func)  # type: ignore[arg-type]
+        _CONVERTERS.register(converter.types, converter.func)
 
 
 @beartype

@@ -79,7 +79,7 @@ def diff_with_rules(*, old_dict: T_DIFF, new_dict: T_DIFF, assert_rules: List[As
                 old_value = extract(old_dict, pth)
             with suppress(KeyError):
                 new_value = extract(new_dict, pth)
-            if not ar.func(old_value, new_value):  # type: ignore[call-arg]
+            if not ar.func(old_value, new_value):
                 diff_result.append(ar, {'old_value': old_value, 'new_value': new_value})
 
     return diff_result

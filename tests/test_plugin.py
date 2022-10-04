@@ -1,6 +1,7 @@
 """Test plugin.py."""
 
 from pathlib import Path, PureWindowsPath
+from unittest.mock import MagicMock
 
 import numpy as np
 import pandas as pd
@@ -45,6 +46,7 @@ def test_gen_s3_client(gen_s3_client, assert_against_cache):
         {'array': np.array([[1.23, 2.34], [3, 4]])},
         {'df': pd.DataFrame([['a', 'b'], ['c', 'd']], columns=['col 1', 'col 2'])},
         {'CustomType': CustomType()},
+        {'MagicMock': MagicMock()},
     ],
 )
 def test_assert_against_cache(test_data, assert_against_cache):

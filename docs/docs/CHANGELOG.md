@@ -1,5 +1,10 @@
 ## Unreleased
 
+### Fix
+
+- support arbitrary class serialization
+- escape slashes in filepaths
+
 ## 3.0.2 (2022-10-04)
 
 ### Fix

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import inspect
+import re
 from functools import partial
 from pathlib import Path
 
@@ -45,6 +46,10 @@ class TestMetadata(BaseModel):
         return cls(test_file=rel_test_file.as_posix(), test_name=test_name, func_args=func_args)
 
 
+_RE_UNSAFE_CHAR = re.compile(r'[/\\]')
+"""Used to remove characters from the cache file path that could cause issues."""
+
+
 @pytest.fixture()
 @beartype
 def assert_against_cache(
@@ -82,7 +87,9 @@ def assert_against_cache(
     # Calculate keyword arguments
     rel_test_file = Path(request.node.fspath).relative_to(test_dir)
 
-    cache_name = (rel_test_file.parent / rel_test_file.stem / f'{request.node.name}.json').as_posix()  # noqa: ECE001
+    # Escape slashes from the pytest node name
+    test_name = _RE_UNSAFE_CHAR.sub('-', request.node.name)
+    cache_name = (rel_test_file.parent / rel_test_file.stem / f'{test_name}.json').as_posix()  # noqa: ECE001
     metadata = TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file).dict()
 
     # FYI: The partial function keyword arguments can be overridden when called

@@ -33,6 +33,17 @@ def test_gen_s3_client(gen_s3_client, assert_against_cache):
 
 
 @pytest.mark.parametrize(
+    'test_str',
+    [
+        '/escape/these\\slashes',
+    ],
+)
+def test_assert_against_cache_srings(test_str, assert_against_cache):
+    """Test edge cases for assert_against_cache that could impact the filename."""
+    assert_against_cache([test_str])
+
+
+@pytest.mark.parametrize(
     'test_data',
     [
         {'decorator': beartype},

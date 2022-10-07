@@ -1,0 +1,14 @@
+{
+  "_info": [
+    {
+      "func_args": {
+        "client": "<FlaskClient <Flask 'tests.test_flask'>>"
+      },
+      "test_file": "test_flask.py",
+      "test_name": "test_pytest_flask_client"
+    }
+  ],
+  "_json": {
+    "client": "<FlaskClient <Flask 'tests.test_flask'>>"
+  }
+}

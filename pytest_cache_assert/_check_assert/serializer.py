@@ -71,8 +71,6 @@ class _CacheAssertSerializer(JSONEncoder):
             return str(obj)
         if isinstance(obj, (str, bytes, list, dict)):
             return super().default(obj)
-        if inspect.isclass(obj):
-            return replace_memory_address(str(obj))
 
         converters = _CONVERTERS.get_lookup().get(type(obj))
         for converter in converters or []:
@@ -88,6 +86,9 @@ class _CacheAssertSerializer(JSONEncoder):
         # Fallback for obj of type "type" (i.e. `MagicMock`)
         with suppress(Unconvertable):
             return _generic_memory_address_serializer(obj)
+
+        if inspect.isclass(obj) or str(obj).startswith('<'):
+            return str(obj)
 
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 

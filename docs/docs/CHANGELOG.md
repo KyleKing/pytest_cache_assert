@@ -2,6 +2,12 @@
 
 ### Fix
 
+- serialize all classes
+
+## 3.0.3 (2022-10-06)
+
+### Fix
+
 - support arbitrary class serialization
 - escape slashes in filepaths
 

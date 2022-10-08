@@ -102,7 +102,7 @@ tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy"
 
 [[package]]
 name = "autoflake"
-version = "1.6.1"
+version = "1.7.0"
 description = "Removes unused imports and unused variables"
 category = "dev"
 optional = false
@@ -198,14 +198,14 @@ python-versions = "*"
 
 [[package]]
 name = "boto3"
-version = "1.24.85"
+version = "1.24.89"
 description = "The AWS SDK for Python"
 category = "dev"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = ">=1.27.85,<1.28.0"
+botocore = ">=1.27.89,<1.28.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -214,7 +214,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.27.85"
+version = "1.27.89"
 description = "Low-level, data-driven core of boto 3."
 category = "dev"
 optional = false
@@ -238,7 +238,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "calcipy"
-version = "0.18.0"
+version = "0.19.0"
 description = "Python package to simplify development. Includes functionality for task running, testing, linting, documenting, and more"
 category = "dev"
 optional = false
@@ -1223,7 +1223,7 @@ smmap = ">=3.0.1,<6"
 
 [[package]]
 name = "GitPython"
-version = "3.1.27"
+version = "3.1.28"
 description = "GitPython is a python library used to interact with Git repositories"
 category = "dev"
 optional = false
@@ -1261,7 +1261,7 @@ async = ["aiofiles (>=0.7,<1.0)"]
 
 [[package]]
 name = "hypothesis"
-version = "6.56.0"
+version = "6.56.1"
 description = "A library for property-based testing"
 category = "dev"
 optional = false
@@ -1326,7 +1326,7 @@ testing = ["flake8 (<5)", "flufl.flake8", "importlib-resources (>=1.3)", "packag
 
 [[package]]
 name = "importlib-resources"
-version = "5.9.0"
+version = "5.10.0"
 description = "Read resources from Python packages"
 category = "dev"
 optional = false
@@ -1336,8 +1336,8 @@ python-versions = ">=3.7"
 zipp = {version = ">=3.1.0", markers = "python_version < \"3.10\""}
 
 [package.extras]
-docs = ["jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx"]
-testing = ["pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
+docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)"]
+testing = ["flake8 (<5)", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
 
 [[package]]
 name = "iniconfig"
@@ -2516,7 +2516,7 @@ crt = ["botocore[crt] (>=1.20.29,<2.0a.0)"]
 
 [[package]]
 name = "semgrep"
-version = "0.115.0"
+version = "0.116.0"
 description = "Lightweight static analysis for many languages. Find bug variants with patterns that look like source code."
 category = "dev"
 optional = false
@@ -2643,11 +2643,11 @@ python-versions = "*"
 
 [[package]]
 name = "tabulate"
-version = "0.8.10"
+version = "0.9.0"
 description = "Pretty-print tabular data"
 category = "dev"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+python-versions = ">=3.7"
 
 [package.extras]
 widechars = ["wcwidth"]
@@ -2758,7 +2758,7 @@ python-versions = "*"
 
 [[package]]
 name = "typing-extensions"
-version = "4.3.0"
+version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
 category = "main"
 optional = false
@@ -2780,7 +2780,7 @@ typing-extensions = ">=3.7.4"
 name = "ujson"
 version = "5.5.0"
 description = "Ultra fast JSON encoder and decoder for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -2970,7 +2970,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.6"
-content-hash = "6934618e4a42d6882e0b75f9764886f3bfe0c221f031d9c5110d7e010985f0c4"
+content-hash = "5752a32f1ff8124f36af355a8a98627c5eb6241ecd9faa383f4481c0fa7755c2"
 
 [metadata.files]
 absolufy-imports = [
@@ -3010,8 +3010,8 @@ attrs = [
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
 ]
 autoflake = [
-    {file = "autoflake-1.6.1-py2.py3-none-any.whl", hash = "sha256:dfef4c851fb07e6111f9115d3e7c8c52d8564cbf71c12ade2d8b8a2a7b8bd176"},
-    {file = "autoflake-1.6.1.tar.gz", hash = "sha256:72bce741144ef6db26005d47dba242c1fd6a91ea53f7f4c5a90ad4b051e394c2"},
+    {file = "autoflake-1.7.0-py2.py3-none-any.whl", hash = "sha256:cb46baf67d7114302cf66363f384d34704508828f1606a42a267957531f2bab3"},
+    {file = "autoflake-1.7.0.tar.gz", hash = "sha256:ac2f7d61cd54e675319fc67ce4a9b4ba69cb054af9ae4e8e565cfcb57ba15c6a"},
 ]
 autopep8 = [
     {file = "autopep8-1.7.0-py2.py3-none-any.whl", hash = "sha256:6f09e90a2be784317e84dc1add17ebfc7abe3924239957a37e5040e27d812087"},
@@ -3043,20 +3043,20 @@ boltons = [
     {file = "boltons-21.0.0.tar.gz", hash = "sha256:65e70a79a731a7fe6e98592ecfb5ccf2115873d01dbc576079874629e5c90f13"},
 ]
 boto3 = [
-    {file = "boto3-1.24.85-py3-none-any.whl", hash = "sha256:714b06755bd76b2001f7099a8e406604c0a0e76a8ff0425480bf1555bcbecee1"},
-    {file = "boto3-1.24.85.tar.gz", hash = "sha256:2c9004c1f0a47807c73247abe8cb2b8a7054c34b9cf6e90f448d51560de20ca1"},
+    {file = "boto3-1.24.89-py3-none-any.whl", hash = "sha256:346f8f0d101a4261dac146a959df18d024feda6431e1d9d84f94efd24d086cae"},
+    {file = "boto3-1.24.89.tar.gz", hash = "sha256:d0d8ffcdc10821c4562bc7f935cdd840033bbc342ac0e14b6bdd348b3adf4c04"},
 ]
 botocore = [
-    {file = "botocore-1.27.85-py3-none-any.whl", hash = "sha256:06b3ebacbe9a532074db4ad68040235e3c7bd52741e3ff6710cef8ab144ecdfe"},
-    {file = "botocore-1.27.85.tar.gz", hash = "sha256:2b4c86178b5a5a2baa0a065aaf9ef9d33a7ac67bf3f30e39005de151b0408cac"},
+    {file = "botocore-1.27.89-py3-none-any.whl", hash = "sha256:238f1dfdb8d8d017c2aea082609a3764f3161d32745900f41bcdcf290d95a048"},
+    {file = "botocore-1.27.89.tar.gz", hash = "sha256:621f5413be8f97712b7e36c1b075a8791d1d1b9971a7ee060cdcdf5e2debf6c1"},
 ]
 bracex = [
     {file = "bracex-2.3.post1-py3-none-any.whl", hash = "sha256:351b7f20d56fb9ea91f9b9e9e7664db466eb234188c175fd943f8f755c807e73"},
     {file = "bracex-2.3.post1.tar.gz", hash = "sha256:e7b23fc8b2cd06d3dec0692baabecb249dda94e06a617901ff03a6c56fd71693"},
 ]
 calcipy = [
-    {file = "calcipy-0.18.0-py3-none-any.whl", hash = "sha256:7e3ef5c02cbde39e8e3d7aed8db9d17438eeb4be41faffa4018362b4040ee9e8"},
-    {file = "calcipy-0.18.0.tar.gz", hash = "sha256:146a57154a907854e14b32f15469e668881677688bf02e6a7c314f104e3015cd"},
+    {file = "calcipy-0.19.0-py3-none-any.whl", hash = "sha256:5e68e1a44513ad3fd84fcb03e440d5756832404d4de2cb63eb20924673bc310c"},
+    {file = "calcipy-0.19.0.tar.gz", hash = "sha256:25fca77235dae860fa5b247bff033714c630912679ec4dcf10f8fa5bf0328edf"},
 ]
 cement = [
     {file = "cement-3.0.8-py3-none-any.whl", hash = "sha256:6bea33b89d3329c405ca4119b7da402b53b7c2c402e98cda371e882d5a2f485e"},
@@ -3485,8 +3485,8 @@ gitdb = [
     {file = "gitdb-4.0.9.tar.gz", hash = "sha256:bac2fd45c0a1c9cf619e63a90d62bdc63892ef92387424b855792a6cabe789aa"},
 ]
 GitPython = [
-    {file = "GitPython-3.1.27-py3-none-any.whl", hash = "sha256:5b68b000463593e05ff2b261acff0ff0972df8ab1b70d3cdbd41b546c8b8fc3d"},
-    {file = "GitPython-3.1.27.tar.gz", hash = "sha256:1c885ce809e8ba2d88a29befeb385fcea06338d3640712b59ca623c220bb5704"},
+    {file = "GitPython-3.1.28-py3-none-any.whl", hash = "sha256:77bfbd299d8709f6af7e0c70840ef26e7aff7cf0c1ed53b42dd7fc3a310fcb02"},
+    {file = "GitPython-3.1.28.tar.gz", hash = "sha256:6bd3451b8271132f099ceeaf581392eaf6c274af74bb06144307870479d0697c"},
 ]
 glom = [
     {file = "glom-22.1.0-py2.py3-none-any.whl", hash = "sha256:5339da206bf3532e01a83a35aca202960ea885156986d190574b779598e9e772"},
@@ -3497,8 +3497,8 @@ griffe = [
     {file = "griffe-0.22.2.tar.gz", hash = "sha256:1408e336a4155392bbd81eed9f2f44bf144e71b9c664e905630affe83bbc088e"},
 ]
 hypothesis = [
-    {file = "hypothesis-6.56.0-py3-none-any.whl", hash = "sha256:dc3a296f1c23fc402ec50a3d90785fcf4a6290156ad4c97e23b0f972b0c3e32c"},
-    {file = "hypothesis-6.56.0.tar.gz", hash = "sha256:38ac02dba2801e26b964da57950cbc574fb22a3e16951c227150282b986ed002"},
+    {file = "hypothesis-6.56.1-py3-none-any.whl", hash = "sha256:df01b518d3c79c34ca5a15462af5407d1e73dd2d7003d374299dddb195aa155d"},
+    {file = "hypothesis-6.56.1.tar.gz", hash = "sha256:cefdaf6143170f1aa28adf4816d12547ab60f93c143f7d5205507d9e4804fccd"},
 ]
 identify = [
     {file = "identify-2.5.6-py2.py3-none-any.whl", hash = "sha256:b276db7ec52d7e89f5bc4653380e33054ddc803d25875952ad90b0f012cbcdaa"},
@@ -3513,8 +3513,8 @@ importlib-metadata = [
     {file = "importlib_metadata-4.13.0.tar.gz", hash = "sha256:dd0173e8f150d6815e098fd354f6414b0f079af4644ddfe90c71e2fc6174346d"},
 ]
 importlib-resources = [
-    {file = "importlib_resources-5.9.0-py3-none-any.whl", hash = "sha256:f78a8df21a79bcc30cfd400bdc38f314333de7c0fb619763f6b9dabab8268bb7"},
-    {file = "importlib_resources-5.9.0.tar.gz", hash = "sha256:5481e97fb45af8dcf2f798952625591c58fe599d0735d86b10f54de086a61681"},
+    {file = "importlib_resources-5.10.0-py3-none-any.whl", hash = "sha256:ee17ec648f85480d523596ce49eae8ead87d5631ae1551f913c0100b5edd3437"},
+    {file = "importlib_resources-5.10.0.tar.gz", hash = "sha256:c01b1b94210d9849f286b86bb51bcea7cd56dde0600d8db721d7b81330711668"},
 ]
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
@@ -4261,10 +4261,10 @@ s3transfer = [
     {file = "s3transfer-0.6.0.tar.gz", hash = "sha256:2ed07d3866f523cc561bf4a00fc5535827981b117dd7876f036b0c1aca42c947"},
 ]
 semgrep = [
-    {file = "semgrep-0.115.0-cp37.cp38.cp39.py37.py38.py39-none-any.whl", hash = "sha256:9b7b4cb1ab9b6d8fcdaf4212f69e5bc3c38341ed49e7418300e3fbfc3eda1658"},
-    {file = "semgrep-0.115.0-cp37.cp38.cp39.py37.py38.py39-none-macosx_10_14_x86_64.whl", hash = "sha256:d064f58e367f087b9be10a21fe826b8584a82c2fd0f9d7f0c867a2208917d550"},
-    {file = "semgrep-0.115.0-cp37.cp38.cp39.py37.py38.py39-none-macosx_11_0_arm64.whl", hash = "sha256:3d3c19ef5c5c0e8b94781d26813ff2b3da440ed884db36c62352e9f282b1545e"},
-    {file = "semgrep-0.115.0.tar.gz", hash = "sha256:6b111884acc6da4c08543d4457bcbbfd1ecbc7306efb696311304e3b3f4902c1"},
+    {file = "semgrep-0.116.0-cp37.cp38.cp39.py37.py38.py39-none-any.whl", hash = "sha256:680b5a8b008bfd1aacde8d4061210667839000c30371d85ab9440a4dc4f49272"},
+    {file = "semgrep-0.116.0-cp37.cp38.cp39.py37.py38.py39-none-macosx_10_14_x86_64.whl", hash = "sha256:3a603224a212fe9fd9dde9c9683d3fec6829e9b55d892b43341aba235bc44b7d"},
+    {file = "semgrep-0.116.0-cp37.cp38.cp39.py37.py38.py39-none-macosx_11_0_arm64.whl", hash = "sha256:f0060920b77ff77f475fc21d33293debd3be6f8deeb9264b4a4be02fc8205fc8"},
+    {file = "semgrep-0.116.0.tar.gz", hash = "sha256:d7ccf9c39e77151b6b59d78524034fa8a8dbc43cba4bcd6d87438fc7f4554fb6"},
 ]
 setuptools = [
     {file = "setuptools-65.4.1-py3-none-any.whl", hash = "sha256:1b6bdc6161661409c5f21508763dc63ab20a9ac2f8ba20029aaaa7fdb9118012"},
@@ -4306,9 +4306,8 @@ sty = [
     {file = "sty-1.0.4-py3-none-any.whl", hash = "sha256:3e3352f05770a37e11c9dfc303cbccb1c6acc13710e15d181cb43be7df89f8ea"},
 ]
 tabulate = [
-    {file = "tabulate-0.8.10-py3-none-any.whl", hash = "sha256:0ba055423dbaa164b9e456abe7920c5e8ed33fcc16f6d1b2f2d152c8e1e8b4fc"},
-    {file = "tabulate-0.8.10-py3.8.egg", hash = "sha256:436f1c768b424654fce8597290d2764def1eea6a77cfa5c33be00b1bc0f4f63d"},
-    {file = "tabulate-0.8.10.tar.gz", hash = "sha256:6c57f3f3dd7ac2782770155f3adb2db0b1a269637e42f27599925e64b114f519"},
+    {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
+    {file = "tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
 ]
 termcolor = [
     {file = "termcolor-2.0.1-py3-none-any.whl", hash = "sha256:7e597f9de8e001a3208c4132938597413b9da45382b6f1d150cff8d062b7aaa3"},
@@ -4351,8 +4350,8 @@ types-setuptools = [
     {file = "types_setuptools-65.4.0.0-py3-none-any.whl", hash = "sha256:ce178b3f7dbd6c0e67f8eee7ae29c1be280ade7e5188bdd9e620843de4060d85"},
 ]
 typing-extensions = [
-    {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
-    {file = "typing_extensions-4.3.0.tar.gz", hash = "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"},
+    {file = "typing_extensions-4.4.0-py3-none-any.whl", hash = "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"},
+    {file = "typing_extensions-4.4.0.tar.gz", hash = "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa"},
 ]
 typing-inspect = [
     {file = "typing_inspect-0.8.0-py3-none-any.whl", hash = "sha256:5fbf9c1e65d4fa01e701fe12a5bca6c6e08a4ffd5bc60bfac028253a447c5188"},

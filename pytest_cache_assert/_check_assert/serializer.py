@@ -87,7 +87,7 @@ class _CacheAssertSerializer(JSONEncoder):
         with suppress(Unconvertable):
             return _generic_memory_address_serializer(obj)
 
-        if inspect.isclass(obj) or str(obj).startswith('<'):
+        if inspect.isclass(obj) or str(type(self)).startswith('<class'):
             return str(obj)
 
         raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')

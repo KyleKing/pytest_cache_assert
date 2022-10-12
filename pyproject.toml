@@ -17,12 +17,12 @@ args_diff = "--fail-under=85"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "3.0.2"
+version = "3.0.4"
 version_files = ["pyproject.toml", "pytest_cache_assert/__init__.py"]
 
 [tool.poetry]
 name = "pytest_cache_assert"
-version = "3.0.2"
+version = "3.0.4"
 description = "Cache assertion data to simplify regression testing of complex serializable data"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
@@ -62,15 +62,15 @@ deepdiff6 = ">=6.2.0"  # FYI: Only temporarily named deepdiff6 (was deepdiff)
 pydantic = ">=1.10.2"
 pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
-ujson = ">=5.1.0"      # FIXME: Implement ujson as a faster alternative to json
 
 # Hack: poetry doesn't like "importlib-metadata" >=5.0 yet which causes publish to fail
 importlib-metadata = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.18.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
+calcipy = { version = ">=0.19.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
 # FYI: New dev-dependencies need to be copied to noxfile.py
 hypothesis = ">=6.55.0"
-moto = ">=4.0.3"
+moto = ">=3.0.0"
 pendulum = ">=2.1.2"
 pytest-benchmark = ">=3.4.1"
+pytest-flask = ">=1.2.0"

@@ -5,6 +5,7 @@ import json
 import re
 from collections import defaultdict
 from contextlib import suppress
+from datetime import datetime
 from enum import Enum
 from json import JSONEncoder
 from pathlib import Path, PurePath
@@ -143,6 +144,8 @@ def _serialize_complex(obj: complex) -> List[float]:
 
 
 _CONVERTERS.register([complex], _serialize_complex)
+
+_CONVERTERS.register([datetime], str)
 
 with suppress(ImportError):
     from pendulum.datetime import DateTime

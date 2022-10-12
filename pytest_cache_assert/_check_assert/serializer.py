@@ -1,6 +1,5 @@
 """Implement a serializer for caching data to and from version controlled files."""
 
-import inspect
 import json
 import re
 from collections import defaultdict
@@ -68,8 +67,6 @@ class _CacheAssertSerializer(JSONEncoder):
 
     def default(self, obj: Any) -> Any:
         """Extend default encoder."""
-        if isinstance(obj, (bytes)):
-            return str(obj)
         if isinstance(obj, (str, bytes, list, dict)):
             return super().default(obj)
 
@@ -84,14 +81,11 @@ class _CacheAssertSerializer(JSONEncoder):
                     with suppress(Unconvertable):
                         return converter(obj)
 
-        # Fallback for obj of type "type" (i.e. `MagicMock`)
-        with suppress(Unconvertable):
+        # Fallback for obj of the general type "type" (i.e. `MagicMock` or "Flask")
+        try:
             return _generic_memory_address_serializer(obj)
-
-        if inspect.isclass(obj) or str(type(self)).startswith('<class'):
+        except Unconvertable:
             return str(obj)
-
-        raise Unconvertable(f'Failed to encode `{obj}` ({type(obj)}) with {_CONVERTERS.get_lookup()}')
 
 
 def _generic_memory_address_serializer(obj: Any) -> Any:

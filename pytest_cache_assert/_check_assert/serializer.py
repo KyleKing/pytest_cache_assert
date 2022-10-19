@@ -67,9 +67,6 @@ class _CacheAssertSerializer(JSONEncoder):
 
     def default(self, obj: Any) -> Any:
         """Extend default encoder."""
-        if isinstance(obj, (str, bytes, list, dict)):
-            return super().default(obj)
-
         converters = _CONVERTERS.get_lookup().get(type(obj))
         for converter in converters or []:
             with suppress(Unconvertable):

@@ -2,6 +2,18 @@
 
 ### Fix
 
+- remove dump of raw data in error message
+- serialize bytes by passing to str
+- serialize datetime by default
+
+### Refactor
+
+- reduce serializer complexity
+
+## 3.0.4 (2022-10-08)
+
+### Fix
+
 - serialize all classes
 
 ## 3.0.3 (2022-10-06)

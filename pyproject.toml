@@ -63,9 +63,6 @@ pydantic = ">=1.10.2"
 pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
 
-# Hack: poetry doesn't like "importlib-metadata" >=5.0 yet which causes publish to fail
-importlib-metadata = "^4.4.0"
-
 [tool.poetry.dev-dependencies]
 calcipy = { version = ">=0.20.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
 # FYI: New dev-dependencies need to be copied to noxfile.py

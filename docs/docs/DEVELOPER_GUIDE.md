@@ -66,5 +66,5 @@ poetry run doit run lock document deploy_docs publish
 | `pytest_cache_assert/plugin.py`                      |           44 |         2 |          0 | 95.5%      |
 | **Totals**                                           |          513 |        28 |          0 | 94.5%      |
 
-Generated on: 2022-10-18
+Generated on: 2022-10-19
 <!-- {cte} -->

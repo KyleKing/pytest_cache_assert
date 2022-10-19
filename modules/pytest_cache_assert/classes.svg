@@ -252,7 +252,7 @@
 <text text-anchor="middle" x="5424.5" y="-99.8" font-family="Times,serif" font-size="14.00">_Converters</text>
 <polyline fill="none" stroke="black" points="5247.5,-92 5601.5,-92"/>
 <text text-anchor="start" x="5255.5" y="-76.8" font-family="Times,serif" font-size="14.00">converter_lookup : Dict[Any, List[T_CONVERTER]]</text>
-<text text-anchor="start" x="5255.5" y="-61.8" font-family="Times,serif" font-size="14.00">converter_lookup : dict, defaultdict</text>
+<text text-anchor="start" x="5255.5" y="-61.8" font-family="Times,serif" font-size="14.00">converter_lookup : defaultdict, dict</text>
 <text text-anchor="start" x="5255.5" y="-46.8" font-family="Times,serif" font-size="14.00">converters : List[Tuple[Any, T_CONVERTER]]</text>
 <polyline fill="none" stroke="black" points="5247.5,-39 5601.5,-39"/>
 <text text-anchor="start" x="5255.5" y="-23.8" font-family="Times,serif" font-size="14.00">get_lookup(): Dict[Any, List[T_CONVERTER]]</text>

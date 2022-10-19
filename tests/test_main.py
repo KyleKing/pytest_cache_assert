@@ -16,7 +16,7 @@ from pytest_cache_assert.main import assert_against_cache, assert_against_dict
 
 from .configuration import clear_test_cache
 
-DEF_ERROR_MESSAGE = r'^\n> For test data: .+\n> Found differences with: .+\n> Differences: .+'
+DEF_ERROR_MESSAGE = r'^\n> Found differences with: .+\n> Differences: .+'
 
 
 def test_assert_against_cache_failure(fix_tmp_assert):  # noqa: AAA01

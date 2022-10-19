@@ -45,8 +45,6 @@ class RichAssertionError(AssertionError):
             indented_data = ('\n' + ' ' * len(prefix)).join(pformat(data).split('\n'))
             return f'{prefix}{indented_data}'
 
-        data_prefix = '> For test data: '
         diff_prefix = '> Differences: '
-        line_data = fmt_line(data_prefix, test_data)
         line_diff = fmt_line(diff_prefix, diff_results.to_dict())
-        return f'\n{line_data}\n> Found differences with: {path_cache_file}\n{line_diff}\n'
+        return f'\n> Found differences with: {path_cache_file}\n{line_diff}\n'

@@ -13,6 +13,7 @@ line_length = 120
 multi_line_output = 5
 
 [tool.calcipy.test]
+pythons = ["3.8.3", "3.10"]
 args_diff = "--fail-under=85"
 
 [tool.commitizen]

@@ -38,7 +38,6 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 python-dateutil = ">=2.7.0"
-typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "astor"
@@ -198,14 +197,14 @@ python-versions = "*"
 
 [[package]]
 name = "boto3"
-version = "1.24.93"
+version = "1.24.94"
 description = "The AWS SDK for Python"
 category = "dev"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = ">=1.27.93,<1.28.0"
+botocore = ">=1.27.94,<1.28.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -214,7 +213,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.27.93"
+version = "1.27.94"
 description = "Low-level, data-driven core of boto 3."
 category = "dev"
 optional = false
@@ -427,7 +426,6 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
-importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "click-option-group"
@@ -1327,12 +1325,11 @@ python-versions = ">=3.5"
 name = "importlib-metadata"
 version = "5.0.0"
 description = "Read metadata from Python packages"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-typing-extensions = {version = ">=3.6.4", markers = "python_version < \"3.8\""}
 zipp = ">=0.5"
 
 [package.extras]
@@ -1733,7 +1730,6 @@ python-versions = ">=3.6"
 boto3 = ">=1.9.201"
 botocore = ">=1.12.201"
 cryptography = ">=3.3.1"
-importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 Jinja2 = ">=2.10.1"
 MarkupSafe = "!=2.0.0a1"
 python-dateutil = ">=2.1,<3.0.0"
@@ -2021,9 +2017,6 @@ category = "main"
 optional = false
 python-versions = ">=3.6"
 
-[package.dependencies]
-importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
-
 [package.extras]
 dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
@@ -2240,7 +2233,6 @@ python-versions = ">=3.7"
 [package.dependencies]
 attrs = ">=19.2.0"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
-importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 iniconfig = "*"
 packaging = "*"
 pluggy = ">=0.12,<2.0"
@@ -2487,7 +2479,6 @@ python-versions = ">=3.7"
 requests = ">=2.22.0,<3.0"
 toml = "*"
 types-toml = "*"
-typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
 urllib3 = ">=1.25.10"
 
 [package.extras]
@@ -3034,7 +3025,7 @@ setuptools = "*"
 name = "zipp"
 version = "3.9.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -3044,8 +3035,8 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.7.6"
-content-hash = "1714d4b721fdb2887f3a2664e0e398ab980b0acd0e2115e790f570f4dda2493c"
+python-versions = "^3.8.3"
+content-hash = "7c8df8a29557840b78aabe1d0572a23e81971a68815e63630feb3ce77afbdf15"
 
 [metadata.files]
 absolufy-imports = [
@@ -3118,12 +3109,12 @@ boltons = [
     {file = "boltons-21.0.0.tar.gz", hash = "sha256:65e70a79a731a7fe6e98592ecfb5ccf2115873d01dbc576079874629e5c90f13"},
 ]
 boto3 = [
-    {file = "boto3-1.24.93-py3-none-any.whl", hash = "sha256:db9f04eeb942e7998d1971c35e1658e2d9d6687166a4ebc036f484a71a79bbeb"},
-    {file = "boto3-1.24.93.tar.gz", hash = "sha256:7881fc380f2f489ae9b3a2f2448334aef9f7be58d85a7a0e8c10458247b09afa"},
+    {file = "boto3-1.24.94-py3-none-any.whl", hash = "sha256:f13db0beb3c9fe2cc1ed0f031189f144610d2909b5874a616e77b0bd1ae3b686"},
+    {file = "boto3-1.24.94.tar.gz", hash = "sha256:f4842b395d1580454756622069f4ca0408993885ecede967001d2c101201cdfa"},
 ]
 botocore = [
-    {file = "botocore-1.27.93-py3-none-any.whl", hash = "sha256:7648891692c3c69038eef902f8d64af59f91211f713fe9072fb83ecdd310dbbc"},
-    {file = "botocore-1.27.93.tar.gz", hash = "sha256:d5200f7b9150cdb91c9d3994980870d7bb4554e19c4d9d847f64626d8ceacf95"},
+    {file = "botocore-1.27.94-py3-none-any.whl", hash = "sha256:8237c070d2ab29fac4fbcfe9dd2e84e0ee147402e0fed3ac1629f92459c7f1d2"},
+    {file = "botocore-1.27.94.tar.gz", hash = "sha256:572224608a0b7662966fc303b768e2eba61bf53bdbf314481cd9e63a0d8e1a66"},
 ]
 bracex = [
     {file = "bracex-2.3.post1-py3-none-any.whl", hash = "sha256:351b7f20d56fb9ea91f9b9e9e7664db466eb234188c175fd943f8f755c807e73"},

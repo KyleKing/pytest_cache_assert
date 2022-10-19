@@ -13,6 +13,7 @@ line_length = 120
 multi_line_output = 5
 
 [tool.calcipy.test]
+pythons = ["3.8.4", "3.10"]
 args_diff = "--fail-under=85"
 
 [tool.commitizen]
@@ -33,15 +34,15 @@ readme = "docs/README.md"
 include = ["LICENSE.md"]
 keywords = []
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Framework :: Pytest",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Testing",
 ] # https://pypi.org/classifiers/
 
@@ -55,16 +56,13 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 "Changelog" = "https://github.com/kyleking/pytest_cache_assert/blob/main/docs/docs/CHANGELOG.md"
 
 [tool.poetry.dependencies]
-python = "^3.7.6"
+python = "^3.8.4"
 arrow = ">=1.2.3"
 beartype = ">=0.10.0"
 deepdiff6 = ">=6.2.0"  # FYI: Only temporarily named deepdiff6 (was deepdiff)
 pydantic = ">=1.10.2"
 pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
-
-# Hack: poetry doesn't like "importlib-metadata" >=5.0 yet which causes publish to fail
-importlib-metadata = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
 calcipy = { version = ">=0.20.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}

@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.5 (2022-10-18)
+
 ### Fix
 
 - remove dump of raw data in error message

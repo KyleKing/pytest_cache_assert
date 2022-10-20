@@ -65,7 +65,7 @@ pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.20.0", extras = ["dev", "lint", "test"], python = "^3.8.4"}
+calcipy = { version = ">=0.20.1", extras = ["dev", "lint", "test"], python = "^3.8.4" }
 # FYI: New dev-dependencies need to be copied to noxfile.py
 hypothesis = ">=6.55.0"
 moto = ">=3.0.0"

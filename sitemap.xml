@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/docs/CHANGELOG/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/docs/CODE_TAG_SUMMARY/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/docs/DEVELOPER_GUIDE/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/docs/STYLE_GUIDE/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/modules/pytest_cache_assert/_code_diagrams/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pytest_cache_assert.kyleking.me/reference/SUMMARY/</loc>
-         <lastmod>2022-10-19</lastmod>
+         <lastmod>2022-10-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

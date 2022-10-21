@@ -1,6 +1,7 @@
 """Representative class of the Cache Data Store."""
 
 from pathlib import Path
+from typing import runtime_checkable
 
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional, Protocol
@@ -8,11 +9,6 @@ from beartype.typing import Any, Dict, List, Optional, Protocol
 from .caching import init_cache, load_cached_data, write_cache_data
 from .converter import Converter
 from .serializer import make_diffable, register_user_converters
-
-try:
-    from typing import runtime_checkable
-except ImportError:
-    from typing_extensions import runtime_checkable
 
 
 @runtime_checkable

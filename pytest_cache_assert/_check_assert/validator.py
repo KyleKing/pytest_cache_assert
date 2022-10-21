@@ -1,6 +1,7 @@
 """Override the default validator for determining differences with the cached data."""
 
 from pathlib import Path
+from typing import runtime_checkable
 
 from beartype import beartype
 from beartype.typing import Any, List, Optional, Protocol
@@ -8,11 +9,6 @@ from beartype.typing import Any, List, Optional, Protocol
 from .assert_rules import AssertRule
 from .differ import diff_with_rules
 from .error_message import RichAssertionError
-
-try:
-    from typing import runtime_checkable
-except ImportError:
-    from typing_extensions import runtime_checkable
 
 
 @runtime_checkable

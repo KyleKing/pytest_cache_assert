@@ -2,6 +2,12 @@
 
 ### Fix
 
+- lower floor for pydantic version
+
+## 3.0.6 (2022-10-19)
+
+### Fix
+
 - use Python 3.8.4 in CI
 
 ## 3.0.5 (2022-10-18)

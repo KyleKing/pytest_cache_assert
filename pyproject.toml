@@ -34,16 +34,16 @@ readme = "docs/README.md"
 include = ["LICENSE.md"]
 keywords = []
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Framework :: Pytest",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Software Development :: Testing",
+  "Development Status :: 5 - Production/Stable",
+  "Framework :: Pytest",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development :: Testing",
 ] # https://pypi.org/classifiers/
 
 [tool.poetry.plugins."pytest11"]
@@ -58,14 +58,18 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 [tool.poetry.dependencies]
 python = "^3.8.4"
 arrow = ">=1.2.3"
-beartype = ">=0.10.0"
-deepdiff6 = ">=6.2.0"  # FYI: Only temporarily named deepdiff6 (was deepdiff)
-pydantic = ">=1.10.2"
+beartype = ">=0.11.0"
+deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
+pydantic = ">=1.8.1"
 pytest = ">=5.0.0"
 StrEnum = ">=0.4.8"
 
 [tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.20.1", extras = ["dev", "lint", "test"], python = "^3.8.4" }
+calcipy = { version = ">=0.20.1", extras = [
+  "dev",
+  "lint",
+  "test",
+], python = "^3.8.4" }
 # FYI: New dev-dependencies need to be copied to noxfile.py
 hypothesis = ">=6.55.0"
 moto = ">=3.0.0"

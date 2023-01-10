@@ -11,7 +11,6 @@ import arrow
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Pattern, Union
 from pydantic import BaseModel
-from strenum import StrEnum
 
 from .constants import T_DIFF
 
@@ -186,7 +185,7 @@ _PAT_END = r"'\]"
 _PAT_JOIN = _PAT_END + _PAT_START
 
 
-class Wild(StrEnum):  # type: ignore[misc]
+class Wild:
     """AssertRule Wildcard Patterns."""
 
     @classmethod

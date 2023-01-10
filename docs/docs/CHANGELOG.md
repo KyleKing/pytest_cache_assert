@@ -8,6 +8,7 @@
 
 ### Refactor
 
+- run pre-commit
 - copier update
 - apply pyupgrade
 

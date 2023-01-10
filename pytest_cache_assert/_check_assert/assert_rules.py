@@ -218,7 +218,7 @@ class AssertRule(BaseModel):
     func: Callable[[T_DIFF, T_DIFF], bool]
 
     @classmethod
-    def build_re(cls, pattern: List[Union[str, Wild]], func: Callable[[T_DIFF, T_DIFF], bool]) -> 'AssertRule':
+    def build_re(cls, pattern: List[str], func: Callable[[T_DIFF, T_DIFF], bool]) -> 'AssertRule':
         """Build a regex pattern from list."""
         if not pattern:
             raise ValueError("Expected at least one item in 'pattern'")

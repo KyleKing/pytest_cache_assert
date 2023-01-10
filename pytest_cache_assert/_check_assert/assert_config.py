@@ -18,7 +18,7 @@ class AssertConfig(BaseModel):
     """Always write to the cached file so that diffs can be examined in the user's VCS."""
 
     cache_dir_rel_path: str = DEF_CACHE_DIR_NAME
-    """String relative directory from `tests/`. Default resolves to `tests/assert-cache/`."""
+    """String relative directory from `tests/` where default resolves to `tests/assert-cache/`."""
 
     cache_store: CacheStoreType = Field(default_factory=LocalJSONCacheStore)
     """Configurable class for managing the cache representation. Default is local JSON.

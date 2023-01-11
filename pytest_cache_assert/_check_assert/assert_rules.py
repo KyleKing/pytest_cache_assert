@@ -160,7 +160,7 @@ def _check_date_proximity(
         return (new_date - old_date) <= time_delta
     elif comparator == Comparator.GTE:
         return (new_date - old_date) >= time_delta
-    return abs(new_date - old_date) <= time_delta  # mypy: ignore[arg-type]
+    return abs(new_date - old_date) <= time_delta  # type: ignore[arg-type]
 
 
 @beartype

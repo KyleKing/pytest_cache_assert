@@ -15,7 +15,6 @@ class CacheAssertContainerKeys(Enum):  # noqa: H601
 
 
 class MissingConfigItemError(Exception):
-
     ...
 
 

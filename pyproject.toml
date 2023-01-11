@@ -1,6 +1,8 @@
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core",
+]
 
 [tool.isort]
 balanced_wrapping = true
@@ -18,12 +20,12 @@ args_diff = "--fail-under=85"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "3.0.6"
+version = "3.0.7"
 version_files = ["pyproject.toml", "pytest_cache_assert/__init__.py"]
 
 [tool.poetry]
 name = "pytest_cache_assert"
-version = "3.0.6"
+version = "3.0.7"
 description = "Cache assertion data to simplify regression testing of complex serializable data"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
@@ -62,14 +64,13 @@ beartype = ">=0.11.0"
 deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
 pydantic = ">=1.8.1"
 pytest = ">=5.0.0"
-StrEnum = ">=0.4.8"
 
 [tool.poetry.dev-dependencies]
 calcipy = { version = ">=0.20.1", extras = [
   "dev",
   "lint",
   "test",
-], python = "^3.8.4" }
+] }
 # FYI: New dev-dependencies need to be copied to noxfile.py
 hypothesis = ">=6.55.0"
 moto = ">=3.0.0"

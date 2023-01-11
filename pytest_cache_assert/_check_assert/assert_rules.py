@@ -11,7 +11,6 @@ import arrow
 from beartype import beartype
 from beartype.typing import Callable, List, Optional, Pattern, Union
 from pydantic import BaseModel
-from strenum import StrEnum
 
 from .constants import T_DIFF
 
@@ -161,7 +160,7 @@ def _check_date_proximity(
         return (new_date - old_date) <= time_delta
     elif comparator == Comparator.GTE:
         return (new_date - old_date) >= time_delta
-    return abs(new_date - old_date) <= time_delta  # mypy: ignore[arg-type]
+    return abs(new_date - old_date) <= time_delta  # type: ignore[arg-type]
 
 
 @beartype
@@ -186,7 +185,7 @@ _PAT_END = r"'\]"
 _PAT_JOIN = _PAT_END + _PAT_START
 
 
-class Wild(StrEnum):  # type: ignore[misc]
+class Wild:
     """AssertRule Wildcard Patterns."""
 
     @classmethod
@@ -219,7 +218,7 @@ class AssertRule(BaseModel):
     func: Callable[[T_DIFF, T_DIFF], bool]
 
     @classmethod
-    def build_re(cls, pattern: List[Union[str, Wild]], func: Callable[[T_DIFF, T_DIFF], bool]) -> 'AssertRule':
+    def build_re(cls, pattern: List[str], func: Callable[[T_DIFF, T_DIFF], bool]) -> 'AssertRule':
         """Build a regex pattern from list."""
         if not pattern:
             raise ValueError("Expected at least one item in 'pattern'")

@@ -47,4 +47,5 @@ class RichAssertionError(AssertionError):
 
         diff_prefix = '> Differences: '
         line_diff = fmt_line(diff_prefix, diff_results.to_dict())
-        return f'\n> Found differences with: {path_cache_file}\n{line_diff}\n'
+        file_diff = f'\n> Found differences with: {path_cache_file}' if path_cache_file else ''
+        return f'{file_diff}\n{line_diff}\n'

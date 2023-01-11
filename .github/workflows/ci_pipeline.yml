@@ -6,10 +6,7 @@ on:  # yamllint disable-line rule:truthy
     branches: [main]
   pull_request:
     branches: [main]
-    paths:
-      - pytest_cache_assert/**
-      - tests/**
-      - pyproject.toml
+    paths: [pytest_cache_assert/**, tests/**, pyproject.toml]
 
 jobs:
   lint:
@@ -17,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04]
-        python-version: [3.8.12]
+        python-version: ['3.8']
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
@@ -33,7 +30,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
-        python-version: [3.8.12]
+        python-version: ['3.8']
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
@@ -50,7 +47,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04]
-        python-version: [3.8.12]
+        python-version: ['3.8']
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup

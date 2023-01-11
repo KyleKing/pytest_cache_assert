@@ -166,7 +166,7 @@ with suppress(ImportError):
     from pydantic.main import BaseModel
 
     def _serialize_pydantic(obj: BaseModel) -> Dict:  # type: ignore[type-arg]
-        return obj.dict()  # type: ignore[attr-defined,no-any-return]
+        return obj.dict()
 
     _CONVERTERS.register([BaseModel], _serialize_pydantic)
 

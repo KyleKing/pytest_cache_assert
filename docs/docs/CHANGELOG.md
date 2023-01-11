@@ -2,7 +2,15 @@
 
 ### Fix
 
+- remove StrEnum and improve RichAssertion on dict
+- serialize pydantic BaseModels
 - lower floor for pydantic version
+
+### Refactor
+
+- run pre-commit
+- copier update
+- apply pyupgrade
 
 ## 3.0.6 (2022-10-19)
 

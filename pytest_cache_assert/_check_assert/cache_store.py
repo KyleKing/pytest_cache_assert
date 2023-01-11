@@ -13,7 +13,6 @@ from .serializer import make_diffable, register_user_converters
 
 @runtime_checkable
 class CacheStoreType(Protocol):
-
     @staticmethod
     def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
         ...

@@ -5,7 +5,6 @@ from beartype.typing import Any, Callable, Dict, List, Optional, Union
 
 
 class NotFound:
-
     ...
 
 

@@ -1,0 +1,11 @@
+diff a/.github/workflows/labeler.yml b/.github/workflows/labeler.yml	(rejected hunks)
+@@ -7,7 +7,4 @@ on:  # yamllint disable-line rule:truthy
+   push:
+-    branches:
+-      - main
+-    paths:
+-      - .github/labels.yml
+-      - .github/workflows/labeler.yml
++    branches: [main]
++    paths: [.github/labels.yml, .github/workflows/labeler.yml]
+ 

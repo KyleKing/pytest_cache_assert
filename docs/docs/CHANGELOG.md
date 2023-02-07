@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.7 (2023-01-09)
+
 ### Fix
 
 - remove StrEnum and improve RichAssertion on dict

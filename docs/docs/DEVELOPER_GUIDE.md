@@ -5,16 +5,18 @@
 ```sh
 git clone https://github.com/kyleking/pytest_cache_assert.git
 cd pytest_cache_assert
-poetry install
+poetry install --sync
 
 # See the available tasks
-poetry run doit list
+poetry run calcipy
+# Or use a local 'run' file (so that 'calcipy' can be extended)
+./run
 
 # Run the default task list (lint, auto-format, test coverage, etc.)
-poetry run doit --continue
+./run main
 
 # Make code changes and run specific tasks as needed:
-poetry run doit run test
+./run lint.fix test
 ```
 
 ## Publishing
@@ -25,7 +27,7 @@ For testing, create an account on [TestPyPi](https://test.pypi.org/legacy/). Rep
 poetry config repositories.testpypi https://test.pypi.org/legacy/
 poetry config pypi-token.testpypi ...
 
-poetry run doit run publish_test_pypi
+./run main pack.publish --to-test-pypi
 # If you didn't configure a token, you will need to provide your username and password to publish
 ```
 
@@ -33,38 +35,14 @@ To publish to the real PyPi
 
 ```sh
 poetry config pypi-token.pypi ...
-poetry run doit run publish
+./run release
 
-# For a full release, triple check the default tasks, increment the version, rebuild documentation (twice), and publish!
-poetry run doit run --continue
-poetry run doit run cl_bump lock document deploy_docs publish
-
-# For pre-releases use cl_bump_pre
-poetry run doit run cl_bump_pre -p rc
-poetry run doit run lock document deploy_docs publish
+# Or for a pre-release
+./run release --suffix=rc
 ```
 
 ## Current Status
 
 <!-- {cts} COVERAGE -->
-| File                                                 |   Statements |   Missing |   Excluded | Coverage   |
-|------------------------------------------------------|--------------|-----------|------------|------------|
-| `pytest_cache_assert/__init__.py`                    |            9 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/assert_config.py` |           24 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/assert_rules.py`  |           86 |         8 |          0 | 90.7%      |
-| `pytest_cache_assert/_check_assert/cache_store.py`   |           41 |         4 |          0 | 90.2%      |
-| `pytest_cache_assert/_check_assert/caching.py`       |           36 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/config.py`        |           27 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/constants.py`     |           17 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/converter.py`     |            6 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/differ.py`        |           41 |         2 |          0 | 95.1%      |
-| `pytest_cache_assert/_check_assert/error_message.py` |           21 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/_check_assert/serializer.py`    |          121 |         7 |          0 | 94.2%      |
-| `pytest_cache_assert/_check_assert/validator.py`     |           20 |         1 |          0 | 95.0%      |
-| `pytest_cache_assert/main.py`                        |           27 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/plugin.py`                      |           45 |         2 |          0 | 95.6%      |
-| **Totals**                                           |          521 |        24 |          0 | 95.4%      |
 
-Generated on: 2023-02-06
 <!-- {cte} -->

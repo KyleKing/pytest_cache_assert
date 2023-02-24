@@ -1,27 +1,10 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
-requires = [
-  "poetry-core",
-]
-
-[tool.isort]
-balanced_wrapping = true
-default_section = "THIRDPARTY"
-force_grid_wrap = 0
-include_trailing_comma = true
-known_first_party = "pytest_cache_assert"
-length_sort = false
-line_length = 120
-multi_line_output = 5
-
-[tool.calcipy.test]
-pythons = ["3.8.4", "3.10"]
-args_diff = "--fail-under=85"
+requires = ["poetry-core"]
 
 [tool.commitizen]
-name = "cz_conventional_commits"
 version = "3.0.7"
-version_files = ["pyproject.toml", "pytest_cache_assert/__init__.py"]
+version_files = ["pyproject.toml:^version", "pytest_cache_assert/__init__.py:^__version"]
 
 [tool.poetry]
 name = "pytest_cache_assert"
@@ -58,22 +41,20 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 "Changelog" = "https://github.com/kyleking/pytest_cache_assert/blob/main/docs/docs/CHANGELOG.md"
 
 [tool.poetry.dependencies]
-python = "^3.8.4"
+python = "^3.8.12"
 arrow = ">=1.2.3"
-beartype = ">=0.11.0"
 deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
-pydantic = ">=1.8.1"
 pytest = ">=5.0.0"
+corallium = ">=0.0.1rc2"
 
-[tool.poetry.dev-dependencies]
-calcipy = { version = ">=0.20.1", extras = [
-  "dev",
-  "lint",
-  "test",
-] }
-# FYI: New dev-dependencies need to be copied to noxfile.py
+[tool.poetry.group.dev.dependencies]
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc6"}
 hypothesis = ">=6.55.0"
 moto = ">=3.0.0"
 pendulum = ">=2.1.2"
 pytest-benchmark = ">=3.4.1"
 pytest-flask = ">=1.2.0"
+
+[tool.pyright]
+include = ["pytest_cache_assert"]
+pythonVersion = "3.8"

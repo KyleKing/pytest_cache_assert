@@ -1,8 +1,4 @@
-"""PyTest configuration.
-
-Note: the calcipy imports are required for a nicer test HTML report
-
-"""
+"""PyTest configuration."""
 
 from pathlib import Path
 
@@ -10,10 +6,6 @@ import boto3
 import pytest
 from beartype import beartype
 from beartype.typing import Dict, Union
-from calcipy.dev.conftest import pytest_configure  # noqa: F401
-from calcipy.dev.conftest import pytest_html_results_table_header  # noqa: F401
-from calcipy.dev.conftest import pytest_html_results_table_row  # noqa: F401
-from calcipy.dev.conftest import pytest_runtest_makereport  # noqa: F401
 from moto import mock_s3
 
 from pytest_cache_assert import AssertConfig, CacheAssertContainerKeys, Converter, register
@@ -60,15 +52,17 @@ def gen_s3_client():
         yield boto3.client('s3')
 
 
-class CustomType:
+class CustomType:  # noqa: PIE798
     """Arbitrary custom type used for testing user configuration.
 
     Note: I previously tested the `to_json(origin='records')` version of the pandas dataframe serializer to override the default, but this test suite was sometimes restoring the default and sometimes not, which was hard to troubleshoot
 
-    """
+    """  # noqa: E501
 
     @staticmethod
+    @beartype
     def to_str(_arg) -> str:
+        """Custom serialization method."""
         return 'Serialized!'
 
 

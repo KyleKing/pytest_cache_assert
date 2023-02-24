@@ -3,12 +3,12 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.commitizen]
-version = "3.0.7"
+version = "3.0.8rc0"
 version_files = ["pyproject.toml:^version", "pytest_cache_assert/__init__.py:^__version"]
 
 [tool.poetry]
 name = "pytest_cache_assert"
-version = "3.0.7"
+version = "3.0.8rc0"
 description = "Cache assertion data to simplify regression testing of complex serializable data"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]

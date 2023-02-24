@@ -1,3 +1,4 @@
+# noqa: RBT002
 """Key Rules."""
 
 import re
@@ -24,7 +25,7 @@ class Comparator(Enum):  # noqa: H601
 
 
 @beartype
-def check_suppress(old: T_DIFF, new: T_DIFF) -> bool:
+def check_suppress(old: T_DIFF, new: T_DIFF) -> bool:  # noqa: ARG001
     """Return True to suppress differences.
 
     Args:
@@ -97,7 +98,7 @@ def check_type(old: T_DIFF, new: T_DIFF) -> bool:
 
 @beartype
 def _check_date_range(
-    old: T_DIFF, new: T_DIFF,
+    old: T_DIFF, new: T_DIFF,  # noqa: ARG001
     min_date: Optional[datetime] = None, max_date: Optional[datetime] = None,
 ) -> bool:
     """Check if the new date falls within the specified range. Will ignores old date.
@@ -158,7 +159,7 @@ def _check_date_proximity(
 
     if comparator == Comparator.LTE:
         return (new_date - old_date) <= time_delta
-    elif comparator == Comparator.GTE:
+    if comparator == Comparator.GTE:
         return (new_date - old_date) >= time_delta
     return abs(new_date - old_date) <= time_delta  # type: ignore[arg-type]
 
@@ -185,7 +186,7 @@ _PAT_END = r"'\]"
 _PAT_JOIN = _PAT_END + _PAT_START
 
 
-class Wild:
+class Wild:  # noqa: PIE798
     """AssertRule Wildcard Patterns."""
 
     @classmethod

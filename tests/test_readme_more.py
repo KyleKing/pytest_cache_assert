@@ -11,7 +11,7 @@ from pytest_cache_assert import AssertRule, Wild, check_suppress, check_type
 
 def test_assert_against_cache_key_rules(assert_against_cache):
     """Demonstrate use of `assert_rules`."""
-    now = datetime.now()
+    now = datetime.now()  # noqa: DTZ005
     cached_data = {
         'date': str(now),
         'nested': {'uuid': str(uuid4())},

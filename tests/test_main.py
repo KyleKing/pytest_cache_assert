@@ -104,12 +104,12 @@ def test_assert_against_dict():
             ], 'Check UUID types',
         ),
         (
-            {'dates': str(datetime.now())}, {'dates': str(arrow.now().shift(weeks=1))}, [
+            {'dates': str(datetime.now())}, {'dates': str(arrow.now().shift(weeks=1))}, [  # noqa: DTZ005
                 AssertRule(pattern='dates', func=check_type),
             ], 'Check date types',
         ),
         (
-            {'dates': str(datetime.now())}, {'dates': None}, [
+            {'dates': str(datetime.now())}, {'dates': None}, [  # noqa: DTZ005
                 AssertRule(pattern='dates', func=check_suppress),
             ], 'Suppress date/null',
         ),
@@ -130,21 +130,25 @@ def test_assert_against_cache_good_key_rules(cached_data, test_data, assert_rule
         raise AssertionError(f'Failed {help_text}') from exc
 
     # Then, verify that without assert rules, an AssertionError is raised
-    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):
+    with pytest.raises(AssertionError, match=DEF_ERROR_MESSAGE):  # noqa: PT012
         assert_against_cache(test_data, **fix_tmp_assert)  # act
-        raise RuntimeError(f'Failed to raise an AssertionError for: {help_text}')
+        msg = f'Failed to raise an AssertionError for: {help_text}'
+        raise RuntimeError(msg)
 
 
 @pytest.mark.parametrize(
-    ('cached_data', 'test_data', 'assert_rules', 'help_text'), [
+    ('cached_data', 'test_data', 'assert_rules'), [
         (
             {'a': 50}, {'a': 51}, [
                 AssertRule(pattern='.', func=check_type),
-            ], 'Verify that regex is only used for compiled patterns (i.e. "." should not match "a")',
+            ],
         ),
     ],
+    ids=[
+        'Verify that regex is only used for compiled patterns (i.e. "." should not match "a")',
+    ],
 )
-def test_assert_against_cache_bad_key_rules(cached_data, test_data, assert_rules, help_text, fix_tmp_assert):
+def test_assert_against_cache_bad_key_rules(cached_data, test_data, assert_rules, fix_tmp_assert):
     """Test various edge cases for different dictionaries."""
     assert_against_cache(cached_data, **fix_tmp_assert)  # First Pass to Cache
 

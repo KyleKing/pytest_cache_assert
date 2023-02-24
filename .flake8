@@ -9,6 +9,8 @@ min-python-version = 3.8
 per-file-ignores=
     # Enforcing beartype on @nox_session doesn't make sense
     *noxfile.py:RBT001,
+    */_check_assert/assert_rules.py:RBT002,
+    */_check_assert/serializer.py:RBT001,RBT002,
     __init__.py:F401,
     check_imports.py:F401,
     test_*.py:RBT001

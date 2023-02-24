@@ -57,7 +57,10 @@ def diff_with_rules(*, old_dict: T_DIFF, new_dict: T_DIFF, assert_rules: List[As
     """
     key_str = 'str'
     key_re = 'regex'
-    collector: Dict[str, List[Union[str, Pattern[str]]]] = {key_str: [], key_re: []}
+    collector: Dict[str, List[Union[str, Pattern[str]]]] = {  # noqa: TAE002
+        key_str: [],
+        key_re: [],
+    }
     for ar in assert_rules:
         collector[key_re if ar.is_regex() else key_str].append(ar.pattern)
 

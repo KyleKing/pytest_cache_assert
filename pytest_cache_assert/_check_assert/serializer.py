@@ -1,3 +1,4 @@
+# noqa: RBT002
 """Implement a serializer for caching data to and from version controlled files."""
 
 import json
@@ -21,7 +22,7 @@ _RE_MEMORY_ADDRESS = re.compile(r'(?: at 0x[^>]+|["\']\d+["\'])>')
 """Regex for matching the hex memory address or MagicMock id in a function signature."""
 
 
-class Unconvertable(ValueError):
+class UnconvertableError(ValueError):
     """Custom Error to indicate conversion failure."""
 
     ...
@@ -63,32 +64,32 @@ class _CacheAssertSerializer(JSONEncoder):
 
     Restored from: https://github.com/KyleKing/pytest_cache_assert/blob/bcc99d04518f08fad7af34e53b2ac8cbdbe19065/pytest_cache_assert/_check_assert/serializer.py#L76-L86
 
-    """
+    """  # noqa: E501
 
-    def default(self, obj: Any) -> Any:
+    def default(self, obj: Any) -> Any:  # noqa: CAC001,CFQ004
         """Extend default encoder."""
         converters = _CONVERTERS.get_lookup().get(type(obj))
         for converter in converters or []:
-            with suppress(Unconvertable):
+            with suppress(UnconvertableError):
                 return converter(obj)
 
         for typ, converters in _CONVERTERS.get_lookup().items():
             if isinstance(obj, typ):
                 for converter in converters:
-                    with suppress(Unconvertable):
+                    with suppress(UnconvertableError):
                         return converter(obj)
 
         # Fallback for obj of the general type "type" (i.e. `MagicMock` or "Flask")
         try:
             return _generic_memory_address_serializer(obj)
-        except Unconvertable:
+        except UnconvertableError:
             return str(obj)
 
 
 def _generic_memory_address_serializer(obj: Any) -> Any:
     if _RE_MEMORY_ADDRESS.search(str(obj)):
         return replace_memory_address(obj)
-    raise Unconvertable("Not a match for 'replace_memory_address'")
+    raise UnconvertableError("Not a match for 'replace_memory_address'")
 
 
 _CONVERTERS.register([Callable], _generic_memory_address_serializer)
@@ -122,7 +123,7 @@ def _serialize_enum(obj: Enum) -> str:
     try:
         return str(obj.value)
     except AttributeError as exc:
-        raise Unconvertable(exc) from None
+        raise UnconvertableError(exc) from None
 
 
 _CONVERTERS.register([Enum], _serialize_enum)
@@ -179,7 +180,7 @@ def register_user_converters(converters: List[Converter]) -> None:
 
 
 @beartype
-def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
+def dumps(obj: Any, *, sort_keys: bool = False, indent: int = 0) -> str:
     """Serialize object to str.
 
     Args:
@@ -191,13 +192,14 @@ def dumps(obj: Any, sort_keys: bool = False, indent: int = 0) -> str:
         str: serialized data
 
     Raises:
-        Unconvertable: when serialization fails
+        UnconvertableError: when serialization fails
 
     """
     try:
         return json.dumps(obj, sort_keys=sort_keys, indent=indent or None, cls=_CacheAssertSerializer)
-    except Unconvertable as exc:
-        raise Unconvertable(f'Conversion error. Try specifying new converters in AssertConfig to fix: {exc}') from exc
+    except UnconvertableError as exc:
+        msg = f'Conversion error. Try specifying new converters in AssertConfig to fix: {exc}'  # noqa: E501
+        raise UnconvertableError(msg) from exc
 
 
 @beartype

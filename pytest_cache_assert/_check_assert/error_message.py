@@ -12,7 +12,9 @@ from .differ import DiffResults
 class NoCacheError(FileNotFoundError):
     """Custom Assertion when no cached data is available for read."""
 
-    ...
+    @beartype
+    def __init__(self, path_cache_file: Path) -> None:
+        super().__init__(f'No cache for: {path_cache_file}')
 
 
 class RichAssertionError(AssertionError):
@@ -24,8 +26,12 @@ class RichAssertionError(AssertionError):
         self.error_info = error_info
 
     @classmethod
+    @beartype
     def create_message(
-        cls, test_data: Any, cached_data: Any, path_cache_file: Path,
+        cls,
+        test_data: Any,   # noqa: ARG003
+        cached_data: Any,  # noqa: ARG003
+        path_cache_file: Path,
         diff_results: DiffResults,
     ) -> str:
         """Create the error message.

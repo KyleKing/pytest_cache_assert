@@ -14,14 +14,17 @@ from .serializer import make_diffable, register_user_converters
 @runtime_checkable
 class CacheStoreType(Protocol):
     @staticmethod
+    @beartype
     def initialize(path_cache_dir: Optional[Path], converters: Optional[List[Converter]] = None) -> None:
         ...
 
     @staticmethod
+    @beartype
     def serialize(data: Any) -> Any:
         ...
 
     @staticmethod
+    @beartype
     def write(
         path_cache_file: Path,
         *,
@@ -32,6 +35,7 @@ class CacheStoreType(Protocol):
         ...
 
     @staticmethod
+    @beartype
     def read_cached_data(path_cache_file: Path) -> Any:
         ...
 

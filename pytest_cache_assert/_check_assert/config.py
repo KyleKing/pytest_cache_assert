@@ -40,9 +40,8 @@ class _ConfigContainer(BaseModel):
         try:
             return self.data[self._private_key_lookup[key.value]]
         except KeyError:
-            raise MissingConfigItemError(
-                f"No '{key}' has been registered. Only: {[*self._private_key_lookup]}",
-            ) from None
+            msg = f"No '{key}' has been registered. Only: {[*self._private_key_lookup]}"
+            raise MissingConfigItemError(msg) from None
 
 
 _cache_assert_container = _ConfigContainer()

@@ -23,7 +23,7 @@ class TestMetadata(BaseModel):
     test_name: str
     func_args: Union[Dict, Iterable]  # type: ignore[type-arg]
 
-    class Config:
+    class Config:  # noqa: D106
         arbitrary_types_allowed = True
         frozen = True
 
@@ -79,7 +79,8 @@ def assert_against_cache(
         if test_dir.is_dir():
             break
     else:
-        raise RuntimeError(f'Could not locate a "tests/" directory in {test_dir}')
+        msg = f'Could not locate a "tests/" directory in {test_dir}'
+        raise RuntimeError(msg)
 
     # Read user settings
     path_cache_dir = test_dir / assert_config.cache_dir_rel_path

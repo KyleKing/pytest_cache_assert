@@ -1,8 +1,10 @@
 import pytest
+from beartype import beartype
 from flask import Flask
 
 
-def _create_app():
+@beartype
+def _create_app() -> Flask:
     """Minimal example from pytest-flask README.
 
     https://github.com/pytest-dev/pytest-flask/tree/a8d8ffaa90fe826e9642e13dba7d739e005f31a3#how-to-start
@@ -11,14 +13,16 @@ def _create_app():
     app = Flask(__name__)
 
     @app.route('/hello')
-    def hello():
+    def hello() -> str:
+        """Hello endpoint."""
         return 'Hello, World!'
 
-    return app
+    return app  # noqa: RET504
 
 
-@pytest.fixture
-def app():
+@pytest.fixture()
+@beartype
+def app() -> Flask:
     return _create_app()
 
 

@@ -21,9 +21,9 @@ This project was heavily inspired by the excellent [pytest-recording](https://gi
 - [pytest-recording](https://github.com/kiwicom/pytest-recording): this is the package I use and highly recommend for recording and replaying **external** API communication so that API requests only need to be made once for unit testing (i.e. recording API responses from Github's API called from a test suite)
 - [pytest-snapshot](https://pypi.org/project/pytest-snapshot/): I only found this package after already releasing a 1.0.0 version of `pytest_assert_cache`. This package can be more configurable with a user-specified serializer and might be a good alternative. See their documentation for more info
 - [snapshottest](https://github.com/syrusakbary/snapshottest): This was another find after releasing a 1.0.0 version and would probably be **a good alterantive for most users**
-  - `pytest-snapshot` is much more configurable, has many more users, and is a better name
-    - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
-    - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
+    - `pytest-snapshot` is much more configurable, has many more users, and is a better name
+        - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
+        - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
 - [dirty-equals](https://github.com/samuelcolvin/dirty-equals): broadly check values (i.e. `assert result == {'counter': IsPositiveInt, ...}`, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review
 
 ### Basic Example
@@ -123,7 +123,7 @@ from pytest_cache_assert import AssertRule, Wild, check_suppress, check_type
 
 def test_assert_against_cache_key_rules(assert_against_cache):
     """Demonstrate use of `assert_rules`."""
-    now = datetime.now()
+    now = datetime.now()  # noqa: DTZ005
     cached_data = {
         'date': str(now),
         'nested': {'uuid': str(uuid4())},
@@ -171,11 +171,11 @@ For 2.0.0, `pytest_cache_assert` was refactored to be more easily customizable w
 With these configuration options, users or 3rd party packages can replace the default package behavior, such as changing the file format for data serialization (`yaml`, `jsonlines`, etc.) and/or specifying a different serialization logic. All configuration options are available by creating a `cache_assert_config` fixture with the provided implementations.
 
 - See `AssertConfig` in `plugin.py` for configuration options and more information
-  - `always_write`: Always write to the cached file so that diffs can be examined in the user's VCS.
-  - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
-  - `cache_store`: Configurable class for managing the cache representation. Default is local JSON.
-  - `converters`: register functions that handle conversion of unhandled types, such as pandas DataFrames
-  - `validator`: Custom validator for identifying and summarizing the deviations from the cache.
+    - `always_write`: Always write to the cached file so that diffs can be examined in the user's VCS.
+    - `cache_dir_rel_path`: String relative directory from `tests/`. Default resolves to `tests/assert-cache/`.
+    - `cache_store`: Configurable class for managing the cache representation. Default is local JSON.
+    - `converters`: register functions that handle conversion of unhandled types, such as pandas DataFrames
+    - `validator`: Custom validator for identifying and summarizing the deviations from the cache.
 
 ```py
 import pytest

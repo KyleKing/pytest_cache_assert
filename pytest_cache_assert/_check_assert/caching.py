@@ -97,4 +97,4 @@ def load_cached_data(path_cache_file: Path) -> Any:
     """
     if path_cache_file.is_file():
         return _read_full_cache(path_cache_file)[KEY_NAME_DATA]
-    raise NoCacheError(f'No cache for: {path_cache_file}')
+    raise NoCacheError(path_cache_file)

@@ -216,7 +216,7 @@ def test_raw_diff(old_dict, new_dict, expected, help_text):
         raise AssertionError(f'Failed {help_text}') from exc
 
 
-_NOW = datetime.utcnow()
+_NOW = datetime.utcnow()  # noqa: DTZ003
 
 
 @pytest.mark.parametrize(

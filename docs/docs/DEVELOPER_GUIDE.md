@@ -44,5 +44,24 @@ poetry config pypi-token.pypi ...
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                                                 |   Statements |   Missing |   Excluded | Coverage   |
+|------------------------------------------------------|--------------|-----------|------------|------------|
+| `pytest_cache_assert/__init__.py`                    |            9 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/__init__.py`      |            0 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/assert_config.py` |           24 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/assert_rules.py`  |           87 |         8 |          0 | 90.8%      |
+| `pytest_cache_assert/_check_assert/cache_store.py`   |           45 |         4 |          0 | 91.1%      |
+| `pytest_cache_assert/_check_assert/caching.py`       |           36 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/config.py`        |           28 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/constants.py`     |           17 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/converter.py`     |            6 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/differ.py`        |           41 |         2 |          0 | 95.1%      |
+| `pytest_cache_assert/_check_assert/error_message.py` |           24 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/_check_assert/serializer.py`    |          123 |         8 |          0 | 93.5%      |
+| `pytest_cache_assert/_check_assert/validator.py`     |           20 |         1 |          0 | 95.0%      |
+| `pytest_cache_assert/main.py`                        |           27 |         0 |          0 | 100.0%     |
+| `pytest_cache_assert/plugin.py`                      |           46 |         3 |          0 | 93.5%      |
+| **Totals**                                           |          533 |        26 |          0 | 95.1%      |
 
+Generated on: 2023-02-25
 <!-- {cte} -->

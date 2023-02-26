@@ -11,9 +11,10 @@ from pytest_cache_assert._check_assert.constants import CACHE_README_TEXT, DEF_C
 
 def test_init_cache(fix_cache_path):
     """Test that the cache can be created."""
-    init_cache(fix_cache_path)  # act
+    init_cache(fix_cache_path / 'new_directory')  # act
 
-    assert (fix_cache_path / 'README.md').read_text() == CACHE_README_TEXT
+    assert not (fix_cache_path / 'README.md').is_file()  # Only conditionally creates the README
+    assert (fix_cache_path / 'new_directory' / 'README.md').read_text() == CACHE_README_TEXT
 
 
 @pytest.mark.parametrize(

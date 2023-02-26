@@ -1,4 +1,8 @@
-## Unreleased
+## 3.0.8rc0 (2023-02-24)
+
+### Refactor
+
+- pass linting
 
 ## 3.0.7 (2023-01-09)
 

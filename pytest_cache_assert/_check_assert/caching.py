@@ -18,8 +18,11 @@ def init_cache(path_cache_dir: Path) -> None:
         path_cache_dir: location of the cache directory
 
     """
+    existed = path_cache_dir.is_dir()
     path_cache_dir.mkdir(exist_ok=True, parents=True)
-    (path_cache_dir / 'README.md').write_text(CACHE_README_TEXT)
+    pth_readme = (path_cache_dir / 'README.md')
+    if not (existed or pth_readme.is_file()):
+        pth_readme.write_text(CACHE_README_TEXT)
 
 
 @beartype

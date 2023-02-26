@@ -21,7 +21,7 @@
         <link rel="next" href="../plugin/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.14">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
     
     
       
@@ -709,6 +709,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pytest_cache_assert.main.read_from_cache" class="md-nav__link">
+    read_from_cache()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -799,6 +806,13 @@
           <li class="md-nav__item">
   <a href="#pytest_cache_assert.main.assert_against_dict" class="md-nav__link">
     assert_against_dict()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pytest_cache_assert.main.read_from_cache" class="md-nav__link">
+    read_from_cache()
   </a>
   
 </li>
@@ -962,45 +976,45 @@
 
       <details class="quote">
         <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="38 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="39 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos="40 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos" data-linenos="41 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="42 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="46 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="47 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="48 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
-<span class="linenos" data-linenos="49 "></span>
-<span class="linenos" data-linenos="50 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="51 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
-<span class="linenos" data-linenos="52 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
-<span class="linenos" data-linenos="53 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
-<span class="linenos" data-linenos="54 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
-<span class="linenos" data-linenos="55 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
-<span class="linenos" data-linenos="56 "></span><span class="sd">        always_write: if True, always write the changes</span>
-<span class="linenos" data-linenos="57 "></span>
-<span class="linenos" data-linenos="58 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="59 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
-<span class="linenos" data-linenos="60 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
-<span class="linenos" data-linenos="61 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
-<span class="linenos" data-linenos="62 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
-<span class="linenos" data-linenos="63 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="linenos" data-linenos="64 "></span>    <span class="c1"># Function argument overrides global</span>
-<span class="linenos" data-linenos="65 "></span>    <span class="n">aw</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">always_write</span> <span class="k">if</span> <span class="n">always_write</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">always_write</span>
-<span class="linenos" data-linenos="66 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="67 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">read_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="68 "></span>    <span class="k">except</span> <span class="n">NoCacheError</span><span class="p">:</span>
-<span class="linenos" data-linenos="69 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">test_data</span>
-<span class="linenos" data-linenos="70 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">always_write</span><span class="o">=</span><span class="n">aw</span><span class="p">)</span>
-<span class="linenos" data-linenos="71 "></span>
-<span class="linenos" data-linenos="72 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
-<span class="linenos" data-linenos="73 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span>
-<span class="linenos" data-linenos="74 "></span>        <span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[],</span>
-<span class="linenos" data-linenos="75 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
-<span class="linenos" data-linenos="76 "></span>    <span class="p">)</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="56 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="57 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="58 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos="59 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="60 "></span>    <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos="61 "></span>    <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="62 "></span>    <span class="n">assert_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="63 "></span>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="linenos" data-linenos="64 "></span>    <span class="n">always_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="65 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="66 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Core logic for pytest_cache_assert to handle caching and assertion-checking.</span>
+<span class="linenos" data-linenos="67 "></span>
+<span class="linenos" data-linenos="68 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="69 "></span><span class="sd">        test_data: dictionary or list to test (could be from cache)</span>
+<span class="linenos" data-linenos="70 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
+<span class="linenos" data-linenos="71 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
+<span class="linenos" data-linenos="72 "></span><span class="sd">        assert_rules: dictionary of AssertRules to apply when selectively ignoring differences</span>
+<span class="linenos" data-linenos="73 "></span><span class="sd">        metadata: metadata dictionary to store in the cache file</span>
+<span class="linenos" data-linenos="74 "></span><span class="sd">        always_write: if True, always write the changes</span>
+<span class="linenos" data-linenos="75 "></span>
+<span class="linenos" data-linenos="76 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="77 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="linenos" data-linenos="78 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
+<span class="linenos" data-linenos="79 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
+<span class="linenos" data-linenos="80 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">converters</span><span class="p">)</span>
+<span class="linenos" data-linenos="81 "></span>    <span class="n">test_data</span> <span class="o">=</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="linenos" data-linenos="82 "></span>    <span class="c1"># Function argument overrides global</span>
+<span class="linenos" data-linenos="83 "></span>    <span class="n">aw</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">always_write</span> <span class="k">if</span> <span class="n">always_write</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">always_write</span>
+<span class="linenos" data-linenos="84 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="85 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">read_from_cache</span><span class="p">(</span><span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">)</span>
+<span class="linenos" data-linenos="86 "></span>    <span class="k">except</span> <span class="n">NoCacheError</span><span class="p">:</span>
+<span class="linenos" data-linenos="87 "></span>        <span class="n">cached_data</span> <span class="o">=</span> <span class="n">test_data</span>
+<span class="linenos" data-linenos="88 "></span>    <span class="n">cache_store</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">always_write</span><span class="o">=</span><span class="n">aw</span><span class="p">)</span>
+<span class="linenos" data-linenos="89 "></span>
+<span class="linenos" data-linenos="90 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
+<span class="linenos" data-linenos="91 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span>
+<span class="linenos" data-linenos="92 "></span>        <span class="n">cached_data</span><span class="o">=</span><span class="n">cached_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[],</span>
+<span class="linenos" data-linenos="93 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
+<span class="linenos" data-linenos="94 "></span>    <span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1103,6 +1117,106 @@
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="pytest_cache_assert.main.read_from_cache" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">read_from_cache</span>
+
+
+<a href="#pytest_cache_assert.main.read_from_cache" class="headerlink" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">read_from_cache</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Read from cache without writing.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th><b>PARAMETER</b></th>
+        <th><b>DESCRIPTION</b></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>path_cache_dir</code></td>
+          <td class="doc-param-details">
+            <p>location of the cache directory</p>
+            <p>
+                <span class="doc-param-annotation">
+                  <b>TYPE:</b>
+                    <code><span title="pathlib.Path">Path</span></code>
+                </span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td><code>cache_name</code></td>
+          <td class="doc-param-details">
+            <p>relative string path from the test_dir to the JSON cache file</p>
+            <p>
+                <span class="doc-param-annotation">
+                  <b>TYPE:</b>
+                    <code>str</code>
+                </span>
+            </p>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th><b>RETURNS</b></th>
+        <th><b>DESCRIPTION</b></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+              <code>Dict</code>
+          </td>
+          <td class="doc-returns-details">
+            <p>cached data</p>
+              <p>
+                <span class="doc-returns-annotation">
+                  <b>TYPE:</b>
+                    <code><span title="beartype.typing.Any">Any</span></code>
+                </span>
+              </p>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="38 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="39 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="40 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read from cache without writing.</span>
+<span class="linenos" data-linenos="41 "></span>
+<span class="linenos" data-linenos="42 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="43 "></span><span class="sd">        path_cache_dir: location of the cache directory</span>
+<span class="linenos" data-linenos="44 "></span><span class="sd">        cache_name: relative string path from the test_dir to the JSON cache file</span>
+<span class="linenos" data-linenos="45 "></span>
+<span class="linenos" data-linenos="46 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="47 "></span><span class="sd">        Dict: cached data</span>
+<span class="linenos" data-linenos="48 "></span>
+<span class="linenos" data-linenos="49 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="n">config</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">CacheAssertContainerKeys</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="linenos" data-linenos="51 "></span>    <span class="n">cache_store</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span>
+<span class="linenos" data-linenos="52 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
+<span class="linenos" data-linenos="53 "></span>    <span class="k">return</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">read_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
+</code></pre></div>
+      </details>
+  </div>
+
+</div>
+
 
 
   </div>
@@ -1116,11 +1230,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 26, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 26, 2023</span>
       
     
   </small>

@@ -173,18 +173,18 @@ files = [
 
 [[package]]
 name = "boto3"
-version = "1.26.78"
+version = "1.26.79"
 description = "The AWS SDK for Python"
 category = "dev"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "boto3-1.26.78-py3-none-any.whl", hash = "sha256:0c593017fa49dbc34dcdbd5659208f2daf293a499d5f4d7e61978cd6b5d72a97"},
-    {file = "boto3-1.26.78.tar.gz", hash = "sha256:488bf63d65864ab7fcdf9337c5aa4d825d444e253738a60f80789916bacc47dc"},
+    {file = "boto3-1.26.79-py3-none-any.whl", hash = "sha256:049de631cc03726a14b8eb24ac9ec2a48b0624197796f36166da809fdc9b9a7f"},
+    {file = "boto3-1.26.79.tar.gz", hash = "sha256:73d7bd1f16118ef0dfe936e0420cd76b02d1aedb75330ebda51168458ab752ac"},
 ]
 
 [package.dependencies]
-botocore = ">=1.29.78,<1.30.0"
+botocore = ">=1.29.79,<1.30.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -193,14 +193,14 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.29.78"
+version = "1.29.79"
 description = "Low-level, data-driven core of boto 3."
 category = "dev"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "botocore-1.29.78-py3-none-any.whl", hash = "sha256:656ac8822a1b6c887a8efe1172bcefa9c9c450face26dc39998a249e8c340a23"},
-    {file = "botocore-1.29.78.tar.gz", hash = "sha256:2bee6ed037590ef1e4884d944486232871513915f12a8590c63e3bb6046479bf"},
+    {file = "botocore-1.29.79-py3-none-any.whl", hash = "sha256:5f254f019e8641f8b2ba6dddc1f7541e8c6d25d976802392710b2fc4bac925b1"},
+    {file = "botocore-1.29.79.tar.gz", hash = "sha256:c7ded44062bed3b928944cfb09e1578ed3fed0e4c98de4f233f3c2056a8d491e"},
 ]
 
 [package.dependencies]
@@ -225,14 +225,14 @@ files = [
 
 [[package]]
 name = "calcipy"
-version = "1.0.0rc7"
+version = "1.0.0"
 description = "Python package to simplify development. Includes functionality for task running, testing, linting, documenting, and more"
 category = "dev"
 optional = false
 python-versions = ">=3.8.12,<4.0.0"
 files = [
-    {file = "calcipy-1.0.0rc7-py3-none-any.whl", hash = "sha256:32a4781ea322e353770108193ac88eca5297e3c2d3688263bcd700aa45f2a3dc"},
-    {file = "calcipy-1.0.0rc7.tar.gz", hash = "sha256:d0e23755b3875e9dbbb53be9fbc65e2d7d7c0180e0ca71a42cd059cfb55f5700"},
+    {file = "calcipy-1.0.0-py3-none-any.whl", hash = "sha256:743cf75993089338cf8f69ec475cd0b3c38e876c8eab120823f4a3ce0e37eb50"},
+    {file = "calcipy-1.0.0.tar.gz", hash = "sha256:b45b13daa6adffdacfea4260dd3bc72a92facc32f54d3892f74a605588924e92"},
 ]
 
 [package.dependencies]
@@ -242,7 +242,7 @@ bandit = {version = ">=1.7.4", optional = true, markers = "extra == \"lint\""}
 beartype = ">=0.12.0"
 bidict = {version = ">=0.22.1", optional = true, markers = "extra == \"stale\""}
 commitizen = {version = ">=2.42.0", optional = true, markers = "extra == \"doc\""}
-corallium = ">=0.1.0rc0"
+corallium = ">=0.1.0"
 invoke = ">=2.0.0"
 mdx_truly_sane_lists = {version = ">=1.2", optional = true, markers = "extra == \"doc\""}
 mkdocs = {version = ">=1.4.1", optional = true, markers = "extra == \"doc\""}
@@ -455,14 +455,14 @@ development = ["black", "flake8", "mypy", "pytest", "types-colorama"]
 
 [[package]]
 name = "commitizen"
-version = "2.42.0"
+version = "2.42.1"
 description = "Python commitizen client tool"
 category = "dev"
 optional = false
 python-versions = ">=3.6.2,<4.0.0"
 files = [
-    {file = "commitizen-2.42.0-py3-none-any.whl", hash = "sha256:3be082c1eecbf1a1fb4c390fbbd3fd26be39e0f105f30c9079fc0e789386d08d"},
-    {file = "commitizen-2.42.0.tar.gz", hash = "sha256:c4c944408f3d55ca22b1c136e22217c167123c54f46730eb27a1c6503d705c69"},
+    {file = "commitizen-2.42.1-py3-none-any.whl", hash = "sha256:fad7d37cfae361a859b713d4ac591859d5ca03137dd52de4e1bd208f7f45d5dc"},
+    {file = "commitizen-2.42.1.tar.gz", hash = "sha256:eac18c7c65587061aac6829534907aeb208405b8230bfd35ec08503c228a7f17"},
 ]
 
 [package.dependencies]
@@ -480,14 +480,14 @@ typing-extensions = ">=4.0.1,<5.0.0"
 
 [[package]]
 name = "corallium"
-version = "0.1.0rc2"
+version = "0.1.0"
 description = "Shared functionality for calcipy-ecosystem"
 category = "main"
 optional = false
 python-versions = ">=3.8.12,<4.0.0"
 files = [
-    {file = "corallium-0.1.0rc2-py3-none-any.whl", hash = "sha256:7dcc6b528e1656cb5721ddcc314543cccda9649f507c0ad9774c33da45c32fa7"},
-    {file = "corallium-0.1.0rc2.tar.gz", hash = "sha256:e57653a416581ca564ab38ba259a80380a53bd534a61fa4e83b7459a50737c63"},
+    {file = "corallium-0.1.0-py3-none-any.whl", hash = "sha256:12d5bcf177f28a6c321a43aa8f5b32ef68057938ab36d6356100c637b4f9cc9e"},
+    {file = "corallium-0.1.0.tar.gz", hash = "sha256:de19791a0f92c3644ed802fb05fae0d8c86d0a2f32bd50f17f739620c17e357b"},
 ]
 
 [package.dependencies]
@@ -1360,14 +1360,14 @@ mkdocs = ">=1.0.3"
 
 [[package]]
 name = "mkdocs-material"
-version = "9.0.14"
+version = "9.0.15"
 description = "Documentation that simply works"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocs_material-9.0.14-py3-none-any.whl", hash = "sha256:e6b1abc3527ece8522abd8fd76bf30c535f3420b20e11095fc7a8818b31385e5"},
-    {file = "mkdocs_material-9.0.14.tar.gz", hash = "sha256:eff6c2c2ebe89bb99b8bf2167f546bdd35c8d5130694d1823361d6cf9c701c22"},
+    {file = "mkdocs_material-9.0.15-py3-none-any.whl", hash = "sha256:734bcf6af9759888385ee15952c2e8a475d8568ded20965da321f0d8117dfe8f"},
+    {file = "mkdocs_material-9.0.15.tar.gz", hash = "sha256:d856bc67bc0115b1f258ca012724e17b72a9aea9b8b4d287c38460704f14eeb4"},
 ]
 
 [package.dependencies]
@@ -2020,14 +2020,14 @@ diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pyrate-limiter"
-version = "2.9.0"
+version = "2.9.1"
 description = "Python Rate-Limiter using Leaky-Bucket Algorithm"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "pyrate_limiter-2.9.0-py3-none-any.whl", hash = "sha256:90bc85de0739cbda32bc80b9df19a8307150c0b503d4d22fc31e2135d7d9524d"},
-    {file = "pyrate_limiter-2.9.0.tar.gz", hash = "sha256:a5ca4f53723cd1c565ae25654b1ee22ca221d904270cb13361e1d7c5ce34f4b4"},
+    {file = "pyrate_limiter-2.9.1-py3-none-any.whl", hash = "sha256:31d350fe668c8e739825fabf2c7c9cc198745123e9e1ebd0115a0ce1423c8105"},
+    {file = "pyrate_limiter-2.9.1.tar.gz", hash = "sha256:73b9d0cf465dda8110c07aeedb66034c288c75df82555f65d9e09210571a85c1"},
 ]
 
 [package.extras]
@@ -3091,21 +3091,21 @@ files = [
 
 [[package]]
 name = "zipp"
-version = "3.14.0"
+version = "3.15.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "zipp-3.14.0-py3-none-any.whl", hash = "sha256:188834565033387710d046e3fe96acfc9b5e86cbca7f39ff69cf21a4128198b7"},
-    {file = "zipp-3.14.0.tar.gz", hash = "sha256:9e5421e176ef5ab4c0ad896624e87a7b2f07aca746c9b2aa305952800cb8eecb"},
+    {file = "zipp-3.15.0-py3-none-any.whl", hash = "sha256:48904fc76a60e542af151aded95726c1a5c34ed43ab4134b597665c86d7ad556"},
+    {file = "zipp-3.15.0.tar.gz", hash = "sha256:112929ad649da941c23de50f356a2b5570c954b65150642bccdd66bf194d224b"},
 ]
 
 [package.extras]
 docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
-testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
+testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.12"
-content-hash = "f9fd35a04ea3ef23a2b19912137335529fbac991b4829c6accd98659a7f24461"
+content-hash = "15cd2b3b92868d900a31aea9615e5ce184798a2e815d0970e7b22506bf707b6e"

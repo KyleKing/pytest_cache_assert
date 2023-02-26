@@ -80,20 +80,20 @@
         "version": "21.0.0"
     },
     "boto3": {
-        "datetime": "2023-02-23T20:31:00.999639+00:00",
+        "datetime": "2023-02-24T21:14:59.436663+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
         "latest_datetime": "2023-02-24T21:14:59.436663+00:00",
         "latest_version": "1.26.79",
         "name": "boto3",
-        "version": "1.26.78"
+        "version": "1.26.79"
     },
     "botocore": {
-        "datetime": "2023-02-23T20:30:42.041789+00:00",
+        "datetime": "2023-02-24T21:14:43.014497+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
         "latest_datetime": "2023-02-24T21:14:43.014497+00:00",
         "latest_version": "1.29.79",
         "name": "botocore",
-        "version": "1.29.78"
+        "version": "1.29.79"
     },
     "bracex": {
         "datetime": "2022-05-30T14:58:01.709129+00:00",
@@ -104,12 +104,12 @@
         "version": "2.3.post1"
     },
     "calcipy": {
-        "datetime": "2023-02-23T13:25:17.710574+00:00",
+        "datetime": "2023-02-26T00:25:49.147476+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-23T13:25:17.710574+00:00",
-        "latest_version": "1.0.0rc7",
+        "latest_datetime": "2023-02-26T00:25:49.147476+00:00",
+        "latest_version": "1.0.0",
         "name": "calcipy",
-        "version": "1.0.0rc7"
+        "version": "1.0.0"
     },
     "certifi": {
         "datetime": "2022-12-07T20:13:19.428014+00:00",
@@ -168,20 +168,20 @@
         "version": "6.7.0"
     },
     "commitizen": {
-        "datetime": "2023-02-11T03:52:16.661158+00:00",
+        "datetime": "2023-02-25T08:43:38.863265+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
         "latest_datetime": "2023-02-25T08:43:38.863265+00:00",
         "latest_version": "2.42.1",
         "name": "commitizen",
-        "version": "2.42.0"
+        "version": "2.42.1"
     },
     "corallium": {
-        "datetime": "2023-02-23T13:44:54.253460+00:00",
+        "datetime": "2023-02-25T16:34:08.441117+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
         "latest_datetime": "2023-02-25T16:34:08.441117+00:00",
         "latest_version": "0.1.0",
         "name": "corallium",
-        "version": "0.1.0rc2"
+        "version": "0.1.0"
     },
     "coverage": {
         "datetime": "2023-02-23T00:58:22.324289+00:00",
@@ -528,12 +528,12 @@
         "version": "0.6.0"
     },
     "mkdocs-material": {
-        "datetime": "2023-02-23T13:25:06.398628+00:00",
+        "datetime": "2023-02-26T10:59:51.118186+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-23T13:25:06.398628+00:00",
-        "latest_version": "9.0.14",
+        "latest_datetime": "2023-02-26T10:59:51.118186+00:00",
+        "latest_version": "9.0.15",
         "name": "mkdocs-material",
-        "version": "9.0.14"
+        "version": "9.0.15"
     },
     "mkdocs-material-extensions": {
         "datetime": "2022-11-22T05:31:01.586723+00:00",
@@ -776,12 +776,12 @@
         "version": "3.0.9"
     },
     "pyrate-limiter": {
-        "datetime": "2023-02-06T22:43:19.892907+00:00",
+        "datetime": "2023-02-26T06:36:57.187344+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-06T22:43:19.892907+00:00",
-        "latest_version": "2.9.0",
+        "latest_datetime": "2023-02-26T06:36:57.187344+00:00",
+        "latest_version": "2.9.1",
         "name": "pyrate-limiter",
-        "version": "2.9.0"
+        "version": "2.9.1"
     },
     "pyrsistent": {
         "datetime": "2022-12-29T07:59:40.520633+00:00",
@@ -1144,11 +1144,11 @@
         "version": "0.13.0"
     },
     "zipp": {
-        "datetime": "2023-02-18T00:47:56.202058+00:00",
+        "datetime": "2023-02-25T02:17:20.807094+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
         "latest_datetime": "2023-02-25T02:17:20.807094+00:00",
         "latest_version": "3.15.0",
         "name": "zipp",
-        "version": "3.14.0"
+        "version": "3.15.0"
     }
 }

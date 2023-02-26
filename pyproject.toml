@@ -7,29 +7,44 @@ version = "3.0.8rc0"
 version_files = ["pyproject.toml:^version", "pytest_cache_assert/__init__.py:^__version"]
 
 [tool.poetry]
-name = "pytest_cache_assert"
-version = "3.0.8rc0"
-description = "Cache assertion data to simplify regression testing of complex serializable data"
-license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
-maintainers = []
-repository = "https://github.com/kyleking/pytest_cache_assert"
-documentation = "https://github.com/kyleking/pytest_cache_assert/docs"
-readme = "docs/README.md"
-include = ["LICENSE.md"]
-keywords = []
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Pytest",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
   "Topic :: Software Development :: Testing",
 ] # https://pypi.org/classifiers/
+description = "Cache assertion data to simplify regression testing of complex serializable data"
+documentation = "https://github.com/kyleking/pytest_cache_assert/docs"
+include = ["LICENSE.md"]
+keywords = []
+license = "MIT"
+maintainers = []
+name = "pytest_cache_assert"
+readme = "docs/README.md"
+repository = "https://github.com/kyleking/pytest_cache_assert"
+version = "3.0.8rc0"
+
+[tool.poetry.dependencies]
+python = "^3.8.12"
+arrow = ">=1.2.3"
+corallium = ">=0.1.0"
+deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
+pytest = ">=5.0.0"
+
+[tool.poetry.group.dev.dependencies]
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0"}
+hypothesis = ">=6.55.0"
+moto = ">=3.0.0"
+pendulum = ">=2.1.2"
+pytest-benchmark = ">=3.4.1"
+pytest-flask = ">=1.2.0"
 
 [tool.poetry.plugins."pytest11"]
 # Register as a Pytest Plugin
@@ -39,21 +54,6 @@ pytest_cache_assert = "pytest_cache_assert.plugin"
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/pytest_cache_assert/issues"
 "Changelog" = "https://github.com/kyleking/pytest_cache_assert/blob/main/docs/docs/CHANGELOG.md"
-
-[tool.poetry.dependencies]
-python = "^3.8.12"
-arrow = ">=1.2.3"
-deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
-pytest = ">=5.0.0"
-corallium = ">=0.0.1rc2"
-
-[tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc6"}
-hypothesis = ">=6.55.0"
-moto = ">=3.0.0"
-pendulum = ">=2.1.2"
-pytest-benchmark = ">=3.4.1"
-pytest-flask = ">=1.2.0"
 
 [tool.pyright]
 include = ["pytest_cache_assert"]

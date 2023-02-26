@@ -36,6 +36,24 @@ def assert_against_dict(
 
 
 @beartype
+def read_from_cache(*, path_cache_dir: Path, cache_name: str) -> Any:
+    """Read from cache without writing.
+
+    Args:
+        path_cache_dir: location of the cache directory
+        cache_name: relative string path from the test_dir to the JSON cache file
+
+    Returns:
+        Dict: cached data
+
+    """
+    config = retrieve(CacheAssertContainerKeys.CONFIG)
+    cache_store = config.cache_store
+    path_cache_file = path_cache_dir / cache_name
+    return cache_store.read_cached_data(path_cache_file)
+
+
+@beartype
 def assert_against_cache(
     test_data: Any,
     *,
@@ -64,7 +82,7 @@ def assert_against_cache(
     # Function argument overrides global
     aw = config.always_write if always_write is None else always_write
     try:
-        cached_data = cache_store.read_cached_data(path_cache_file)
+        cached_data = read_from_cache(path_cache_dir=path_cache_dir, cache_name=cache_name)
     except NoCacheError:
         cached_data = test_data
     cache_store.write(path_cache_file, metadata=metadata, test_data=test_data, always_write=aw)

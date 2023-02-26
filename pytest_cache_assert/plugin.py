@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
-from beartype.typing import Any, Callable, Dict, Iterable, Optional, Union
+from beartype.typing import Any, Callable, Dict, Iterable, Optional, Tuple, Union
 from pydantic import BaseModel
 
 from . import AssertConfig, CacheAssertContainerKeys, main, register, retrieve
@@ -50,25 +50,12 @@ _RE_UNSAFE_CHAR = re.compile(r'[/\\]')
 """Used to remove characters from the cache file path that could cause issues."""
 
 
-@pytest.fixture()
 @beartype
-def assert_against_cache(
+def _inner_plugin(
     request: FixtureRequest,
     cache_assert_config: Optional[AssertConfig] = None,
-) -> Callable[[Any], None]:
-    """Return main.assert_against_cache with pytest-specific arguments already specified.
-
-    Args:
-        request: pytest fixture used to identify the test directory
-        cache_assert_config: pytest fixture that returns AssertConfig for user configuration
-
-    Returns:
-        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
-
-    Raises:
-        RuntimeError: if the test directory cannot be determined
-
-    """
+) -> Tuple[Path, Path, str]:
+    """Private shared code between the two plugins."""
     if cache_assert_config:
         register(CacheAssertContainerKeys.CONFIG, cache_assert_config)
     assert_config = retrieve(CacheAssertContainerKeys.CONFIG)
@@ -91,7 +78,56 @@ def assert_against_cache(
     # Escape slashes from the pytest node name
     test_name = _RE_UNSAFE_CHAR.sub('-', request.node.name)
     cache_name = (rel_test_file.parent / rel_test_file.stem / f'{test_name}.json').as_posix()  # noqa: ECE001
+
+    return path_cache_dir, rel_test_file, cache_name
+
+
+@pytest.fixture()
+@beartype
+def assert_against_cache(
+    request: FixtureRequest,
+    cache_assert_config: Optional[AssertConfig] = None,
+) -> Callable[[Any], None]:
+    """Return main.assert_against_cache with pytest-specific arguments already specified.
+
+    Args:
+        request: pytest fixture used to identify the test directory
+        cache_assert_config: pytest fixture that returns AssertConfig for user configuration
+
+    Returns:
+        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
+
+    Raises:
+        RuntimeError: if the test directory cannot be determined
+
+    """
+    path_cache_dir, rel_test_file, cache_name = _inner_plugin(request, cache_assert_config)
     metadata = TestMetadata.from_pytest(request=request, rel_test_file=rel_test_file).dict()
 
     # FYI: The partial function keyword arguments can be overridden when called
     return partial(main.assert_against_cache, path_cache_dir=path_cache_dir, cache_name=cache_name, metadata=metadata)
+
+
+@pytest.fixture()
+@beartype
+def read_from_cache(
+    request: FixtureRequest,
+    cache_assert_config: Optional[AssertConfig] = None,
+) -> Callable[[], Any]:
+    """Return main.assert_against_cache with pytest-specific arguments already specified.
+
+    Args:
+        request: pytest fixture used to identify the test directory
+        cache_assert_config: pytest fixture that returns AssertConfig for user configuration
+
+    Returns:
+        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified
+
+    Raises:
+        RuntimeError: if the test directory cannot be determined
+
+    """
+    path_cache_dir, _rel_test_file, cache_name = _inner_plugin(request, cache_assert_config)
+
+    # FYI: The partial function keyword arguments can be overridden when called
+    return partial(main.read_from_cache, path_cache_dir=path_cache_dir, cache_name=cache_name)

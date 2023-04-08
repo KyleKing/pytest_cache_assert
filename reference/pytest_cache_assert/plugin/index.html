@@ -984,10 +984,14 @@
 <span class="linenos" data-linenos="40 "></span><span class="sd">            TestMetadata: new TestMetadata</span>
 <span class="linenos" data-linenos="41 "></span>
 <span class="linenos" data-linenos="42 "></span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="43 "></span>        <span class="n">test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>
-<span class="linenos" data-linenos="44 "></span>        <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="linenos" data-linenos="45 "></span>        <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
-<span class="linenos" data-linenos="46 "></span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
+<span class="linenos" data-linenos="43 "></span>        <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="45 "></span>        <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="46 "></span>
+<span class="linenos" data-linenos="47 "></span>        <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
+<span class="linenos" data-linenos="48 "></span>        <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos="49 "></span>        <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
+<span class="linenos" data-linenos="50 "></span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -1098,10 +1102,14 @@
 <span class="linenos" data-linenos="40 "></span><span class="sd">        TestMetadata: new TestMetadata</span>
 <span class="linenos" data-linenos="41 "></span>
 <span class="linenos" data-linenos="42 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
-<span class="linenos" data-linenos="46 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore</span>
+<span class="linenos" data-linenos="46 "></span>
+<span class="linenos" data-linenos="47 "></span>    <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
+<span class="linenos" data-linenos="48 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos="49 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1216,30 +1224,30 @@
 
       <details class="quote">
         <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 85 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 86 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 87 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 88 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 89 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 90 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="linenos" data-linenos=" 91 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
-<span class="linenos" data-linenos=" 92 "></span>
-<span class="linenos" data-linenos=" 93 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 94 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos=" 95 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 89 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 90 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 91 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 92 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 93 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 94 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos" data-linenos=" 95 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
 <span class="linenos" data-linenos=" 96 "></span>
-<span class="linenos" data-linenos=" 97 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos=" 98 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
-<span class="linenos" data-linenos=" 99 "></span>
-<span class="linenos" data-linenos="100 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="101 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
-<span class="linenos" data-linenos="102 "></span>
-<span class="linenos" data-linenos="103 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="104 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
-<span class="linenos" data-linenos="105 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">TestMetadata</span><span class="o">.</span><span class="n">from_pytest</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 97 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 98 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos=" 99 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+<span class="linenos" data-linenos="100 "></span>
+<span class="linenos" data-linenos="101 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="102 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
+<span class="linenos" data-linenos="103 "></span>
+<span class="linenos" data-linenos="104 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="105 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
 <span class="linenos" data-linenos="106 "></span>
-<span class="linenos" data-linenos="107 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
-<span class="linenos" data-linenos="108 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+<span class="linenos" data-linenos="107 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="108 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
+<span class="linenos" data-linenos="109 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">TestMetadata</span><span class="o">.</span><span class="n">from_pytest</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="linenos" data-linenos="110 "></span>
+<span class="linenos" data-linenos="111 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
+<span class="linenos" data-linenos="112 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1345,29 +1353,29 @@
 
       <details class="quote">
         <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="111 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos="112 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="113 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos="114 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
-<span class="linenos" data-linenos="115 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="116 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos" data-linenos="117 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
-<span class="linenos" data-linenos="118 "></span>
-<span class="linenos" data-linenos="119 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="120 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos="121 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="115 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos="116 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="117 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="118 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+<span class="linenos" data-linenos="119 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="120 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos" data-linenos="121 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
 <span class="linenos" data-linenos="122 "></span>
-<span class="linenos" data-linenos="123 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="124 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
-<span class="linenos" data-linenos="125 "></span>
-<span class="linenos" data-linenos="126 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="127 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
-<span class="linenos" data-linenos="128 "></span>
-<span class="linenos" data-linenos="129 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="130 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">_rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
-<span class="linenos" data-linenos="131 "></span>
-<span class="linenos" data-linenos="132 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
-<span class="linenos" data-linenos="133 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">read_from_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">)</span>
+<span class="linenos" data-linenos="123 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="124 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos="125 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+<span class="linenos" data-linenos="126 "></span>
+<span class="linenos" data-linenos="127 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="128 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
+<span class="linenos" data-linenos="129 "></span>
+<span class="linenos" data-linenos="130 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="131 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
+<span class="linenos" data-linenos="132 "></span>
+<span class="linenos" data-linenos="133 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="134 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">_rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
+<span class="linenos" data-linenos="135 "></span>
+<span class="linenos" data-linenos="136 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
+<span class="linenos" data-linenos="137 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">read_from_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>

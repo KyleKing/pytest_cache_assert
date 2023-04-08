@@ -121,7 +121,7 @@
 <polygon fill="none" stroke="black" points="2557.5,-16.4 2557.5,-100.4 2939.5,-100.4 2939.5,-16.4 2557.5,-16.4"/>
 <text text-anchor="start" x="2709" y="-85.2" font-family="Times,serif" font-size="14.00">DiffResults</text>
 <polyline fill="none" stroke="black" points="2557.5,-77.4 2939.5,-77.4 "/>
-<text text-anchor="start" x="2684" y="-62.2" font-family="Times,serif" font-size="14.00">results : dict, Dict</text>
+<text text-anchor="start" x="2684" y="-62.2" font-family="Times,serif" font-size="14.00">results : Dict, dict</text>
 <polyline fill="none" stroke="black" points="2557.5,-54.4 2939.5,-54.4 "/>
 <text text-anchor="start" x="2565.5" y="-39.2" font-family="Times,serif" font-size="14.00">append(assert_rule: AssertRule, result: Dict): None</text>
 <text text-anchor="start" x="2565.5" y="-24.2" font-family="Times,serif" font-size="14.00">to_dict(): Dict</text>
@@ -251,7 +251,7 @@
 <text text-anchor="start" x="6705" y="-100.2" font-family="Times,serif" font-size="14.00">_Converters</text>
 <polyline fill="none" stroke="black" points="6528.5,-92.4 6968.5,-92.4 "/>
 <text text-anchor="start" x="6569.5" y="-77.2" font-family="Times,serif" font-size="14.00">converter_lookup : Dict[Any, List[T_CONVERTER]]</text>
-<text text-anchor="start" x="6569.5" y="-62.2" font-family="Times,serif" font-size="14.00">converter_lookup : dict, defaultdict</text>
+<text text-anchor="start" x="6569.5" y="-62.2" font-family="Times,serif" font-size="14.00">converter_lookup : defaultdict, dict</text>
 <text text-anchor="start" x="6569.5" y="-47.2" font-family="Times,serif" font-size="14.00">converters : List[Tuple[Any, T_CONVERTER]]</text>
 <polyline fill="none" stroke="black" points="6528.5,-39.4 6968.5,-39.4 "/>
 <text text-anchor="start" x="6536.5" y="-24.2" font-family="Times,serif" font-size="14.00">get_lookup(): Dict[Any, List[T_CONVERTER]]</text>

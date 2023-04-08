@@ -224,11 +224,11 @@ If you have any security issue to report, please contact the project maintainers
 
 [LICENSE]
 
-[changelog]: ./docs/CHANGELOG.md
-[code_tag_summary]: ./docs/CODE_TAG_SUMMARY.md
+[changelog]: https://pytest_cache_assert.kyleking.me/docs/CHANGELOG
+[code_tag_summary]: https://pytest_cache_assert.kyleking.me/docs/CODE_TAG_SUMMARY
 [contributor-covenant]: https://www.contributor-covenant.org
-[developer_guide]: ./docs/DEVELOPER_GUIDE.md
-[license]: https://github.com/kyleking/pytest_cache_assert/LICENSE
-[scripts]: https://github.com/kyleking/pytest_cache_assert/scripts
-[style_guide]: ./docs/STYLE_GUIDE.md
-[tests]: https://github.com/kyleking/pytest_cache_assert/tests
+[developer_guide]: https://pytest_cache_assert.kyleking.me/docs/DEVELOPER_GUIDE
+[license]: https://github.com/kyleking/pytest_cache_assert/blob/main/LICENSE
+[scripts]: https://github.com/kyleking/pytest_cache_assert/blob/main/scripts
+[style_guide]: https://pytest_cache_assert.kyleking.me/docs/STYLE_GUIDE
+[tests]: https://github.com/kyleking/pytest_cache_assert/blob/main/tests

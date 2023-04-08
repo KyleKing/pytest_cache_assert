@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 3.0.8 (2023-02-26)
+
 ### Feat
 
 - **#11**: add read_from_cache fixture

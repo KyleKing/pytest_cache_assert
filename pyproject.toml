@@ -21,8 +21,8 @@ classifiers = [
   "Topic :: Software Development :: Testing",
 ] # https://pypi.org/classifiers/
 description = "Cache assertion data to simplify regression testing of complex serializable data"
-documentation = "https://github.com/kyleking/pytest_cache_assert/docs"
-include = ["LICENSE.md"]
+documentation = "https://pytest_cache_assert.kyleking.me"
+include = ["LICENSE"]
 keywords = []
 license = "MIT"
 maintainers = []
@@ -34,12 +34,12 @@ version = "3.0.8"
 [tool.poetry.dependencies]
 python = "^3.8.12"
 arrow = ">=1.2.3"
-corallium = ">=0.1.0"
+corallium = ">=0.1.1"
 deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
 pytest = ">=5.0.0"
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0"}
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.2.1"}
 hypothesis = ">=6.55.0"
 moto = ">=3.0.0"
 pendulum = ">=2.1.2"

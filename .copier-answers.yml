@@ -2,7 +2,7 @@
 # Answer file maintained by Copier for: https://github.com/KyleKing/calcipy_template
 # DO NOT MODIFY THIS FILE. Edit by re-running copier and changing responses to the questions
 # Check into version control.
-_commit: 1.2.5
+_commit: 1.5.0
 _src_path: gh:KyleKing/calcipy_template
 author_email: dev.act.kyle@gmail.com
 author_name: Kyle King
@@ -13,7 +13,7 @@ development_branch: main
 doc_dir: docs
 extends_calcipy: false
 include_adrs: false
-install_extras: null
+install_extras: ''
 minimum_python: 3.8.12
 minimum_python_short: '3.8'
 package_name_py: pytest_cache_assert
@@ -22,5 +22,6 @@ project_description: Cache assertion data to simplify regression testing of comp
 project_name: pytest_cache_assert
 repository_namespace: kyleking
 repository_provider: https://github.com
+repository_source_url: https://github.com/kyleking/pytest_cache_assert/blob/main
 repository_url: https://github.com/kyleking/pytest_cache_assert
 

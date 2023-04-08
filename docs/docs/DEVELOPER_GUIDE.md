@@ -60,8 +60,8 @@ poetry config pypi-token.pypi ...
 | `pytest_cache_assert/_check_assert/serializer.py`    |          123 |         8 |          0 | 93.5%      |
 | `pytest_cache_assert/_check_assert/validator.py`     |           20 |         1 |          0 | 95.0%      |
 | `pytest_cache_assert/main.py`                        |           33 |         0 |          0 | 100.0%     |
-| `pytest_cache_assert/plugin.py`                      |           55 |         5 |          0 | 90.9%      |
-| **Totals**                                           |          551 |        28 |          0 | 94.9%      |
+| `pytest_cache_assert/plugin.py`                      |           58 |         5 |          0 | 91.4%      |
+| **Totals**                                           |          554 |        28 |          0 | 94.9%      |
 
 Generated on: 2023-04-08
 <!-- {cte} -->

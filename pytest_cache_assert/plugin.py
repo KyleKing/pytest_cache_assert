@@ -40,10 +40,14 @@ class TestMetadata(BaseModel):
             TestMetadata: new TestMetadata
 
         """
-        test_name = (f'{request.cls.__name__}/' if request.cls else '') + request.node.originalname
-        test_params = [*inspect.signature(request.node.function).parameters.keys()]
-        func_args = {key: value for key, value in request.node.funcargs.items() if key in test_params}
-        return cls(test_file=rel_test_file.as_posix(), test_name=test_name, func_args=func_args)
+        test_name = request.node.originalname  # pyright: ignore
+        function = request.node.function  # pyright: ignore
+        func_arg_name_value_pairs = request.node.funcargs.items()  # pyright: ignore
+
+        full_test_name = (f'{request.cls.__name__}/' if request.cls else '') + test_name
+        test_params = [*inspect.signature(function).parameters.keys()]
+        func_args = {key: value for key, value in func_arg_name_value_pairs if key in test_params}
+        return cls(test_file=rel_test_file.as_posix(), test_name=full_test_name, func_args=func_args)
 
 
 _RE_UNSAFE_CHAR = re.compile(r'[/\\]')

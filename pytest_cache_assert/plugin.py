@@ -40,9 +40,9 @@ class TestMetadata(BaseModel):
             TestMetadata: new TestMetadata
 
         """
-        test_name = request.node.originalname  # pyright: ignore
-        function = request.node.function  # pyright: ignore
-        func_arg_name_value_pairs = request.node.funcargs.items()  # pyright: ignore
+        test_name = request.node.originalname  # pyright: ignore[reportGeneralTypeIssues]
+        function = request.node.function  # pyright: ignore[reportGeneralTypeIssues]
+        func_arg_name_value_pairs = request.node.funcargs.items()  # pyright: ignore[reportGeneralTypeIssues]
 
         full_test_name = (f'{request.cls.__name__}/' if request.cls else '') + test_name
         test_params = [*inspect.signature(function).parameters.keys()]

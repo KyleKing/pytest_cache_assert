@@ -34,16 +34,17 @@ version = "3.0.8"
 [tool.poetry.dependencies]
 python = "^3.8.12"
 arrow = ">=1.2.3"
-corallium = ">=0.1.1"
+corallium = ">=0.2.2"
 deepdiff6 = ">=6.2.0" # FYI: Only temporarily named deepdiff6 (was deepdiff)
-pytest = ">=5.0.0"
+pytest = ">=6.0.0"
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.2.1"}
-hypothesis = ">=6.55.0"
+botocore = "1.29.135"
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.2.4"}
+hypothesis = ">=6.75.3"
 moto = ">=3.0.0"
 pendulum = ">=2.1.2"
-pytest-benchmark = ">=3.4.1"
+pytest-benchmark = ">=4.0.0"
 pytest-flask = ">=1.2.0"
 
 [tool.poetry.plugins."pytest11"]

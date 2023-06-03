@@ -63,5 +63,5 @@ poetry config pypi-token.pypi ...
 | `pytest_cache_assert/plugin.py`                      |           58 |         5 |          0 | 90.7%      |
 | **Totals**                                           |          554 |        28 |          0 | 95.0%      |
 
-Generated on: 2023-05-16
+Generated on: 2023-06-03
 <!-- {cte} -->

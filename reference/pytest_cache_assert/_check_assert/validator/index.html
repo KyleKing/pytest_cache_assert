@@ -21,7 +21,7 @@
         <link rel="next" href="../../main/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -926,7 +926,7 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.validator.DictDiffValidator" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">DictDiffValidator</span>
+          <span class="doc doc-object-name doc-class-name">DictDiffValidator</span>
 
 
 <a href="#pytest_cache_assert._check_assert.validator.DictDiffValidator" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -937,10 +937,9 @@
   
       <p>Default Validator.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="25 "></span><span class="k">class</span> <span class="nc">DictDiffValidator</span><span class="p">:</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="25 "></span><span class="k">class</span> <span class="nc">DictDiffValidator</span><span class="p">:</span>
 <span class="linenos" data-linenos="26 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Default Validator.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="27 "></span>
 <span class="linenos" data-linenos="28 "></span>    <span class="nd">@staticmethod</span>
@@ -970,7 +969,7 @@
 <span class="linenos" data-linenos="52 "></span>            <span class="p">}</span>
 <span class="linenos" data-linenos="53 "></span>            <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">RichAssertionError</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -984,12 +983,13 @@
 
 <h4 id="pytest_cache_assert._check_assert.validator.DictDiffValidator-functions">Functions<a href="#pytest_cache_assert._check_assert.validator.DictDiffValidator-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.validator.DictDiffValidator.assertion" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">assertion</span>
+          <span class="doc doc-object-name doc-function-name">assertion</span>
 
   
   <span class="doc doc-labels">
@@ -1004,18 +1004,22 @@
   
       <p>Validate test data against cached data.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>test_data</code></td>
           <td class="doc-param-details">
-            <p>data to compare</p>
+            <div class="doc-md-description">
+              <p>data to compare</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1027,7 +1031,9 @@
         <tr>
           <td><code>cached_data</code></td>
           <td class="doc-param-details">
-            <p>data to compare</p>
+            <div class="doc-md-description">
+              <p>data to compare</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1039,7 +1045,9 @@
         <tr>
           <td><code>assert_rules</code></td>
           <td class="doc-param-details">
-            <p>list of assert rules to apply</p>
+            <div class="doc-md-description">
+              <p>list of assert rules to apply</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1051,7 +1059,9 @@
         <tr>
           <td><code>path_cache_file</code></td>
           <td class="doc-param-details">
-            <p>optional Path to the cached data</p>
+            <div class="doc-md-description">
+              <p>optional Path to the cached data</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1066,6 +1076,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1082,15 +1094,17 @@
             </span>
           </td>
           <td class="doc-raises-details">
-            <p>if any assertion comparison fails</p>
+            <div class="doc-md-description">
+              <p>if any assertion comparison fails</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="28 "></span><span class="nd">@staticmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="28 "></span><span class="nd">@staticmethod</span>
 <span class="linenos" data-linenos="29 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="30 "></span><span class="k">def</span> <span class="nf">assertion</span><span class="p">(</span>
 <span class="linenos" data-linenos="31 "></span>    <span class="o">*</span><span class="p">,</span> <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cached_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">assert_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">],</span> <span class="n">path_cache_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1117,7 +1131,7 @@
 <span class="linenos" data-linenos="52 "></span>        <span class="p">}</span>
 <span class="linenos" data-linenos="53 "></span>        <span class="k">raise</span> <span class="n">RichAssertionError</span><span class="p">(</span><span class="n">RichAssertionError</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">error_info</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1135,23 +1149,22 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.validator.ValidatorType" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">ValidatorType</span>
+          <span class="doc doc-object-name doc-class-name">ValidatorType</span>
 
 
 <a href="#pytest_cache_assert._check_assert.validator.ValidatorType" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="beartype.typing.Protocol">Protocol</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="beartype.typing.Protocol">Protocol</span></code></p>
 
   
       <p>Validator Interface.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="14 "></span><span class="nd">@runtime_checkable</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/validator.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="14 "></span><span class="nd">@runtime_checkable</span>
 <span class="linenos" data-linenos="15 "></span><span class="k">class</span> <span class="nc">ValidatorType</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="linenos" data-linenos="16 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validator Interface.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="17 "></span>
@@ -1161,7 +1174,7 @@
 <span class="linenos" data-linenos="21 "></span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="22 "></span>        <span class="o">...</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1197,11 +1210,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1243,14 +1256,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../../_javascript/tables.js"></script>
+        
+          <script src="../../../../_javascript/tables.js"></script>
+        
       
     
   </body>

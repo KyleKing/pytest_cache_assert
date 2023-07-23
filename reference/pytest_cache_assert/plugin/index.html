@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -948,56 +948,52 @@
 
 
 <h3 id="pytest_cache_assert.plugin.TestMetadata" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">TestMetadata</span>
+          <span class="doc doc-object-name doc-class-name">TestMetadata</span>
 
 
 <a href="#pytest_cache_assert.plugin.TestMetadata" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
 
   
       <p>Test MetaData.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="19 "></span><span class="k">class</span> <span class="nc">TestMetadata</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="19 "></span><span class="k">class</span> <span class="nc">TestMetadata</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="linenos" data-linenos="20 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test MetaData.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="21 "></span>
 <span class="linenos" data-linenos="22 "></span>    <span class="n">test_file</span><span class="p">:</span> <span class="nb">str</span>
 <span class="linenos" data-linenos="23 "></span>    <span class="n">test_name</span><span class="p">:</span> <span class="nb">str</span>
 <span class="linenos" data-linenos="24 "></span>    <span class="n">func_args</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">]</span>  <span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="25 "></span>
-<span class="linenos" data-linenos="26 "></span>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>  <span class="c1"># noqa: D106</span>
-<span class="linenos" data-linenos="27 "></span>        <span class="n">arbitrary_types_allowed</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos" data-linenos="28 "></span>        <span class="n">frozen</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos" data-linenos="29 "></span>
-<span class="linenos" data-linenos="30 "></span>    <span class="nd">@classmethod</span>
-<span class="linenos" data-linenos="31 "></span>    <span class="nd">@beartype</span>
-<span class="linenos" data-linenos="32 "></span>    <span class="k">def</span> <span class="nf">from_pytest</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestMetadata</span><span class="p">:</span>
-<span class="linenos" data-linenos="33 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve TestMetadata.</span>
-<span class="linenos" data-linenos="34 "></span>
-<span class="linenos" data-linenos="35 "></span><span class="sd">        Args:</span>
-<span class="linenos" data-linenos="36 "></span><span class="sd">            request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos="37 "></span><span class="sd">            rel_test_file: relative path to the test file</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span>    <span class="nd">@classmethod</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="nd">@beartype</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="k">def</span> <span class="nf">from_pytest</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestMetadata</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve TestMetadata.</span>
+<span class="linenos" data-linenos="31 "></span>
+<span class="linenos" data-linenos="32 "></span><span class="sd">        Args:</span>
+<span class="linenos" data-linenos="33 "></span><span class="sd">            request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos="34 "></span><span class="sd">            rel_test_file: relative path to the test file</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span><span class="sd">        Returns:</span>
+<span class="linenos" data-linenos="37 "></span><span class="sd">            TestMetadata: new TestMetadata</span>
 <span class="linenos" data-linenos="38 "></span>
-<span class="linenos" data-linenos="39 "></span><span class="sd">        Returns:</span>
-<span class="linenos" data-linenos="40 "></span><span class="sd">            TestMetadata: new TestMetadata</span>
-<span class="linenos" data-linenos="41 "></span>
-<span class="linenos" data-linenos="42 "></span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="43 "></span>        <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="44 "></span>        <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="45 "></span>        <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="46 "></span>
-<span class="linenos" data-linenos="47 "></span>        <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
-<span class="linenos" data-linenos="48 "></span>        <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="linenos" data-linenos="49 "></span>        <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
-<span class="linenos" data-linenos="50 "></span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
+<span class="linenos" data-linenos="39 "></span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="40 "></span>        <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="42 "></span>        <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="43 "></span>
+<span class="linenos" data-linenos="44 "></span>        <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
+<span class="linenos" data-linenos="45 "></span>        <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos="46 "></span>        <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
+<span class="linenos" data-linenos="47 "></span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1011,12 +1007,13 @@
 
 <h4 id="pytest_cache_assert.plugin.TestMetadata-functions">Functions<a href="#pytest_cache_assert.plugin.TestMetadata-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert.plugin.TestMetadata.from_pytest" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">from_pytest</span>
+          <span class="doc doc-object-name doc-function-name">from_pytest</span>
 
   
   <span class="doc doc-labels">
@@ -1031,18 +1028,22 @@
   
       <p>Resolve TestMetadata.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>request</code></td>
           <td class="doc-param-details">
-            <p>pytest fixture used to identify the test directory</p>
+            <div class="doc-md-description">
+              <p>pytest fixture used to identify the test directory</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1054,7 +1055,9 @@
         <tr>
           <td><code>rel_test_file</code></td>
           <td class="doc-param-details">
-            <p>relative path to the test file</p>
+            <div class="doc-md-description">
+              <p>relative path to the test file</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1065,6 +1068,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1079,7 +1084,9 @@
               <code>TestMetadata</code>
           </td>
           <td class="doc-returns-details">
-            <p>new TestMetadata</p>
+            <div class="doc-md-description">
+              <p>new TestMetadata</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1091,31 +1098,31 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="30 "></span><span class="nd">@classmethod</span>
-<span class="linenos" data-linenos="31 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="32 "></span><span class="k">def</span> <span class="nf">from_pytest</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestMetadata</span><span class="p">:</span>
-<span class="linenos" data-linenos="33 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve TestMetadata.</span>
-<span class="linenos" data-linenos="34 "></span>
-<span class="linenos" data-linenos="35 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="36 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos="37 "></span><span class="sd">        rel_test_file: relative path to the test file</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="27 "></span><span class="nd">@classmethod</span>
+<span class="linenos" data-linenos="28 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="29 "></span><span class="k">def</span> <span class="nf">from_pytest</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestMetadata</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve TestMetadata.</span>
+<span class="linenos" data-linenos="31 "></span>
+<span class="linenos" data-linenos="32 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="33 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos="34 "></span><span class="sd">        rel_test_file: relative path to the test file</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="37 "></span><span class="sd">        TestMetadata: new TestMetadata</span>
 <span class="linenos" data-linenos="38 "></span>
-<span class="linenos" data-linenos="39 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="40 "></span><span class="sd">        TestMetadata: new TestMetadata</span>
-<span class="linenos" data-linenos="41 "></span>
-<span class="linenos" data-linenos="42 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
-<span class="linenos" data-linenos="46 "></span>
-<span class="linenos" data-linenos="47 "></span>    <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
-<span class="linenos" data-linenos="48 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="linenos" data-linenos="49 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
-<span class="linenos" data-linenos="50 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
+<span class="linenos" data-linenos="39 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="40 "></span>    <span class="n">test_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">originalname</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="41 "></span>    <span class="n">function</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">function</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="n">func_arg_name_value_pairs</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">funcargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+<span class="linenos" data-linenos="43 "></span>
+<span class="linenos" data-linenos="44 "></span>    <span class="n">full_test_name</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">cls</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">test_name</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="n">test_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos="46 "></span>    <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">func_arg_name_value_pairs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_params</span><span class="p">}</span>
+<span class="linenos" data-linenos="47 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">test_name</span><span class="o">=</span><span class="n">full_test_name</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1129,12 +1136,13 @@
 </div>
 <h2 id="pytest_cache_assert.plugin-functions">Functions<a href="#pytest_cache_assert.plugin-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert.plugin.assert_against_cache" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">assert_against_cache</span>
+          <span class="doc doc-object-name doc-function-name">assert_against_cache</span>
 
 
 <a href="#pytest_cache_assert.plugin.assert_against_cache" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1145,18 +1153,22 @@
   
       <p>Return main.assert_against_cache with pytest-specific arguments already specified.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>request</code></td>
           <td class="doc-param-details">
-            <p>pytest fixture used to identify the test directory</p>
+            <div class="doc-md-description">
+              <p>pytest fixture used to identify the test directory</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1168,7 +1180,9 @@
         <tr>
           <td><code>cache_assert_config</code></td>
           <td class="doc-param-details">
-            <p>pytest fixture that returns AssertConfig for user configuration</p>
+            <div class="doc-md-description">
+              <p>pytest fixture that returns AssertConfig for user configuration</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1183,6 +1197,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1199,11 +1215,15 @@
               </span>
           </td>
           <td class="doc-returns-details">
-            <p>Callable[[Any], None]: <code>main.assert_against_cache()</code> with test_dir already specified</p>
+            <div class="doc-md-description">
+              <p>Callable[[Any], None]: <code>main.assert_against_cache()</code> with test_dir already specified</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1220,50 +1240,53 @@
             </span>
           </td>
           <td class="doc-raises-details">
-            <p>if the test directory cannot be determined</p>
+            <div class="doc-md-description">
+              <p>if the test directory cannot be determined</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 89 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 90 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 91 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 92 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 93 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 94 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="linenos" data-linenos=" 95 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
-<span class="linenos" data-linenos=" 96 "></span>
-<span class="linenos" data-linenos=" 97 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 98 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos=" 99 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 86 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 87 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 88 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 89 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 90 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 91 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos" data-linenos=" 92 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
+<span class="linenos" data-linenos=" 93 "></span>
+<span class="linenos" data-linenos=" 94 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 95 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos=" 96 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+<span class="linenos" data-linenos=" 97 "></span>
+<span class="linenos" data-linenos=" 98 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 99 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
 <span class="linenos" data-linenos="100 "></span>
-<span class="linenos" data-linenos="101 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="102 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
+<span class="linenos" data-linenos="101 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="102 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
 <span class="linenos" data-linenos="103 "></span>
-<span class="linenos" data-linenos="104 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="105 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
-<span class="linenos" data-linenos="106 "></span>
-<span class="linenos" data-linenos="107 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="108 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
-<span class="linenos" data-linenos="109 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">TestMetadata</span><span class="o">.</span><span class="n">from_pytest</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
-<span class="linenos" data-linenos="110 "></span>
-<span class="linenos" data-linenos="111 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
-<span class="linenos" data-linenos="112 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+<span class="linenos" data-linenos="104 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="105 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
+<span class="linenos" data-linenos="106 "></span>    <span class="n">metadata</span> <span class="o">=</span> <span class="n">TestMetadata</span><span class="o">.</span><span class="n">from_pytest</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">rel_test_file</span><span class="o">=</span><span class="n">rel_test_file</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="linenos" data-linenos="107 "></span>
+<span class="linenos" data-linenos="108 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
+<span class="linenos" data-linenos="109 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">assert_against_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert.plugin.read_from_cache" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">read_from_cache</span>
+          <span class="doc doc-object-name doc-function-name">read_from_cache</span>
 
 
 <a href="#pytest_cache_assert.plugin.read_from_cache" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1274,18 +1297,22 @@
   
       <p>Return main.assert_against_cache with pytest-specific arguments already specified.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>request</code></td>
           <td class="doc-param-details">
-            <p>pytest fixture used to identify the test directory</p>
+            <div class="doc-md-description">
+              <p>pytest fixture used to identify the test directory</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1297,7 +1324,9 @@
         <tr>
           <td><code>cache_assert_config</code></td>
           <td class="doc-param-details">
-            <p>pytest fixture that returns AssertConfig for user configuration</p>
+            <div class="doc-md-description">
+              <p>pytest fixture that returns AssertConfig for user configuration</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1312,6 +1341,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1328,11 +1359,15 @@
               </span>
           </td>
           <td class="doc-returns-details">
-            <p>Callable[[Any], None]: <code>main.assert_against_cache()</code> with test_dir already specified</p>
+            <div class="doc-md-description">
+              <p>Callable[[Any], None]: <code>main.assert_against_cache()</code> with test_dir already specified</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1349,39 +1384,41 @@
             </span>
           </td>
           <td class="doc-raises-details">
-            <p>if the test directory cannot be determined</p>
+            <div class="doc-md-description">
+              <p>if the test directory cannot be determined</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="115 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
-<span class="linenos" data-linenos="116 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="117 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span>
-<span class="linenos" data-linenos="118 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
-<span class="linenos" data-linenos="119 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="120 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos" data-linenos="121 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
-<span class="linenos" data-linenos="122 "></span>
-<span class="linenos" data-linenos="123 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="124 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
-<span class="linenos" data-linenos="125 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/plugin.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="112 "></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">()</span>
+<span class="linenos" data-linenos="113 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="114 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span>
+<span class="linenos" data-linenos="115 "></span>    <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+<span class="linenos" data-linenos="116 "></span>    <span class="n">cache_assert_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AssertConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="117 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos" data-linenos="118 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return main.assert_against_cache with pytest-specific arguments already specified.</span>
+<span class="linenos" data-linenos="119 "></span>
+<span class="linenos" data-linenos="120 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="121 "></span><span class="sd">        request: pytest fixture used to identify the test directory</span>
+<span class="linenos" data-linenos="122 "></span><span class="sd">        cache_assert_config: pytest fixture that returns AssertConfig for user configuration</span>
+<span class="linenos" data-linenos="123 "></span>
+<span class="linenos" data-linenos="124 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="125 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
 <span class="linenos" data-linenos="126 "></span>
-<span class="linenos" data-linenos="127 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="128 "></span><span class="sd">        Callable[[Any], None]: `main.assert_against_cache()` with test_dir already specified</span>
+<span class="linenos" data-linenos="127 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="128 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
 <span class="linenos" data-linenos="129 "></span>
-<span class="linenos" data-linenos="130 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="131 "></span><span class="sd">        RuntimeError: if the test directory cannot be determined</span>
+<span class="linenos" data-linenos="130 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="131 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">_rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
 <span class="linenos" data-linenos="132 "></span>
-<span class="linenos" data-linenos="133 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="134 "></span>    <span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">_rel_test_file</span><span class="p">,</span> <span class="n">cache_name</span> <span class="o">=</span> <span class="n">_inner_plugin</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cache_assert_config</span><span class="p">)</span>
-<span class="linenos" data-linenos="135 "></span>
-<span class="linenos" data-linenos="136 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
-<span class="linenos" data-linenos="137 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">read_from_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">)</span>
+<span class="linenos" data-linenos="133 "></span>    <span class="c1"># FYI: The partial function keyword arguments can be overridden when called</span>
+<span class="linenos" data-linenos="134 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">read_from_cache</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="o">=</span><span class="n">path_cache_dir</span><span class="p">,</span> <span class="n">cache_name</span><span class="o">=</span><span class="n">cache_name</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1399,11 +1436,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1445,14 +1482,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../_javascript/tables.js"></script>
+        
+          <script src="../../../_javascript/tables.js"></script>
+        
       
     
   </body>

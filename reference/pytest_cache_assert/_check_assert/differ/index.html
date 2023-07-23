@@ -21,7 +21,7 @@
         <link rel="next" href="../error_message/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -900,23 +900,22 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.differ.DiffResults" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">DiffResults</span>
+          <span class="doc doc-object-name doc-class-name">DiffResults</span>
 
 
 <a href="#pytest_cache_assert._check_assert.differ.DiffResults" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
 
   
       <p>Result from calculating the diff.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/differ.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="15 "></span><span class="k">class</span> <span class="nc">DiffResults</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/differ.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="15 "></span><span class="k">class</span> <span class="nc">DiffResults</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="linenos" data-linenos="16 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Result from calculating the diff.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="17 "></span>
 <span class="linenos" data-linenos="18 "></span>    <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span>  <span class="c1"># type: ignore[type-arg]</span>
@@ -929,7 +928,7 @@
 <span class="linenos" data-linenos="25 "></span>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assert_rule</span><span class="p">:</span> <span class="n">AssertRule</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore[type-arg]</span>
 <span class="linenos" data-linenos="26 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;For </span><span class="si">{</span><span class="n">assert_rule</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -952,12 +951,13 @@
 </div>
 <h2 id="pytest_cache_assert._check_assert.differ-functions">Functions<a href="#pytest_cache_assert._check_assert.differ-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.differ.diff_with_rules" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">diff_with_rules</span>
+          <span class="doc doc-object-name doc-function-name">diff_with_rules</span>
 
 
 <a href="#pytest_cache_assert._check_assert.differ.diff_with_rules" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -968,18 +968,22 @@
   
       <p>Determine the differences between two dictionaries.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>old_dict</code></td>
           <td class="doc-param-details">
-            <p>old dictionary (typically cached one)</p>
+            <div class="doc-md-description">
+              <p>old dictionary (typically cached one)</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -991,7 +995,9 @@
         <tr>
           <td><code>new_dict</code></td>
           <td class="doc-param-details">
-            <p>new dictionary (typically test data)</p>
+            <div class="doc-md-description">
+              <p>new dictionary (typically test data)</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1003,7 +1009,9 @@
         <tr>
           <td><code>assert_rules</code></td>
           <td class="doc-param-details">
-            <p>list of assert rules to ignore certain differences</p>
+            <div class="doc-md-description">
+              <p>list of assert rules to ignore certain differences</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1014,6 +1022,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1028,7 +1038,9 @@
               <code>DiffResults</code>
           </td>
           <td class="doc-returns-details">
-            <p>Diff Object</p>
+            <div class="doc-md-description">
+              <p>Diff Object</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1040,9 +1052,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/differ.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="45 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/differ.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="45 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="46 "></span><span class="k">def</span> <span class="nf">diff_with_rules</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">old_dict</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">,</span> <span class="n">assert_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AssertRule</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DiffResults</span><span class="p">:</span>
 <span class="linenos" data-linenos="47 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine the differences between two dictionaries.</span>
 <span class="linenos" data-linenos="48 "></span>
@@ -1087,7 +1099,7 @@
 <span class="linenos" data-linenos="87 "></span>
 <span class="linenos" data-linenos="88 "></span>    <span class="k">return</span> <span class="n">diff_result</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1105,11 +1117,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1151,14 +1163,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../../_javascript/tables.js"></script>
+        
+          <script src="../../../../_javascript/tables.js"></script>
+        
       
     
   </body>

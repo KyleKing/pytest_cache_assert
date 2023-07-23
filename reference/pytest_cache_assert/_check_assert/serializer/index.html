@@ -21,7 +21,7 @@
         <link rel="next" href="../validator/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -956,40 +956,40 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.UnconvertableError" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">UnconvertableError</span>
+          <span class="doc doc-object-name doc-class-name">UnconvertableError</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.UnconvertableError" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code>ValueError</code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code>ValueError</code></p>
 
   
       <p>Custom Error to indicate conversion failure.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="25 "></span><span class="k">class</span> <span class="nc">UnconvertableError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="25 "></span><span class="k">class</span> <span class="nc">UnconvertableError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
 <span class="linenos" data-linenos="26 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom Error to indicate conversion failure.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="27 "></span>
 <span class="linenos" data-linenos="28 "></span>    <span class="o">...</span>
 </code></pre></div>
-        </details>
+            </details>
 
   </div>
 
 </div>
 <h2 id="pytest_cache_assert._check_assert.serializer-functions">Functions<a href="#pytest_cache_assert._check_assert.serializer-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.dumps" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">dumps</span>
+          <span class="doc doc-object-name doc-function-name">dumps</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.dumps" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1000,18 +1000,22 @@
   
       <p>Serialize object to str.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>obj</code></td>
           <td class="doc-param-details">
-            <p>data to serialize</p>
+            <div class="doc-md-description">
+              <p>data to serialize</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1023,7 +1027,9 @@
         <tr>
           <td><code>sort_keys</code></td>
           <td class="doc-param-details">
-            <p>if True, order keys before serializing</p>
+            <div class="doc-md-description">
+              <p>if True, order keys before serializing</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1039,7 +1045,9 @@
         <tr>
           <td><code>indent</code></td>
           <td class="doc-param-details">
-            <p>indent for pretty-printing. Default is no extra whitespace</p>
+            <div class="doc-md-description">
+              <p>indent for pretty-printing. Default is no extra whitespace</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1055,6 +1063,8 @@
     </tbody>
   </table>
 
+
+
   <table>
     <thead>
       <tr>
@@ -1068,7 +1078,9 @@
               <code>str</code>
           </td>
           <td class="doc-returns-details">
-            <p>serialized data</p>
+            <div class="doc-md-description">
+              <p>serialized data</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1079,6 +1091,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1095,15 +1109,17 @@
             </span>
           </td>
           <td class="doc-raises-details">
-            <p>when serialization fails</p>
+            <div class="doc-md-description">
+              <p>when serialization fails</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="182 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="182 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="183 "></span><span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sort_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="184 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Serialize object to str.</span>
 <span class="linenos" data-linenos="185 "></span>
@@ -1125,17 +1141,18 @@
 <span class="linenos" data-linenos="201 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Conversion error. Try specifying new converters in AssertConfig to fix: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s1">&#39;</span>  <span class="c1"># noqa: E501</span>
 <span class="linenos" data-linenos="202 "></span>        <span class="k">raise</span> <span class="n">UnconvertableError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.loads" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">loads</span>
+          <span class="doc doc-object-name doc-function-name">loads</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.loads" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1146,18 +1163,22 @@
   
       <p>Deserialize arbitrary JSON data back to Python types.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>raw</code></td>
           <td class="doc-param-details">
-            <p>raw string JSON</p>
+            <div class="doc-md-description">
+              <p>raw string JSON</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1168,6 +1189,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1182,7 +1205,9 @@
               <code>T_DIFF</code>
           </td>
           <td class="doc-returns-details">
-            <p>DiffResults-safe data</p>
+            <div class="doc-md-description">
+              <p>DiffResults-safe data</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1194,9 +1219,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="219 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="219 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="220 "></span><span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T_DIFF</span><span class="p">:</span>
 <span class="linenos" data-linenos="221 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Deserialize arbitrary JSON data back to Python types.</span>
 <span class="linenos" data-linenos="222 "></span>
@@ -1209,17 +1234,18 @@
 <span class="linenos" data-linenos="229 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="230 "></span>    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.make_diffable" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">make_diffable</span>
+          <span class="doc doc-object-name doc-function-name">make_diffable</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.make_diffable" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1230,18 +1256,22 @@
   
       <p>Convert raw object to diffable types for assertion checks.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>data</code></td>
           <td class="doc-param-details">
-            <p>data to serialize</p>
+            <div class="doc-md-description">
+              <p>data to serialize</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1252,6 +1282,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1266,7 +1298,9 @@
               <code>T_DIFF</code>
           </td>
           <td class="doc-returns-details">
-            <p>DiffResults-safe data</p>
+            <div class="doc-md-description">
+              <p>DiffResults-safe data</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1278,9 +1312,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="233 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="233 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="234 "></span><span class="k">def</span> <span class="nf">make_diffable</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T_DIFF</span><span class="p">:</span>
 <span class="linenos" data-linenos="235 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert raw object to diffable types for assertion checks.</span>
 <span class="linenos" data-linenos="236 "></span>
@@ -1293,17 +1327,18 @@
 <span class="linenos" data-linenos="243 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="244 "></span>    <span class="k">return</span> <span class="n">loads</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.pretty_dumps" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">pretty_dumps</span>
+          <span class="doc doc-object-name doc-function-name">pretty_dumps</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.pretty_dumps" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1314,18 +1349,22 @@
   
       <p>Serialize object to a pretty-printable str.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>obj</code></td>
           <td class="doc-param-details">
-            <p>data to serialize</p>
+            <div class="doc-md-description">
+              <p>data to serialize</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1336,6 +1375,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1350,7 +1391,9 @@
               <code>str</code>
           </td>
           <td class="doc-returns-details">
-            <p>serialized data</p>
+            <div class="doc-md-description">
+              <p>serialized data</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1362,9 +1405,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="205 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="205 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="206 "></span><span class="k">def</span> <span class="nf">pretty_dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="207 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Serialize object to a pretty-printable str.</span>
 <span class="linenos" data-linenos="208 "></span>
@@ -1377,17 +1420,18 @@
 <span class="linenos" data-linenos="215 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="216 "></span>    <span class="k">return</span> <span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.serializer.register_user_converters" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">register_user_converters</span>
+          <span class="doc doc-object-name doc-function-name">register_user_converters</span>
 
 
 <a href="#pytest_cache_assert._check_assert.serializer.register_user_converters" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1398,15 +1442,15 @@
   
       <p>Register the user-specified converters.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="175 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/serializer.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="175 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="176 "></span><span class="k">def</span> <span class="nf">register_user_converters</span><span class="p">(</span><span class="n">converters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Converter</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="177 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Register the user-specified converters.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="178 "></span>    <span class="k">for</span> <span class="n">converter</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">:</span>
 <span class="linenos" data-linenos="179 "></span>        <span class="n">_CONVERTERS</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">types</span><span class="p">,</span> <span class="n">converter</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1424,11 +1468,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1470,14 +1514,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../../_javascript/tables.js"></script>
+        
+          <script src="../../../../_javascript/tables.js"></script>
+        
       
     
   </body>

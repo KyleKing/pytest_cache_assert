@@ -21,7 +21,7 @@
         <link rel="next" href="../cache_store/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -1144,23 +1144,22 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.AssertRule" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">AssertRule</span>
+          <span class="doc doc-object-name doc-class-name">AssertRule</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.AssertRule" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
 
   
       <p>Key Rule.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="215 "></span><span class="k">class</span> <span class="nc">AssertRule</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="215 "></span><span class="k">class</span> <span class="nc">AssertRule</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="linenos" data-linenos="216 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key Rule.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="217 "></span>
 <span class="linenos" data-linenos="218 "></span>    <span class="n">pattern</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">]</span>  <span class="c1"># type: ignore[type-arg] # https://github.com/pydantic/pydantic/issues/2636</span>
@@ -1180,7 +1179,7 @@
 <span class="linenos" data-linenos="232 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for checking if pattern is a regex or string.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="233 "></span>        <span class="k">return</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1194,12 +1193,13 @@
 
 <h4 id="pytest_cache_assert._check_assert.assert_rules.AssertRule-functions">Functions<a href="#pytest_cache_assert._check_assert.assert_rules.AssertRule-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.AssertRule.build_re" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">build_re</span>
+          <span class="doc doc-object-name doc-function-name">build_re</span>
 
   
   <span class="doc doc-labels">
@@ -1214,9 +1214,9 @@
   
       <p>Build a regex pattern from list.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="221 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="221 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="222 "></span><span class="k">def</span> <span class="nf">build_re</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T_DIFF</span><span class="p">,</span> <span class="n">T_DIFF</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;AssertRule&#39;</span><span class="p">:</span>
 <span class="linenos" data-linenos="223 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a regex pattern from list.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="224 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">pattern</span><span class="p">:</span>
@@ -1226,17 +1226,18 @@
 <span class="linenos" data-linenos="228 "></span>    <span class="n">pattern_re</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;root</span><span class="si">{</span><span class="n">_PAT_START</span><span class="si">}{</span><span class="n">_PAT_JOIN</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="si">}{</span><span class="n">_PAT_END</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="linenos" data-linenos="229 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern_re</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.AssertRule.is_regex" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">is_regex</span>
+          <span class="doc doc-object-name doc-function-name">is_regex</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.AssertRule.is_regex" class="headerlink" title="Permanent link">⚓︎</a></h5>
@@ -1247,13 +1248,13 @@
   
       <p>Helper for checking if pattern is a regex or string.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="231 "></span><span class="k">def</span> <span class="nf">is_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="231 "></span><span class="k">def</span> <span class="nf">is_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="linenos" data-linenos="232 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for checking if pattern is a regex or string.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="233 "></span>    <span class="k">return</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1271,30 +1272,29 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.Comparator" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">Comparator</span>
+          <span class="doc doc-object-name doc-class-name">Comparator</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.Comparator" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="enum.Enum">Enum</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="enum.Enum">Enum</span></code></p>
 
   
       <p>Comparator Enum for AssertRules.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="19 "></span><span class="k">class</span> <span class="nc">Comparator</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="19 "></span><span class="k">class</span> <span class="nc">Comparator</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
 <span class="linenos" data-linenos="20 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Comparator Enum for AssertRules.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="21 "></span>
 <span class="linenos" data-linenos="22 "></span>    <span class="n">LTE</span> <span class="o">=</span> <span class="s1">&#39;new - old &lt;= value&#39;</span>
 <span class="linenos" data-linenos="23 "></span>    <span class="n">GTE</span> <span class="o">=</span> <span class="s1">&#39;new - old &gt;= value&#39;</span>
 <span class="linenos" data-linenos="24 "></span>    <span class="n">WITHIN</span> <span class="o">=</span> <span class="s1">&#39;abs(new - old) &lt;= value&#39;</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1321,7 +1321,7 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.Wild" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">Wild</span>
+          <span class="doc doc-object-name doc-class-name">Wild</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.Wild" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1332,10 +1332,9 @@
   
       <p>AssertRule Wildcard Patterns.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="189 "></span><span class="k">class</span> <span class="nc">Wild</span><span class="p">:</span>  <span class="c1"># noqa: PIE798</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="189 "></span><span class="k">class</span> <span class="nc">Wild</span><span class="p">:</span>  <span class="c1"># noqa: PIE798</span>
 <span class="linenos" data-linenos="190 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;AssertRule Wildcard Patterns.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="191 "></span>
 <span class="linenos" data-linenos="192 "></span>    <span class="nd">@classmethod</span>
@@ -1360,7 +1359,7 @@
 <span class="linenos" data-linenos="211 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return pattern that matches any level of nested dictionary keys or lists indices.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="212 "></span>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.+&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1374,12 +1373,13 @@
 
 <h4 id="pytest_cache_assert._check_assert.assert_rules.Wild-functions">Functions<a href="#pytest_cache_assert._check_assert.assert_rules.Wild-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.Wild.build" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">build</span>
+          <span class="doc doc-object-name doc-function-name">build</span>
 
   
   <span class="doc doc-labels">
@@ -1394,26 +1394,27 @@
   
       <p>Specify a custom regular expression to match nested keys.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="192 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="192 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="193 "></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inner_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="194 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Specify a custom regular expression to match nested keys.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="195 "></span>    <span class="k">if</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos" data-linenos="196 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Count must be at least one&#39;</span><span class="p">)</span>
 <span class="linenos" data-linenos="197 "></span>    <span class="k">return</span> <span class="n">_PAT_JOIN</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">inner_pattern</span><span class="p">]</span> <span class="o">*</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.Wild.index" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">index</span>
+          <span class="doc doc-object-name doc-function-name">index</span>
 
   
   <span class="doc doc-labels">
@@ -1428,24 +1429,25 @@
   
       <p>Return pattern that matches a specific number of nested lists in the cached data.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="199 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="199 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="200 "></span><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="201 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return pattern that matches a specific number of nested lists in the cached data.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="202 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.Wild.keys" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">keys</span>
+          <span class="doc doc-object-name doc-function-name">keys</span>
 
   
   <span class="doc doc-labels">
@@ -1460,24 +1462,25 @@
   
       <p>Return pattern that matches a specific number of nested dictionary keys.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="204 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="204 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="205 "></span><span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="206 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return pattern that matches a specific number of nested dictionary keys.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="207 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\]]+&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.assert_rules.Wild.recur" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">recur</span>
+          <span class="doc doc-object-name doc-function-name">recur</span>
 
   
   <span class="doc doc-labels">
@@ -1492,14 +1495,14 @@
   
       <p>Return pattern that matches any level of nested dictionary keys or lists indices.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="209 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="209 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="210 "></span><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="211 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return pattern that matches any level of nested dictionary keys or lists indices.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="212 "></span>    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.+&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1513,12 +1516,13 @@
 </div>
 <h2 id="pytest_cache_assert._check_assert.assert_rules-functions">Functions<a href="#pytest_cache_assert._check_assert.assert_rules-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.check_exact" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">check_exact</span>
+          <span class="doc doc-object-name doc-function-name">check_exact</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.check_exact" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1529,18 +1533,22 @@
   
       <p>Check for value equality.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>old</code></td>
           <td class="doc-param-details">
-            <p>the old value</p>
+            <div class="doc-md-description">
+              <p>the old value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1552,7 +1560,9 @@
         <tr>
           <td><code>new</code></td>
           <td class="doc-param-details">
-            <p>the new value</p>
+            <div class="doc-md-description">
+              <p>the new value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1563,6 +1573,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1577,7 +1589,9 @@
               <code>bool</code>
           </td>
           <td class="doc-returns-details">
-            <p>True if both values are the exact same</p>
+            <div class="doc-md-description">
+              <p>True if both values are the exact same</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1589,9 +1603,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="42 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="42 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="43 "></span><span class="k">def</span> <span class="nf">check_exact</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="linenos" data-linenos="44 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check for value equality.</span>
 <span class="linenos" data-linenos="45 "></span>
@@ -1605,17 +1619,18 @@
 <span class="linenos" data-linenos="53 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="54 "></span>    <span class="k">return</span> <span class="n">old</span> <span class="o">==</span> <span class="n">new</span>  <span class="c1"># type: ignore[no-any-return]</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.check_suppress" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">check_suppress</span>
+          <span class="doc doc-object-name doc-function-name">check_suppress</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.check_suppress" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1626,18 +1641,22 @@
   
       <p>Return True to suppress differences.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>old</code></td>
           <td class="doc-param-details">
-            <p>the old value</p>
+            <div class="doc-md-description">
+              <p>the old value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1649,7 +1668,9 @@
         <tr>
           <td><code>new</code></td>
           <td class="doc-param-details">
-            <p>the new value</p>
+            <div class="doc-md-description">
+              <p>the new value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1660,6 +1681,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1674,7 +1697,9 @@
               <code>bool</code>
           </td>
           <td class="doc-returns-details">
-            <p>Always True</p>
+            <div class="doc-md-description">
+              <p>Always True</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1686,9 +1711,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="27 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="27 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="28 "></span><span class="k">def</span> <span class="nf">check_suppress</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># noqa: ARG001</span>
 <span class="linenos" data-linenos="29 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True to suppress differences.</span>
 <span class="linenos" data-linenos="30 "></span>
@@ -1702,17 +1727,18 @@
 <span class="linenos" data-linenos="38 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="39 "></span>    <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.check_type" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">check_type</span>
+          <span class="doc doc-object-name doc-function-name">check_type</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.check_type" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1723,18 +1749,22 @@
   
       <p>Check if both values are the exact same or same non-string type. Will attempt conversion from string.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>old</code></td>
           <td class="doc-param-details">
-            <p>the old value</p>
+            <div class="doc-md-description">
+              <p>the old value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1746,7 +1776,9 @@
         <tr>
           <td><code>new</code></td>
           <td class="doc-param-details">
-            <p>the new value</p>
+            <div class="doc-md-description">
+              <p>the new value</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1757,6 +1789,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1771,7 +1805,9 @@
               <code>bool</code>
           </td>
           <td class="doc-returns-details">
-            <p>True if both values are the same kind</p>
+            <div class="doc-md-description">
+              <p>True if both values are the same kind</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1783,9 +1819,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="78 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="78 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="79 "></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">old</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="n">T_DIFF</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="linenos" data-linenos="80 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if both values are the exact same or same non-string type. Will attempt conversion from string.</span>
 <span class="linenos" data-linenos="81 "></span>
@@ -1805,17 +1841,18 @@
 <span class="linenos" data-linenos="95 "></span>
 <span class="linenos" data-linenos="96 "></span>    <span class="k">return</span> <span class="n">_try_type_coercion</span><span class="p">(</span><span class="n">old</span><span class="o">=</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="n">new</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.gen_check_date_proximity" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">gen_check_date_proximity</span>
+          <span class="doc doc-object-name doc-function-name">gen_check_date_proximity</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.gen_check_date_proximity" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1826,18 +1863,22 @@
   
       <p>Generate a AssertRule check for date within the specified range.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>time_delta</code></td>
           <td class="doc-param-details">
-            <p>timedelta to use for checking that the new data is</p>
+            <div class="doc-md-description">
+              <p>timedelta to use for checking that the new data is</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1849,7 +1890,9 @@
         <tr>
           <td><code>comparator</code></td>
           <td class="doc-param-details">
-            <p>defaults to Comparator.WITHIN. Can make directional by setting LTE or GTE</p>
+            <div class="doc-md-description">
+              <p>defaults to Comparator.WITHIN. Can make directional by setting LTE or GTE</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1857,13 +1900,15 @@
                 </span>
                 <span class="doc-param-default">
                   <b>DEFAULT:</b> 
-                    <code>Comparator.WITHIN</code>
+                    <code><a class="autorefs autorefs-internal" title="pytest_cache_assert._check_assert.assert_rules.Comparator" href="#pytest_cache_assert._check_assert.assert_rules.Comparator">Comparator</a>.<span title="pytest_cache_assert._check_assert.assert_rules.Comparator.WITHIN">WITHIN</span></code>
                 </span>
             </p>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1880,15 +1925,17 @@
               </span>
           </td>
           <td class="doc-returns-details">
-            <p>Callable[[T_DIFF, T_DIFF], bool]: AssertRule check</p>
+            <div class="doc-md-description">
+              <p>Callable[[T_DIFF, T_DIFF], bool]: AssertRule check</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="167 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="167 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="168 "></span><span class="k">def</span> <span class="nf">gen_check_date_proximity</span><span class="p">(</span>
 <span class="linenos" data-linenos="169 "></span>    <span class="n">time_delta</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">comparator</span><span class="p">:</span> <span class="n">Comparator</span> <span class="o">=</span> <span class="n">Comparator</span><span class="o">.</span><span class="n">WITHIN</span><span class="p">,</span>
 <span class="linenos" data-linenos="170 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T_DIFF</span><span class="p">,</span> <span class="n">T_DIFF</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]:</span>
@@ -1904,17 +1951,18 @@
 <span class="linenos" data-linenos="180 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="181 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">_check_date_proximity</span><span class="p">,</span> <span class="n">time_delta</span><span class="o">=</span><span class="n">time_delta</span><span class="p">,</span> <span class="n">comparator</span><span class="o">=</span><span class="n">comparator</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert._check_assert.assert_rules.gen_check_date_range" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">gen_check_date_range</span>
+          <span class="doc doc-object-name doc-function-name">gen_check_date_range</span>
 
 
 <a href="#pytest_cache_assert._check_assert.assert_rules.gen_check_date_range" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1925,18 +1973,22 @@
   
       <p>Generate a AssertRule check for date within the specified range.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>min_date</code></td>
           <td class="doc-param-details">
-            <p>optional minimum datetime</p>
+            <div class="doc-md-description">
+              <p>optional minimum datetime</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1952,7 +2004,9 @@
         <tr>
           <td><code>max_date</code></td>
           <td class="doc-param-details">
-            <p>optional maximum datetime</p>
+            <div class="doc-md-description">
+              <p>optional maximum datetime</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1967,6 +2021,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1983,15 +2039,17 @@
               </span>
           </td>
           <td class="doc-returns-details">
-            <p>Callable[[T_DIFF, T_DIFF], bool]: AssertRule check</p>
+            <div class="doc-md-description">
+              <p>Callable[[T_DIFF, T_DIFF], bool]: AssertRule check</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="124 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/assert_rules.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="124 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="125 "></span><span class="k">def</span> <span class="nf">gen_check_date_range</span><span class="p">(</span>
 <span class="linenos" data-linenos="126 "></span>    <span class="n">min_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="linenos" data-linenos="127 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T_DIFF</span><span class="p">,</span> <span class="n">T_DIFF</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]:</span>
@@ -2007,7 +2065,7 @@
 <span class="linenos" data-linenos="137 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="138 "></span>    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">_check_date_range</span><span class="p">,</span> <span class="n">min_date</span><span class="o">=</span><span class="n">min_date</span><span class="p">,</span> <span class="n">max_date</span><span class="o">=</span><span class="n">max_date</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2025,11 +2083,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -2071,14 +2129,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../../_javascript/tables.js"></script>
+        
+          <script src="../../../../_javascript/tables.js"></script>
+        
       
     
   </body>

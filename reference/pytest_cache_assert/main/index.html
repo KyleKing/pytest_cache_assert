@@ -21,7 +21,7 @@
         <link rel="next" href="../plugin/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -869,12 +869,13 @@
 
 <h2 id="pytest_cache_assert.main-functions">Functions<a href="#pytest_cache_assert.main-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert.main.assert_against_cache" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">assert_against_cache</span>
+          <span class="doc doc-object-name doc-function-name">assert_against_cache</span>
 
 
 <a href="#pytest_cache_assert.main.assert_against_cache" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -885,18 +886,22 @@
   
       <p>Core logic for pytest_cache_assert to handle caching and assertion-checking.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>test_data</code></td>
           <td class="doc-param-details">
-            <p>dictionary or list to test (could be from cache)</p>
+            <div class="doc-md-description">
+              <p>dictionary or list to test (could be from cache)</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -908,7 +913,9 @@
         <tr>
           <td><code>path_cache_dir</code></td>
           <td class="doc-param-details">
-            <p>location of the cache directory</p>
+            <div class="doc-md-description">
+              <p>location of the cache directory</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -920,7 +927,9 @@
         <tr>
           <td><code>cache_name</code></td>
           <td class="doc-param-details">
-            <p>relative string path from the test_dir to the JSON cache file</p>
+            <div class="doc-md-description">
+              <p>relative string path from the test_dir to the JSON cache file</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -932,7 +941,9 @@
         <tr>
           <td><code>assert_rules</code></td>
           <td class="doc-param-details">
-            <p>dictionary of AssertRules to apply when selectively ignoring differences</p>
+            <div class="doc-md-description">
+              <p>dictionary of AssertRules to apply when selectively ignoring differences</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -948,7 +959,9 @@
         <tr>
           <td><code>metadata</code></td>
           <td class="doc-param-details">
-            <p>metadata dictionary to store in the cache file</p>
+            <div class="doc-md-description">
+              <p>metadata dictionary to store in the cache file</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -964,7 +977,9 @@
         <tr>
           <td><code>always_write</code></td>
           <td class="doc-param-details">
-            <p>if True, always write the changes</p>
+            <div class="doc-md-description">
+              <p>if True, always write the changes</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -980,9 +995,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="56 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="56 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="57 "></span><span class="k">def</span> <span class="nf">assert_against_cache</span><span class="p">(</span>
 <span class="linenos" data-linenos="58 "></span>    <span class="n">test_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="linenos" data-linenos="59 "></span>    <span class="o">*</span><span class="p">,</span>
@@ -1022,17 +1037,18 @@
 <span class="linenos" data-linenos="93 "></span>        <span class="n">path_cache_file</span><span class="o">=</span><span class="n">path_cache_file</span><span class="p">,</span>
 <span class="linenos" data-linenos="94 "></span>    <span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert.main.assert_against_dict" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">assert_against_dict</span>
+          <span class="doc doc-object-name doc-function-name">assert_against_dict</span>
 
 
 <a href="#pytest_cache_assert.main.assert_against_dict" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1043,18 +1059,22 @@
   
       <p>Utilize custom DictDiffer logic to compare in-memory dictionaries.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>old_dict</code></td>
           <td class="doc-param-details">
-            <p>old dictionary (typically cached one)</p>
+            <div class="doc-md-description">
+              <p>old dictionary (typically cached one)</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1066,7 +1086,9 @@
         <tr>
           <td><code>new_dict</code></td>
           <td class="doc-param-details">
-            <p>new dictionary (typically test data)</p>
+            <div class="doc-md-description">
+              <p>new dictionary (typically test data)</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1078,7 +1100,9 @@
         <tr>
           <td><code>assert_rules</code></td>
           <td class="doc-param-details">
-            <p>dictionary of AssertRules to apply when selectively ignoring differences</p>
+            <div class="doc-md-description">
+              <p>dictionary of AssertRules to apply when selectively ignoring differences</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1094,9 +1118,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="15 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="15 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="16 "></span><span class="k">def</span> <span class="nf">assert_against_dict</span><span class="p">(</span>
 <span class="linenos" data-linenos="17 "></span>    <span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
 <span class="linenos" data-linenos="18 "></span>    <span class="n">new_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
@@ -1118,17 +1142,18 @@
 <span class="linenos" data-linenos="34 "></span>    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validator</span>
 <span class="linenos" data-linenos="35 "></span>    <span class="n">validator</span><span class="o">.</span><span class="n">assertion</span><span class="p">(</span><span class="n">cached_data</span><span class="o">=</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">new_dict</span><span class="p">,</span> <span class="n">assert_rules</span><span class="o">=</span><span class="n">assert_rules</span> <span class="ow">or</span> <span class="p">[])</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="pytest_cache_assert.main.read_from_cache" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">read_from_cache</span>
+          <span class="doc doc-object-name doc-function-name">read_from_cache</span>
 
 
 <a href="#pytest_cache_assert.main.read_from_cache" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1139,18 +1164,22 @@
   
       <p>Read from cache without writing.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>path_cache_dir</code></td>
           <td class="doc-param-details">
-            <p>location of the cache directory</p>
+            <div class="doc-md-description">
+              <p>location of the cache directory</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1162,7 +1191,9 @@
         <tr>
           <td><code>cache_name</code></td>
           <td class="doc-param-details">
-            <p>relative string path from the test_dir to the JSON cache file</p>
+            <div class="doc-md-description">
+              <p>relative string path from the test_dir to the JSON cache file</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1173,6 +1204,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1187,7 +1220,9 @@
               <code>Dict</code>
           </td>
           <td class="doc-returns-details">
-            <p>cached data</p>
+            <div class="doc-md-description">
+              <p>cached data</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1199,9 +1234,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="38 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/main.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="38 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="39 "></span><span class="k">def</span> <span class="nf">read_from_cache</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">path_cache_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">cache_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="linenos" data-linenos="40 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read from cache without writing.</span>
 <span class="linenos" data-linenos="41 "></span>
@@ -1218,7 +1253,7 @@
 <span class="linenos" data-linenos="52 "></span>    <span class="n">path_cache_file</span> <span class="o">=</span> <span class="n">path_cache_dir</span> <span class="o">/</span> <span class="n">cache_name</span>
 <span class="linenos" data-linenos="53 "></span>    <span class="k">return</span> <span class="n">cache_store</span><span class="o">.</span><span class="n">read_cached_data</span><span class="p">(</span><span class="n">path_cache_file</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1236,11 +1271,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1282,14 +1317,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../_javascript/tables.js"></script>
+        
+          <script src="../../../_javascript/tables.js"></script>
+        
       
     
   </body>

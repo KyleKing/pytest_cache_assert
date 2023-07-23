@@ -21,7 +21,7 @@
         <link rel="next" href="../serializer/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -926,30 +926,29 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.error_message.NoCacheError" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">NoCacheError</span>
+          <span class="doc doc-object-name doc-class-name">NoCacheError</span>
 
 
 <a href="#pytest_cache_assert._check_assert.error_message.NoCacheError" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code>FileNotFoundError</code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code>FileNotFoundError</code></p>
 
   
       <p>Custom Assertion when no cached data is available for read.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="12 "></span><span class="k">class</span> <span class="nc">NoCacheError</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="12 "></span><span class="k">class</span> <span class="nc">NoCacheError</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
 <span class="linenos" data-linenos="13 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom Assertion when no cached data is available for read.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="14 "></span>
 <span class="linenos" data-linenos="15 "></span>    <span class="nd">@beartype</span>
 <span class="linenos" data-linenos="16 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_cache_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="17 "></span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No cache for: </span><span class="si">{</span><span class="n">path_cache_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -976,23 +975,22 @@
 
 
 <h3 id="pytest_cache_assert._check_assert.error_message.RichAssertionError" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">RichAssertionError</span>
+          <span class="doc doc-object-name doc-class-name">RichAssertionError</span>
 
 
 <a href="#pytest_cache_assert._check_assert.error_message.RichAssertionError" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code>AssertionError</code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code>AssertionError</code></p>
 
   
       <p>Custom AssertionError with additional <code>error_info</code>.</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="20 "></span><span class="k">class</span> <span class="nc">RichAssertionError</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="20 "></span><span class="k">class</span> <span class="nc">RichAssertionError</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">):</span>
 <span class="linenos" data-linenos="21 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom AssertionError with additional `error_info`.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="22 "></span>
 <span class="linenos" data-linenos="23 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">error_info</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1031,7 +1029,7 @@
 <span class="linenos" data-linenos="56 "></span>        <span class="n">file_diff</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&gt; Found differences with: </span><span class="si">{</span><span class="n">path_cache_file</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">path_cache_file</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
 <span class="linenos" data-linenos="57 "></span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_diff</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">line_diff</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1045,12 +1043,13 @@
 
 <h4 id="pytest_cache_assert._check_assert.error_message.RichAssertionError-functions">Functions<a href="#pytest_cache_assert._check_assert.error_message.RichAssertionError-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.error_message.RichAssertionError.__init__" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">__init__</span>
+          <span class="doc doc-object-name doc-function-name">__init__</span>
 
 
 <a href="#pytest_cache_assert._check_assert.error_message.RichAssertionError.__init__" class="headerlink" title="Permanent link">⚓︎</a></h5>
@@ -1061,24 +1060,25 @@
   
       <p>Store the error_info for later access.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="23 "></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">error_info</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="23 "></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">error_info</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="24 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Store the error_info for later access.&quot;&quot;&quot;</span>  <span class="c1"># noqa: DAR101</span>
 <span class="linenos" data-linenos="25 "></span>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="linenos" data-linenos="26 "></span>    <span class="bp">self</span><span class="o">.</span><span class="n">error_info</span> <span class="o">=</span> <span class="n">error_info</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="pytest_cache_assert._check_assert.error_message.RichAssertionError.create_message" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">create_message</span>
+          <span class="doc doc-object-name doc-function-name">create_message</span>
 
   
   <span class="doc doc-labels">
@@ -1093,18 +1093,22 @@
   
       <p>Create the error message.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><code>test_data</code></td>
           <td class="doc-param-details">
-            <p>the test data</p>
+            <div class="doc-md-description">
+              <p>the test data</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1116,7 +1120,9 @@
         <tr>
           <td><code>cached_data</code></td>
           <td class="doc-param-details">
-            <p>the cached data</p>
+            <div class="doc-md-description">
+              <p>the cached data</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1128,7 +1134,9 @@
         <tr>
           <td><code>path_cache_file</code></td>
           <td class="doc-param-details">
-            <p>the path to the cache file</p>
+            <div class="doc-md-description">
+              <p>the path to the cache file</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1140,7 +1148,9 @@
         <tr>
           <td><code>diff_results</code></td>
           <td class="doc-param-details">
-            <p>the diff results</p>
+            <div class="doc-md-description">
+              <p>the diff results</p>
+            </div>
             <p>
                 <span class="doc-param-annotation">
                   <b>TYPE:</b>
@@ -1151,6 +1161,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1165,7 +1177,9 @@
               <code>str</code>
           </td>
           <td class="doc-returns-details">
-            <p>pleasant error message</p>
+            <div class="doc-md-description">
+              <p>pleasant error message</p>
+            </div>
               <p>
                 <span class="doc-returns-annotation">
                   <b>TYPE:</b>
@@ -1177,9 +1191,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="28 "></span><span class="nd">@classmethod</span>
+          <details class="quote">
+            <summary>Source code in <code>pytest_cache_assert/_check_assert/error_message.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="28 "></span><span class="nd">@classmethod</span>
 <span class="linenos" data-linenos="29 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="30 "></span><span class="k">def</span> <span class="nf">create_message</span><span class="p">(</span>
 <span class="linenos" data-linenos="31 "></span>    <span class="bp">cls</span><span class="p">,</span>
@@ -1210,7 +1224,7 @@
 <span class="linenos" data-linenos="56 "></span>    <span class="n">file_diff</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&gt; Found differences with: </span><span class="si">{</span><span class="n">path_cache_file</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">path_cache_file</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
 <span class="linenos" data-linenos="57 "></span>    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_diff</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">line_diff</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1237,11 +1251,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 3, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2023</span>
       
     
   </small>
@@ -1283,14 +1297,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
       
-        <script src="../../../../_javascript/tables.js"></script>
+        
+          <script src="../../../../_javascript/tables.js"></script>
+        
       
     
   </body>

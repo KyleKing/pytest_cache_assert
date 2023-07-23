@@ -11,7 +11,7 @@ import pytest
 from _pytest.fixtures import FixtureRequest
 from beartype import beartype
 from beartype.typing import Any, Callable, Dict, Iterable, Optional, Tuple, Union
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from . import AssertConfig, CacheAssertContainerKeys, main, register, retrieve
 
@@ -22,10 +22,7 @@ class TestMetadata(BaseModel):
     test_file: str
     test_name: str
     func_args: Union[Dict, Iterable]  # type: ignore[type-arg]
-
-    class Config:  # noqa: D106
-        arbitrary_types_allowed = True
-        frozen = True
+    model_config = ConfigDict(arbitrary_types_allowed=True, frozen=True)
 
     @classmethod
     @beartype

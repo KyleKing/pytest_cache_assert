@@ -2,7 +2,7 @@
 
 
 from beartype.typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .cache_store import CacheStoreType, LocalJSONCacheStore
 from .config import CacheAssertContainerKeys, MissingConfigItemError, register, retrieve
@@ -43,9 +43,7 @@ class AssertConfig(BaseModel):
 
     validator: ValidatorType = Field(default_factory=DictDiffValidator)
     """Custom validator for identifying and summarizing the deviations from the cache."""
-
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
 # Ensure that a default AssertConfig is always registered

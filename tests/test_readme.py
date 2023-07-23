@@ -13,7 +13,7 @@ class User(BaseModel):  # noqa: H601
     """Example from pydantic documentation."""
 
     id: int  # noqa: A003,VNE003
-    name = 'John Doe'
+    name: str = 'John Doe'
     signup_ts: Optional[datetime] = None
     friends: List[int] = []
 

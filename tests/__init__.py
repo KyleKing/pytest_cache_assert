@@ -1,3 +1,3 @@
-from os import environ
+from os import environ, getenv
 
-environ['BEARTYPE_SHOW_WARNINGS'] = 'yes'
+environ['RUNTIME_TYPE_CHECKING_MODE'] = getenv('RUNTIME_TYPE_CHECKING_MODE', 'ERROR')

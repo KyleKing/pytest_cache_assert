@@ -24,6 +24,7 @@ This project was heavily inspired by the excellent [pytest-recording](https://gi
     - `pytest-snapshot` is much more configurable, has many more users, and is a better name
         - I really like the ability to quickly regenerate the cached files with [--snapshot-update](https://github.com/syrusakbary/snapshottest/blob/master/snapshottest/pytest.py)
         - [There is some interesting discussion on how best to handle fields that change between tests](https://github.com/syrusakbary/snapshottest/issues/21)
+    - [syrupy](https://github.com/tophat/syrupy): a well designed alternative that is extensible and provides classes like `JSONSnapshotExtension` to store the cached data in VCS
 - [dirty-equals](https://github.com/samuelcolvin/dirty-equals): broadly check values (i.e. `assert result == {'counter': IsPositiveInt, ...}`, etc.) rather than accessing and checking each field individual, which makes test easier to write and output errors easier to review
 - [pytest-pinned](https://github.com/freol35241/pytest-pinned): write assertions like `assert result == pinned` where the results are stored in JSON
 - [touca](https://github.com/trytouca/trytouca): more general implementation of snapshot-style testing using a cloud service

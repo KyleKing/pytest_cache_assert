@@ -10,7 +10,7 @@ from beartype.claw import beartype_this_package
 from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 from typing_extensions import Self  # noqa: UP035
 
-__version__ = '3.0.8'
+__version__ = '4.0.0'
 __pkg_name__ = 'pytest_cache_assert'
 
 

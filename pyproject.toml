@@ -3,7 +3,7 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.commitizen]
-version = "3.0.8"
+version = "4.0.0"
 version_files = ["pyproject.toml:^version", "pytest_cache_assert/__init__.py:^__version"]
 
 [tool.poetry]
@@ -29,7 +29,7 @@ maintainers = []
 name = "pytest_cache_assert"
 readme = "docs/README.md"
 repository = "https://github.com/kyleking/pytest_cache_assert"
-version = "3.0.8"
+version = "4.0.0"
 
 [tool.poetry.dependencies]
 python = "^3.8.12"

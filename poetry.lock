@@ -259,13 +259,13 @@ files = [
 
 [[package]]
 name = "calcipy"
-version = "1.6.2"
+version = "1.6.3"
 description = "Python package to simplify development"
 optional = false
 python-versions = ">=3.8.12,<4.0.0"
 files = [
-    {file = "calcipy-1.6.2-py3-none-any.whl", hash = "sha256:dbedd24477be24a84e077a70ffb2a3756193f8c13d92594498231fc71dc45ace"},
-    {file = "calcipy-1.6.2.tar.gz", hash = "sha256:71ddce25d35d557380253505af70e6a11e2f2f05df50f3c18ebd7eb303b4f78b"},
+    {file = "calcipy-1.6.3-py3-none-any.whl", hash = "sha256:7fceb38173ef48480d0244b3471855702b4f7bb57d5289f47157959cf7f43470"},
+    {file = "calcipy-1.6.3.tar.gz", hash = "sha256:df7035f483af738ede2576605ba79d857ebee460880941bfeadbe701c961f637"},
 ]
 
 [package.dependencies]
@@ -275,10 +275,10 @@ bandit = {version = ">=1.7.4", optional = true, markers = "extra == \"lint\""}
 beartype = ">=0.15.0"
 bidict = {version = ">=0.22.1", optional = true, markers = "extra == \"stale\""}
 commitizen = {version = ">=2.42.0", optional = true, markers = "extra == \"doc\""}
-corallium = ">=0.3.0"
+corallium = ">=0.3.1"
 griffe = ">=0.32.3"
 httpx = {version = ">=0.24.1", optional = true, markers = "extra == \"stale\""}
-invoke = ">=2.1.2"
+invoke = ">=2.2.0"
 mkdocs = {version = ">=1.4.1", optional = true, markers = "extra == \"doc\""}
 mkdocs-build-plantuml-plugin = {version = ">=1.7.4", optional = true, markers = "extra == \"doc\""}
 mkdocs-gen-files = {version = ">=0.4.0", optional = true, markers = "extra == \"doc\""}
@@ -292,7 +292,7 @@ mypy = {version = ">=1.0.0", optional = true, markers = "extra == \"types\""}
 nox-poetry = {version = ">=1.0.2", optional = true, markers = "extra == \"nox\""}
 pandas = {version = ">=1.5.3", optional = true, markers = "extra == \"doc\" or extra == \"tags\""}
 pip-check = {version = ">=2.8.1", optional = true, markers = "extra == \"lint\""}
-pydantic = ">=2.0.2"
+pydantic = ">=2.1.1"
 pylint = {version = ">=2.16.2", optional = true, markers = "extra == \"doc\" or extra == \"pylint\""}
 pymdown-extensions = {version = ">=10.0.1", optional = true, markers = "extra == \"doc\""}
 pyrate_limiter = {version = ">=2.4", optional = true, markers = "extra == \"stale\""}
@@ -301,7 +301,7 @@ pytest-cov = {version = ">=4.0.0", optional = true, markers = "extra == \"test\"
 pytest-randomly = {version = ">=3.12.0", optional = true, markers = "extra == \"test\""}
 pytest-watcher = {version = ">=0.2.6", optional = true, markers = "extra == \"test\""}
 pyyaml = {version = ">=5.2", optional = true, markers = "extra == \"doc\" or extra == \"tags\""}
-ruff = {version = ">=0.0.280", optional = true, markers = "extra == \"lint\""}
+ruff = {version = ">=0.0.284", optional = true, markers = "extra == \"lint\""}
 semgrep = {version = ">=1.12.1", optional = true, markers = "extra == \"lint\""}
 semver = ">=3.0.1"
 tabulate = {version = ">=0.9.0", optional = true, markers = "extra == \"tags\""}
@@ -311,7 +311,7 @@ transitions = {version = ">=0.9.0", optional = true, markers = "extra == \"doc\"
 ddict = ["python-box (>=6.0.2)"]
 doc = ["commitizen (>=2.42.0)", "mkdocs (>=1.4.1)", "mkdocs-build-plantuml-plugin (>=1.7.4)", "mkdocs-gen-files (>=0.4.0)", "mkdocs-git-revision-date-localized-plugin (>=1.0.1)", "mkdocs-include-markdown-plugin (>=4.0.3)", "mkdocs-literate-nav (>=0.5.0)", "mkdocs-material (>=8.2.16)", "mkdocs-section-index (>=0.3.4)", "mkdocstrings[python] (>=0.21.1)", "pandas (>=1.5.3)", "pylint (>=2.16.2)", "pymdown-extensions (>=10.0.1)", "pyyaml (>=5.2)", "transitions (>=0.9.0)"]
 flake8 = ["dlint (>=0.14.0)", "flake8 (>=6.0.0)", "flake8-adjustable-complexity (>=0.0.6)", "flake8-annotations-complexity (>=0.0.7)", "flake8-executable (>=2.1.3)", "flake8-expression-complexity (>=0.0.11)", "flake8-functions (>=0.0.7)", "flake8-pep3101 (>=2.0.0)", "flake8-pie (>=0.16.0)", "flake8-printf-formatting (>=1.1.2)", "flake8-raise (>=0.0.5)", "flake8-sql (>=0.4.1)", "flake8-string-format (>=0.3.0)", "flake8-super (>=0.1.3)", "flake8-tuple (>=0.4.1)", "flake8-typing-imports (>=1.14.0)", "flake8-use-pathlib (>=0.3.0)", "flake8-variables-names (>=0.0.5)"]
-lint = ["autopep8 (>=2.0.1)", "bandit (>=1.7.4)", "pip-check (>=2.8.1)", "ruff (>=0.0.280)", "semgrep (>=1.12.1)"]
+lint = ["autopep8 (>=2.0.1)", "bandit (>=1.7.4)", "pip-check (>=2.8.1)", "ruff (>=0.0.284)", "semgrep (>=1.12.1)"]
 nox = ["nox-poetry (>=1.0.2)"]
 pylint = ["pylint (>=2.16.2)"]
 stale = ["arrow (>=1.2.3)", "bidict (>=0.22.1)", "httpx (>=0.24.1)", "pyrate_limiter (>=2.4)"]
@@ -577,18 +577,18 @@ tomlkit = ">=0.5.3,<1.0.0"
 
 [[package]]
 name = "corallium"
-version = "0.3.1"
+version = "0.3.3"
 description = "Shared functionality for the calcipy-ecosystem"
 optional = false
 python-versions = ">=3.8.12,<4.0.0"
 files = [
-    {file = "corallium-0.3.1-py3-none-any.whl", hash = "sha256:34b9250c892931f3b2103f50fc0464254250e962f15485201a11df10201f63bc"},
-    {file = "corallium-0.3.1.tar.gz", hash = "sha256:a329ad1b180ccc706f4fb5629c6af059382543622051e1f6cb57cdd789cf0cc6"},
+    {file = "corallium-0.3.3-py3-none-any.whl", hash = "sha256:54dd6ab8738267d0fd12935e820e77d2c88339fa485519399d61baa44ee39499"},
+    {file = "corallium-0.3.3.tar.gz", hash = "sha256:ba7dbbac6e93aa6a131bc0e1169fb84fb6861f52e0682fdfa1c18c4812ff5d86"},
 ]
 
 [package.dependencies]
 beartype = ">=0.15.0"
-pydantic = ">=1.10.4"
+pydantic = ">=2.1.1"
 rich = ">=12.6.0"
 tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
 
@@ -3410,4 +3410,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.12"
-content-hash = "da6e8c60766b9514d5a1822db1b5c1fe17e4c3c48999aca5b1cc422eebbbe701"
+content-hash = "093dd342f67cc385f51740c29d5ffbf992e5d645ceef21a626aeff32fdb3450c"

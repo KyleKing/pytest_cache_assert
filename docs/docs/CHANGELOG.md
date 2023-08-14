@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Feat
+
+- upgrade to pydantic v2
+
 ### Refactor
 
 - bump minimum pymdown dependency

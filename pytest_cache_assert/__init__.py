@@ -1,10 +1,13 @@
 """pytest_cache_assert."""
 
+from datetime import datetime, timezone
 from enum import Enum
 from os import getenv
+from warnings import filterwarnings
 
 from beartype import BeartypeConf
 from beartype.claw import beartype_this_package
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 from typing_extensions import Self  # noqa: UP035
 
 __version__ = '3.0.8'
@@ -19,7 +22,7 @@ class _RuntimeTypeCheckingModes(Enum):
     OFF = None
 
     @classmethod
-    def from_environment(cls) -> Self:
+    def from_environment(cls) -> Self:  # pragma: no cover
         """Return the configured mode."""
         rtc_mode = getenv('RUNTIME_TYPE_CHECKING_MODE') or None
         try:
@@ -30,7 +33,7 @@ class _RuntimeTypeCheckingModes(Enum):
             raise ValueError(msg) from None
 
 
-def configure_runtime_type_checking_mode() -> None:
+def configure_runtime_type_checking_mode() -> None:  # pragma: no cover
     """Optionally configure runtime type checking mode globally."""
     rtc_mode = _RuntimeTypeCheckingModes.from_environment()
 
@@ -44,6 +47,9 @@ def configure_runtime_type_checking_mode() -> None:
         ))
 
 
+_PEP585_DATE = 2025
+if datetime.now(tz=timezone.utc).year <= _PEP585_DATE:  # pragma: no cover
+    filterwarnings('ignore', category=BeartypeDecorHintPep585DeprecationWarning)
 configure_runtime_type_checking_mode()
 
 # ====== Above is the recommended code from calcipy_template and may be updated on new releases ======

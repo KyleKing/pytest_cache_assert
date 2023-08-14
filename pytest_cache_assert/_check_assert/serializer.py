@@ -25,8 +25,6 @@ _RE_MEMORY_ADDRESS = re.compile(r'(?: at 0x[^>]+|["\']\d+["\'])>')
 class UnconvertableError(ValueError):
     """Custom Error to indicate conversion failure."""
 
-    ...
-
 
 @beartype
 def replace_memory_address(obj: Any) -> str:

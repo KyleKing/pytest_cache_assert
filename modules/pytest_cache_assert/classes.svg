@@ -101,7 +101,7 @@
 <polygon fill="none" stroke="black" points="2057.5,-16.4 2057.5,-100.4 2439.5,-100.4 2439.5,-16.4 2057.5,-16.4"/>
 <text text-anchor="start" x="2209" y="-85.2" font-family="Times,serif" font-size="14.00">DiffResults</text>
 <polyline fill="none" stroke="black" points="2057.5,-77.4 2439.5,-77.4 "/>
-<text text-anchor="start" x="2184" y="-62.2" font-family="Times,serif" font-size="14.00">results : dict, Dict</text>
+<text text-anchor="start" x="2184" y="-62.2" font-family="Times,serif" font-size="14.00">results : Dict, dict</text>
 <polyline fill="none" stroke="black" points="2057.5,-54.4 2439.5,-54.4 "/>
 <text text-anchor="start" x="2065.5" y="-39.2" font-family="Times,serif" font-size="14.00">append(assert_rule: AssertRule, result: Dict): None</text>
 <text text-anchor="start" x="2065.5" y="-24.2" font-family="Times,serif" font-size="14.00">to_dict(): Dict</text>

@@ -998,6 +998,21 @@
 
 <h1 id="pytest_cache_assert">pytest_cache_assert<a class="headerlink" href="#pytest_cache_assert" title="Permanent link">⚓︎</a></h1>
 <p>Cache assertion data to simplify regression testing of complex serializable data</p>
+<blockquote>
+<p><strong>Warning</strong></p>
+<p>This project is deprecated in favor of <a href="https://github.com/tophat/syrupy"><code>syrupy</code></a>, which has a larger user base and more features.</p>
+<p>To migrate:</p>
+<ol>
+<li>Add the <code>syrupy</code> dependency and remove <code>pytest-cache-assert</code></li>
+<li>In your test, replace the fixture argument <code>assert_against_cache</code> with <code>snapshot</code><ol>
+<li>Then replace <code>assert_against_cache(data)</code> with <code>assert data == snapshot</code></li>
+</ol>
+</li>
+<li>Remove the <code>tests/assert-cache</code> directory</li>
+</ol>
+<p>See an example of a project that was migrated here: <a href="https://github.com/KyleKing/tail-jsonl/commit/c3b32e20ad88407555b445ba796adda3cfe200d1">https://github.com/KyleKing/tail-jsonl/commit/c3b32e20ad88407555b445ba796adda3cfe200d1</a></p>
+<p>If you run into any issue migrating or have questions, feel free to open an issue on GitHub: <a href="https://github.com/KyleKing/pytest_cache_assert/issues">https://github.com/KyleKing/pytest_cache_assert/issues</a>. There are also additional alternatives to <code>syrupy</code> listed below.</p>
+</blockquote>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">⚓︎</a></h2>
 <p><code>poetry add pytest_assert_check --dev</code></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
@@ -1196,7 +1211,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 30, 2023</span>
       
         <br>
         Created:
